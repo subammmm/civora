@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scholarships for Nepali Students — Civora</title>
+  <meta name="description" content="Ongoing scholarships for Nepali students with verified links and filtering via Google Sheets." />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">🌍 Civora</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav">
+        <a href="index.html">Home</a>
+        <a class="active" href="scholarships.html">Scholarships</a>
+        <a href="citizenship.html">Citizenship</a>
+        <a href="ielts.html">IELTS & Prep</a>
+        <a href="guides.html">Guides</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <h1>Scholarships for Nepali Students</h1>
+    <p>This page compiles ongoing scholarships that Nepali students are eligible for. Each entry is verified and linked to the official source. Use the embedded spreadsheet below to filter by country, deadline, and eligibility.</p>
+
+    <div class="callout">
+      <h3>Instructions</h3>
+      <ol>
+        <li>Open your Google Sheet with scholarships.</li>
+        <li>Publish to the web → Embed → copy the URL.</li>
+        <li>Replace the iframe src below with your embed URL.</li>
+      </ol>
+    </div>
+
+    <div class="embed">
+      <!-- Replace the src with your Google Sheet embed URL -->
+      <iframe
+        title="Scholarships Google Sheet"
+        src="https://docs.google.com/spreadsheets/d/e/YOUR-EMBED-ID/pubhtml?widget=true&amp;headers=false"
+        loading="lazy"
+      ></iframe>
+      <p class="embed-note">Replace the embed URL above with your own Google Sheet link.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Civora</div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
