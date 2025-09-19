@@ -3,9 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Civora — Opening doors for Nepali students</title>
+  <title data-i18n="title.index">Civora — Opening doors for Nepali students</title>
   <meta name="description" content="Civora is a research-driven hub for Nepali students: verified scholarships, clear visa and residency pathways, IELTS resources, and practical templates." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8D%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -16,30 +15,38 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">🌍 Civora</a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-i18n="nav.menu">Menu</button>
       <nav id="site-nav" class="site-nav">
-        <a href="index.html" class="active">Home</a>
-        <a href="scholarships.html">Scholarships</a>
-        <a href="citizenship.html">Citizenship</a>
-        <a href="ielts.html">IELTS & Prep</a>
-        <a href="guides.html">Guides</a>
-        <a href="about.html">About</a>
+        <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+        <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
+        <a href="citizenship.html" data-i18n="nav.citizenship">Citizenship</a>
+        <a href="ielts.html" data-i18n="nav.ielts">IELTS & Prep</a>
+        <a href="guides.html" data-i18n="nav.guides">Guides</a>
+        <a href="about.html" data-i18n="nav.about">About</a>
       </nav>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ne">नेपाली</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="ur">اردو</option>
+        <option value="hi">हिन्दी</option>
+      </select>
     </div>
   </header>
 
   <main>
     <section class="hero">
       <div class="container">
-        <h1>Civora</h1>
-        <p class="tagline">Opening doors for Nepali students to study, work, and belong anywhere in the world.</p>
-        <p class="intro">
+        <h1 data-i18n="index.hero_title">Civora</h1>
+        <p class="tagline" data-i18n="index.tagline">Opening doors for Nepali students to study, work, and belong anywhere in the world.</p>
+        <p class="intro" data-i18n="index.intro">
           Civora is a research-driven hub that curates verified scholarships, clear visa and residency pathways, and practical study resources.
           Everything here is designed to make international education and mobility more accessible for Nepali students.
         </p>
         <div class="hero-cta">
-          <a class="button" href="scholarships.html">Explore Scholarships</a>
-          <a class="button button-secondary" href="guides.html">Guides & Templates</a>
+          <a class="button" href="scholarships.html" data-i18n="index.cta_primary">Explore Scholarships</a>
+          <a class="button button-secondary" href="guides.html" data-i18n="index.cta_secondary">Guides & Templates</a>
         </div>
       </div>
     </section>
@@ -47,28 +54,28 @@
     <section class="cards">
       <div class="container grid">
         <a class="card" href="scholarships.html">
-          <h3>Scholarships Database</h3>
-          <p>Verified, ongoing opportunities — filter by country, deadline, and eligibility.</p>
+          <h3 data-i18n="index.card_sch_title">Scholarships Database</h3>
+          <p data-i18n="index.card_sch_desc">Verified, ongoing opportunities — filter by country, deadline, and eligibility.</p>
         </a>
         <a class="card" href="citizenship.html">
-          <h3>Citizenship & Residency</h3>
-          <p>Quick pathways and official links for study → work → PR → citizenship.</p>
+          <h3 data-i18n="index.card_cit_title">Citizenship & Residency</h3>
+          <p data-i18n="index.card_cit_desc">Quick pathways and official links for study → work → PR → citizenship.</p>
         </a>
         <a class="card" href="ielts.html">
-          <h3>IELTS & English Prep</h3>
-          <p>Research-backed resources and strategies — no fluff, no testimonials.</p>
+          <h3 data-i18n="index.card_ielts_title">IELTS & English Prep</h3>
+          <p data-i18n="index.card_ielts_desc">Research-backed resources and strategies — no fluff, no testimonials.</p>
         </a>
         <a class="card" href="guides.html">
-          <h3>Application Guides & Templates</h3>
-          <p>Sponsor letters, financial checklists, and visa timelines you can download.</p>
+          <h3 data-i18n="index.card_guides_title">Application Guides & Templates</h3>
+          <p data-i18n="index.card_guides_desc">Sponsor letters, financial checklists, and visa timelines you can download.</p>
         </a>
       </div>
     </section>
 
     <section class="mission">
       <div class="container">
-        <h2>Mission</h2>
-        <p>
+        <h2 data-i18n="index.mission_title">Mission</h2>
+        <p data-i18n="index.mission_body">
           Civora exists to reduce friction for Nepali students aiming abroad. We compile what matters — scholarships with official links,
           transparent immigration steps, and practical documents — and keep the tone professional, clear, and factual.
         </p>
@@ -80,11 +87,11 @@
     <div class="container footer-inner">
       <div>© <span id="year"></span> Civora</div>
       <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="scholarships.html">Scholarships</a>
-        <a href="citizenship.html">Citizenship</a>
-        <a href="ielts.html">IELTS</a>
-        <a href="guides.html">Guides</a>
+        <a href="about.html" data-i18n="footer.links.about">About</a>
+        <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
+        <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
+        <a href="ielts.html" data-i18n="footer.links.ielts">IELTS</a>
+        <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
       </div>
     </div>
   </footer>
