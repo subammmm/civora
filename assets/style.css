@@ -1,25 +1,25 @@
 :root{
-  /* Navy + Gold Professional Theme */
+  /* Navy + Blue Professional Theme */
   --bg: #0a1a3f;
   --panel: #1e293b;
-  --text: #f1f5f9;
+  --text: #f5f5f5;
   --muted: #94a3b8;
-  --brand: #d4af37;
-  --brand-2: #b9972e;
+  --brand: #1e3a8a;
+  --brand-2: #1d4ed8;
   --border: #334155;
   --card: #1e293b;
-  --link: #d4af37;
+  --link: #1e3a8a;
   --header-bg: #0a1a3f;
   --table-header: #1e293b;
   --badge-bg: #334155;
   --filter-bg: #1e293b;
   --callout-bg: #1e293b;
-  --button-hover: #b9972e;
-  --accent: #d4af37;
+  --button-hover: #1d4ed8;
+  --accent: #1e3a8a;
   --success: #10b981;
   --warning: #f59e0b;
-  --gradient-start: #d4af37;
-  --gradient-end: #b9972e;
+  --gradient-start: #1e3a8a;
+  --gradient-end: #1d4ed8;
   --nav-height: 72px;
   --form-bg: #1e293b;
   --form-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
@@ -105,7 +105,7 @@ p {
 
 /* Civora Button Styles */
 .civora-button {
-  background-color: #d4af37;
+  background-color: var(--brand);
   color: #fff;
   padding: 10px 20px;
   border-radius: 6px;
@@ -120,7 +120,7 @@ p {
 }
 
 .civora-button:hover {
-  background-color: #b9972e;
+  background-color: var(--brand-2);
   color: #fff;
 }
 
