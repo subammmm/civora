@@ -3,48 +3,50 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Scholarships for Nepali Students — Civora</title>
+  <title data-i18n="title.sch">Scholarships for Nepali Students — Civora</title>
   <meta name="description" content="Ongoing scholarships for Nepali students with verified links. Includes a demo dataset with on-page filtering until you add your own Google Sheet embed." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
-  <style>
-    /* Page-local styles for the demo dataset table */
-    .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
-    .filters input,.filters select,.filters label{background:#1a1c26;border:1px solid var(--border);color:#e9ecf4;border-radius:.5rem;padding:.4rem .5rem}
-    .filters label{display:flex;align-items:center;gap:.4rem;padding:.35rem .5rem}
-    .table{width:100%;border-collapse:collapse}
-    .table th,.table td{border:1px solid var(--border);padding:.5rem;vertical-align:top}
-    .table th{background:#131421;text-align:left}
-    .badge{background:#1a1c26;border:1px solid var(--border);border-radius:.4rem;padding:.1rem .4rem;font-size:.85rem}
-    .muted{color:var(--muted)}
-  </style>
+  <script defer src="assets/scholarships.js"></script>
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">🌍 Civora</a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-i18n="nav.menu">Menu</button>
       <nav id="site-nav" class="site-nav">
-        <a href="index.html">Home</a>
-        <a class="active" href="scholarships.html">Scholarships</a>
-        <a href="citizenship.html">Citizenship</a>
-        <a href="ielts.html">IELTS & Prep</a>
-        <a href="guides.html">Guides</a>
-        <a href="about.html">About</a>
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a class="active" href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
+        <a href="citizenship.html" data-i18n="nav.citizenship">Citizenship</a>
+        <a href="ielts.html" data-i18n="nav.ielts">IELTS & Prep</a>
+        <a href="guides.html" data-i18n="nav.guides">Guides</a>
+        <a href="about.html" data-i18n="nav.about">About</a>
       </nav>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ne">नेपाली</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="ur">اردو</option>
+        <option value="hi">हिन्दी</option>
+      </select>
     </div>
   </header>
 
   <main class="container page">
-    <h1>Scholarships for Nepali Students</h1>
-    <p>This page compiles ongoing scholarships that Nepali students are eligible for. Each entry is verified and linked to the official source. You can embed your own Google Sheet below, or use the demo dataset and filters provided.</p>
+    <h1 data-i18n="sch.title">Scholarships for Nepali Students</h1>
+    <p data-i18n="sch.intro">This page compiles ongoing scholarships that Nepali students are eligible for. Each entry is verified and linked to the official source. You can embed your own Google Sheet below, or use the demo dataset with on-page filters.</p>
 
     <div class="callout">
-      <h3>Instructions</h3>
+      <h3 data-i18n="sch.instructions_title">Instructions</h3>
       <ol>
-        <li>Open your Google Sheet with scholarships.</li>
-        <li>Publish to the web → Embed → copy the URL.</li>
-        <li>Replace the iframe src below with your embed URL.</li>
+        <li data-i18n="sch.instructions_li1">Open your Google Sheet with scholarships.</li>
+        <li data-i18n="sch.instructions_li2">Publish to the web → Embed → copy the URL.</li>
+        <li data-i18n="sch.instructions_li3">Replace the iframe src below with your embed URL.</li>
       </ol>
     </div>
 
@@ -55,38 +57,38 @@
         src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9CivoraDemoEmbedId12345/pubhtml?widget=true&amp;headers=false"
         loading="lazy"
       ></iframe>
-      <p class="embed-note">Currently showing a demo embed link. Replace the URL above with your own Google Sheet when ready.</p>
+      <p class="embed-note" data-i18n="sch.embed_note">Currently showing a demo embed link. Replace the URL above with your own Google Sheet when ready.</p>
     </div>
 
     <hr class="muted" style="border-color: var(--border); opacity:.4; margin:1.5rem 0" />
 
     <section>
-      <h2>Demo Dataset (Filterable)</h2>
-      <p class="muted">Use this until your Google Sheet is ready. All links go to official program pages.</p>
+      <h2 data-i18n="sch.demo_heading">Demo Dataset (Filterable)</h2>
+      <p class="muted" data-i18n="sch.demo_intro">Use this until your Google Sheet is ready. All links go to official program pages.</p>
 
       <div class="filters">
-        <input id="q" type="search" placeholder="Search by name or keyword" />
+        <input id="q" type="search" data-i18n-placeholder="sch.filter_search_placeholder" placeholder="Search by name or keyword" />
         <select id="country">
-          <option value="">All countries/regions</option>
+          <option value="" data-i18n="sch.filter_all_countries">All countries/regions</option>
         </select>
         <select id="level">
-          <option value="">All levels</option>
-          <option>Bachelor's</option>
-          <option>Master's</option>
-          <option>PhD</option>
+          <option value="" data-i18n="sch.filter_all_levels">All levels</option>
+          <option data-i18n="sch.filter_bachelors">Bachelor's</option>
+          <option data-i18n="sch.filter_masters">Master's</option>
+          <option data-i18n="sch.filter_phd">PhD</option>
         </select>
-        <label><input type="checkbox" id="full" /> Fully funded only</label>
+        <label><input type="checkbox" id="full" /> <span data-i18n="sch.filter_full_only">Fully funded only</span></label>
       </div>
 
       <div class="table-wrap">
         <table class="table" id="schTable" aria-describedby="resultsNote">
           <thead>
             <tr>
-              <th>Scholarship</th>
-              <th>Country/Region</th>
-              <th>Level</th>
-              <th>Funding</th>
-              <th>Deadline</th>
+              <th data-i18n="sch.th_name">Scholarship</th>
+              <th data-i18n="sch.th_country">Country/Region</th>
+              <th data-i18n="sch.th_level">Level</th>
+              <th data-i18n="sch.th_funding">Funding</th>
+              <th data-i18n="sch.th_deadline">Deadline</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -100,72 +102,13 @@
     <div class="container footer-inner">
       <div>© <span id="year"></span> Civora</div>
       <div class="footer-links">
-        <a href="about.html">About</a>
+        <a href="about.html" data-i18n="footer.links.about">About</a>
+        <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
+        <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
+        <a href="ielts.html" data-i18n="footer.links.ielts">IELTS</a>
+        <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
       </div>
     </div>
   </footer>
-
-  <script>
-    // Demo dataset with verified official links
-    const data = [
-      { name: 'Eiffel Excellence Scholarship', country: 'France', level: "Master's", funding: 'Fully funded', deadline: 'Jan 10', url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence' },
-      { name: 'DAAD Development-Related Postgraduate Courses (EPOS)', country: 'Germany', level: "Master's", funding: 'Fully funded', deadline: 'Aug-Sep (varies)', url: 'https://www.daad.de/en/study-and-research-in-germany/scholarships/epos/' },
-      { name: 'Erasmus Mundus Joint Masters', country: 'EU', level: "Master's", funding: 'Fully funded', deadline: 'Dec–Jan (varies)', url: 'https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-join-master-degrees_en' },
-      { name: 'Chevening Scholarships', country: 'UK', level: "Master's", funding: 'Fully funded', deadline: 'Nov (annual)', url: 'https://www.chevening.org/scholarships/' },
-      { name: 'MEXT (Monbukagakusho) Scholarship', country: 'Japan', level: "Bachelor\'s / Master\'s / PhD", funding: 'Fully funded', deadline: 'Apr–May (varies)', url: 'https://www.studyinjapan.go.jp/en/planning/scholarship/' },
-      { name: 'Fulbright Foreign Student Program (Nepal)', country: 'USA', level: "Master's", funding: 'Fully funded', deadline: 'Varies', url: 'https://foreign.fulbrightonline.org/about/foreign-fulbright' },
-      { name: 'Australia Awards Scholarships', country: 'Australia', level: "Master's", funding: 'Fully funded', deadline: 'Feb–Apr', url: 'https://www.dfat.gov.au/people-to-people/australia-awards/scholarships' },
-      { name: 'Swiss Government Excellence Scholarships', country: 'Switzerland', level: 'PhD', funding: 'Fully funded', deadline: 'Sep–Dec (varies)', url: 'https://www.sbfi.admin.ch/sbfi/en/home/education/scholarships-and-grants/swiss-government-excellence-scholarships.html' },
-      { name: 'Stipendium Hungaricum', country: 'Hungary', level: "Bachelor\'s / Master\'s", funding: 'Fully funded', deadline: 'Jan', url: 'https://stipendiumhungaricum.hu/' },
-      { name: 'ANSO Scholarship for Young Talents', country: 'China', level: "Master\'s / PhD", funding: 'Fully funded', deadline: 'Feb', url: 'https://www.anso.org.cn/programmes/talent/scholarship/' },
-      { name: 'ADB–Japan Scholarship Program (ADB–JSP)', country: 'Asia-Pacific', level: "Master's", funding: 'Fully funded', deadline: 'Varies', url: 'https://www.adb.org/work-with-us/careers/japan-scholarship-program' }
-    ];
-
-    const tbody = document.querySelector('#schTable tbody');
-    const q = document.getElementById('q');
-    const countrySel = document.getElementById('country');
-    const levelSel = document.getElementById('level');
-    const fullOnly = document.getElementById('full');
-    const resultsNote = document.getElementById('resultsNote');
-
-    // Populate country options
-    const countries = Array.from(new Set(data.map(d => d.country))).sort();
-    countries.forEach(c => {
-      const opt = document.createElement('option');
-      opt.textContent = c; opt.value = c; countrySel.appendChild(opt);
-    });
-
-    function matches(d){
-      const term = (q.value || '').toLowerCase().trim();
-      const inText = !term || d.name.toLowerCase().includes(term) || d.country.toLowerCase().includes(term);
-      const countryOk = !countrySel.value || d.country === countrySel.value;
-      const levelOk = !levelSel.value || d.level.includes(levelSel.value);
-      const fundingOk = !fullOnly.checked || d.funding.toLowerCase().includes('fully');
-      return inText && countryOk && levelOk && fundingOk;
-    }
-
-    function render(){
-      const rows = data.filter(matches);
-      tbody.innerHTML = rows.map(d => `
-        <tr>
-          <td>
-            <a href="${d.url}" target="_blank" rel="noopener">${d.name}</a>
-          </td>
-          <td>${d.country}</td>
-          <td>${d.level}</td>
-          <td><span class="badge">${d.funding}</span></td>
-          <td>${d.deadline}</td>
-        </tr>`).join('');
-      resultsNote.textContent = \
-        `${rows.length} result${rows.length === 1 ? '' : 's'} shown`;
-    }
-
-    q.addEventListener('input', render);
-    countrySel.addEventListener('change', render);
-    levelSel.addEventListener('change', render);
-    fullOnly.addEventListener('change', render);
-
-    render();
-  </script>
 </body>
 </html>
