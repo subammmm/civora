@@ -49,9 +49,13 @@
         <span class="sidebar-nav-icon">📚</span>
         <span>IELTS & Prep</span>
       </a>
-      <a href="about.html" class="active" data-i18n="nav.about">
+      <a href="about.html" data-i18n="nav.about">
         <span class="sidebar-nav-icon">ℹ️</span>
         <span>About</span>
+      </a>
+      <a href="contact.html">
+        <span class="sidebar-nav-icon">📧</span>
+        <span>Contact</span>
       </a>
     </nav>
     
@@ -73,19 +77,41 @@
     <h1 data-i18n="about.title">About Civora</h1>
     <p data-i18n="about.body">Civora was founded to bridge the information gap for Nepali and underprivileged students seeking global opportunities. By compiling verified scholarships, visa pathways, and citizenship options, Civora serves as a research hub to support students in building international futures.</p>
 
+    <section id="vision">
+      <h2>Our Vision</h2>
+      <p>Civora began as a research hub for Nepali students, but its mission reaches far beyond one country. We envision Civora evolving into a <strong>global mobility network</strong> — a platform where students and professionals worldwide can access transparent, affordable guidance on scholarships, visas, tax residency, and citizenship strategies.</p>
+      <ul>
+        <li><strong>Global Contributors</strong>: Researchers and advisors across regions, sharing verified updates.</li>
+        <li><strong>Interactive Tools</strong>: Scholarship matching, visa timelines, and residency calculators.</li>
+        <li><strong>Affordable Guidance</strong>: Free resources for all, with optional paid services for deeper support.</li>
+        <li><strong>Scalable Impact</strong>: From Nepal to the world, Civora empowers underrepresented students and professionals to design their own futures.</li>
+      </ul>
+    </section>
+
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div>
-        <div>© <span id="year"></span> Civora</div>
-        <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Last updated: December 2024</div>
+      <div class="footer-main">
+        <div class="footer-info">
+          <div>© <span id="year"></span> Civora</div>
+          <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Last updated: December 2024</div>
+        </div>
+        <div class="footer-newsletter">
+          <h4>📬 Stay Updated</h4>
+          <p>Get monthly scholarship & visa updates — join the Civora newsletter.</p>
+          <form action="https://buttondown.email/api/emails/embed-subscribe/civora" method="POST" class="newsletter-form">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit" class="button button-small">Subscribe</button>
+          </form>
+        </div>
       </div>
       <div class="footer-links">
         <a href="about.html" data-i18n="footer.links.about">About</a>
         <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
         <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
         <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
+        <a href="contact.html">Contact</a>
         <a href="students-supported.html">Students Supported</a>
         <a href="ielts-prep.html">IELTS & Prep</a>
       </div>
