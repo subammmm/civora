@@ -1,19 +1,19 @@
 :root{
-  --bg: #ffffff;
-  --panel: #ffffff;
-  --text: #0f172a;
-  --muted: #6b7280;
-  --brand: #111827;
-  --brand-2: #111827;
-  --border: #e5e7eb;
-  --card: #ffffff;
-  --link: #111827;
-  --header-bg: rgba(255,255,255,0.8);
-  --table-header: #f9fafb;
-  --badge-bg: #f3f4f6;
-  --filter-bg: #ffffff;
-  --callout-bg: #f9fafb;
-  --button-hover: brightness(0.95);
+  --bg: #000000;
+  --panel: #000000;
+  --text: #ffffff;
+  --muted: #cccccc;
+  --brand: #ffffff;
+  --brand-2: #ffffff;
+  --border: #333333;
+  --card: #000000;
+  --link: #ffffff;
+  --header-bg: rgba(0,0,0,0.9);
+  --table-header: #111111;
+  --badge-bg: #222222;
+  --filter-bg: #000000;
+  --callout-bg: #111111;
+  --button-hover: brightness(1.2);
 }
 
 /* Dark theme */
