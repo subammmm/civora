@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="title.index">Civora — Opening doors for Nepali students</title>
-  <meta name="description" content="Civora is a research-driven hub for Nepali students: verified scholarships, clear visa and residency pathways, IELTS resources, and practical templates." />
+  <meta name="description" content="Civora is a research-driven hub for Nepali students: verified scholarships, clear visa and residency pathways, and practical templates." />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,18 +13,40 @@
   <script defer src="assets/script.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">🌍 Civora</a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-i18n="nav.menu">Menu</button>
-      <nav id="site-nav" class="site-nav">
-        <a href="index.html" class="active" data-i18n="nav.home">Home</a>
-        <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
-        <a href="citizenship.html" data-i18n="nav.citizenship">Citizenship</a>
-        <a href="ielts.html" data-i18n="nav.ielts">IELTS & Prep</a>
-        <a href="guides.html" data-i18n="nav.guides">Guides</a>
-        <a href="about.html" data-i18n="nav.about">About</a>
-      </nav>
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" aria-label="Toggle menu">☰</button>
+  
+  <!-- Sidebar overlay for mobile -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <a class="sidebar-brand" href="index.html">🌍 Civora</a>
+    
+    <nav class="sidebar-nav">
+      <a href="index.html" class="active" data-i18n="nav.home">
+        <span class="sidebar-nav-icon">🏠</span>
+        <span>Home</span>
+      </a>
+      <a href="scholarships.html" data-i18n="nav.scholarships">
+        <span class="sidebar-nav-icon">🎓</span>
+        <span>Scholarships</span>
+      </a>
+      <a href="citizenship.html" data-i18n="nav.citizenship">
+        <span class="sidebar-nav-icon">🌍</span>
+        <span>Citizenship</span>
+      </a>
+      <a href="guides.html" data-i18n="nav.guides">
+        <span class="sidebar-nav-icon">📋</span>
+        <span>Guides</span>
+      </a>
+      <a href="about.html" data-i18n="nav.about">
+        <span class="sidebar-nav-icon">ℹ️</span>
+        <span>About</span>
+      </a>
+    </nav>
+    
+    <div class="sidebar-footer">
       <select id="lang" class="lang-select" aria-label="Language">
         <option value="en">English</option>
         <option value="ne">नेपाली</option>
@@ -34,9 +56,11 @@
         <option value="hi">हिन्दी</option>
       </select>
     </div>
-  </header>
-
-  <main>
+  </aside>
+  
+  <!-- Main content area -->
+  <div class="main-content">
+    <main>
     <section class="hero">
       <div class="container">
         <h1 data-i18n="index.hero_title">Civora</h1>
@@ -62,10 +86,7 @@
           <h3 data-i18n="index.card_cit_title">Citizenship & Residency</h3>
           <p data-i18n="index.card_cit_desc">Quick pathways and official links for study → work → PR → citizenship.</p>
         </a>
-        <a class="card" href="ielts.html">
-          <h3 data-i18n="index.card_ielts_title">IELTS & English Prep</h3>
-          <p data-i18n="index.card_ielts_desc">Research-backed resources, strategies, and focus music playlists — no fluff, no testimonials.</p>
-        </a>
+
         <a class="card" href="guides.html">
           <h3 data-i18n="index.card_guides_title">Application Guides & Templates</h3>
           <p data-i18n="index.card_guides_desc">Sponsor letters, financial checklists, and visa timelines you can download.</p>
@@ -91,10 +112,11 @@
         <a href="about.html" data-i18n="footer.links.about">About</a>
         <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
         <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
-        <a href="ielts.html" data-i18n="footer.links.ielts">IELTS</a>
+
         <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
       </div>
     </div>
   </footer>
+  </div> <!-- Close main-content -->
 </body>
 </html>

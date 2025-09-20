@@ -13,18 +13,40 @@
   <script defer src="assets/script.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">🌍 Civora</a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-i18n="nav.menu">Menu</button>
-      <nav id="site-nav" class="site-nav">
-        <a href="index.html" data-i18n="nav.home">Home</a>
-        <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
-        <a href="citizenship.html" data-i18n="nav.citizenship">Citizenship</a>
-        <a href="ielts.html" data-i18n="nav.ielts">IELTS & Prep</a>
-        <a class="active" href="guides.html" data-i18n="nav.guides">Guides</a>
-        <a href="about.html" data-i18n="nav.about">About</a>
-      </nav>
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" aria-label="Toggle menu">☰</button>
+  
+  <!-- Sidebar overlay for mobile -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <a class="sidebar-brand" href="index.html">🌍 Civora</a>
+    
+    <nav class="sidebar-nav">
+      <a href="index.html" data-i18n="nav.home">
+        <span class="sidebar-nav-icon">🏠</span>
+        <span>Home</span>
+      </a>
+      <a href="scholarships.html" data-i18n="nav.scholarships">
+        <span class="sidebar-nav-icon">🎓</span>
+        <span>Scholarships</span>
+      </a>
+      <a href="citizenship.html" data-i18n="nav.citizenship">
+        <span class="sidebar-nav-icon">🌍</span>
+        <span>Citizenship</span>
+      </a>
+      <a href="guides.html" class="active" data-i18n="nav.guides">
+        <span class="sidebar-nav-icon">📋</span>
+        <span>Guides</span>
+      </a>
+      <a href="about.html" data-i18n="nav.about">
+        <span class="sidebar-nav-icon">ℹ️</span>
+        <span>About</span>
+      </a>
+    </nav>
+    
+    <div class="sidebar-footer">
       <select id="lang" class="lang-select" aria-label="Language">
         <option value="en">English</option>
         <option value="ne">नेपाली</option>
@@ -34,9 +56,11 @@
         <option value="hi">हिन्दी</option>
       </select>
     </div>
-  </header>
-
-  <main class="container page">
+  </aside>
+  
+  <!-- Main content area -->
+  <div class="main-content">
+    <main class="container page">
     <h1 data-i18n="guides.title">Application Guides & Templates</h1>
     <p data-i18n="guides.intro">This section provides practical tools for Nepali students preparing for international applications.</p>
 
@@ -44,7 +68,7 @@
     <ul>
       <li>Sponsor letter template.</li>
       <li>Financial proof checklist.</li>
-      <li>Application timeline (from IELTS prep → visa → enrollment).</li>
+      <li>Application timeline (from language prep → visa → enrollment).</li>
     </ul>
   </main>
 
@@ -55,10 +79,11 @@
         <a href="about.html" data-i18n="footer.links.about">About</a>
         <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
         <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
-        <a href="ielts.html" data-i18n="footer.links.ielts">IELTS</a>
+
         <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
       </div>
     </div>
   </footer>
+  </div> <!-- Close main-content -->
 </body>
 </html>
