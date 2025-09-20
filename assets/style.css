@@ -1,32 +1,32 @@
 :root{
-  /* Spotify-inspired Dark Theme */
-  --bg: #000000;
-  --panel: #181818;
+  /* Navy + Gold Professional Theme */
+  --bg: #0f1a2e;
+  --panel: #1a2b47;
   --text: #ffffff;
-  --muted: #b3b3b3;
-  --brand: #1db954;
-  --brand-2: #1ed760;
-  --border: #2a2a2a;
-  --card: #181818;
-  --link: #1db954;
-  --header-bg: rgba(0,0,0,0.95);
-  --table-header: #181818;
-  --badge-bg: #2a2a2a;
-  --filter-bg: #181818;
-  --callout-bg: #181818;
+  --muted: #94a3b8;
+  --brand: #fbbf24;
+  --brand-2: #f59e0b;
+  --border: #334155;
+  --card: #1e293b;
+  --link: #fbbf24;
+  --header-bg: rgba(15,26,46,0.95);
+  --table-header: #1e293b;
+  --badge-bg: #334155;
+  --filter-bg: #1e293b;
+  --callout-bg: #1e293b;
   --button-hover: brightness(1.1);
-  --accent: #1db954;
-  --success: #1db954;
-  --warning: #ffa726;
-  --gradient-start: #1db954;
-  --gradient-end: #1ed760;
+  --accent: #fbbf24;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --gradient-start: #fbbf24;
+  --gradient-end: #f59e0b;
   --sidebar-width: 280px;
-  --sidebar-bg: #000000;
-  --sidebar-item-hover: #1a1a1a;
-  --sidebar-item-active: #1db954;
-  --main-content-bg: #121212;
-  --card-hover: #282828;
-  --text-secondary: #a7a7a7;
+  --sidebar-bg: #0f1a2e;
+  --sidebar-item-hover: #1a2b47;
+  --sidebar-item-active: #fbbf24;
+  --main-content-bg: #0f172a;
+  --card-hover: #334155;
+  --text-secondary: #64748b;
 }
 
 
