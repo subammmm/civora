@@ -5,19 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scholarships for Nepali Students — Civora</title>
   <meta name="description" content="Ongoing scholarships for Nepali students with verified links. Includes a demo dataset with on-page filtering until you add your own Google Sheet embed." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
-  <style>
-    /* Page-local styles for the demo dataset table */
-    .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
-    .filters input,.filters select,.filters label{background:#1a1c26;border:1px solid var(--border);color:#e9ecf4;border-radius:.5rem;padding:.4rem .5rem}
-    .filters label{display:flex;align-items:center;gap:.4rem;padding:.35rem .5rem}
-    .table{width:100%;border-collapse:collapse}
-    .table th,.table td{border:1px solid var(--border);padding:.5rem;vertical-align:top}
-    .table th{background:#131421;text-align:left}
-    .badge{background:#1a1c26;border:1px solid var(--border);border-radius:.4rem;padding:.1rem .4rem;font-size:.85rem}
-    .muted{color:var(--muted)}
-  </style>
+  <script defer src="assets/scholarships.js"></script>
+</head>
 </head>
 <body>
   <header class="site-header">
@@ -104,68 +96,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    // Demo dataset with verified official links
-    const data = [
-      { name: 'Eiffel Excellence Scholarship', country: 'France', level: "Master's", funding: 'Fully funded', deadline: 'Jan 10', url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence' },
-      { name: 'DAAD Development-Related Postgraduate Courses (EPOS)', country: 'Germany', level: "Master's", funding: 'Fully funded', deadline: 'Aug-Sep (varies)', url: 'https://www.daad.de/en/study-and-research-in-germany/scholarships/epos/' },
-      { name: 'Erasmus Mundus Joint Masters', country: 'EU', level: "Master's", funding: 'Fully funded', deadline: 'Dec–Jan (varies)', url: 'https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-join-master-degrees_en' },
-      { name: 'Chevening Scholarships', country: 'UK', level: "Master's", funding: 'Fully funded', deadline: 'Nov (annual)', url: 'https://www.chevening.org/scholarships/' },
-      { name: 'MEXT (Monbukagakusho) Scholarship', country: 'Japan', level: "Bachelor\'s / Master\'s / PhD", funding: 'Fully funded', deadline: 'Apr–May (varies)', url: 'https://www.studyinjapan.go.jp/en/planning/scholarship/' },
-      { name: 'Fulbright Foreign Student Program (Nepal)', country: 'USA', level: "Master's", funding: 'Fully funded', deadline: 'Varies', url: 'https://foreign.fulbrightonline.org/about/foreign-fulbright' },
-      { name: 'Australia Awards Scholarships', country: 'Australia', level: "Master's", funding: 'Fully funded', deadline: 'Feb–Apr', url: 'https://www.dfat.gov.au/people-to-people/australia-awards/scholarships' },
-      { name: 'Swiss Government Excellence Scholarships', country: 'Switzerland', level: 'PhD', funding: 'Fully funded', deadline: 'Sep–Dec (varies)', url: 'https://www.sbfi.admin.ch/sbfi/en/home/education/scholarships-and-grants/swiss-government-excellence-scholarships.html' },
-      { name: 'Stipendium Hungaricum', country: 'Hungary', level: "Bachelor\'s / Master\'s", funding: 'Fully funded', deadline: 'Jan', url: 'https://stipendiumhungaricum.hu/' },
-      { name: 'ANSO Scholarship for Young Talents', country: 'China', level: "Master\'s / PhD", funding: 'Fully funded', deadline: 'Feb', url: 'https://www.anso.org.cn/programmes/talent/scholarship/' },
-      { name: 'ADB–Japan Scholarship Program (ADB–JSP)', country: 'Asia-Pacific', level: "Master's", funding: 'Fully funded', deadline: 'Varies', url: 'https://www.adb.org/work-with-us/careers/japan-scholarship-program' }
-    ];
-
-    const tbody = document.querySelector('#schTable tbody');
-    const q = document.getElementById('q');
-    const countrySel = document.getElementById('country');
-    const levelSel = document.getElementById('level');
-    const fullOnly = document.getElementById('full');
-    const resultsNote = document.getElementById('resultsNote');
-
-    // Populate country options
-    const countries = Array.from(new Set(data.map(d => d.country))).sort();
-    countries.forEach(c => {
-      const opt = document.createElement('option');
-      opt.textContent = c; opt.value = c; countrySel.appendChild(opt);
-    });
-
-    function matches(d){
-      const term = (q.value || '').toLowerCase().trim();
-      const inText = !term || d.name.toLowerCase().includes(term) || d.country.toLowerCase().includes(term);
-      const countryOk = !countrySel.value || d.country === countrySel.value;
-      const levelOk = !levelSel.value || d.level.includes(levelSel.value);
-      const fundingOk = !fullOnly.checked || d.funding.toLowerCase().includes('fully');
-      return inText && countryOk && levelOk && fundingOk;
-    }
-
-    function render(){
-      const rows = data.filter(matches);
-      tbody.innerHTML = rows.map(d => `
-        <tr>
-          <td>
-            <a href="${d.url}" target="_blank" rel="noopener">${d.name}</a>
-          </td>
-          <td>${d.country}</td>
-          <td>${d.level}</td>
-          <td><span class="badge">${d.funding}</span></td>
-          <td>${d.deadline}</td>
-        </tr>`).join('');
-      resultsNote.textContent = \
-        `${rows.length} result${rows.length === 1 ? '' : 's'} shown`;
-    }
-
-    q.addEventListener('input', render);
-    countrySel.addEventListener('change', render);
-    levelSel.addEventListener('change', render);
-    fullOnly.addEventListener('change', render);
-
-    render();
-  </script>
 </body>
 </html>
