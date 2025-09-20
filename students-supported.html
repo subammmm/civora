@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://civora.me/students-supported.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
@@ -17,60 +17,25 @@
   <script defer src="assets/leaflet-map.js"></script>
 </head>
 <body>
-  <!-- Mobile sidebar toggle -->
-  <button class="sidebar-toggle" aria-label="Toggle menu">☰</button>
-  
-  <!-- Sidebar overlay for mobile -->
-  <div class="sidebar-overlay"></div>
-  
-  <!-- Sidebar Navigation -->
-  <aside class="sidebar">
-    <a class="sidebar-brand" href="index.html">🌍 Civora</a>
-    
-    <nav class="sidebar-nav">
-      <a href="index.html">
-        <span class="sidebar-nav-icon">🏠</span>
-        <span>Home</span>
-      </a>
-      <a href="scholarships.html">
-        <span class="sidebar-nav-icon">🎓</span>
-        <span>Scholarships</span>
-      </a>
-      <a href="citizenship.html">
-        <span class="sidebar-nav-icon">🌍</span>
-        <span>Citizenship</span>
-      </a>
-      <a href="guides.html">
-        <span class="sidebar-nav-icon">📋</span>
-        <span>Guides</span>
-      </a>
-      <a href="students-supported.html" class="active">
-        <span class="sidebar-nav-icon">📍</span>
-        <span>Students Supported</span>
-      </a>
-      <a href="ielts-prep.html">
-        <span class="sidebar-nav-icon">📚</span>
-        <span>IELTS & Prep</span>
-      </a>
-      <a href="about.html">
-        <span class="sidebar-nav-icon">ℹ️</span>
-        <span>About</span>
-      </a>
-    </nav>
-    
-    <div class="sidebar-footer">
-      <select id="lang" class="lang-select" aria-label="Language">
-        <option value="en">English</option>
-        <option value="ne">नेपाली</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="ur">اردو</option>
-        <option value="hi">हिन्दी</option>
-      </select>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Civora</a>
+      
+      <nav class="site-nav" id="nav-menu">
+        <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+        <a href="scholarships.html" class="nav-link" data-i18n="nav.scholarships">Scholarships</a>
+        <a href="citizenship.html" class="nav-link" data-i18n="nav.citizenship">Citizenship</a>
+        <a href="guides.html" class="nav-link" data-i18n="nav.guides">Guides</a>
+        <a href="students-supported.html" class="nav-link active">Students Supported</a>
+        <a href="ielts-prep.html" class="nav-link">IELTS & Prep</a>
+        <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      
+      <button class="nav-toggle" aria-label="Toggle menu" id="nav-toggle">☰</button>
     </div>
-  </aside>
+  </header>
   
-  <!-- Main content area -->
   <div class="main-content">
     <main class="container page">
     <h1>Students Supported</h1>
