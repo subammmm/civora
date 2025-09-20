@@ -10,9 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
-  <script defer src="assets/world-map.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="assets/leaflet-map.js"></script>
 </head>
 <body>
   <!-- Mobile sidebar toggle -->
@@ -79,7 +81,7 @@
       <p>Interactive world map showing countries where our students have succeeded</p>
       
       <div class="interactive-world-map">
-        <div id="world-map" style="height: 500px; width: 100%;"></div>
+        <div id="students-map" style="height:600px; width:100%;"></div>
       </div>
     </div>
 
