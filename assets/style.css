@@ -1,19 +1,19 @@
 :root{
   /* Navy + Gold Professional Theme */
-  --bg: #ffffff;
-  --panel: #f8fafc;
-  --text: #0a1a3f;
-  --muted: #64748b;
+  --bg: #0a1a3f;
+  --panel: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
   --brand: #d4af37;
   --brand-2: #b9972e;
-  --border: #e2e8f0;
-  --card: #ffffff;
-  --link: #0a1a3f;
+  --border: #334155;
+  --card: #1e293b;
+  --link: #d4af37;
   --header-bg: #0a1a3f;
-  --table-header: #f1f5f9;
-  --badge-bg: #f1f5f9;
-  --filter-bg: #ffffff;
-  --callout-bg: #f8fafc;
+  --table-header: #1e293b;
+  --badge-bg: #334155;
+  --filter-bg: #1e293b;
+  --callout-bg: #1e293b;
   --button-hover: #b9972e;
   --accent: #d4af37;
   --success: #10b981;
@@ -21,11 +21,14 @@
   --gradient-start: #d4af37;
   --gradient-end: #b9972e;
   --nav-height: 72px;
-  --form-bg: #ffffff;
-  --form-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --main-content-bg: #ffffff;
-  --card-hover: #f8fafc;
-  --text-secondary: #64748b;
+  --form-bg: #1e293b;
+  --form-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --main-content-bg: #0a1a3f;
+  --card-hover: #334155;
+  --text-secondary: #94a3b8;
+  --sidebar-width: 280px;
+  --sidebar-bg: #0a1a3f;
+  --sidebar-item-hover: #334155;
 }
 
 
