@@ -717,7 +717,7 @@ blockquote{
   }
 }
 
-/* OLD SIDEBAR STYLES - COMMENTED OUT FOR HORIZONTAL NAV
+/* Sidebar Styles - Modern Dark Theme */
 .sidebar {
   position: fixed;
   top: 0;
@@ -731,6 +731,7 @@ blockquote{
   flex-direction: column;
   overflow-y: auto;
   transition: transform 0.3s ease;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar-brand {
@@ -740,6 +741,12 @@ blockquote{
   font-size: 1.5rem;
   font-weight: 800;
   border-bottom: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.sidebar-brand:hover {
+  color: var(--brand-2);
+  text-decoration: none;
 }
 
 .sidebar-nav {
@@ -751,32 +758,38 @@ blockquote{
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.5rem;
   color: var(--muted);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.2s ease;
   position: relative;
+  margin: 0.125rem 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .sidebar-nav a:hover {
   background: var(--sidebar-item-hover);
   color: var(--text);
+  text-decoration: none;
+  transform: translateX(4px);
 }
 
 .sidebar-nav a.active {
-  color: var(--brand);
+  color: var(--brand-2);
   background: var(--sidebar-item-hover);
+  font-weight: 600;
 }
 
 .sidebar-nav a.active::before {
   content: '';
   position: absolute;
-  left: 0;
+  left: -0.5rem;
   top: 0;
   bottom: 0;
   width: 3px;
-  background: var(--brand);
+  background: var(--brand-2);
+  border-radius: 0 2px 2px 0;
 }
 
 .sidebar-nav-icon {
@@ -786,12 +799,18 @@ blockquote{
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-nav a:hover .sidebar-nav-icon {
+  transform: scale(1.1);
 }
 
 /* Language selector in sidebar */
 .sidebar-footer {
   padding: 1rem 1.5rem;
   border-top: 1px solid var(--border);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
 }
 
 .lang-select {
@@ -799,9 +818,21 @@ blockquote{
   background: var(--panel);
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 0.5rem;
+  padding: 0.75rem 0.5rem;
   border-radius: 0.5rem;
   font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-select:hover {
+  border-color: var(--brand);
+  background: var(--card-hover);
+}
+
+.lang-select:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }
 
 /* Main content area */
@@ -819,8 +850,9 @@ blockquote{
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 999;
+  backdrop-filter: blur(4px);
 }
 
 .sidebar-toggle {
@@ -836,6 +868,13 @@ blockquote{
   cursor: pointer;
   z-index: 1001;
   font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  background: var(--brand-2);
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
@@ -859,7 +898,6 @@ blockquote{
     margin-left: 0;
   }
 }
-END OF SIDEBAR COMMENT */
 
 /* Scholarship Spotlight Section */
 .scholarship-spotlight {
