@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact & Contribute — Civora</title>
-  <meta name="description" content="Get in touch with Civora, ask questions, suggest scholarships, or join our research network." />
+  <title>Contact — Civora</title>
+  <meta name="description" content="Get in touch with Civora, ask questions about scholarships, visas, or study pathways." />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="canonical" href="https://civora.me/contact.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
   <!-- Analytics -->
@@ -22,52 +22,22 @@
   </script>
 </head>
 <body>
-  <!-- Mobile sidebar toggle -->
-  <button class="sidebar-toggle" aria-label="Toggle menu">☰</button>
-  
-  <!-- Sidebar overlay for mobile -->
-  <div class="sidebar-overlay"></div>
-  
-  <!-- Sidebar Navigation -->
-  <aside class="sidebar">
-    <a class="sidebar-brand" href="index.html">🌍 Civora</a>
+  <!-- Slide-out Left Navigation -->
+  <nav class="slide-nav">
+    <a class="slide-nav-brand" href="index.html">Civora</a>
     
-    <nav class="sidebar-nav">
-      <a href="index.html" data-i18n="nav.home">
-        <span class="sidebar-nav-icon">🏠</span>
-        <span>Home</span>
-      </a>
-      <a href="scholarships.html" data-i18n="nav.scholarships">
-        <span class="sidebar-nav-icon">🎓</span>
-        <span>Scholarships</span>
-      </a>
-      <a href="citizenship.html" data-i18n="nav.citizenship">
-        <span class="sidebar-nav-icon">🌍</span>
-        <span>Citizenship</span>
-      </a>
-      <a href="guides.html" data-i18n="nav.guides">
-        <span class="sidebar-nav-icon">📋</span>
-        <span>Guides</span>
-      </a>
-      <a href="students-supported.html">
-        <span class="sidebar-nav-icon">📍</span>
-        <span>Students Supported</span>
-      </a>
-      <a href="ielts-prep.html">
-        <span class="sidebar-nav-icon">📚</span>
-        <span>IELTS & Prep</span>
-      </a>
-      <a href="about.html" data-i18n="nav.about">
-        <span class="sidebar-nav-icon">ℹ️</span>
-        <span>About</span>
-      </a>
-      <a href="contact.html" class="active">
-        <span class="sidebar-nav-icon">📧</span>
-        <span>Contact</span>
-      </a>
-    </nav>
+    <div class="slide-nav-links">
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
+      <a href="citizenship.html" data-i18n="nav.citizenship">Citizenship</a>
+      <a href="guides.html" data-i18n="nav.guides">Guides</a>
+      <a href="students-supported.html">Students Supported</a>
+      <a href="ielts-prep.html">IELTS & Prep</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
     
-    <div class="sidebar-footer">
+    <div class="slide-nav-footer">
       <select id="lang" class="lang-select" aria-label="Language">
         <option value="en">English</option>
         <option value="ne">नेपाली</option>
@@ -77,163 +47,37 @@
         <option value="hi">हिन्दी</option>
       </select>
     </div>
-  </aside>
+  </nav>
   
   <!-- Main content area -->
   <div class="main-content">
     <main class="container page">
-      <h1>Contact & Contribute</h1>
-      <p>Get in touch with the Civora team, ask questions, suggest improvements, or join our research network.</p>
+      <h1>Contact</h1>
+      <p>Get in touch with the Civora team. We'll get back to you within 48 hours.</p>
 
       <div class="contact-grid">
-        <!-- Ask Civora a Question -->
+        <!-- Basic Contact Form -->
         <section class="contact-section">
-          <h2>💬 Ask Civora a Question</h2>
-          <p>Have a specific question about scholarships, visas, or study pathways? We'll get back to you within 48 hours.</p>
+          <h2>💬 Contact Us</h2>
+          <p>Have a question about scholarships, visas, or study pathways?</p>
           
           <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
             <div class="form-group">
-              <label for="question-name">Your Name</label>
-              <input type="text" id="question-name" name="name" required>
+              <label for="contact-name">Your Name</label>
+              <input type="text" id="contact-name" name="name" required>
             </div>
             
             <div class="form-group">
-              <label for="question-email">Email Address</label>
-              <input type="email" id="question-email" name="email" required>
+              <label for="contact-email">Email Address</label>
+              <input type="email" id="contact-email" name="email" required>
             </div>
             
             <div class="form-group">
-              <label for="question-country">Your Country</label>
-              <select id="question-country" name="country" required>
-                <option value="">Select your country</option>
-                <option value="Nepal">Nepal</option>
-                <option value="India">India</option>
-                <option value="Bangladesh">Bangladesh</option>
-                <option value="Pakistan">Pakistan</option>
-                <option value="Sri Lanka">Sri Lanka</option>
-                <option value="Other">Other</option>
-              </select>
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="6" required placeholder="Please provide as much detail as possible about your question..."></textarea>
             </div>
             
-            <div class="form-group">
-              <label for="question-topic">Question Topic</label>
-              <select id="question-topic" name="topic" required>
-                <option value="">Select a topic</option>
-                <option value="Scholarships">Scholarships</option>
-                <option value="Visa Process">Visa Process</option>
-                <option value="University Applications">University Applications</option>
-                <option value="Financial Planning">Financial Planning</option>
-                <option value="Language Requirements">Language Requirements</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="question-message">Your Question</label>
-              <textarea id="question-message" name="message" rows="6" required placeholder="Please provide as much detail as possible about your question..."></textarea>
-            </div>
-            
-            <button type="submit" class="button">Send Question</button>
-          </form>
-        </section>
-
-        <!-- Suggest a Scholarship/Correction -->
-        <section class="contact-section">
-          <h2>🎯 Suggest a Scholarship/Correction</h2>
-          <p>Found a new scholarship opportunity or spotted an error? Help us keep our database accurate and up-to-date.</p>
-          
-          <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
-            <div class="form-group">
-              <label for="suggest-name">Your Name</label>
-              <input type="text" id="suggest-name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="suggest-email">Email Address</label>
-              <input type="email" id="suggest-email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="suggest-type">Suggestion Type</label>
-              <select id="suggest-type" name="type" required>
-                <option value="">Select type</option>
-                <option value="New Scholarship">New Scholarship</option>
-                <option value="Correction/Update">Correction/Update</option>
-                <option value="Deadline Change">Deadline Change</option>
-                <option value="Link Fix">Broken Link</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="suggest-scholarship">Scholarship/Program Name</label>
-              <input type="text" id="suggest-scholarship" name="scholarship" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="suggest-details">Details</label>
-              <textarea id="suggest-details" name="details" rows="6" required placeholder="Please provide details about the scholarship, deadline, eligibility, or correction needed..."></textarea>
-            </div>
-            
-            <div class="form-group">
-              <label for="suggest-source">Official Source/Link</label>
-              <input type="url" id="suggest-source" name="source" placeholder="https://...">
-            </div>
-            
-            <button type="submit" class="button">Submit Suggestion</button>
-          </form>
-        </section>
-
-        <!-- Join Civora Research Network -->
-        <section class="contact-section">
-          <h2>🤝 Join Civora Research Network</h2>
-          <p>Help us research and verify scholarship opportunities. Join our network of volunteer contributors worldwide.</p>
-          
-          <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
-            <div class="form-group">
-              <label for="volunteer-name">Your Name</label>
-              <input type="text" id="volunteer-name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="volunteer-email">Email Address</label>
-              <input type="email" id="volunteer-email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="volunteer-location">Location</label>
-              <input type="text" id="volunteer-location" name="location" required placeholder="City, Country">
-            </div>
-            
-            <div class="form-group">
-              <label for="volunteer-background">Background</label>
-              <select id="volunteer-background" name="background" required>
-                <option value="">Select your background</option>
-                <option value="Current Student">Current Student</option>
-                <option value="Alumni">Alumni</option>
-                <option value="Education Consultant">Education Consultant</option>
-                <option value="Academic Professional">Academic Professional</option>
-                <option value="Other Professional">Other Professional</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="volunteer-areas">Areas of Interest</label>
-              <textarea id="volunteer-areas" name="areas" rows="4" required placeholder="Which countries, scholarship types, or research areas would you like to help with?"></textarea>
-            </div>
-            
-            <div class="form-group">
-              <label for="volunteer-time">Time Commitment</label>
-              <select id="volunteer-time" name="time" required>
-                <option value="">Select time commitment</option>
-                <option value="1-2 hours/week">1-2 hours/week</option>
-                <option value="2-5 hours/week">2-5 hours/week</option>
-                <option value="5+ hours/week">5+ hours/week</option>
-                <option value="Occasional">Occasional contributions</option>
-              </select>
-            </div>
-            
-            <button type="submit" class="button">Join Network</button>
+            <button type="submit" class="button">Send Message</button>
           </form>
         </section>
       </div>
@@ -243,16 +87,7 @@
       <div class="container footer-inner">
         <div class="footer-main">
           <div class="footer-info">
-            <div>© <span id="year"></span> Civora</div>
-            <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Last updated: December 2024</div>
-          </div>
-          <div class="footer-newsletter">
-            <h4>📬 Stay Updated</h4>
-            <p>Get monthly scholarship & visa updates — join the Civora newsletter.</p>
-            <form action="https://buttondown.email/api/emails/embed-subscribe/civora" method="POST" class="newsletter-form">
-              <input type="email" name="email" placeholder="Enter your email" required>
-              <button type="submit" class="button button-small">Subscribe</button>
-            </form>
+            <div>© <span id="year"></span> Civora | Last updated: December 2024</div>
           </div>
         </div>
         <div class="footer-links">
@@ -261,8 +96,6 @@
           <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
           <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
           <a href="contact.html">Contact</a>
-          <a href="students-supported.html">Students Supported</a>
-          <a href="ielts-prep.html">IELTS & Prep</a>
         </div>
       </div>
     </footer>
