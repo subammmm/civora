@@ -47,12 +47,21 @@ function initializeWorldMap() {
     });
   });
   
-  // Add hover effects to map countries
+  // Enhanced hover effects for map countries
   mapCountries.forEach(country => {
     country.addEventListener('mouseenter', () => {
       if (country.classList.contains('supported')) {
         country.style.fill = 'var(--brand-2)';
-        country.style.opacity = '0.9';
+        country.style.opacity = '1';
+        country.style.filter = 'drop-shadow(0 0 12px rgba(29, 185, 84, 0.6))';
+        
+        // Find and highlight corresponding pin
+        const countryId = country.id;
+        const correspondingPin = findPinByCountryId(countryId);
+        if (correspondingPin) {
+          correspondingPin.style.transform = 'translate(-50%, -50%) scale(1.3)';
+          correspondingPin.style.boxShadow = '0 8px 32px rgba(29, 185, 84, 0.8)';
+        }
       }
     });
     
@@ -60,9 +69,47 @@ function initializeWorldMap() {
       if (country.classList.contains('supported')) {
         country.style.fill = '';
         country.style.opacity = '';
+        country.style.filter = '';
+        
+        // Reset corresponding pin
+        const countryId = country.id;
+        const correspondingPin = findPinByCountryId(countryId);
+        if (correspondingPin) {
+          correspondingPin.style.transform = '';
+          correspondingPin.style.boxShadow = '';
+        }
+      }
+    });
+    
+    // Add click functionality to countries
+    country.addEventListener('click', () => {
+      if (country.classList.contains('supported')) {
+        const countryId = country.id;
+        const correspondingPin = findPinByCountryId(countryId);
+        if (correspondingPin) {
+          correspondingPin.click();
+        }
       }
     });
   });
+}
+
+// Helper function to find pin by country ID
+function findPinByCountryId(countryId) {
+  const countryMapping = {
+    'united-states': 'United States',
+    'united-kingdom': 'United Kingdom', 
+    'france': 'France',
+    'belgium': 'Belgium',
+    'south-korea': 'South Korea',
+    'australia': 'Australia'
+  };
+  
+  const countryName = countryMapping[countryId];
+  if (countryName) {
+    return document.querySelector(`[data-country="${countryName}"]`);
+  }
+  return null;
 }
 
 // Initialize map when DOM is loaded

@@ -78,40 +78,129 @@
       <p>Interactive world map showing countries where our students have succeeded</p>
       
       <div class="interactive-world-map">
-        <svg class="world-map-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-          <!-- Simplified world map background -->
-          <rect width="800" height="400" fill="#1a1a1a"/>
+        <svg class="world-map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- High-quality world map with accurate country borders -->
+          <!-- Ocean background -->
+          <rect width="1000" height="500" fill="#0d1117"/>
           
-          <!-- Continents (simplified shapes) -->
-          <!-- North America -->
-          <path d="M120 80 Q180 70 220 90 L250 120 Q280 140 260 180 L240 200 Q200 220 160 210 L140 190 Q100 160 120 80 Z" class="map-country" id="north-america"/>
+          <!-- Grid lines for geographic reference -->
+          <defs>
+            <pattern id="grid" width="50" height="25" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 0 25" fill="none" stroke="#21262d" stroke-width="0.5" opacity="0.3"/>
+            </pattern>
+          </defs>
+          <rect width="1000" height="500" fill="url(#grid)"/>
           
-          <!-- South America -->
-          <path d="M200 220 Q230 240 240 280 L250 340 Q245 360 220 370 L200 365 Q180 350 185 320 L190 280 Q195 250 200 220 Z" class="map-country" id="south-america"/>
+          <!-- United States -->
+          <path d="M158 180 L180 160 L220 165 L270 170 L310 175 L340 185 L350 200 L345 225 L340 245 L320 260 L290 265 L260 263 L230 260 L200 255 L170 250 L150 235 L140 215 L145 195 L158 180 Z M60 160 L90 145 L110 150 L115 165 L105 180 L85 185 L65 180 L60 160 Z" class="map-country supported" id="united-states"/>
           
-          <!-- Europe -->
-          <path d="M380 90 Q420 85 450 100 L470 120 Q480 140 465 150 L440 155 Q400 150 390 130 L385 110 Q380 95 380 90 Z" class="map-country supported" id="europe"/>
+          <!-- Canada -->
+          <path d="M158 80 L200 65 L250 70 L300 75 L350 80 L400 85 L430 95 L450 110 L445 130 L435 150 L425 165 L400 170 L370 168 L340 165 L310 160 L280 155 L250 150 L220 145 L190 140 L165 135 L145 125 L130 105 L140 85 L158 80 Z" class="map-country" id="canada"/>
           
-          <!-- Asia -->
-          <path d="M480 80 Q580 70 650 90 L680 120 Q720 140 710 180 L690 200 Q650 220 600 210 L550 190 Q500 160 480 80 Z" class="map-country supported" id="asia"/>
+          <!-- Mexico -->
+          <path d="M158 270 L200 275 L240 280 L260 295 L255 315 L245 330 L230 340 L210 343 L190 340 L170 335 L155 320 L150 300 L155 280 L158 270 Z" class="map-country" id="mexico"/>
           
-          <!-- Africa -->
-          <path d="M400 180 Q450 175 480 200 L490 260 Q485 320 460 340 L430 345 Q400 340 395 310 L390 250 Q395 210 400 180 Z" class="map-country" id="africa"/>
+          <!-- United Kingdom -->
+          <path d="M415 125 L430 120 L445 125 L450 140 L445 155 L430 160 L415 155 L410 140 L415 125 Z" class="map-country supported" id="united-kingdom"/>
+          
+          <!-- Ireland -->
+          <path d="M400 135 L410 130 L415 140 L410 150 L400 155 L395 145 L400 135 Z" class="map-country" id="ireland"/>
+          
+          <!-- France -->
+          <path d="M435 165 L460 160 L480 165 L485 185 L480 205 L465 210 L445 205 L430 185 L435 165 Z" class="map-country supported" id="france"/>
+          
+          <!-- Germany -->
+          <path d="M460 140 L485 135 L505 140 L510 160 L505 180 L490 185 L470 180 L455 160 L460 140 Z" class="map-country" id="germany"/>
+          
+          <!-- Spain -->
+          <path d="M405 200 L440 195 L460 200 L465 220 L460 240 L445 245 L425 240 L400 235 L395 215 L405 200 Z" class="map-country" id="spain"/>
+          
+          <!-- Italy -->
+          <path d="M480 195 L500 190 L515 205 L510 235 L505 265 L495 285 L485 270 L475 245 L480 220 L480 195 Z" class="map-country" id="italy"/>
+          
+          <!-- Belgium -->
+          <path d="M445 150 L465 145 L475 155 L470 165 L460 170 L445 165 L445 150 Z" class="map-country supported" id="belgium"/>
+          
+          <!-- Netherlands -->
+          <path d="M450 135 L470 130 L480 140 L475 150 L465 155 L450 150 L450 135 Z" class="map-country" id="netherlands"/>
+          
+          <!-- Norway -->
+          <path d="M470 70 L485 60 L500 65 L505 85 L510 110 L515 135 L510 145 L495 150 L480 145 L470 140 L465 120 L470 95 L475 80 L470 70 Z" class="map-country" id="norway"/>
+          
+          <!-- Sweden -->
+          <path d="M485 80 L505 75 L520 80 L525 105 L520 130 L510 140 L500 145 L490 135 L485 115 L485 95 L485 80 Z" class="map-country" id="sweden"/>
+          
+          <!-- Russia -->
+          <path d="M530 95 L580 90 L640 95 L700 100 L760 105 L820 110 L870 115 L920 120 L950 130 L955 150 L950 170 L940 185 L925 195 L905 200 L880 195 L850 190 L820 185 L790 180 L760 175 L730 170 L700 165 L670 160 L640 155 L610 150 L580 145 L550 140 L530 130 L520 115 L525 100 L530 95 Z" class="map-country" id="russia"/>
+          
+          <!-- China -->
+          <path d="M660 175 L720 170 L780 175 L820 180 L850 195 L855 220 L850 245 L840 265 L825 280 L805 285 L785 280 L765 275 L745 270 L725 265 L705 260 L685 255 L670 245 L660 230 L655 210 L660 190 L660 175 Z" class="map-country" id="china"/>
+          
+          <!-- Japan -->
+          <path d="M870 195 L890 190 L905 195 L910 215 L905 235 L890 240 L875 235 L870 215 L870 195 Z M890 175 L910 170 L925 175 L920 195 L905 200 L890 195 L890 175 Z" class="map-country" id="japan"/>
+          
+          <!-- South Korea -->
+          <path d="M830 215 L850 210 L865 215 L870 235 L865 255 L850 260 L835 255 L830 235 L830 215 Z" class="map-country supported" id="south-korea"/>
+          
+          <!-- India -->
+          <path d="M610 240 L670 235 L710 245 L740 260 L745 285 L740 310 L730 330 L715 345 L695 350 L675 345 L655 335 L635 325 L620 310 L610 290 L605 265 L610 240 Z" class="map-country" id="india"/>
           
           <!-- Australia -->
-          <path d="M600 300 Q650 295 680 310 L690 330 Q685 345 660 350 L630 345 Q605 335 600 300 Z" class="map-country supported" id="australia"/>
+          <path d="M770 350 L830 345 L890 350 L930 360 L945 385 L940 410 L930 430 L915 445 L895 450 L870 445 L845 440 L820 435 L795 430 L775 420 L760 405 L755 385 L765 365 L770 350 Z" class="map-country supported" id="australia"/>
           
-          <!-- United Kingdom (separate from Europe for clarity) -->
-          <circle cx="380" cy="110" r="8" class="map-country supported" id="uk"/>
+          <!-- New Zealand -->
+          <path d="M920 415 L940 410 L955 415 L960 435 L955 455 L940 460 L925 455 L920 435 L920 415 Z M930 465 L950 460 L965 465 L970 485 L965 500 L950 505 L935 500 L930 485 L930 465 Z" class="map-country" id="new-zealand"/>
+          
+          <!-- Brazil -->
+          <path d="M290 270 L350 265 L400 270 L430 285 L435 315 L430 345 L420 375 L405 395 L385 410 L360 415 L335 410 L310 400 L285 385 L265 370 L255 350 L260 325 L275 300 L290 280 L290 270 Z" class="map-country" id="brazil"/>
+          
+          <!-- Argentina -->
+          <path d="M310 415 L350 410 L370 425 L375 455 L370 485 L360 510 L345 525 L330 520 L315 505 L305 480 L300 455 L305 430 L310 415 Z" class="map-country" id="argentina"/>
+          
+          <!-- Egypt -->
+          <path d="M500 285 L525 280 L545 285 L550 305 L545 325 L525 330 L505 325 L495 305 L500 285 Z" class="map-country" id="egypt"/>
+          
+          <!-- South Africa -->
+          <path d="M490 385 L540 380 L565 390 L570 415 L565 440 L545 455 L520 460 L495 455 L475 440 L470 415 L475 390 L490 385 Z" class="map-country" id="south-africa"/>
+          
+          <!-- Nigeria -->
+          <path d="M450 305 L480 300 L500 305 L505 325 L500 345 L480 350 L460 345 L445 325 L450 305 Z" class="map-country" id="nigeria"/>
+          
+          <!-- Iran -->
+          <path d="M550 220 L585 215 L610 220 L615 240 L610 260 L590 265 L570 260 L550 240 L550 220 Z" class="map-country" id="iran"/>
+          
+          <!-- Turkey -->
+          <path d="M510 195 L545 190 L565 195 L570 215 L565 235 L545 240 L525 235 L510 215 L510 195 Z" class="map-country" id="turkey"/>
+          
+          <!-- Saudi Arabia -->
+          <path d="M530 255 L570 250 L595 255 L600 280 L595 305 L575 315 L550 310 L535 295 L525 275 L530 255 Z" class="map-country" id="saudi-arabia"/>
+          
+          <!-- Indonesia -->
+          <path d="M720 335 L780 330 L840 335 L860 345 L855 365 L840 370 L820 365 L780 360 L740 355 L720 345 L720 335 Z" class="map-country" id="indonesia"/>
+          
+          <!-- Thailand -->
+          <path d="M700 285 L725 280 L740 285 L745 305 L740 325 L725 330 L705 325 L690 305 L700 285 Z" class="map-country" id="thailand"/>
+          
+          <!-- Kazakhstan -->
+          <path d="M570 155 L630 150 L690 155 L730 160 L735 180 L730 200 L690 205 L660 200 L630 195 L600 190 L570 185 L565 170 L570 155 Z" class="map-country" id="kazakhstan"/>
+          
+          <!-- Pakistan -->
+          <path d="M590 235 L620 230 L640 235 L645 255 L640 275 L620 280 L600 275 L590 255 L590 235 Z" class="map-country" id="pakistan"/>
+          
+          <!-- Ukraine -->
+          <path d="M490 155 L525 150 L550 155 L555 175 L550 195 L525 200 L500 195 L490 175 L490 155 Z" class="map-country" id="ukraine"/>
+          
+          <!-- Poland -->
+          <path d="M480 155 L505 150 L520 155 L525 175 L520 195 L505 200 L485 195 L475 175 L480 155 Z" class="map-country" id="poland"/>
         </svg>
         
         <!-- Interactive pins for each supported country -->
-        <div class="map-pin" data-country="United States" style="left: 20%; top: 35%;"></div>
-        <div class="map-pin" data-country="United Kingdom" style="left: 47%; top: 27%;"></div>
-        <div class="map-pin" data-country="France" style="left: 49%; top: 32%;"></div>
-        <div class="map-pin" data-country="Belgium" style="left: 50%; top: 30%;"></div>
-        <div class="map-pin" data-country="South Korea" style="left: 78%; top: 38%;"></div>
-        <div class="map-pin" data-country="Australia" style="left: 83%; top: 78%;"></div>
+        <div class="map-pin" data-country="United States" style="left: 25%; top: 36%;"></div>
+        <div class="map-pin" data-country="United Kingdom" style="left: 43%; top: 26%;"></div>
+        <div class="map-pin" data-country="France" style="left: 46%; top: 34%;"></div>
+        <div class="map-pin" data-country="Belgium" style="left: 46%; top: 30%;"></div>
+        <div class="map-pin" data-country="South Korea" style="left: 85%; top: 43%;"></div>
+        <div class="map-pin" data-country="Australia" style="left: 87%; top: 76%;"></div>
       </div>
     </div>
 
