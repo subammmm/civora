@@ -625,3 +625,27 @@ window.I18N_T = (key, params) => t(key, params);
   }
   applyI18n(stored);
 })();
+
+// Collapsible sections functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+  
+  collapsibleHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const isExpanded = header.getAttribute('aria-expanded') === 'true';
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.collapsible-icon');
+      
+      // Toggle this section
+      header.setAttribute('aria-expanded', !isExpanded);
+      
+      if (isExpanded) {
+        content.style.display = 'none';
+        icon.textContent = '▼';
+      } else {
+        content.style.display = 'block';
+        icon.textContent = '▲';
+      }
+    });
+  });
+});
