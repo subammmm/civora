@@ -1135,3 +1135,152 @@ blockquote{
     min-width: auto;
   }
 }
+
+/* IELTS Pronunciation Guide Styles */
+.pronunciation-guide h5 {
+  color: var(--brand);
+  margin: 1.5rem 0 1rem 0;
+  font-size: 1.1rem;
+  border-bottom: 2px solid var(--brand);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.sound-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.sound-item {
+  background: var(--filter-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.sound-item:hover {
+  border-color: var(--brand);
+}
+
+.sound-item strong {
+  color: var(--brand);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.sound-examples {
+  margin: 0.5rem 0;
+}
+
+.sound-examples span {
+  display: block;
+  font-family: 'Courier New', monospace;
+  margin: 0.25rem 0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.sound-examples .correct {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--success);
+}
+
+.sound-examples .incorrect {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.sound-item .tip {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.stress-patterns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.stress-example {
+  background: var(--callout-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.stress-example strong {
+  color: var(--text);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.stress-example ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.stress-example li {
+  margin: 0.5rem 0;
+  color: var(--muted);
+}
+
+.stress-example em {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.practice-exercises {
+  margin: 1rem 0;
+}
+
+.exercise {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.exercise strong {
+  color: var(--brand);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.exercise ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.exercise li {
+  margin: 0.25rem 0;
+  color: var(--muted);
+  font-family: 'Courier New', monospace;
+}
+
+.exercise p {
+  margin: 0.5rem 0;
+  color: var(--text);
+}
+
+.exercise small {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .sound-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stress-patterns {
+    grid-template-columns: 1fr;
+  }
+}
