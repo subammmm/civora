@@ -4,27 +4,64 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="title.guides">Application Guides & Templates — Civora</title>
-  <meta name="description" content="Practical tools for Nepali students: sponsor letter templates, financial proof checklist, application timeline." />
+  <meta name="description" content="Practical application guides and templates for international students. Sponsor letters, financial checklists, and application timelines." />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">🌍 Civora</a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-i18n="nav.menu">Menu</button>
-      <nav id="site-nav" class="site-nav">
-        <a href="index.html" data-i18n="nav.home">Home</a>
-        <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
-        <a href="citizenship.html" data-i18n="nav.citizenship">Citizenship</a>
-        <a href="ielts.html" data-i18n="nav.ielts">IELTS & Prep</a>
-        <a class="active" href="guides.html" data-i18n="nav.guides">Guides</a>
-        <a href="about.html" data-i18n="nav.about">About</a>
-      </nav>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a class="brand" href="index.html">
+        <span>🌍</span>
+        Civora
+      </a>
+    </div>
+    
+    <nav class="site-nav">
+      <a href="index.html" data-i18n="nav.home">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+        Home
+      </a>
+      <a href="scholarships.html" data-i18n="nav.scholarships">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+        </svg>
+        Scholarships
+      </a>
+      <a href="citizenship.html" data-i18n="nav.citizenship">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        Citizenship
+      </a>
+      <a href="ielts.html" data-i18n="nav.ielts">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+        IELTS & Prep
+      </a>
+      <a href="guides.html" class="active" data-i18n="nav.guides">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+        </svg>
+        Guides
+      </a>
+      <a href="about.html" data-i18n="nav.about">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+        </svg>
+        About
+      </a>
+    </nav>
+    
+    <div class="sidebar-footer">
       <select id="lang" class="lang-select" aria-label="Language">
         <option value="en">English</option>
         <option value="ne">नेपाली</option>
@@ -34,31 +71,107 @@
         <option value="hi">हिन्दी</option>
       </select>
     </div>
-  </header>
+  </aside>
 
-  <main class="container page">
-    <h1 data-i18n="guides.title">Application Guides & Templates</h1>
-    <p data-i18n="guides.intro">This section provides practical tools for Nepali students preparing for international applications.</p>
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px;">
+      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </svg>
+  </button>
 
-    <h2>Checklist</h2>
-    <ul>
-      <li>Sponsor letter template.</li>
-      <li>Financial proof checklist.</li>
-      <li>Application timeline (from IELTS prep → visa → enrollment).</li>
-    </ul>
-  </main>
+  <!-- Sidebar overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> Civora</div>
-      <div class="footer-links">
-        <a href="about.html" data-i18n="footer.links.about">About</a>
-        <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
-        <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
-        <a href="ielts.html" data-i18n="footer.links.ielts">IELTS</a>
-        <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
+  <!-- Main content -->
+  <div class="main-content">
+    <main class="container page">
+      <h1 data-i18n="guides.title">Application Guides & Templates</h1>
+      <p data-i18n="guides.intro">Practical tools and step-by-step guides for Nepali students preparing international applications.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>📋 Application Checklist</h3>
+          <p>Complete timeline from IELTS preparation to visa approval. Track your progress and never miss a deadline.</p>
+        </div>
+        
+        <div class="card">
+          <h3>💰 Financial Documentation</h3>
+          <p>Bank statements, sponsor letters, and financial proof requirements for different countries and visa types.</p>
+        </div>
+        
+        <div class="card">
+          <h3>📝 Document Templates</h3>
+          <p>Statement of purpose templates, recommendation letter guides, and CV formats for international applications.</p>
+        </div>
+        
+        <div class="card">
+          <h3>🎯 Country-Specific Guides</h3>
+          <p>Detailed application processes for popular destinations including Canada, Australia, UK, and USA.</p>
+        </div>
       </div>
-    </div>
-  </footer>
+
+      <section>
+        <h2>Essential Documents Checklist</h2>
+        <div class="callout">
+          <h3>Required for Most Applications</h3>
+          <ul class="bullets">
+            <li><strong>Academic Transcripts:</strong> Official sealed transcripts from all institutions</li>
+            <li><strong>English Proficiency:</strong> IELTS/TOEFL scores (usually 6.5+ for most programs)</li>
+            <li><strong>Financial Proof:</strong> Bank statements showing funds for tuition + living expenses</li>
+            <li><strong>Sponsor Letter:</strong> If sponsored, detailed letter from sponsor with financial documents</li>
+            <li><strong>Statement of Purpose:</strong> Compelling essay explaining your goals and motivations</li>
+            <li><strong>Letters of Recommendation:</strong> 2-3 letters from professors or employers</li>
+            <li><strong>Passport:</strong> Valid for at least 6 months beyond intended stay</li>
+            <li><strong>Medical Exam:</strong> Country-specific health requirements</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Application Timeline</h2>
+        <div class="callout">
+          <h3>12-Month Planning Schedule</h3>
+          <ul class="bullets">
+            <li><strong>12 months before:</strong> Research programs, start IELTS preparation</li>
+            <li><strong>10 months before:</strong> Take IELTS, request transcripts and recommendations</li>
+            <li><strong>8 months before:</strong> Submit applications (for September intake)</li>
+            <li><strong>6 months before:</strong> Receive offers, accept preferred university</li>
+            <li><strong>4 months before:</strong> Apply for study visa, arrange finances</li>
+            <li><strong>2 months before:</strong> Book flights, arrange accommodation</li>
+            <li><strong>1 month before:</strong> Orientation, travel preparations</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Sponsor Letter Template</h2>
+        <div class="callout">
+          <h3>Key Elements to Include</h3>
+          <ul class="bullets">
+            <li>Sponsor's full name, address, and relationship to student</li>
+            <li>Employment details and annual income</li>
+            <li>Clear statement of financial support commitment</li>
+            <li>Bank account details and current balance</li>
+            <li>Duration and amount of financial support</li>
+            <li>Sponsor's signature and contact information</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>© <span id="year"></span> Civora</div>
+        <div class="footer-links">
+          <a href="about.html" data-i18n="footer.links.about">About</a>
+          <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
+          <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
+          <a href="ielts.html" data-i18n="footer.links.ielts">IELTS</a>
+          <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

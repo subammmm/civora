@@ -4,27 +4,64 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="title.ielts">IELTS & English Preparation — Civora</title>
-  <meta name="description" content="Tips, resources, and testimonials for IELTS success by Nepali students (7.0+)." />
+  <meta name="description" content="IELTS preparation resources and strategies for Nepali students. Tips, practice materials, and proven study methods." />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">🌍 Civora</a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-i18n="nav.menu">Menu</button>
-      <nav id="site-nav" class="site-nav">
-        <a href="index.html" data-i18n="nav.home">Home</a>
-        <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
-        <a href="citizenship.html" data-i18n="nav.citizenship">Citizenship</a>
-        <a class="active" href="ielts.html" data-i18n="nav.ielts">IELTS & Prep</a>
-        <a href="guides.html" data-i18n="nav.guides">Guides</a>
-        <a href="about.html" data-i18n="nav.about">About</a>
-      </nav>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a class="brand" href="index.html">
+        <span>🌍</span>
+        Civora
+      </a>
+    </div>
+    
+    <nav class="site-nav">
+      <a href="index.html" data-i18n="nav.home">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+        Home
+      </a>
+      <a href="scholarships.html" data-i18n="nav.scholarships">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+        </svg>
+        Scholarships
+      </a>
+      <a href="citizenship.html" data-i18n="nav.citizenship">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        Citizenship
+      </a>
+      <a href="ielts.html" class="active" data-i18n="nav.ielts">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+        IELTS & Prep
+      </a>
+      <a href="guides.html" data-i18n="nav.guides">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+        </svg>
+        Guides
+      </a>
+      <a href="about.html" data-i18n="nav.about">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+        </svg>
+        About
+      </a>
+    </nav>
+    
+    <div class="sidebar-footer">
       <select id="lang" class="lang-select" aria-label="Language">
         <option value="en">English</option>
         <option value="ne">नेपाली</option>
@@ -34,45 +71,83 @@
         <option value="hi">हिन्दी</option>
       </select>
     </div>
-  </header>
+  </aside>
 
-  <main class="container page">
-    <h1>IELTS & English Preparation</h1>
-    <p>Strong English skills open doors to global education. I’ve taught 15+ students who achieved IELTS 7.0+ and went abroad. Here are resources and strategies that worked for them.</p>
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px;">
+      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </svg>
+  </button>
 
-    <section>
-      <h2>Tips</h2>
-      <ul>
-        <li>Time management, writing structure, speaking practice.</li>
-      </ul>
-    </section>
+  <!-- Sidebar overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <section>
-      <h2>Resources</h2>
-      <ul>
-        <li>Free prep links, practice tests.</li>
-      </ul>
-    </section>
+  <!-- Main content -->
+  <div class="main-content">
+    <main class="container page">
+      <h1>IELTS & English Preparation</h1>
+      <p>Strong English skills open doors to global education. Here are proven resources and strategies for achieving IELTS 7.0+ scores.</p>
 
-    <section>
-      <h2>Testimonials</h2>
-      <blockquote>
-        “With these methods I scored 7.5 and got into [University].”
-      </blockquote>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> Civora</div>
-      <div class="footer-links">
-        <a href="about.html" data-i18n="footer.links.about">About</a>
-        <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
-        <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
-        <a href="ielts.html" data-i18n="footer.links.ielts">IELTS</a>
-        <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
+      <div class="grid">
+        <div class="card">
+          <h3>📝 Writing Skills</h3>
+          <p>Master task structure, coherence, and academic vocabulary. Focus on planning before writing and practice timed essays regularly.</p>
+        </div>
+        
+        <div class="card">
+          <h3>🎧 Listening Practice</h3>
+          <p>Improve prediction skills, note-taking techniques, and familiarity with different accents through daily practice.</p>
+        </div>
+        
+        <div class="card">
+          <h3>📖 Reading Strategies</h3>
+          <p>Develop skimming, scanning, and time management skills. Practice identifying main ideas and supporting details quickly.</p>
+        </div>
+        
+        <div class="card">
+          <h3>🗣️ Speaking Confidence</h3>
+          <p>Build fluency through regular practice, expand topic vocabulary, and work on pronunciation and intonation.</p>
+        </div>
       </div>
-    </div>
-  </footer>
+
+      <section>
+        <h2>Study Resources</h2>
+        <div class="callout">
+          <h3>Free Practice Materials</h3>
+          <ul class="bullets">
+            <li><a href="https://www.ielts.org/for-test-takers/test-preparation" target="_blank">Official IELTS Practice Materials</a></li>
+            <li><a href="https://www.britishcouncil.org/exam/ielts/prepare" target="_blank">British Council IELTS Preparation</a></li>
+            <li><a href="https://www.cambridgeenglish.org/test-your-english/" target="_blank">Cambridge English Level Test</a></li>
+            <li><a href="https://www.edx.org/course/ielts-academic-test-preparation" target="_blank">Free IELTS Course on edX</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Study Tips</h2>
+        <ul class="bullets">
+          <li><strong>Consistent Practice:</strong> Study 1-2 hours daily for 2-3 months before your test date</li>
+          <li><strong>Timed Practice:</strong> Always practice under real test conditions with strict timing</li>
+          <li><strong>Weak Areas:</strong> Identify and focus extra time on your lowest-scoring section</li>
+          <li><strong>Vocabulary Building:</strong> Learn academic words and phrases commonly used in IELTS</li>
+          <li><strong>Mock Tests:</strong> Take full practice tests weekly to track progress</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>© <span id="year"></span> Civora</div>
+        <div class="footer-links">
+          <a href="about.html" data-i18n="footer.links.about">About</a>
+          <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
+          <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
+          <a href="ielts.html" data-i18n="footer.links.ielts">IELTS</a>
+          <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
