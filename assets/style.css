@@ -1113,22 +1113,54 @@ END OF SIDEBAR COMMENT */
   font-style: italic;
 }
 
-/* Contact Page Styles */
-.contact-grid {
+/* Contact Page Two-Column Layout */
+.contact-page-layout {
   display: grid;
-  gap: 3rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   margin-top: 2rem;
 }
 
-.contact-section {
-  background: var(--card);
+.contact-intro {
+  padding-right: 2rem;
+}
+
+.vision-section {
+  background: var(--panel);
   padding: 2rem;
   border-radius: 1rem;
   border: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+.vision-section h2 {
+  color: var(--brand);
+  margin-bottom: 1rem;
+}
+
+.contact-forms {
+  padding-left: 2rem;
+}
+
+.section-divider {
+  height: 1px;
+  background: var(--brand);
+  margin: 3rem 0;
+  opacity: 0.3;
+}
+
+/* Form Styling */
+.contact-section {
+  background: var(--form-bg);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--form-shadow);
+  margin-bottom: 2rem;
 }
 
 .contact-section h2 {
-  color: var(--brand);
+  color: var(--text);
   margin-bottom: 1rem;
   font-size: 1.5rem;
 }
@@ -1145,7 +1177,8 @@ END OF SIDEBAR COMMENT */
   display: block;
   margin-bottom: 0.5rem;
   color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .form-group input,
@@ -1155,10 +1188,11 @@ END OF SIDEBAR COMMENT */
   padding: 0.75rem;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
-  background: var(--filter-bg);
+  background: var(--form-bg);
   color: var(--text);
   font-family: inherit;
   font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input:focus,
@@ -1166,7 +1200,7 @@ END OF SIDEBAR COMMENT */
 .form-group textarea:focus {
   outline: none;
   border-color: var(--brand);
-  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
 }
 
 .form-group textarea {
@@ -1174,13 +1208,17 @@ END OF SIDEBAR COMMENT */
   min-height: 120px;
 }
 
-@media (min-width: 768px) {
-  .contact-grid {
-    grid-template-columns: 1fr 1fr;
+/* Mobile responsive layout */
+@media (max-width: 768px) {
+  .contact-page-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
   
-  .contact-section:last-child {
-    grid-column: 1 / -1;
+  .contact-intro,
+  .contact-forms {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 
