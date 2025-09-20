@@ -40,3 +40,29 @@ python3 -m http.server 8080
 ## Content Sources
 
 All textual content reflects your provided content pack, renamed to "Civora".
+
+## Spotify Integration
+
+The site now includes a **Study Music** feature on the IELTS preparation page, providing curated Spotify playlists to help students focus during study sessions.
+
+### Features:
+- **Three curated playlists**: Focus & Concentration, Instrumental Study, and Ambient Sounds
+- **Responsive design**: Works on desktop and mobile devices
+- **Accessibility**: Keyboard navigation and screen reader support
+- **Multi-language support**: Translated into all supported languages
+- **Educational focus**: Specifically designed for IELTS and study preparation
+
+### Implementation:
+- Embedded Spotify iframe players using official Spotify embed API
+- Custom CSS styling that matches the site's design language
+- Dedicated JavaScript module (`spotify-integration.js`) for enhanced functionality
+- Analytics-ready playlist tracking (console logging for development)
+
+### Usage:
+Students can access the study music directly on the IELTS page, with helpful tips about using instrumental music to improve concentration without lyrical distractions.
+
+### Technical Details:
+- Uses Spotify's official embed URLs with `utm_source=generator` for tracking
+- Implements lazy loading for improved page performance  
+- Includes proper iframe attributes for security and accessibility
+- Responsive grid layout that adapts to different screen sizes
