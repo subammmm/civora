@@ -2,15 +2,47 @@
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
 
-// Mobile nav toggle
-const toggle = document.querySelector('.nav-toggle');
-const nav = document.getElementById('site-nav');
-if (toggle && nav) {
-  toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
-  });
+// Mobile sidebar toggle
+const sidebarToggle = document.getElementById('sidebar-toggle');
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+function toggleSidebar() {
+  const isOpen = sidebar.classList.toggle('open');
+  sidebarOverlay.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
 }
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  sidebarOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (sidebarToggle) {
+  sidebarToggle.addEventListener('click', toggleSidebar);
+}
+
+if (sidebarOverlay) {
+  sidebarOverlay.addEventListener('click', closeSidebar);
+}
+
+// Close sidebar when clicking on nav links on mobile
+const navLinks = document.querySelectorAll('.site-nav a');
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      closeSidebar();
+    }
+  });
+});
+
+// Close sidebar on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeSidebar();
+  }
+});
 
 // i18n strings
 const I18N = {
