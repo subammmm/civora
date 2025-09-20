@@ -388,6 +388,100 @@ blockquote{
 }
 .footer-links a:hover{color:var(--brand)}
 
+/* Spotify Study Music Integration */
+.study-music {
+  background: var(--panel);
+  padding: 3rem 0;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.study-music h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.study-music p {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.spotify-playlists {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.playlist-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.playlist-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.playlist-card h3 {
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.spotify-player {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.spotify-player iframe {
+  border-radius: 6px;
+}
+
+.music-controls {
+  text-align: center;
+  background: var(--callout-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.music-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.music-note strong {
+  color: var(--brand);
+}
+
+@media (max-width: 768px) {
+  .spotify-playlists {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .playlist-card {
+    padding: 1rem;
+  }
+  
+  .study-music {
+    padding: 2rem 0;
+  }
+}
+
 @media (max-width: 768px) {
   .footer-inner {
     flex-direction: column;
