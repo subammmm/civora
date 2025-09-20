@@ -1,31 +1,30 @@
 :root{
   /* Navy + Gold Professional Theme */
-  --bg: #0f1a2e;
-  --panel: #1a2b47;
-  --text: #ffffff;
-  --muted: #94a3b8;
-  --brand: #fbbf24;
-  --brand-2: #f59e0b;
-  --border: #334155;
-  --card: #1e293b;
-  --link: #fbbf24;
-  --header-bg: rgba(15,26,46,0.95);
-  --table-header: #1e293b;
-  --badge-bg: #334155;
-  --filter-bg: #1e293b;
-  --callout-bg: #1e293b;
-  --button-hover: brightness(1.1);
-  --accent: #fbbf24;
+  --bg: #ffffff;
+  --panel: #f8fafc;
+  --text: #0a1a3f;
+  --muted: #64748b;
+  --brand: #d4af37;
+  --brand-2: #b9972e;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  --link: #0a1a3f;
+  --header-bg: #0a1a3f;
+  --table-header: #f1f5f9;
+  --badge-bg: #f1f5f9;
+  --filter-bg: #ffffff;
+  --callout-bg: #f8fafc;
+  --button-hover: #b9972e;
+  --accent: #d4af37;
   --success: #10b981;
   --warning: #f59e0b;
-  --gradient-start: #fbbf24;
-  --gradient-end: #f59e0b;
-  --sidebar-width: 280px;
-  --sidebar-bg: #0f1a2e;
-  --sidebar-item-hover: #1a2b47;
-  --sidebar-item-active: #fbbf24;
-  --main-content-bg: #0f172a;
-  --card-hover: #334155;
+  --gradient-start: #d4af37;
+  --gradient-end: #b9972e;
+  --nav-height: 72px;
+  --form-bg: #ffffff;
+  --form-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --main-content-bg: #ffffff;
+  --card-hover: #f8fafc;
   --text-secondary: #64748b;
 }
 
@@ -71,6 +70,7 @@ a:hover{color: var(--brand-2);text-decoration:underline;text-underline-offset:3p
 a:focus{outline: 2px solid var(--link);outline-offset: 2px;border-radius: 2px}
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 1rem 0;
@@ -100,31 +100,150 @@ p {
   line-height: 1.7;
 }
 
+/* Civora Button Styles */
+.civora-button {
+  background-color: #d4af37;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  transition: background-color 0.2s ease;
+}
+
+.civora-button:hover {
+  background-color: #b9972e;
+  color: #fff;
+}
+
 .container{max-width:1200px;margin:0 auto;padding:0 2rem}
 
 @media (max-width: 768px) {
   .container{padding:0 1rem}
 }
 
+/* Horizontal Navigation Bar */
 .site-header{
   background: var(--header-bg);
-  backdrop-filter: blur(12px);
-  position: sticky; top:0; z-index: 10;
+  position: sticky; 
+  top: 0; 
+  z-index: 10;
   border-bottom: 1px solid var(--border);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
-.header-inner{display:flex;align-items:center;gap:2rem;min-height:72px}
+
+.header-inner{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-height: var(--nav-height);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
 .brand{
-  font-weight:800;
-  font-size:1.5rem;
-  letter-spacing:-0.02em;
-  color:var(--brand);
-  text-decoration:none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+  text-decoration: none;
   transition: color 0.2s ease;
 }
-.brand:hover{color:var(--brand-2)}
 
-.site-nav{margin-left:auto;display:flex;gap:1rem;flex-wrap:wrap}
+.brand:hover{
+  color: var(--brand-2);
+}
+
+.site-nav{
+  margin-left: auto;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-link{
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover{
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after{
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--brand);
+}
+
+.nav-link.active{
+  color: var(--brand);
+  font-weight: 700;
+}
+
+.nav-toggle{
+  display: none;
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  border-radius: .5rem;
+  padding: .5rem .75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-toggle:focus{
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.nav-toggle:hover{
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 760px){
+  .nav-toggle{
+    display: block;
+  }
+  .site-nav{
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 1rem;
+    gap: 0.5rem;
+    background: var(--header-bg);
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .site-nav.open{
+    display: flex;
+  }
+}
+
+/* Main Content Layout */
+.main-content {
+  padding-top: 2rem;
+}
 .site-nav a{
   padding:.5rem 1rem;
   border-radius:.75rem;
@@ -595,7 +714,7 @@ blockquote{
   }
 }
 
-/* Spotify-inspired Sidebar Navigation */
+/* OLD SIDEBAR STYLES - COMMENTED OUT FOR HORIZONTAL NAV
 .sidebar {
   position: fixed;
   top: 0;
@@ -737,6 +856,7 @@ blockquote{
     margin-left: 0;
   }
 }
+END OF SIDEBAR COMMENT */
 
 /* Scholarship Spotlight Section */
 .scholarship-spotlight {
@@ -934,49 +1054,37 @@ blockquote{
   }
 }
 
-/* Footer Styles */
-.footer-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 2rem;
+/* Simplified Footer Styles */
+.site-footer {
+  background: var(--panel);
+  padding: 2rem 0;
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
 }
 
-.footer-newsletter h4 {
-  color: var(--brand);
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.footer-newsletter p {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.newsletter-form {
+.footer-inner{
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: var(--muted);
 }
 
-.newsletter-form input {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  background: var(--filter-bg);
+.footer-links{
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a{
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover{
   color: var(--text);
-  font-size: 0.9rem;
-}
-
-.newsletter-form input:focus {
-  outline: none;
-  border-color: var(--brand);
-}
-
-.button-small {
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
