@@ -1,6 +1,5 @@
 # Civora Static Website Development Guide
 
-Civora is a static website providing resources for Nepali students pursuing international education opportunities. The site contains scholarships databases, citizenship pathways, IELTS prep resources, and application guides.
 
 **ALWAYS reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.**
 
@@ -22,7 +21,6 @@ Civora is a static website providing resources for Nepali students pursuing inte
 ├── about.html             # About page with build instructions
 ├── scholarships.html      # Scholarships database with Google Sheets embed
 ├── citizenship.html       # Citizenship & residency pathways
-├── ielts.html            # IELTS preparation resources
 ├── guides.html           # Application guides & templates
 ├── assets/
 │   ├── style.css         # Main stylesheet (97 lines)
@@ -47,7 +45,6 @@ Civora is a static website providing resources for Nepali students pursuing inte
    - Homepage: `http://localhost:8080/`
    - Scholarships: `http://localhost:8080/scholarships.html`
    - Citizenship: `http://localhost:8080/citizenship.html`
-   - IELTS: `http://localhost:8080/ielts.html`
    - Guides: `http://localhost:8080/guides.html`
    - About: `http://localhost:8080/about.html`
 
@@ -153,7 +150,6 @@ After pushing changes:
 ### Maintaining Accuracy
 - **Scholarship links**: Always verify external scholarship links work
 - **Visa information**: Keep citizenship/residency information current
-- **IELTS resources**: Ensure prep materials are up-to-date
 - **Templates**: Verify downloadable resources in guides section
 
 ### Professional Tone
