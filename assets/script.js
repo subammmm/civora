@@ -2,13 +2,28 @@
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
 
-// Mobile nav toggle
-const toggle = document.querySelector('.nav-toggle');
-const nav = document.getElementById('site-nav');
-if (toggle && nav) {
-  toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
+// Sidebar toggle for mobile
+const sidebarToggle = document.querySelector('.sidebar-toggle');
+const sidebar = document.querySelector('.sidebar');
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+
+if (sidebarToggle && sidebar && sidebarOverlay) {
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    sidebarOverlay.classList.toggle('active');
+  });
+
+  sidebarOverlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+    }
   });
 }
 
