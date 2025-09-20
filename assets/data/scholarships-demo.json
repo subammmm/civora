@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Eiffel Excellence Scholarship",
+    "country": "France",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Jan 10",
+    "url": "https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence"
+  },
+  {
+    "name": "DAAD Development-Related Postgraduate Courses (EPOS)",
+    "country": "Germany", 
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Aug-Sep (varies)",
+    "url": "https://www.daad.de/en/study-and-research-in-germany/scholarships/epos/"
+  },
+  {
+    "name": "Erasmus Mundus Joint Masters",
+    "country": "EU",
+    "level": "Master's", 
+    "funding": "Fully funded",
+    "deadline": "Dec–Jan (varies)",
+    "url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-join-master-degrees_en"
+  },
+  {
+    "name": "Chevening Scholarships",
+    "country": "UK",
+    "level": "Master's",
+    "funding": "Fully funded", 
+    "deadline": "Nov (annual)",
+    "url": "https://www.chevening.org/scholarships/"
+  },
+  {
+    "name": "MEXT (Monbukagakusho) Scholarship",
+    "country": "Japan",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Apr–May (varies)",
+    "url": "https://www.studyinjapan.go.jp/en/planning/scholarship/"
+  },
+  {
+    "name": "Fulbright Foreign Student Program (Nepal)",
+    "country": "USA", 
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Varies",
+    "url": "https://foreign.fulbrightonline.org/about/foreign-fulbright"
+  },
+  {
+    "name": "Australia Awards Scholarships",
+    "country": "Australia",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Feb–Apr", 
+    "url": "https://www.dfat.gov.au/people-to-people/australia-awards/scholarships"
+  },
+  {
+    "name": "Swiss Government Excellence Scholarships",
+    "country": "Switzerland",
+    "level": "PhD",
+    "funding": "Fully funded",
+    "deadline": "Sep–Dec (varies)",
+    "url": "https://www.sbfi.admin.ch/sbfi/en/home/education/scholarships-and-grants/swiss-government-excellence-scholarships.html"
+  },
+  {
+    "name": "Stipendium Hungaricum",
+    "country": "Hungary",
+    "level": "Bachelor's / Master's",
+    "funding": "Fully funded", 
+    "deadline": "Jan",
+    "url": "https://stipendiumhungaricum.hu/"
+  },
+  {
+    "name": "ANSO Scholarship for Young Talents",
+    "country": "China",
+    "level": "Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Feb",
+    "url": "https://www.anso.org.cn/programmes/talent/scholarship/"
+  },
+  {
+    "name": "ADB–Japan Scholarship Program (ADB–JSP)",
+    "country": "Asia-Pacific",
+    "level": "Master's", 
+    "funding": "Fully funded",
+    "deadline": "Varies",
+    "url": "https://www.adb.org/work-with-us/careers/japan-scholarship-program"
+  },
+  {
+    "name": "Rhodes Scholarships",
+    "country": "UK",
+    "level": "Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Oct",
+    "url": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/"
+  },
+  {
+    "name": "Gates Cambridge Scholarships",
+    "country": "UK",
+    "level": "PhD / Master's",
+    "funding": "Fully funded",
+    "deadline": "Oct-Dec",
+    "url": "https://www.gatescambridge.org/"
+  },
+  {
+    "name": "Swedish Institute Scholarships",
+    "country": "Sweden",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Feb",
+    "url": "https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/"
+  },
+  {
+    "name": "Netherlands Fellowship Programmes (NFP)",
+    "country": "Netherlands",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Feb-May",
+    "url": "https://www.nuffic.nl/en/subjects/netherlands-fellowship-programmes"
+  }
+]
