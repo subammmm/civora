@@ -2,6 +2,72 @@
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
 
+// Interactive World Map functionality
+function initializeWorldMap() {
+  const mapPins = document.querySelectorAll('.map-pin');
+  const mapCountries = document.querySelectorAll('.map-country');
+  
+  // Add click interactions to pins
+  mapPins.forEach(pin => {
+    pin.addEventListener('click', (e) => {
+      const country = pin.getAttribute('data-country');
+      // Scroll to the corresponding country card
+      const countryCards = document.querySelectorAll('.card h3');
+      countryCards.forEach(card => {
+        if (card.textContent.includes(country) || 
+            (country === 'United States' && card.textContent.includes('United States')) ||
+            (country === 'United Kingdom' && card.textContent.includes('United Kingdom')) ||
+            (country === 'South Korea' && card.textContent.includes('South Korea'))) {
+          card.closest('.card').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+          // Add a brief highlight effect
+          const cardElement = card.closest('.card');
+          cardElement.style.transform = 'scale(1.02)';
+          cardElement.style.boxShadow = '0 12px 40px rgba(29, 185, 84, 0.3)';
+          setTimeout(() => {
+            cardElement.style.transform = '';
+            cardElement.style.boxShadow = '';
+          }, 2000);
+        }
+      });
+    });
+    
+    // Add accessible keyboard navigation
+    pin.setAttribute('tabindex', '0');
+    pin.setAttribute('role', 'button');
+    pin.setAttribute('aria-label', `View information about ${pin.getAttribute('data-country')}`);
+    
+    pin.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        pin.click();
+      }
+    });
+  });
+  
+  // Add hover effects to map countries
+  mapCountries.forEach(country => {
+    country.addEventListener('mouseenter', () => {
+      if (country.classList.contains('supported')) {
+        country.style.fill = 'var(--brand-2)';
+        country.style.opacity = '0.9';
+      }
+    });
+    
+    country.addEventListener('mouseleave', () => {
+      if (country.classList.contains('supported')) {
+        country.style.fill = '';
+        country.style.opacity = '';
+      }
+    });
+  });
+}
+
+// Initialize map when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeWorldMap);
+
 // Sidebar toggle for mobile
 const sidebarToggle = document.querySelector('.sidebar-toggle');
 const sidebar = document.querySelector('.sidebar');

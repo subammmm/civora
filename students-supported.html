@@ -73,16 +73,45 @@
     <h1>Students Supported</h1>
     <p>Through Civora resources and guidance, Nepali students have successfully secured admissions and opportunities in these countries.</p>
 
-    <div class="world-map-placeholder" style="background: var(--card); border: 2px dashed var(--border); padding: 3rem; text-align: center; margin: 2rem 0; border-radius: 8px;">
+    <div class="world-map-container">
       <h3>🗺️ Global Reach</h3>
-      <p style="color: var(--muted);">Interactive world map showing supported countries</p>
-      <div class="map-pins" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1rem;">
-        <span class="pin">📍 South Korea</span>
-        <span class="pin">📍 France</span>
-        <span class="pin">📍 United Kingdom</span>
-        <span class="pin">📍 United States</span>
-        <span class="pin">📍 Australia</span>
-        <span class="pin">📍 Belgium</span>
+      <p>Interactive world map showing countries where our students have succeeded</p>
+      
+      <div class="interactive-world-map">
+        <svg class="world-map-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Simplified world map background -->
+          <rect width="800" height="400" fill="#1a1a1a"/>
+          
+          <!-- Continents (simplified shapes) -->
+          <!-- North America -->
+          <path d="M120 80 Q180 70 220 90 L250 120 Q280 140 260 180 L240 200 Q200 220 160 210 L140 190 Q100 160 120 80 Z" class="map-country" id="north-america"/>
+          
+          <!-- South America -->
+          <path d="M200 220 Q230 240 240 280 L250 340 Q245 360 220 370 L200 365 Q180 350 185 320 L190 280 Q195 250 200 220 Z" class="map-country" id="south-america"/>
+          
+          <!-- Europe -->
+          <path d="M380 90 Q420 85 450 100 L470 120 Q480 140 465 150 L440 155 Q400 150 390 130 L385 110 Q380 95 380 90 Z" class="map-country supported" id="europe"/>
+          
+          <!-- Asia -->
+          <path d="M480 80 Q580 70 650 90 L680 120 Q720 140 710 180 L690 200 Q650 220 600 210 L550 190 Q500 160 480 80 Z" class="map-country supported" id="asia"/>
+          
+          <!-- Africa -->
+          <path d="M400 180 Q450 175 480 200 L490 260 Q485 320 460 340 L430 345 Q400 340 395 310 L390 250 Q395 210 400 180 Z" class="map-country" id="africa"/>
+          
+          <!-- Australia -->
+          <path d="M600 300 Q650 295 680 310 L690 330 Q685 345 660 350 L630 345 Q605 335 600 300 Z" class="map-country supported" id="australia"/>
+          
+          <!-- United Kingdom (separate from Europe for clarity) -->
+          <circle cx="380" cy="110" r="8" class="map-country supported" id="uk"/>
+        </svg>
+        
+        <!-- Interactive pins for each supported country -->
+        <div class="map-pin" data-country="United States" style="left: 20%; top: 35%;"></div>
+        <div class="map-pin" data-country="United Kingdom" style="left: 47%; top: 27%;"></div>
+        <div class="map-pin" data-country="France" style="left: 49%; top: 32%;"></div>
+        <div class="map-pin" data-country="Belgium" style="left: 50%; top: 30%;"></div>
+        <div class="map-pin" data-country="South Korea" style="left: 78%; top: 38%;"></div>
+        <div class="map-pin" data-country="Australia" style="left: 83%; top: 78%;"></div>
       </div>
     </div>
 
