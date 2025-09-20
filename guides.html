@@ -12,6 +12,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
 </head>
 <body>
   <!-- Mobile sidebar toggle -->
@@ -103,7 +111,12 @@ Financial Details:
 Sincerely,
 [Sponsor Signature]</pre>
         </div>
-        <p><em>Download: Right-click and save the template above, or contact your education consultant for a Word format.</em></p>
+        <div class="download-buttons">
+          <a href="assets/downloads/sponsor-letter-template.html" target="_blank" class="button button-secondary">
+            📄 Download Template (HTML)
+          </a>
+          <p class="download-note">Right-click and "Save as" to download. Open in any browser to print as PDF.</p>
+        </div>
       </div>
       
       <div class="card">
@@ -121,6 +134,12 @@ Sincerely,
           <li>✅ Bank solvency certificate</li>
         </ul>
         <p><strong>Tip:</strong> Different countries have different financial requirements. Verify the exact amount needed for your destination.</p>
+        <div class="download-buttons">
+          <a href="assets/downloads/financial-checklist.html" target="_blank" class="button button-secondary">
+            💰 Download Checklist (HTML)
+          </a>
+          <p class="download-note">Complete checklist with country-specific requirements. Print as PDF for reference.</p>
+        </div>
       </div>
       
       <div class="card">
@@ -235,15 +254,26 @@ Sincerely,
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div>
-        <div>© <span id="year"></span> Civora</div>
-        <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Last updated: December 2024</div>
+      <div class="footer-main">
+        <div class="footer-info">
+          <div>© <span id="year"></span> Civora</div>
+          <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Last updated: December 2024</div>
+        </div>
+        <div class="footer-newsletter">
+          <h4>📬 Stay Updated</h4>
+          <p>Get monthly scholarship & visa updates — join the Civora newsletter.</p>
+          <form action="https://buttondown.email/api/emails/embed-subscribe/civora" method="POST" class="newsletter-form">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit" class="button button-small">Subscribe</button>
+          </form>
+        </div>
       </div>
       <div class="footer-links">
         <a href="about.html" data-i18n="footer.links.about">About</a>
         <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
         <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
         <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
+        <a href="contact.html">Contact</a>
         <a href="students-supported.html">Students Supported</a>
         <a href="ielts-prep.html">IELTS & Prep</a>
       </div>

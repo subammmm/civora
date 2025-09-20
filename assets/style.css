@@ -875,6 +875,65 @@ blockquote{
   align-items: center;
 }
 
+/* Impact Metrics */
+.impact-metrics {
+  background: linear-gradient(135deg, var(--card) 0%, rgba(251, 191, 36, 0.02) 100%);
+  padding: 4rem 0;
+  margin: 3rem 0;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+
+.impact-metrics h2 {
+  text-align: center;
+  color: var(--brand);
+  margin-bottom: 3rem;
+  font-size: 2rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.metric-item {
+  padding: 2rem 1rem;
+  background: rgba(251, 191, 36, 0.05);
+  border-radius: 1rem;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.metric-item:hover {
+  transform: translateY(-4px);
+}
+
+.metric-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--brand);
+  margin-bottom: 0.5rem;
+}
+
+.metric-label {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .metric-number {
+    font-size: 2.5rem;
+  }
+}
+
 /* Footer Styles */
 .footer-main {
   display: grid;
@@ -929,6 +988,21 @@ blockquote{
   .newsletter-form {
     flex-direction: column;
   }
+}
+
+/* Download Buttons */
+.download-buttons {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.download-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
 /* Contact Page Styles */

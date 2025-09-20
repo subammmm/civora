@@ -12,6 +12,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
 </head>
 <body>
   <!-- Mobile sidebar toggle -->
@@ -146,6 +154,26 @@
       </div>
     </section>
 
+    <section class="impact-metrics">
+      <div class="container">
+        <h2>📊 Our Impact</h2>
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <div class="metric-number">15+</div>
+            <div class="metric-label">Scholarships Verified</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number">6+</div>
+            <div class="metric-label">Countries Where Students Supported</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number">1000+</div>
+            <div class="metric-label">Visitors Reached</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="support-civora">
       <div class="container">
         <div class="support-content">
@@ -163,9 +191,9 @@
             </ul>
           </div>
           <div class="support-action">
-            <a href="https://ko-fi.com/civora" target="_blank" rel="noopener noreferrer" class="button support-button">
+            <a href="https://www.buymeacoffee.com/civora" target="_blank" rel="noopener noreferrer" class="button support-button">
               <span class="support-icon">☕</span>
-              <span>Buy us a coffee</span>
+              <span>Support Civora</span>
             </a>
             <p class="support-note">Every contribution helps a student find their pathway</p>
           </div>
