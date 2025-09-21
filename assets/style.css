@@ -1,33 +1,33 @@
 :root{
-  /* Premium Dark Color Palette */
-  --bg: #121212;
-  --panel: #1e1e1e;
+  /* Premium Red + Black Color Palette */
+  --bg: #000000;
+  --panel: #000000;
   --text: #E5E5E5;
   --muted: #999999;
-  --brand: #C28840;
-  --brand-2: #D4964A;
+  --brand: #C00000;
+  --brand-2: #8B0000;
   --border: #333333;
-  --card: #1e1e1e;
-  --link: #C28840;
-  --header-bg: #121212;
-  --table-header: #1e1e1e;
+  --card: #000000;
+  --link: #C00000;
+  --header-bg: #000000;
+  --table-header: #000000;
   --badge-bg: #333333;
-  --filter-bg: #1e1e1e;
-  --callout-bg: #1e1e1e;
-  --button-hover: #D4964A;
-  --accent: #B22222;
+  --filter-bg: #000000;
+  --callout-bg: #000000;
+  --button-hover: #8B0000;
+  --accent: #C00000;
   --success: #006400;
-  --warning: #C28840;
-  --gradient-start: #B22222;
-  --gradient-end: #006400;
+  --warning: #C00000;
+  --gradient-start: #C00000;
+  --gradient-end: #8B0000;
   --nav-height: 72px;
-  --form-bg: #1e1e1e;
+  --form-bg: #000000;
   --form-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --main-content-bg: #121212;
+  --main-content-bg: #000000;
   --card-hover: #2a2a2a;
   --text-secondary: #B0B0B0;
   --sidebar-width: 280px;
-  --sidebar-bg: #121212;
+  --sidebar-bg: #000000;
   --sidebar-item-hover: #2a2a2a;
 }
 
@@ -337,11 +337,11 @@ p {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   letter-spacing: 0.02em;
-  box-shadow: 0 4px 20px rgba(194, 136, 64, 0.3);
+  box-shadow: 0 4px 20px rgba(192, 0, 0, 0.3);
 }
 .button:hover{
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(194, 136, 64, 0.4);
+  box-shadow: 0 8px 30px rgba(192, 0, 0, 0.4);
   color: var(--text);
   background: var(--brand-2);
 }
@@ -1195,7 +1195,7 @@ blockquote{
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: var(--text);
+  color: #E5E5E5;
   font-weight: 500;
 }
 
@@ -1206,8 +1206,8 @@ blockquote{
   padding: 0.75rem;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
-  background: var(--filter-bg);
-  color: var(--text);
+  background: #000000;
+  color: #E5E5E5;
   font-family: inherit;
   font-size: 1rem;
 }
@@ -1216,8 +1216,8 @@ blockquote{
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--brand);
-  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+  border-color: #C00000;
+  box-shadow: 0 0 0 2px rgba(192, 0, 0, 0.2);
 }
 
 .form-group textarea {
@@ -1614,7 +1614,7 @@ blockquote{
 .contact-submit-button {
   display: inline-flex;
   align-items: center;
-  background: #C28840;
+  background: #C00000;
   color: #E5E5E5;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -1625,18 +1625,18 @@ blockquote{
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   letter-spacing: 0.02em;
-  box-shadow: 0 4px 20px rgba(194, 136, 64, 0.3);
+  box-shadow: 0 4px 20px rgba(192, 0, 0, 0.3);
 }
 
 .contact-submit-button:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(194, 136, 64, 0.4);
-  background: #B5773A;
+  box-shadow: 0 8px 30px rgba(192, 0, 0, 0.4);
+  background: #8B0000;
   color: #E5E5E5;
 }
 
 .contact-submit-button:focus {
-  outline: 2px solid #C28840;
+  outline: 2px solid #C00000;
   outline-offset: 4px;
 }
 
