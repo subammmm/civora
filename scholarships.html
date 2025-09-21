@@ -31,39 +31,34 @@
   
   <!-- Sidebar Navigation -->
   <aside class="sidebar">
-    <a class="sidebar-brand" href="index.html">🌍 Civora</a>
+    <a class="sidebar-brand" href="index.html">
+      <img src="assets/logo.svg" alt="Civora Logo" class="sidebar-logo">
+      Civora
+    </a>
     
     <nav class="sidebar-nav">
       <a href="index.html" data-i18n="nav.home">
-        <span class="sidebar-nav-icon">🏠</span>
         <span>Home</span>
       </a>
       <a href="scholarships.html" class="active" data-i18n="nav.scholarships">
-        <span class="sidebar-nav-icon">🎓</span>
         <span>Scholarships</span>
       </a>
       <a href="citizenship.html" data-i18n="nav.citizenship">
-        <span class="sidebar-nav-icon">🌍</span>
         <span>Citizenship</span>
       </a>
       <a href="guides.html" data-i18n="nav.guides">
-        <span class="sidebar-nav-icon">📋</span>
         <span>Guides</span>
       </a>
       <a href="students-supported.html">
-        <span class="sidebar-nav-icon">📍</span>
         <span>Students Supported</span>
       </a>
       <a href="ielts-prep.html">
-        <span class="sidebar-nav-icon">📚</span>
         <span>IELTS & Prep</span>
       </a>
       <a href="about.html" data-i18n="nav.about">
-        <span class="sidebar-nav-icon">ℹ️</span>
         <span>About</span>
       </a>
       <a href="contact.html">
-        <span class="sidebar-nav-icon">📧</span>
         <span>Contact</span>
       </a>
     </nav>
@@ -85,6 +80,10 @@
     <main class="container page">
     <h1 data-i18n="sch.title">Scholarships for Nepali Students</h1>
     <p data-i18n="sch.intro">This page compiles ongoing scholarships that Nepali students are eligible for. Each entry is verified and linked to the official source.</p>
+
+    <div class="hero-image">
+      <img src="assets/images/scholarships-hero.svg" alt="Students studying and scholarship opportunities" style="max-width: 100%; border-radius: 6px; margin: 2rem 0;">
+    </div>
 
 
     <hr class="muted" style="border-color: var(--border); opacity:.4; margin:1.5rem 0" />
@@ -128,7 +127,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-info">
-        <div>© <span id="year"></span> Civora | Last updated: December 2024</div>
+        <div>© <span id="year"></span> Civora | Last updated: <span id="last-updated"></span></div>
       </div>
       <div class="footer-links">
         <a href="about.html" data-i18n="footer.links.about">About</a>

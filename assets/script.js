@@ -1,6 +1,14 @@
-// Footer year
+// Footer year and last updated date
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
+
+const lastUpdated = document.getElementById('last-updated');
+if (lastUpdated) {
+  const date = new Date();
+  const monthNames = ["January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"];
+  lastUpdated.textContent = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+}
 
 // Interactive World Map functionality
 function initializeWorldMap() {

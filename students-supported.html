@@ -25,42 +25,38 @@
   
   <!-- Sidebar Navigation -->
   <aside class="sidebar">
-    <a class="sidebar-brand" href="index.html">🌍 Civora</a>
+    <a class="sidebar-brand" href="index.html">
+      <img src="assets/logo.svg" alt="Civora Logo" class="sidebar-logo">
+      Civora
+    </a>
     
     <nav class="sidebar-nav">
       <a href="index.html">
-        <span class="sidebar-nav-icon">🏠</span>
         <span>Home</span>
       </a>
       <a href="scholarships.html">
-        <span class="sidebar-nav-icon">🎓</span>
         <span>Scholarships</span>
       </a>
       <a href="citizenship.html">
-        <span class="sidebar-nav-icon">🌍</span>
         <span>Citizenship</span>
       </a>
       <a href="guides.html">
-        <span class="sidebar-nav-icon">📋</span>
         <span>Guides</span>
       </a>
       <a href="students-supported.html" class="active">
-        <span class="sidebar-nav-icon">📍</span>
         <span>Students Supported</span>
       </a>
       <a href="ielts-prep.html">
-        <span class="sidebar-nav-icon">📚</span>
         <span>IELTS & Prep</span>
       </a>
       <a href="about.html">
-        <span class="sidebar-nav-icon">ℹ️</span>
         <span>About</span>
       </a>
       <a href="contact.html">
-        <span class="sidebar-nav-icon">📧</span>
         <span>Contact</span>
       </a>
     </nav>
+    
     
     <div class="sidebar-footer">
       <select id="lang" class="lang-select" aria-label="Language">
@@ -80,8 +76,14 @@
     <h1>Students Supported</h1>
     <p>Through Civora resources and guidance, Nepali students have successfully secured admissions and opportunities in these countries.</p>
 
+    <!-- Celebratory Banner -->
+    <div class="celebration-banner" style="background: linear-gradient(135deg, #C28840 0%, #B22222 100%); padding: 2rem; margin: 2rem 0; border-radius: 8px; text-align: center; border: 2px solid #006400;">
+      <h2 style="color: #E5E5E5; margin: 0 0 1rem 0; font-size: 1.8rem; font-weight: bold;">Global Success Stories</h2>
+      <p style="color: #E5E5E5; margin: 0; font-size: 1.1rem; opacity: 0.9;">Celebrating Nepali students who have achieved their dreams through verified opportunities and guidance</p>
+    </div>
+
     <div class="world-map-container">
-      <h3>🗺️ Global Reach</h3>
+      <h3>Global Reach</h3>
       <p>Interactive world map showing countries where our students have succeeded</p>
       
       <div class="interactive-world-map">
@@ -92,38 +94,38 @@
     <h2>Countries Where Our Students Have Succeeded</h2>
     <div class="grid">
       <div class="card">
-        <h3>🇰🇷 South Korea</h3>
+        <h3>South Korea</h3>
         <p>Korean Government Scholarship Program (KGSP), university partnerships, and research opportunities in technology and engineering.</p>
       </div>
       
       <div class="card">
-        <h3>🇫🇷 France</h3>
+        <h3>France</h3>
         <p>Eiffel Excellence Scholarships, French government programs, and pathways through public universities and grandes écoles.</p>
       </div>
       
       <div class="card">
-        <h3>🇬🇧 United Kingdom</h3>
+        <h3>United Kingdom</h3>
         <p>Chevening Scholarships, Commonwealth Scholarships, and prestigious university admissions including Russell Group institutions.</p>
       </div>
       
       <div class="card">
-        <h3>🇺🇸 United States</h3>
+        <h3>United States</h3>
         <p>Fulbright Program, need-based aid at liberal arts colleges, and graduate assistantships at research universities.</p>
       </div>
       
       <div class="card">
-        <h3>🇦🇺 Australia</h3>
+        <h3>Australia</h3>
         <p>Australia Awards Scholarships, Research Training Program (RTP), and pathways to permanent residency through study.</p>
       </div>
       
       <div class="card">
-        <h3>🇧🇪 Belgium</h3>
+        <h3>Belgium</h3>
         <p>Erasmus Mundus programs, VLIR-UOS scholarships, and opportunities in both French and Dutch-speaking regions.</p>
       </div>
     </div>
 
     <div class="callout">
-      <h3>💡 Success Stories Impact</h3>
+      <h3>Success Stories Impact</h3>
       <p>Students supported through Civora resources have secured admissions in these countries, demonstrating that with proper guidance and verified information, global education opportunities are accessible to Nepali students.</p>
       <p><em>Privacy note: Individual student information is kept confidential. This page shows aggregate success by country only.</em></p>
     </div>
@@ -132,7 +134,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-info">
-        <div>© <span id="year"></span> Civora | Last updated: December 2024</div>
+        <div>© <span id="year"></span> Civora | Last updated: <span id="last-updated"></span></div>
       </div>
       <div class="footer-links">
         <a href="about.html">About</a>

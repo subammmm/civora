@@ -30,39 +30,34 @@
   
   <!-- Sidebar Navigation -->
   <aside class="sidebar">
-    <a class="sidebar-brand" href="index.html">🌍 Civora</a>
+    <a class="sidebar-brand" href="index.html">
+      <img src="assets/logo.svg" alt="Civora Logo" class="sidebar-logo">
+      Civora
+    </a>
     
     <nav class="sidebar-nav">
       <a href="index.html" data-i18n="nav.home">
-        <span class="sidebar-nav-icon">🏠</span>
         <span>Home</span>
       </a>
       <a href="scholarships.html" data-i18n="nav.scholarships">
-        <span class="sidebar-nav-icon">🎓</span>
         <span>Scholarships</span>
       </a>
       <a href="citizenship.html" class="active" data-i18n="nav.citizenship">
-        <span class="sidebar-nav-icon">🌍</span>
         <span>Citizenship</span>
       </a>
       <a href="guides.html" data-i18n="nav.guides">
-        <span class="sidebar-nav-icon">📋</span>
         <span>Guides</span>
       </a>
       <a href="students-supported.html">
-        <span class="sidebar-nav-icon">📍</span>
         <span>Students Supported</span>
       </a>
       <a href="ielts-prep.html">
-        <span class="sidebar-nav-icon">📚</span>
         <span>IELTS & Prep</span>
       </a>
       <a href="about.html" data-i18n="nav.about">
-        <span class="sidebar-nav-icon">ℹ️</span>
         <span>About</span>
       </a>
       <a href="contact.html">
-        <span class="sidebar-nav-icon">📧</span>
         <span>Contact</span>
       </a>
     </nav>
@@ -85,7 +80,11 @@
     <h1>Citizenship & Residency Pathways</h1>
     <p>Quick pathways for Nepali students to secure permanent residency and citizenship through education and work.</p>
 
-    <h2>🚀 Quick Pathways Summary</h2>
+    <div class="hero-image">
+      <img src="assets/images/citizenship-hero.svg" alt="Passports, visas and citizenship documents" style="max-width: 100%; border-radius: 6px; margin: 2rem 0;">
+    </div>
+
+    <h2>Quick Pathways Summary</h2>
     <ul class="pathway-list">
       <li><strong>France</strong> → Study → Alternance → 5 years → PR → Citizenship. <a href="https://www.service-public.fr/particuliers/vosdroits/F2213" target="_blank">Official Info</a></li>
       <li><strong>Argentina</strong> → 2 years residency → Naturalization. <a href="https://www.argentina.gob.ar/interior/migraciones/ciudadania" target="_blank">Official Info</a></li>
@@ -100,20 +99,20 @@
     <p>Based on the latest global research, here are the quickest and most reliable routes to citizenship for international students and professionals. All pathways include official sources and processing timelines.</p>
 
     <div class="callout">
-      <h3>🚀 Express Routes (3-12 months)</h3>
+      <h3>Express Routes (3-12 months)</h3>
       <p>Caribbean and European investment programs offering the fastest citizenship options globally.</p>
     </div>
 
     <!-- Collapsible Section 1: Caribbean Citizenship -->
     <div class="collapsible-section">
       <button class="collapsible-header" type="button" aria-expanded="false">
-        <h2>🏝️ Caribbean Citizenship by Investment</h2>
+        <h2>Caribbean Citizenship by Investment</h2>
         <span class="collapsible-icon">▼</span>
       </button>
       <div class="collapsible-content">
         <div class="grid">
           <div class="card">
-            <h3>🇰🇳 St. Kitts & Nevis</h3>
+            <h3>St. Kitts & Nevis</h3>
             <p><strong>Timeline:</strong> 3-6 months</p>
             <p><strong>Investment:</strong> $250,000 real estate or $150,000 donation</p>
             <p><strong>Benefits:</strong> Visa-free travel to 156+ countries, no residency requirement</p>
@@ -156,7 +155,7 @@
           </div>
           
           <div class="card">
-            <h3>🇹🇷 Turkey Citizenship</h3>
+            <h3>Turkey Citizenship</h3>
             <p><strong>Timeline:</strong> 3-6 months</p>
             <p><strong>Investment:</strong> $400,000 real estate (held for 3 years)</p>
             <p><strong>Benefits:</strong> Strategic location, growing economy, visa-free travel to 110+ countries</p>
@@ -196,12 +195,12 @@
     <!-- Collapsible Section 4: Post-Study Work-to-Citizenship -->
     <div class="collapsible-section">
       <button class="collapsible-header" type="button" aria-expanded="true">
-        <h2>🎓 Post-Study Work-to-Citizenship</h2>
+        <h2>Post-Study Work-to-Citizenship</h2>
         <span class="collapsible-icon">▲</span>
       </button>
       <div class="collapsible-content" style="display: block;">
         <div class="callout">
-          <h3>🎓 Student-Friendly Countries</h3>
+          <h3>Student-Friendly Countries</h3>
           <p>Countries with streamlined pathways from student visa to permanent residency and citizenship.</p>
         </div>
 
@@ -236,7 +235,7 @@
     <!-- Collapsible Section 5: Alternative Fast Routes -->
     <div class="collapsible-section">
       <button class="collapsible-header" type="button" aria-expanded="false">
-        <h2>🌟 Alternative Fast Routes</h2>
+        <h2>Alternative Fast Routes</h2>
         <span class="collapsible-icon">▼</span>
       </button>
       <div class="collapsible-content">
@@ -269,7 +268,7 @@
     </div>
 
     <div class="callout">
-      <h3>⚠️ Important Considerations</h3>
+      <h3>Important Considerations</h3>
       <ul>
         <li><strong>Due Diligence:</strong> All programs require background checks and clean criminal records</li>
         <li><strong>Tax Implications:</strong> Consider tax obligations in both home and destination countries</li>
@@ -287,7 +286,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-info">
-        <div>© <span id="year"></span> Civora | Last updated: December 2024</div>
+        <div>© <span id="year"></span> Civora | Last updated: <span id="last-updated"></span></div>
       </div>
       <div class="footer-links">
         <a href="about.html" data-i18n="footer.links.about">About</a>

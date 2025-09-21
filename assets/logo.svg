@@ -1,0 +1,16 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Globe base -->
+  <circle cx="16" cy="18" r="12" stroke="#C28840" stroke-width="2" fill="none"/>
+  
+  <!-- Globe lines -->
+  <path d="M16 6 C16 6, 20 10, 20 18 C20 26, 16 30, 16 30" stroke="#C28840" stroke-width="1" fill="none"/>
+  <path d="M16 6 C16 6, 12 10, 12 18 C12 26, 16 30, 16 30" stroke="#C28840" stroke-width="1" fill="none"/>
+  <path d="M6 18 L26 18" stroke="#C28840" stroke-width="1"/>
+  <path d="M8 13 L24 13" stroke="#C28840" stroke-width="1"/>
+  <path d="M8 23 L24 23" stroke="#C28840" stroke-width="1"/>
+  
+  <!-- Graduation cap -->
+  <path d="M10 8 L22 8 L24 10 L22 12 L10 12 L8 10 Z" fill="#C28840"/>
+  <rect x="21" y="8" width="2" height="8" fill="#C28840"/>
+  <circle cx="22" cy="16" r="1" fill="#C28840"/>
+</svg>
