@@ -516,7 +516,7 @@ p {
 .mission {
   padding: 6rem 2rem;
   background: var(--panel);
-  border-radius: 2rem;
+  border-radius: 12px;
   margin: 4rem 0;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border);
@@ -950,7 +950,7 @@ blockquote{
 .spotlight-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 12px;
   padding: 2rem;
   transition: all 0.3s ease;
   position: relative;
@@ -1027,7 +1027,7 @@ blockquote{
   background: linear-gradient(135deg, var(--panel) 0%, rgba(251, 191, 36, 0.05) 100%);
   padding: 4rem 0;
   margin: 4rem 0;
-  border-radius: 1rem;
+  border-radius: 12px;
   border: 1px solid var(--border);
   position: relative;
   overflow: hidden;
