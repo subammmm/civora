@@ -1609,3 +1609,45 @@ blockquote{
     padding: 0 1.5rem 1.5rem 1.5rem;
   }
 }
+
+/* Contact Form Specific Styles */
+.contact-submit-button {
+  display: inline-flex;
+  align-items: center;
+  background: #C28840;
+  color: #E5E5E5;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 20px rgba(194, 136, 64, 0.3);
+}
+
+.contact-submit-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(194, 136, 64, 0.4);
+  background: #B5773A;
+  color: #E5E5E5;
+}
+
+.contact-submit-button:focus {
+  outline: 2px solid #C28840;
+  outline-offset: 4px;
+}
+
+.form-error-message {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+}

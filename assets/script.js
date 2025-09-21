@@ -656,4 +656,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+// Contact form error handling
+document.addEventListener('DOMContentLoaded', function() {
+  const contactForm = document.querySelector('.contact-form');
+  const errorMessage = document.getElementById('form-error');
+  
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      // Hide any previous error messages
+      if (errorMessage) {
+        errorMessage.style.display = 'none';
+      }
+    });
+
+    // Listen for form submission errors (Formspree will handle most of this)
+    // But we can add additional client-side validation if needed
+    contactForm.addEventListener('invalid', function(e) {
+      if (errorMessage) {
+        errorMessage.style.display = 'block';
+      }
+    }, true);
+  }
+});
 });
