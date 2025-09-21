@@ -3,6 +3,8 @@
   --bg: #000000;
   --panel: #000000;
   --text: #E5E5E5;
+  --text-body: #CCCCCC;
+  --text-heading: #FFFFFF;
   --muted: #999999;
   --brand: #C00000;
   --brand-2: #8B0000;
@@ -61,7 +63,7 @@
 html,body{margin:0;padding:0}
 body{
   font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  color: var(--text);
+  color: var(--text-body);
   background: var(--bg);
   line-height: 1.6;
   font-size: 16px;
@@ -77,13 +79,14 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 1rem 0;
-  color: var(--text);
+  color: var(--text-heading);
 }
 
 h1 {
   font-size: clamp(2.5rem, 4vw, 4rem);
   font-weight: 800;
   letter-spacing: -0.025em;
+  color: var(--text-heading);
 }
 
 h2 {
@@ -101,14 +104,15 @@ p {
   margin: 0 0 1.5rem 0;
   font-size: 1.1rem;
   line-height: 1.7;
+  color: var(--text-body);
 }
 
 /* Civora Button Styles */
 .civora-button {
   background-color: var(--brand);
-  color: #fff;
+  color: var(--text);
   padding: 10px 20px;
-  border-radius: 6px;
+  border-radius: 10px;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -116,12 +120,14 @@ p {
   align-items: center;
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .civora-button:hover {
   background-color: var(--brand-2);
-  color: #fff;
+  color: var(--text);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
 .container{max-width:1200px;margin:0 auto;padding:0 2rem}
@@ -329,7 +335,7 @@ p {
   background: var(--brand);
   color: var(--text);
   padding: 1rem 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 700;
   font-size: 1rem;
   border: none;
@@ -377,7 +383,7 @@ p {
   background: var(--card);
   border: 1px solid var(--border);
   padding: 2.5rem;
-  border-radius: 1.5rem;
+  border-radius: 12px;
   color: var(--text);
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1205,7 +1211,7 @@ blockquote{
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--border);
-  border-radius: 0.5rem;
+  border-radius: 10px;
   background: #000000;
   color: #E5E5E5;
   font-family: inherit;
@@ -1617,7 +1623,7 @@ blockquote{
   background: #C00000;
   color: #E5E5E5;
   padding: 1rem 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 700;
   font-size: 1rem;
   border: none;
