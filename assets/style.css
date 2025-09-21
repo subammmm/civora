@@ -1599,3 +1599,64 @@ blockquote{
     padding: 0 1.5rem 1.5rem 1.5rem;
   }
 }
+
+/* === Slide-out sidebar behavior and accessibility === */
+
+/* Desktop: hide most of the sidebar by default, reveal on hover and focus */
+@media (min-width: 900px) {
+  .sidebar {
+    /* leave a ~48px sliver visible to indicate presence */
+    transform: translateX(calc(-1 * var(--sidebar-width) + 48px));
+    transition: transform 0.3s ease;
+  }
+  
+  /* Respect user preference for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .sidebar {
+      transition: none;
+    }
+  }
+  
+  /* Reveal on hover */
+  .sidebar:hover {
+    transform: translateX(0);
+  }
+  
+  /* Reveal on focus-within for keyboard accessibility */
+  .sidebar:focus-within {
+    transform: translateX(0);
+  }
+  
+  /* Adjust main content margin to account for hidden sidebar */
+  .main-content {
+    margin-left: 48px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .main-content {
+      transition: none;
+    }
+  }
+  
+  /* Expand main content margin when sidebar is revealed */
+  .sidebar:hover ~ .main-content,
+  .sidebar:focus-within ~ .main-content {
+    margin-left: var(--sidebar-width);
+  }
+}
+
+/* Mobile: keep existing toggle/overlay behavior unchanged */
+@media (max-width: 899px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+}
