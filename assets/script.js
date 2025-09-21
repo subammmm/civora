@@ -181,7 +181,7 @@ const I18N = {
     'index.card_guides_title': 'Application Guides & Templates',
     'index.card_guides_desc': 'Sponsor letters, financial checklists, and visa timelines you can download.',
     'index.mission_title': 'Mission',
-    'index.mission_body': 'Civora exists to reduce friction for Nepali students aiming abroad. We compile what matters — scholarships with official links, transparent immigration steps, and practical documents — and keep the tone professional, clear, and factual.',
+    'index.mission_body': 'Civora helps Nepali students access global education opportunities. We provide verified scholarships, clear immigration pathways, and practical documents to make international education more accessible.',
 
     'about.title': 'About Civora',
     'about.body': 'I founded Civora to make global opportunities more accessible for Nepali students. Having navigated scholarships, visas, and citizenship systems myself, I wanted to share verified resources in one place. This project is built by students, for students — to help more Nepalis study, work, and thrive abroad.',
@@ -250,7 +250,7 @@ const I18N = {
     'index.card_guides_title': 'आवेदन मार्गदर्शिका र ढाँचाहरू',
     'index.card_guides_desc': 'प्रायोजक पत्र, वित्तीय चेकलिस्ट, र भिसा टाइमलाइन डाउनलोड गर्नुहोस्।',
     'index.mission_title': 'उद्देश्य',
-    'index.mission_body': 'विदेश जाने लक्ष्यासहितका नेपाली विद्यार्थीहरूको बाधा घटाउन Civora बनाइएको हो। हामी आवश्यक कुराहरू संक्षेपमा राख्छौं — आधिकारिक लिङ्कसहितका छात्रवृत्तिहरू, पारदर्शी आप्रवासन चरणहरू, र व्यावहारिक कागजातहरू।',
+    'index.mission_body': 'Civora नेपाली विद्यार्थीहरूलाई विश्वव्यापी शिक्षाका अवसरहरू पहुँच गर्न सहयोग गर्छ। हामी प्रमाणित छात्रवृत्तिहरू, स्पष्ट आप्रवासन मार्गहरू, र व्यावहारिक कागजातहरू प्रदान गर्छौं।',
 
     'about.title': 'Civora बारेमा',
     'about.body': 'नेपाली विद्यार्थीहरूका लागि विश्वव्यापी अवसरहरू सजिलो बनाउन मैले Civora सुरु गरेको हुँ। छात्रवृत्ति, भिसा र नागरिकता प्रक्रियाहरू आफैं पार गरेको अनुभवका आधारमा, प्रमाणित स्रोतहरू एउटै स्थानमा राखिएको छ। यो परियोजना विद्यार्थीहरूद्वारा, विद्यार्थीहरूकै लागि — विदेशमा पढ्न, काम गर्न र सफल हुन सहयोग गर्न।',
@@ -319,7 +319,7 @@ const I18N = {
     'index.card_guides_title': 'Guides & modèles',
     'index.card_guides_desc': 'Lettres de sponsor, check-lists financières et calendriers de visa à télécharger.',
     'index.mission_title': 'Mission',
-    'index.mission_body': 'Civora vise à réduire les frictions pour les étudiants népalais. Nous compilons l’essentiel — bourses officielles, étapes d’immigration transparentes et documents pratiques — avec un ton clair et professionnel.',
+    'index.mission_body': 'Civora aide les étudiants népalais à accéder aux opportunités d\'éducation mondiale. Nous fournissons des bourses vérifiées, des voies d\'immigration claires et des documents pratiques.',
 
     'about.title': 'À propos de Civora',
     'about.body': 'J’ai fondé Civora pour rendre les opportunités mondiales plus accessibles aux étudiants népalais. Ayant moi-même traversé les systèmes de bourses, de visas et de citoyenneté, je partage des ressources vérifiées en un seul endroit. Un projet par des étudiants, pour des étudiants.',
@@ -388,7 +388,7 @@ const I18N = {
     'index.card_guides_title': 'Guías y plantillas',
     'index.card_guides_desc': 'Cartas de patrocinio, listas financieras y cronogramas de visa descargables.',
     'index.mission_title': 'Misión',
-    'index.mission_body': 'Civora reduce fricciones para estudiantes nepaleses. Compilamos lo esencial — becas oficiales, pasos de inmigración transparentes y documentos prácticos — con tono claro y profesional.',
+    'index.mission_body': 'Civora ayuda a estudiantes nepaleses a acceder a oportunidades educativas globales. Proporcionamos becas verificadas, vías de inmigración claras y documentos prácticos.',
 
     'about.title': 'Acerca de Civora',
     'about.body': 'Fundé Civora para que las oportunidades globales sean más accesibles a estudiantes nepaleses. Tras pasar por becas, visas y ciudadanía, quise compartir recursos verificados en un solo lugar. Un proyecto de estudiantes, para estudiantes.',
@@ -457,7 +457,7 @@ const I18N = {
     'index.card_guides_title': 'درخواست رہنمائیں اور ٹیمپلیٹس',
     'index.card_guides_desc': 'سپانسر خط، مالی چیک لسٹ اور ویزا ٹائم لائن ڈاؤن لوڈ کریں۔',
     'index.mission_title': 'مقصد',
-    'index.mission_body': 'Civora نیپالی طلبہ کے لیے رکاوٹیں کم کرتا ہے — سرکاری لنکس کے ساتھ اسکالرشپس، شفاف امیگریشن مراحل، اور عملی دستاویزات۔',
+    'index.mission_body': 'Civora نیپالی طلبہ کو عالمی تعلیمی مواقع تک رسائی میں مدد کرتا ہے۔ ہم تصدیق شدہ اسکالرشپس، واضح امیگریشن راستے، اور عملی دستاویزات فراہم کرتے ہیں۔',
 
     'about.title': 'Civora — تعارف',
     'about.body': 'میں نے Civora اس لیے شروع کیا کہ نیپالی طلبہ کے لیے عالمی مواقع زیادہ قابلِ رسائی ہوں۔ اسکالرشپس، ویزا اور شہریت کے نظام سے گزر کر، میں نے مصدقہ وسائل ایک جگہ جمع کیے ہیں۔ یہ منصوبہ طلبہ کی جانب سے، طلبہ کے لیے ہے۔',
@@ -526,7 +526,7 @@ const I18N = {
     'index.card_guides_title': 'आवेदन गाइड्स और टेम्पलेट्स',
     'index.card_guides_desc': 'स्पॉन्सर लेटर, वित्तीय चेकलिस्ट और वीज़ा टाइमलाइन डाउनलोड करें।',
     'index.mission_title': 'उद्देश्य',
-    'index.mission_body': 'Civora अंतर्राष्ट्रीय लक्ष्यों वाले नेपाली छात्रों के लिए बाधाएँ कम करता है — आधिकारिक लिंक सहित छात्रवृत्तियाँ, पारदर्शी इमीग्रेशन चरण, और व्यावहारिक दस्तावेज।',
+    'index.mission_body': 'Civora नेपाली छात्रों को वैश्विक शिक्षा के अवसरों तक पहुंचने में मदद करता है। हम सत्यापित छात्रवृत्तियां, स्पष्ट आप्रवासन मार्ग, और व्यावहारिक दस्तावेज प्रदान करते हैं।',
 
     'about.title': 'Civora — परिचय',
     'about.body': 'मैंने नेपाली छात्रों के लिए वैश्विक अवसरों को सुलभ बनाने के लिए Civora शुरू किया। छात्रवृत्ति, वीज़ा और नागरिकता प्रक्रियाओं से गुजरकर, मैंने सत्यापित संसाधन एक जगह संकलित किए हैं। यह प्रोजेक्ट छात्रों द्वारा, छात्रों के लिए है।',
