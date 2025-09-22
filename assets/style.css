@@ -3590,4 +3590,116 @@ img[alt=""] {
     color: #666;
   }
 }
+
+/* Troubleshooting Section Styles */
+.troubleshooting-section {
+  background: linear-gradient(135deg, var(--panel) 0%, rgba(0, 123, 255, 0.05) 100%);
+  padding: 3rem;
+  margin: 3rem 0;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+
+.troubleshooting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.troubleshooting-item {
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.troubleshooting-item:hover {
+  border-color: var(--brand);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.1);
+}
+
+.troubleshooting-item h3 {
+  color: var(--brand);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.troubleshooting-item p {
+  color: var(--text-body);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.troubleshooting-item ul {
+  color: var(--text-body);
+  padding-left: 1.5rem;
+  line-height: 1.6;
+}
+
+.troubleshooting-item li {
+  margin-bottom: 0.5rem;
+}
+
+.troubleshooting-item code {
+  background: rgba(0, 123, 255, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.9rem;
+  color: var(--brand);
+}
+
+.troubleshooting-help {
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-top: 2rem;
+  border-left: 4px solid var(--brand);
+}
+
+.troubleshooting-help h3 {
+  color: var(--brand);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.troubleshooting-help ul {
+  color: var(--text-body);
+  padding-left: 1.5rem;
+  line-height: 1.6;
+}
+
+.troubleshooting-help li {
+  margin-bottom: 0.5rem;
+}
+
+/* Mobile responsiveness for troubleshooting */
+@media (max-width: 768px) {
+  .troubleshooting-section {
+    padding: 2rem;
+  }
+  
+  .troubleshooting-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .troubleshooting-item {
+    padding: 1.5rem;
+  }
+  
+  .troubleshooting-help {
+    padding: 1.5rem;
+  }
+}
+
 }
