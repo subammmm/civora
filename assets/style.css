@@ -1,39 +1,41 @@
 :root{
-  /* Linear.app-inspired Dark Slate Color Palette */
-  --bg: #0f172a;
-  --panel: #1e293b;
+  /* Linear.app Exact Color Palette - Dark Theme */
+  --bg: #0C0D0F;
+  --panel: #18191C;
   --text: #ffffff;
-  --text-body: #e2e8f0;
+  --text-body: #ffffff;
   --text-heading: #ffffff;
-  --muted: #94a3b8;
-  --brand: #3b82f6;
-  --brand-2: #2563eb;
-  --border: #334155;
-  --card: #1e293b;
-  --link: #3b82f6;
-  --header-bg: #0f172a;
-  --table-header: #1e293b;
-  --badge-bg: #334155;
-  --filter-bg: #1e293b;
-  --callout-bg: #1e293b;
-  --button-hover: #2563eb;
-  --accent: #3b82f6;
+  --muted: #8A8F98;
+  --brand: #5E6AD2;
+  --brand-2: #4D59B8;
+  --border: #8A8F98;
+  --card: #18191C;
+  --link: #5E6AD2;
+  --header-bg: #0C0D0F;
+  --table-header: #18191C;
+  --badge-bg: #8A8F98;
+  --filter-bg: #18191C;
+  --callout-bg: #18191C;
+  --button-hover: #4D59B8;
+  --accent: #5E6AD2;
   --success: #10b981;
-  --warning: #f59e0b;
-  --gradient-start: #0f172a;
-  --gradient-end: #1e293b;
+  --warning: #5E6AD2;
+  --gradient-start: #0C0D0F;
+  --gradient-end: #18191C;
   --nav-height: 64px;
-  --form-bg: #1e293b;
-  --form-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --main-content-bg: #0f172a;
-  --card-hover: #334155;
-  --text-secondary: #cbd5e1;
+  --form-bg: #18191C;
+  --form-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --main-content-bg: #0C0D0F;
+  --card-hover: #6A7180;
+  --text-secondary: #8A8F98;
   --sidebar-width: 280px;
+  --sidebar-bg: #0C0D0F;
+  --sidebar-item-hover: #18191C;
 }
 
 
 
-/* Manual light theme toggle support */
+/* Manual light theme toggle support - Linear.app Light Mode */
 [data-theme="light"] {
   --bg: #f6f7f7;
   --panel: #ffffff;
