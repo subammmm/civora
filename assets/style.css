@@ -1660,12 +1660,12 @@ blockquote{
   }
 }
 
-/* Contact Form Specific Styles */
+/* Contact Form Specific Styles - Updated for Linear.app palette */
 .contact-submit-button {
   display: inline-flex;
   align-items: center;
-  background: #C00000;
-  color: #E5E5E5;
+  background: var(--brand);
+  color: var(--text);
   padding: 1rem 2rem;
   border-radius: 10px;
   font-weight: 700;
@@ -1681,12 +1681,12 @@ blockquote{
 .contact-submit-button:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 8px 30px rgba(94, 106, 210, 0.4);
-  background: #8B0000;
-  color: #E5E5E5;
+  background: var(--brand-2);
+  color: var(--text);
 }
 
 .contact-submit-button:focus {
-  outline: 2px solid #C00000;
+  outline: 2px solid var(--brand);
   outline-offset: 4px;
 }
 
