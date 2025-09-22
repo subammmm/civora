@@ -3749,6 +3749,11 @@ img[alt=""] {
 /* Sidebar: hidden to use top navigation layout */
 .sidebar { display: none !important; }
 
+/* Fix main-content margin when sidebar is hidden */
+.main-content {
+  margin-left: 0 !important;
+}
+
 /* Page Layout - No Sidebar */
 .page-content {
   min-height: 100vh;
