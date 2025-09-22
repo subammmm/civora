@@ -13,20 +13,25 @@
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
   <!-- Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'GA_MEASUREMENT_ID');
+    if (typeof gtag !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
+    }
   </script>
 </head>
 <body>
   <!-- Mobile sidebar toggle -->
-  <button class="sidebar-toggle" aria-label="Toggle menu">☰</button>
+  <button class="sidebar-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
   
   <!-- Sidebar overlay for mobile -->
-  <div class="sidebar-overlay"></div>
+  <div class="sidebar-overlay" aria-hidden="true"></div>
   
   <!-- Sidebar Navigation -->
   <aside class="sidebar">

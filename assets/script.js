@@ -123,27 +123,71 @@ function findPinByCountryId(countryId) {
 // Initialize map when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeWorldMap);
 
-// Sidebar toggle for mobile
+// Sidebar toggle for mobile with accessibility features
 const sidebarToggle = document.querySelector('.sidebar-toggle');
 const sidebar = document.querySelector('.sidebar');
 const sidebarOverlay = document.querySelector('.sidebar-overlay');
 
 if (sidebarToggle && sidebar && sidebarOverlay) {
-  sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-    sidebarOverlay.classList.toggle('active');
-  });
-
-  sidebarOverlay.addEventListener('click', () => {
+  // Store the element that had focus before opening sidebar
+  let previouslyFocusedElement = null;
+  
+  function openSidebar() {
+    // Store currently focused element
+    previouslyFocusedElement = document.activeElement;
+    
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.add('active');
+    
+    // Update ARIA attributes
+    sidebarToggle.setAttribute('aria-expanded', 'true');
+    sidebarOverlay.setAttribute('aria-hidden', 'false');
+    
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
+    
+    // Focus first nav link
+    const firstNavLink = sidebar.querySelector('.sidebar-nav a');
+    if (firstNavLink) {
+      firstNavLink.focus();
+    }
+  }
+  
+  function closeSidebar() {
     sidebar.classList.remove('open');
     sidebarOverlay.classList.remove('active');
+    
+    // Update ARIA attributes
+    sidebarToggle.setAttribute('aria-expanded', 'false');
+    sidebarOverlay.setAttribute('aria-hidden', 'true');
+    
+    // Unlock body scroll
+    document.body.style.overflow = '';
+    
+    // Return focus to toggle button
+    if (previouslyFocusedElement) {
+      previouslyFocusedElement.focus();
+      previouslyFocusedElement = null;
+    } else {
+      sidebarToggle.focus();
+    }
+  }
+
+  sidebarToggle.addEventListener('click', () => {
+    const isOpen = sidebar.classList.contains('open');
+    if (isOpen) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
   });
+
+  sidebarOverlay.addEventListener('click', closeSidebar);
 
   // Close sidebar on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && sidebar.classList.contains('open')) {
-      sidebar.classList.remove('open');
-      sidebarOverlay.classList.remove('active');
+      closeSidebar();
     }
   });
 }
@@ -678,5 +722,133 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, true);
   }
+});
+
+// Load and render scholarship spotlight data
+async function loadSpotlightData() {
+  try {
+    const response = await fetch('/assets/data/spotlight.json');
+    if (!response.ok) throw new Error('Failed to load spotlight data');
+    const data = await response.json();
+    renderSpotlight(data);
+  } catch (error) {
+    console.warn('Could not load spotlight data:', error);
+    // Gracefully degrade - leave existing content or show message
+  }
+}
+
+function renderSpotlight(scholarships) {
+  const grid = document.getElementById('spotlight-grid');
+  if (!grid) return;
+
+  const now = new Date();
+  
+  // Filter out expired scholarships
+  const activeScholarships = scholarships.filter(scholarship => {
+    if (!scholarship.deadline) return true;
+    
+    let deadline;
+    if (scholarship.deadline.includes('-')) {
+      // ISO format (YYYY-MM-DD)
+      deadline = new Date(scholarship.deadline);
+    } else {
+      // Month YYYY format - parse differently
+      deadline = new Date(scholarship.deadline);
+    }
+    
+    return deadline > now;
+  });
+
+  if (activeScholarships.length === 0) {
+    grid.innerHTML = '<p class="spotlight-empty">No active scholarships available at this time. Check back soon!</p>';
+    return;
+  }
+
+  grid.innerHTML = activeScholarships.map(scholarship => {
+    const deadlineText = formatDeadline(scholarship.deadline);
+    
+    return `
+      <div class="spotlight-card">
+        <div class="spotlight-header">
+          <h3>${escapeHtml(scholarship.title)}</h3>
+          <span class="spotlight-badge">${escapeHtml(scholarship.badge)}</span>
+        </div>
+        <p class="spotlight-desc">${escapeHtml(scholarship.description)}</p>
+        <div class="spotlight-details">
+          <span class="spotlight-deadline">⏰ Deadline: ${deadlineText}</span>
+          <span class="spotlight-level">${escapeHtml(scholarship.academic_level)}</span>
+        </div>
+        <div class="spotlight-actions">
+          <a href="${escapeHtml(scholarship.cta_url)}" target="_blank" rel="noopener noreferrer" class="button button-secondary">
+            ${escapeHtml(scholarship.cta_text)}
+          </a>
+          ${scholarship.source_url ? `
+            <a href="${escapeHtml(scholarship.source_url)}" target="_blank" rel="noopener noreferrer" class="spotlight-source">
+              Official source
+            </a>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function formatDeadline(deadline) {
+  if (!deadline) return 'See official source';
+  
+  try {
+    let date;
+    if (deadline.includes('-')) {
+      // ISO format
+      date = new Date(deadline);
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    } else {
+      // Month YYYY format - return as is
+      return deadline;
+    }
+  } catch (error) {
+    return deadline; // Return original if parsing fails
+  }
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Update last modified dates using document.lastModified
+function updateLastModified() {
+  const lastUpdatedEl = document.getElementById('last-updated');
+  const footerLastUpdatedEl = document.getElementById('footer-last-updated');
+  
+  if (lastUpdatedEl || footerLastUpdatedEl) {
+    try {
+      const lastModified = new Date(document.lastModified);
+      const formatted = lastModified.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long' 
+      });
+      
+      if (lastUpdatedEl) lastUpdatedEl.textContent = formatted;
+      if (footerLastUpdatedEl) footerLastUpdatedEl.textContent = formatted;
+    } catch (error) {
+      // Fallback to current date
+      const now = new Date();
+      const formatted = now.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long' 
+      });
+      
+      if (lastUpdatedEl) lastUpdatedEl.textContent = formatted;
+      if (footerLastUpdatedEl) footerLastUpdatedEl.textContent = formatted;
+    }
+  }
+}
+
+// Initialize spotlight and last modified on page load
+document.addEventListener('DOMContentLoaded', function() {
+  loadSpotlightData();
+  updateLastModified();
 });
 });
