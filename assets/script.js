@@ -700,6 +700,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+});
 
 // Contact form error handling
 document.addEventListener('DOMContentLoaded', function() {
@@ -850,5 +851,4 @@ function updateLastModified() {
 document.addEventListener('DOMContentLoaded', function() {
   loadSpotlightData();
   updateLastModified();
-});
 });
