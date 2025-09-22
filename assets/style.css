@@ -493,6 +493,46 @@ p {
 
 .page{padding:3rem 0}
 
+/* Celebration Banner Styles */
+.celebration-banner {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  margin: 2rem 0;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.celebration-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  opacity: 1;
+}
+
+.celebration-banner h2 {
+  color: var(--text-heading);
+  margin: 0 0 1rem 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.celebration-banner p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
 /* Interactive World Map Styles */
 .world-map-container {
   background: var(--card);
@@ -1266,7 +1306,7 @@ blockquote{
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #C00000;
+  border-color: var(--brand);
   box-shadow: 0 0 0 2px rgba(94, 106, 210, 0.2);
 }
 
