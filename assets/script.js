@@ -123,71 +123,36 @@ function findPinByCountryId(countryId) {
 // Initialize map when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeWorldMap);
 
-// Sidebar toggle for mobile with accessibility features
-const sidebarToggle = document.querySelector('.sidebar-toggle');
-const sidebar = document.querySelector('.sidebar');
-const sidebarOverlay = document.querySelector('.sidebar-overlay');
+// Top navigation toggle for mobile
+const navToggle = document.querySelector('.nav-toggle');
+const siteNav = document.querySelector('.site-nav');
 
-if (sidebarToggle && sidebar && sidebarOverlay) {
-  // Store the element that had focus before opening sidebar
-  let previouslyFocusedElement = null;
-  
-  function openSidebar() {
-    // Store currently focused element
-    previouslyFocusedElement = document.activeElement;
+if (navToggle && siteNav) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.contains('open');
     
-    sidebar.classList.add('open');
-    sidebarOverlay.classList.add('active');
-    
-    // Update ARIA attributes
-    sidebarToggle.setAttribute('aria-expanded', 'true');
-    sidebarOverlay.setAttribute('aria-hidden', 'false');
-    
-    // Lock body scroll
-    document.body.style.overflow = 'hidden';
-    
-    // Focus first nav link
-    const firstNavLink = sidebar.querySelector('.sidebar-nav a');
-    if (firstNavLink) {
-      firstNavLink.focus();
-    }
-  }
-  
-  function closeSidebar() {
-    sidebar.classList.remove('open');
-    sidebarOverlay.classList.remove('active');
-    
-    // Update ARIA attributes
-    sidebarToggle.setAttribute('aria-expanded', 'false');
-    sidebarOverlay.setAttribute('aria-hidden', 'true');
-    
-    // Unlock body scroll
-    document.body.style.overflow = '';
-    
-    // Return focus to toggle button
-    if (previouslyFocusedElement) {
-      previouslyFocusedElement.focus();
-      previouslyFocusedElement = null;
-    } else {
-      sidebarToggle.focus();
-    }
-  }
-
-  sidebarToggle.addEventListener('click', () => {
-    const isOpen = sidebar.classList.contains('open');
     if (isOpen) {
-      closeSidebar();
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     } else {
-      openSidebar();
+      siteNav.classList.add('open');
+      navToggle.setAttribute('aria-expanded', 'true');
     }
   });
 
-  sidebarOverlay.addEventListener('click', closeSidebar);
-
-  // Close sidebar on escape key
+  // Close nav on escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sidebar.classList.contains('open')) {
-      closeSidebar();
+    if (e.key === 'Escape' && siteNav.classList.contains('open')) {
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close nav when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navToggle.contains(e.target) && !siteNav.contains(e.target)) {
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     }
   });
 }
