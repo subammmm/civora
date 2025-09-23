@@ -427,55 +427,6 @@ p {
   margin: 0 auto;
   padding: 0 2rem;
 }
-
-/* New 6-category layout */
-.cards-grid-small {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: 1400px;
-  margin: 0 auto 3rem auto;
-  padding: 0 2rem;
-}
-
-.cards-grid-large {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 2.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.card-small {
-  min-height: 180px;
-  padding: 2rem;
-}
-
-.card-large {
-  min-height: 220px;
-  padding: 2.5rem;
-}
-
-/* Mobile responsive adjustments for new layout */
-@media (max-width: 760px) {
-  .cards-grid-small {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-  }
-  
-  .cards-grid-large {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .card-small,
-  .card-large {
-    min-height: auto;
-    padding: 1.5rem;
-  }
-}
 .card{
   background: var(--card);
   border: 1px solid var(--border);
