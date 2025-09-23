@@ -19,7 +19,9 @@ class CustomWorldMap {
       { name: 'France', lat: 46.6034, lng: 1.8883 },
       { name: 'Belgium', lat: 50.8476, lng: 4.3572 },
       { name: 'South Korea', lat: 37.5665, lng: 126.9780 },
-      { name: 'Australia', lat: -25.2744, lng: 133.7751 }
+      { name: 'Australia', lat: -25.2744, lng: 133.7751 },
+      { name: 'Canada', lat: 60.0000, lng: -95.0000 },
+      { name: 'Japan', lat: 36.2048, lng: 138.2529 }
     ];
     
     this.init();
@@ -315,18 +317,18 @@ class CustomWorldMap {
       .marker-pin {
         width: 24px;
         height: 24px;
-        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        background: linear-gradient(135deg, #1a1a1a, #333333);
         border: 3px solid #ffffff;
         border-radius: 50%;
         position: relative;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 16px rgba(251, 191, 36, 0.5);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
         animation: gentle-pulse 3s ease-in-out infinite;
       }
 
       .marker-pin:hover {
         transform: scale(1.3);
-        box-shadow: 0 8px 32px rgba(251, 191, 36, 0.7);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
         border-width: 4px;
       }
 
