@@ -533,7 +533,8 @@
           deadline: 'March 31, 2025',
           description: 'Comprehensive support for undergraduate and graduate studies.',
           link: 'https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do',
-          match: 85
+          match: 85,
+          tags: ['south-korea', 'korea']
         },
         {
           name: 'Eiffel Excellence Scholarship',
@@ -542,7 +543,8 @@
           deadline: 'January 8, 2025',
           description: 'For master\'s and PhD programs in engineering and sciences.',
           link: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence',
-          match: 78
+          match: 78,
+          tags: ['france']
         },
         {
           name: 'Erasmus Mundus Joint Masters',
@@ -551,15 +553,95 @@
           deadline: 'January 15, 2025',
           description: 'Study in multiple European countries with full funding.',
           link: 'https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters',
-          match: 72
+          match: 72,
+          tags: ['netherlands', 'germany', 'france', 'other']
+        },
+        {
+          name: 'Chevening Scholarships',
+          country: '🇬🇧 United Kingdom',
+          funding: 'Full tuition + living allowance (£1,560/month)',
+          deadline: 'November 5, 2025',
+          description: 'One-year master\'s degree program with full funding.',
+          link: 'https://www.chevening.org/scholarships/',
+          match: 80,
+          tags: ['uk', 'united-kingdom']
+        },
+        {
+          name: 'Australia Awards Scholarships',
+          country: '🇦🇺 Australia',
+          funding: 'Full tuition + living allowance (AUD 3,000/month)',
+          deadline: 'April 30, 2025',
+          description: 'Long-term development awards for undergraduate and postgraduate study.',
+          link: 'https://www.australiaawards.gov.au/',
+          match: 75,
+          tags: ['australia']
+        },
+        {
+          name: 'Fulbright Program',
+          country: '🇺🇸 United States',
+          funding: 'Full tuition + living stipend + health insurance',
+          deadline: 'May 15, 2025',
+          description: 'Graduate study, research, and teaching programs in the US.',
+          link: 'https://foreign.fulbrightonline.org/',
+          match: 77,
+          tags: ['usa', 'united-states']
+        },
+        {
+          name: 'Vanier Canada Graduate Scholarships',
+          country: '🇨🇦 Canada',
+          funding: 'CAD $50,000 per year for 3 years',
+          deadline: 'November 1, 2025',
+          description: 'For doctoral students demonstrating leadership skills and academic excellence.',
+          link: 'https://vanier.gc.ca/',
+          match: 73,
+          tags: ['canada']
+        },
+        {
+          name: 'DAAD Scholarships',
+          country: '🇩🇪 Germany',
+          funding: '€850-1,200/month + travel allowance',
+          deadline: 'October 31, 2025',
+          description: 'Study and research scholarships for international students.',
+          link: 'https://www.daad.de/en/',
+          match: 76,
+          tags: ['germany']
         }
       ];
       
-      // Filter and sort based on user preferences
-      return scholarships.filter(s => {
-        const country = s.country.toLowerCase();
-        return data.preferredCountries.some(pref => country.includes(pref.replace('-', ' ')));
-      }).sort((a, b) => b.match - a.match).slice(0, 3);
+      // First try to match with user preferences
+      let filteredScholarships = scholarships.filter(s => {
+        return data.preferredCountries.some(pref => 
+          s.tags.includes(pref) || 
+          s.country.toLowerCase().includes(pref.replace('-', ' ')) ||
+          pref === 'other'
+        );
+      });
+      
+      // If no matches or user selected "other", show all scholarships
+      if (filteredScholarships.length === 0 || data.preferredCountries.includes('other')) {
+        filteredScholarships = scholarships;
+      }
+      
+      // Calculate dynamic match scores based on user profile
+      filteredScholarships = filteredScholarships.map(s => {
+        let adjustedMatch = s.match;
+        
+        // Adjust based on education level
+        if (data.educationLevel === 'bachelor' && s.description.includes('undergraduate')) {
+          adjustedMatch += 10;
+        }
+        if (data.educationLevel === 'master' && s.description.includes('master')) {
+          adjustedMatch += 10;
+        }
+        if (data.educationLevel === 'phd' && s.description.includes('PhD')) {
+          adjustedMatch += 10;
+        }
+        
+        return { ...s, match: Math.min(adjustedMatch, 95) };
+      });
+      
+      // Sort by match score and return top results
+      return filteredScholarships.sort((a, b) => b.match - a.match).slice(0, 5);
     }
     
     function getImprovementSuggestions(data) {

@@ -260,60 +260,112 @@
     function generateRecommendations(data) {
       const resultsContainer = document.getElementById('recommendationResults');
       
-      // Simple recommendation logic
-      let recommendations = [];
-      
-      if (data.fieldOfStudy === 'computer-science' || data.fieldOfStudy === 'engineering') {
-        recommendations.push({
+      // Comprehensive recommendation logic with more scholarships
+      let allScholarships = [
+        {
           name: 'Korean Government Scholarship Program (KGSP)',
           country: 'South Korea',
           match: '95%',
           deadline: 'March 2025',
-          description: 'Perfect match for STEM fields with full funding including living allowance.'
-        });
-        recommendations.push({
+          description: 'Perfect match for STEM fields with full funding including living allowance.',
+          link: 'https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do',
+          fields: ['computer-science', 'engineering', 'business', 'medicine']
+        },
+        {
           name: 'Eiffel Excellence Scholarship',
           country: 'France',
           match: '85%',
           deadline: 'January 2025',
-          description: 'Great opportunity for engineering and computer science students.'
-        });
-      }
-      
-      if (data.educationLevel === 'bachelor' || data.educationLevel === 'undergraduate') {
-        recommendations.push({
+          description: 'Great opportunity for engineering and computer science students.',
+          link: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence',
+          fields: ['computer-science', 'engineering']
+        },
+        {
           name: 'Chevening Scholarships',
           country: 'United Kingdom',
           match: '80%',
           deadline: 'November 2024',
-          description: 'Prestigious UK government scholarship for future leaders.'
-        });
-      }
-      
-      // Default recommendations
-      if (recommendations.length === 0) {
-        recommendations.push({
+          description: 'Prestigious UK government scholarship for future leaders.',
+          link: 'https://www.chevening.org/scholarships/',
+          fields: ['all']
+        },
+        {
           name: 'Australia Awards Scholarships',
           country: 'Australia',
           match: '75%',
           deadline: 'April 2025',
-          description: 'Comprehensive scholarships for developing country students.'
-        });
+          description: 'Comprehensive scholarships for developing country students.',
+          link: 'https://www.australiaawards.gov.au/',
+          fields: ['all']
+        },
+        {
+          name: 'Fulbright Program',
+          country: 'United States',
+          match: '88%',
+          deadline: 'May 2025',
+          description: 'Graduate study, research, and teaching programs in the US.',
+          link: 'https://foreign.fulbrightonline.org/',
+          fields: ['all']
+        },
+        {
+          name: 'DAAD Scholarships',
+          country: 'Germany',
+          match: '82%',
+          deadline: 'October 2025',
+          description: 'Study and research scholarships for international students.',
+          link: 'https://www.daad.de/en/',
+          fields: ['computer-science', 'engineering', 'business']
+        },
+        {
+          name: 'Erasmus Mundus Joint Masters',
+          country: 'European Union',
+          match: '78%',
+          deadline: 'January 2025',
+          description: 'Study in multiple European countries with full funding.',
+          link: 'https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters',
+          fields: ['all']
+        }
+      ];
+      
+      // Filter based on field of study
+      let recommendations = allScholarships.filter(scholarship => {
+        return scholarship.fields.includes(data.fieldOfStudy) || scholarship.fields.includes('all');
+      });
+      
+      // Adjust match scores based on GPA
+      recommendations = recommendations.map(rec => {
+        let adjustedMatch = parseInt(rec.match);
+        if (data.gpa === '90-100') adjustedMatch += 5;
+        else if (data.gpa === '80-89') adjustedMatch += 2;
+        else if (data.gpa === '70-79') adjustedMatch -= 2;
+        else if (data.gpa === '60-69') adjustedMatch -= 5;
+        
+        return { ...rec, match: Math.min(adjustedMatch, 95) + '%' };
+      });
+      
+      // If no specific matches, show all scholarships
+      if (recommendations.length === 0) {
+        recommendations = allScholarships;
       }
+      
+      // Sort by match percentage and take top 5
+      recommendations = recommendations.sort((a, b) => 
+        parseInt(b.match) - parseInt(a.match)
+      ).slice(0, 5);
       
       // Render recommendations
       let html = '<div class="rec-section"><h3>🎯 Top Scholarship Matches</h3>';
       recommendations.forEach(rec => {
         html += `
           <div class="recommendation-item" style="background: var(--panel); padding: 1.5rem; margin: 1rem 0; border-radius: 8px; border: 1px solid var(--border);">
-            <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
               <h4 style="color: var(--brand); margin: 0;">${rec.name}</h4>
               <span style="background: var(--brand); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">${rec.match} Match</span>
             </div>
             <p style="margin: 0.5rem 0; color: var(--text-muted);"><strong>Country:</strong> ${rec.country}</p>
             <p style="margin: 0.5rem 0; color: var(--text-muted);"><strong>Deadline:</strong> ${rec.deadline}</p>
             <p style="margin: 0.5rem 0;">${rec.description}</p>
-            <button onclick="window.open('#', '_blank')" style="background: var(--brand); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Learn More</button>
+            <button onclick="window.open('${rec.link}', '_blank')" style="background: var(--brand); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Learn More</button>
           </div>
         `;
       });
