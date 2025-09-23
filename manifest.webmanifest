@@ -4,8 +4,8 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0b5fff",
+  "background_color": "#0C0D0F",
+  "theme_color": "#0C0D0F",
   "description": "Opening doors for Nepali students to study, work, and belong anywhere in the world",
   "icons": [
     {
@@ -18,5 +18,8 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "categories": ["education", "reference"],
+  "lang": "en",
+  "dir": "ltr"
 }
