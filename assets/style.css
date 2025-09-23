@@ -22,6 +22,8 @@
   --warning: #ffffff;
   --gradient-start: #0C0D0F;
   --gradient-end: #18191C;
+  --button-text: #0C0D0F;
+  --button-bg: #ffffff;
   --nav-height: 64px;
   --form-bg: #18191C;
   --form-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -66,6 +68,8 @@
   --text-secondary: #8A8F98;
   --sidebar-bg: #f6f7f7;
   --sidebar-item-hover: #ffffff;
+  --button-text: #ffffff;
+  --button-bg: #0C0D0F;
 }
 
 *{box-sizing:border-box}
@@ -118,8 +122,8 @@ p {
 
 /* Civora Button Styles */
 .civora-button {
-  background-color: var(--brand);
-  color: var(--text);
+  background-color: var(--button-bg);
+  color: var(--button-text);
   padding: 10px 20px;
   border-radius: 10px;
   font-weight: 600;
@@ -134,8 +138,8 @@ p {
 }
 
 .civora-button:hover {
-  background-color: var(--brand-2);
-  color: var(--text);
+  background-color: var(--button-hover);
+  color: var(--button-text);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
@@ -376,8 +380,8 @@ p {
 .button{
   display: inline-flex;
   align-items: center;
-  background: var(--brand);
-  color: var(--text);
+  background: var(--button-bg);
+  color: var(--button-text);
   padding: 1rem 2rem;
   border-radius: 10px;
   font-weight: 700;
@@ -392,8 +396,8 @@ p {
 .button:hover{
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 8px 30px rgba(94, 106, 210, 0.4);
-  color: var(--text);
-  background: var(--brand-2);
+  color: var(--button-text);
+  background: var(--button-hover);
 }
 .button:focus{outline: 2px solid var(--brand);outline-offset: 4px}
 .button-secondary{
@@ -1388,8 +1392,8 @@ blockquote{
 }
 
 .support-button {
-  background: var(--brand);
-  color: var(--bg);
+  background: var(--button-bg);
+  color: var(--button-text);
   padding: 1rem 2rem;
   border-radius: 2rem;
   font-weight: 600;
@@ -1404,10 +1408,10 @@ blockquote{
 }
 
 .support-button:hover {
-  background: var(--brand-2);
+  background: var(--button-hover);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(94, 106, 210, 0.4);
-  color: var(--bg);
+  color: var(--button-text);
 }
 
 .support-icon {
