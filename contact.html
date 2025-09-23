@@ -83,34 +83,115 @@
 
   <div class="main-content">
     <main class="container page">
-      <h1>Contact</h1>
-      <p>Get in touch with the Civora team for questions, suggestions, or collaboration opportunities.</p>
+      <div class="contact-hero">
+        <h1>Get in touch</h1>
+        <p class="contact-subtitle">We're here to help you navigate your educational journey. Reach out with questions, suggestions, or collaboration ideas.</p>
+      </div>
 
-      <div class="contact-section">
-        <form action="https://formspree.io/f/xldpregr" method="POST" class="contact-form">
-          <input type="hidden" name="_next" value="/thank-you.html">
+      <div class="contact-grid">
+        <div class="contact-section">
+          <h2>Send us a message</h2>
+          <p>Have a question about scholarships, need help with your application, or want to suggest a new opportunity? We'd love to hear from you.</p>
           
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required>
+          <form action="https://formspree.io/f/xldpregr" method="POST" class="contact-form">
+            <input type="hidden" name="_next" value="/thank-you.html">
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select id="subject" name="subject" required>
+                <option value="">Select a topic</option>
+                <option value="scholarship-question">Scholarship Question</option>
+                <option value="visa-guidance">Visa & Immigration Guidance</option>
+                <option value="technical-issue">Technical Issue</option>
+                <option value="partnership">Partnership Opportunity</option>
+                <option value="suggestion">Suggestion or Feedback</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us how we can help you..." required rows="5"></textarea>
+            </div>
+            
+            <button type="submit" class="contact-submit-button">
+              <span>Send message</span>
+            </button>
+            
+            <div id="form-error" class="form-error-message" style="display: none;">
+              Something went wrong. Please try again.
+            </div>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <div class="contact-section">
+            <h2>Other ways to reach us</h2>
+            
+            <div class="contact-methods">
+              <div class="contact-method">
+                <div class="contact-icon">✉️</div>
+                <div class="contact-details">
+                  <h3>Email</h3>
+                  <p><a href="mailto:contact@civora.me">contact@civora.me</a></p>
+                  <span>We typically respond within 24 hours</span>
+                </div>
+              </div>
+              
+              <div class="contact-method">
+                <div class="contact-icon">💬</div>
+                <div class="contact-details">
+                  <h3>Join our community</h3>
+                  <p><a href="students-supported.html">Student Stories</a></p>
+                  <span>Connect with other students and share experiences</span>
+                </div>
+              </div>
+              
+              <div class="contact-method">
+                <div class="contact-icon">🔗</div>
+                <div class="contact-details">
+                  <h3>LinkedIn</h3>
+                  <p><a href="https://www.linkedin.com/in/subamdhakal" target="_blank" rel="noopener">Connect with our founder</a></p>
+                  <span>Professional networking and mentorship</span>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" required>
+
+          <div class="contact-section">
+            <h2>Contribute to Civora</h2>
+            <p>Help us expand our database and improve our resources:</p>
+            
+            <div class="contribution-options">
+              <div class="contribution-item">
+                <h3>📚 Research Volunteer</h3>
+                <p>Help verify scholarships and update deadlines</p>
+              </div>
+              
+              <div class="contribution-item">
+                <h3>🌍 Language Support</h3>
+                <p>Translate content to reach more students</p>
+              </div>
+              
+              <div class="contribution-item">
+                <h3>💡 Content Creation</h3>
+                <p>Share your success story or create helpful guides</p>
+              </div>
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          
-          <button type="submit" class="contact-submit-button">Send Message</button>
-          
-          <div id="form-error" class="form-error-message" style="display: none;">
-            Something went wrong. Please try again.
-          </div>
-        </form>
+        </div>
       </div>
     </main>
 
