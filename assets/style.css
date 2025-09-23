@@ -309,7 +309,7 @@ p {
   font-weight:500;
   transition: all 0.2s ease;
 }
-.site-nav a.active{background: var(--brand);color: white}
+.site-nav a.active{background: var(--brand);color: var(--button-text)}
 .site-nav a:hover{background: var(--badge-bg);color: var(--brand)}
 .site-nav a:focus{outline: 2px solid var(--link);outline-offset: 2px}
 
@@ -965,7 +965,7 @@ blockquote{
   top: 1rem;
   left: 1rem;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   border: none;
   padding: 0.75rem;
   border-radius: 0.5rem;
@@ -1919,7 +1919,7 @@ blockquote{
   align-items: center;
   justify-content: center;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 1rem 2rem;
   border-radius: 8px;
   font-weight: 600;
@@ -2077,7 +2077,7 @@ blockquote{
 
 .step-number {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -2215,7 +2215,7 @@ a:focus {
   top: -40px;
   left: 6px;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 8px;
   text-decoration: none;
   border-radius: 4px;
@@ -2537,17 +2537,17 @@ img[alt=""] {
 
 .priority-badge.high {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
 }
 
 .priority-badge.medium {
   background: #FFA500;
-  color: white;
+  color: var(--button-text);
 }
 
 .priority-badge.low {
   background: var(--muted);
-  color: white;
+  color: var(--button-text);
 }
 
 .feature-card p {
@@ -2651,7 +2651,7 @@ img[alt=""] {
 
 .input-btn {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 1rem 1.5rem;
   border-radius: 8px;
   text-decoration: none;
@@ -2880,7 +2880,7 @@ img[alt=""] {
 
 .volunteer-btn:hover {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   border-color: var(--brand);
   transform: translateY(-2px);
 }
@@ -2933,7 +2933,7 @@ img[alt=""] {
 
 .post-category {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -3044,7 +3044,7 @@ img[alt=""] {
 
 .subscribe-btn {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -3075,7 +3075,7 @@ img[alt=""] {
 
 .topic-tag:hover {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
 }
 
 .scholarship-alerts {
@@ -3145,7 +3145,7 @@ img[alt=""] {
 
 .cta-btn {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 1rem 2rem;
   border-radius: 8px;
   text-decoration: none;
@@ -3218,7 +3218,7 @@ img[alt=""] {
   width: 60px;
   height: 60px;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   border-radius: 50%;
   font-size: 1.5rem;
   font-weight: 800;
@@ -3319,7 +3319,7 @@ img[alt=""] {
 .step-btn {
   padding: 1rem 2rem;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -3418,7 +3418,7 @@ img[alt=""] {
 
 .match-badge {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -3439,7 +3439,7 @@ img[alt=""] {
 .rec-btn {
   padding: 0.75rem 1.5rem;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   border: none;
   border-radius: 6px;
   text-decoration: none;
@@ -3615,7 +3615,7 @@ img[alt=""] {
 
 .story-tag {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -3841,7 +3841,7 @@ img[alt=""] {
 
 .submit-story-btn {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 1rem 2rem;
   border: none;
   border-radius: 8px;
@@ -3974,7 +3974,7 @@ img[alt=""] {
   display: inline-flex;
   align-items: center;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   text-decoration: none;
@@ -3999,7 +3999,7 @@ img[alt=""] {
   background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
   padding: 2rem;
   border-radius: 1rem;
-  color: white;
+  color: var(--button-text);
   min-width: 200px;
 }
 
@@ -4291,7 +4291,7 @@ img[alt=""] {
   width: 60px;
   height: 60px;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   border-radius: 50%;
   font-size: 1.5rem;
   font-weight: 800;
@@ -4373,7 +4373,7 @@ img[alt=""] {
 .template-download {
   display: inline-block;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 1rem 2rem;
   border-radius: 8px;
   text-decoration: none;
@@ -4435,7 +4435,7 @@ img[alt=""] {
   width: 100px;
   height: 60px;
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   border-radius: 12px;
   font-weight: 800;
   font-size: 1.1rem;
@@ -4710,7 +4710,7 @@ img[alt=""] {
 
 .processing-time {
   background: var(--brand);
-  color: white;
+  color: var(--button-text);
   padding: 0.75rem 1rem;
   border-radius: 20px;
   text-align: center;
