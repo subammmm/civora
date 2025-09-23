@@ -118,5 +118,301 @@
     "funding": "Fully funded",
     "deadline": "Feb-May",
     "url": "https://www.nuffic.nl/en/subjects/netherlands-fellowship-programmes"
+  },
+  {
+    "name": "Korean Government Scholarship Program (KGSP)",
+    "country": "South Korea",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Mar",
+    "url": "https://www.niied.go.kr/eng/contents.do?contentsNo=78&menuNo=349"
+  },
+  {
+    "name": "New Zealand Development Scholarships",
+    "country": "New Zealand",
+    "level": "Bachelor's / Master's",
+    "funding": "Fully funded",
+    "deadline": "Jun-Jul",
+    "url": "https://www.mfat.govt.nz/en/aid-and-development/scholarships/"
+  },
+  {
+    "name": "Taiwan International Cooperation and Development Fund (TaiwanICDF)",
+    "country": "Taiwan",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Mar-Apr",
+    "url": "https://www.icdf.org.tw/ct.asp?xItem=32581&ctNode=30286&mp=2"
+  },
+  {
+    "name": "Vanier Canada Graduate Scholarships",
+    "country": "Canada",
+    "level": "PhD",
+    "funding": "Fully funded",
+    "deadline": "Nov",
+    "url": "https://vanier.gc.ca/en/home-accueil.html"
+  },
+  {
+    "name": "Government of Ireland International Education Scholarships",
+    "country": "Ireland",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Mar",
+    "url": "https://www.gov.ie/en/service/c0993e-government-of-ireland-international-education-scholarship/"
+  },
+  {
+    "name": "Belgian Development Cooperation Scholarships",
+    "country": "Belgium",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Feb",
+    "url": "https://www.vliruos.be/en/projects/scholarships"
+  },
+  {
+    "name": "Turkiye Burslari",
+    "country": "Turkey",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Feb-Mar",
+    "url": "https://www.turkiyeburslari.gov.tr/"
+  },
+  {
+    "name": "Chinese Government Scholarship",
+    "country": "China",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Mar-Apr",
+    "url": "https://www.china-scholarship-council.com/"
+  },
+  {
+    "name": "Italian Government Scholarships for Foreign Students",
+    "country": "Italy",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "May",
+    "url": "https://studyinitaly.esteri.it/en/call-for-applications"
+  },
+  {
+    "name": "Spain Government Scholarships (Becas MAEC-AECID)",
+    "country": "Spain",
+    "level": "Master's",
+    "funding": "Partially funded",
+    "deadline": "Mar",
+    "url": "https://www.aecid.es/EN/becas-y-lectorados/becas-maec-aecid"
+  },
+  {
+    "name": "Portugal Government Scholarships",
+    "country": "Portugal",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Apr",
+    "url": "https://www.icp.pt/en/cooperation/scholarships"
+  },
+  {
+    "name": "Russian Government Scholarships",
+    "country": "Russia",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Mar",
+    "url": "https://russia.study/en/scholarship/russian-government-scholarships/"
+  },
+  {
+    "name": "Czech Republic Government Scholarships",
+    "country": "Czech Republic",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Feb",
+    "url": "https://www.dzs.cz/en/scholarships"
+  },
+  {
+    "name": "Poland Government Scholarships (Ignacy Łukasiewicz)",
+    "country": "Poland",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Apr",
+    "url": "https://nawa.gov.pl/en/students/the-ignacy-lukasiewicz-scholarship-programme"
+  },
+  {
+    "name": "Denmark Government Scholarships",
+    "country": "Denmark",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Mar",
+    "url": "https://ufm.dk/en/education/higher-education/transparency-in-higher-education/transparency-higher-education/scholarships"
+  },
+  {
+    "name": "Norway Quota Scheme Scholarships",
+    "country": "Norway",
+    "level": "Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Dec",
+    "url": "https://www.siu.no/en/external-funding/quota-scheme"
+  },
+  {
+    "name": "Finland Government Scholarships",
+    "country": "Finland",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Apr",
+    "url": "https://www.studyinfinland.fi/scholarships"
+  },
+  {
+    "name": "Orange Knowledge Programme (OKP)",
+    "country": "Netherlands",
+    "level": "Bachelor's / Master's",
+    "funding": "Fully funded",
+    "deadline": "May",
+    "url": "https://www.nuffic.nl/en/subjects/orange-knowledge-programme"
+  },
+  {
+    "name": "VLIR-UOS Scholarships Belgium",
+    "country": "Belgium",
+    "level": "Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Feb",
+    "url": "https://www.vliruos.be/en/projects/scholarships/6"
+  },
+  {
+    "name": "Austria Government Excellence Scholarships",
+    "country": "Austria",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Mar",
+    "url": "https://oead.at/en/to-austria/grants-and-scholarships"
+  },
+  {
+    "name": "Slovenia Government Scholarships",
+    "country": "Slovenia",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Apr",
+    "url": "https://www.cmepius.si/en/international-cooperation-opportunities/scholarships-for-foreign-students/"
+  },
+  {
+    "name": "Slovakia Government Scholarships",
+    "country": "Slovakia",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Mar",
+    "url": "https://www.studyin.sk/en/scholarships/"
+  },
+  {
+    "name": "ARES Scholarships (Belgium)",
+    "country": "Belgium",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Feb",
+    "url": "https://www.ares-ac.be/en/cooperation-au-developpement/bourses/masters-et-stages-en-belgique"
+  },
+  {
+    "name": "MACES Scholarships (Morocco)",
+    "country": "Morocco",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Mar",
+    "url": "https://www.enssup.gov.ma/en/node/1127"
+  },
+  {
+    "name": "Egyptian Government Scholarships",
+    "country": "Egypt",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Apr",
+    "url": "https://www.studyinegypt.gov.eg/scholarships"
+  },
+  {
+    "name": "Indian Council for Cultural Relations (ICCR)",
+    "country": "India",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Dec",
+    "url": "https://www.iccr.gov.in/scholarships-for-foreign-students"
+  },
+  {
+    "name": "Commonwealth Scholarships for Developing Countries",
+    "country": "UK",
+    "level": "Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Dec",
+    "url": "https://cscuk.fcdo.gov.uk/scholarships/"
+  },
+  {
+    "name": "Joint Japan World Bank Graduate Scholarship",
+    "country": "Various",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Mar",
+    "url": "https://www.worldbank.org/en/programs/scholarships"
+  },
+  {
+    "name": "Islamic Development Bank Merit Scholarship",
+    "country": "Various",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded",
+    "deadline": "Dec",
+    "url": "https://www.isdb.org/what-we-do/education/scholarships"
+  },
+  {
+    "name": "OPEC Fund for International Development",
+    "country": "Various",
+    "level": "Master's",
+    "funding": "Fully funded",
+    "deadline": "Jan",
+    "url": "https://opecfund.org/operations/private-sector-and-trade-finance/ofid-scholarship-award"
+  },
+  {
+    "name": "University of Copenhagen Scholarships",
+    "country": "Denmark",
+    "level": "Master's",
+    "funding": "Partially funded",
+    "deadline": "Jan",
+    "url": "https://studies.ku.dk/masters/tuition-fees-and-scholarships/scholarships/"
+  },
+  {
+    "name": "ETH Zurich Excellence Scholarship",
+    "country": "Switzerland",
+    "level": "Master's",
+    "funding": "Partially funded",
+    "deadline": "Dec",
+    "url": "https://ethz.ch/en/studies/financial/scholarships/excellence-scholarship.html"
+  },
+  {
+    "name": "University of Vienna Scholarships",
+    "country": "Austria",
+    "level": "Master's / PhD",
+    "funding": "Partially funded",
+    "deadline": "Feb",
+    "url": "https://international.univie.ac.at/en/students/scholarships-funding/"
+  },
+  {
+    "name": "Karolinska Institute Global Master's Scholarships",
+    "country": "Sweden",
+    "level": "Master's",
+    "funding": "Partially funded",
+    "deadline": "Jan",
+    "url": "https://education.ki.se/scholarships-and-funding"
+  },
+  {
+    "name": "Technical University of Munich Scholarships",
+    "country": "Germany",
+    "level": "Master's",
+    "funding": "Partially funded",
+    "deadline": "Feb",
+    "url": "https://www.tum.de/en/studies/degree-programs/international-students/scholarships"
+  },
+  {
+    "name": "Sciences Po Paris Scholarships",
+    "country": "France",
+    "level": "Master's",
+    "funding": "Partially funded",
+    "deadline": "Jan",
+    "url": "https://www.sciencespo.fr/students/en/finance/financial-aid"
+  },
+  {
+    "name": "University of Amsterdam Merit Scholarships",
+    "country": "Netherlands",
+    "level": "Master's",
+    "funding": "Partially funded",
+    "deadline": "Feb",
+    "url": "https://www.uva.nl/en/education/master-s/scholarships-and-loans/scholarships-and-loans.html"
   }
 ]
