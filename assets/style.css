@@ -427,6 +427,63 @@ p {
   margin: 0 auto;
   padding: 0 2rem;
 }
+
+/* New 6-card grid layout */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Large cards span 1 column in top row */
+.card-large {
+  grid-row: 1;
+  min-height: 280px;
+}
+
+/* Small cards in bottom row, each taking 1 column */
+.card-small {
+  grid-row: 2;
+  min-height: 220px;
+}
+
+/* Responsive behavior */
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  
+  .card-large:nth-child(1), .card-large:nth-child(2) {
+    grid-row: 1;
+  }
+  
+  .card-large:nth-child(3) {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
+  
+  .card-small {
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .card-large, .card-small {
+    grid-row: auto;
+    grid-column: 1;
+    min-height: 200px;
+  }
+}
 .card{
   background: var(--card);
   border: 1px solid var(--border);
