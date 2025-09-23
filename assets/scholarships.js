@@ -40,9 +40,9 @@ class ScholarshipFilter {
       console.warn('Failed to load external data, using fallback data');
       // Fallback data in case the JSON file fails to load
       this.data = [
-        { name: 'Eiffel Excellence Scholarship', country: 'France', level: "Master's", funding: 'Fully funded', deadline: 'Jan 10', url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence' },
-        { name: 'DAAD Development-Related Postgraduate Courses (EPOS)', country: 'Germany', level: "Master's", funding: 'Fully funded', deadline: 'Aug-Sep (varies)', url: 'https://www.daad.de/en/study-and-research-in-germany/scholarships/epos/' },
-        { name: 'Erasmus Mundus Joint Masters', country: 'EU', level: "Master's", funding: 'Fully funded', deadline: 'Dec–Jan (varies)', url: 'https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-join-master-degrees_en' }
+        { name: 'Eiffel Excellence Scholarship', country: 'France', level: "Master's", funding: 'Fully funded ($1,200/month + tuition)', deadline: 'Jan 8, 2025', url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence' },
+        { name: 'DAAD Development-Related Postgraduate Courses (EPOS)', country: 'Germany', level: "Master's", funding: 'Fully funded (€850/month + tuition)', deadline: 'Aug 31, 2025', url: 'https://www.daad.de/en/study-and-research-in-germany/scholarships/epos/' },
+        { name: 'Korean Government Scholarship Program (KGSP)', country: 'South Korea', level: "Bachelor's / Master's / PhD", funding: 'Fully funded (1.3M KRW/month + tuition)', deadline: 'Mar 31, 2025', url: 'https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do' }
       ];
       this.filteredData = [...this.data];
     }

@@ -29,7 +29,9 @@ function initializeLeafletMap() {
       { name: "United Kingdom", coords: [55.3, -3.4] },
       { name: "United States", coords: [37.1, -95.7] },
       { name: "Australia", coords: [-25.3, 133.8] },
-      { name: "Belgium", coords: [50.8, 4.4] }
+      { name: "Belgium", coords: [50.8, 4.4] },
+      { name: "Canada", coords: [60.0, -95.0] },
+      { name: "Japan", coords: [36.2, 138.3] }
     ];
 
     // Create custom icon with Civora's navy + gold theme
@@ -166,19 +168,19 @@ function addCustomMapStyles() {
     .marker-pin {
       width: 24px;
       height: 24px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      background: linear-gradient(135deg, #1a1a1a, #333333);
       border: 3px solid #ffffff;
       border-radius: 50%;
       position: relative;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 16px rgba(251, 191, 36, 0.5);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
       animation: gentle-pulse 3s ease-in-out infinite;
       cursor: pointer;
     }
 
     .marker-pin:hover {
       transform: scale(1.3);
-      box-shadow: 0 8px 32px rgba(251, 191, 36, 0.7);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
       border-width: 4px;
     }
 
