@@ -4263,7 +4263,7 @@ img[alt=""] {
 
 .process-steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
 }
@@ -4276,6 +4276,9 @@ img[alt=""] {
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .step:hover {
@@ -4307,6 +4310,8 @@ img[alt=""] {
 .step p {
   color: var(--text-body);
   line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Templates Section */
