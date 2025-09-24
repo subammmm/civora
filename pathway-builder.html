@@ -25,6 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
+  <script defer src="assets/ai-matcher.js"></script>
   <!-- Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
@@ -397,7 +398,22 @@
       document.querySelector('.main-content').scrollTop = 0;
     }
     
-    function generateRecommendations() {
+    async function generateRecommendations() {
+      // Show loading state
+      const loadingHtml = `
+        <div style="text-align: center; padding: 2rem;">
+          <div style="display: inline-block; width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #0b5fff; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <p style="margin-top: 1rem;">Analyzing your profile and matching scholarships...</p>
+        </div>
+      `;
+      document.getElementById('recommendations-content').innerHTML = loadingHtml;
+      
+      // Show results step
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('results').classList.add('active');
+      document.querySelector('.main-content').scrollTop = 0;
+      
       // Collect form data
       const formData = {
         educationLevel: document.getElementById('education-level').value,
@@ -408,22 +424,253 @@
         targetDegree: document.getElementById('target-degree').value,
         preferredCountries: Array.from(document.querySelectorAll('input[name="countries"]:checked')).map(cb => cb.value),
         timeline: document.getElementById('timeline').value,
-        fundingNeed: document.getElementById('funding-need').value,
+        fundingNeeds: document.getElementById('funding-need').value,
         familyIncome: document.getElementById('family-income').value,
         savings: document.getElementById('savings').value
       };
       
-      // Generate recommendations based on profile
-      const recommendations = generatePersonalizedRecommendations(formData);
+      // Wait for AI matcher to be ready and generate recommendations
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate processing time
+        
+        if (window.scholarshipMatcher) {
+          // Update user profile with form data
+          window.scholarshipMatcher.updateProfile(formData);
+          
+          // Get AI-powered recommendations
+          const recommendations = window.scholarshipMatcher.getRecommendations(8);
+          const personalizedHtml = generateAIRecommendations(recommendations, formData);
+          document.getElementById('recommendations-content').innerHTML = personalizedHtml;
+        } else {
+          // Fallback to basic recommendations
+          const basicHtml = generatePersonalizedRecommendations(formData);
+          document.getElementById('recommendations-content').innerHTML = basicHtml;
+        }
+      } catch (error) {
+        console.error('Error generating recommendations:', error);
+        const errorHtml = `
+          <div style="text-align: center; padding: 2rem; color: #666;">
+            <p>We encountered an issue generating your recommendations. Please try again.</p>
+            <button onclick="generateRecommendations()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #0b5fff; color: white; border: none; border-radius: 4px; cursor: pointer;">Retry</button>
+          </div>
+        `;
+        document.getElementById('recommendations-content').innerHTML = errorHtml;
+      }
+    }
+    
+    function generateAIRecommendations(recommendations, formData) {
+      let html = '<div class="ai-recommendations">';
       
-      // Display recommendations
-      document.getElementById('recommendations-content').innerHTML = recommendations;
+      // Add AI insights header
+      html += `
+        <div class="ai-insights-header">
+          <h3>🤖 AI-Powered Analysis</h3>
+          <p>Our intelligent matching system analyzed ${recommendations.length} scholarships from our database based on your profile.</p>
+        </div>
+      `;
       
-      // Show results
-      document.getElementById(`step${currentStep}`).classList.remove('active');
-      document.getElementById('results').style.display = 'block';
-      document.getElementById('results').classList.add('active');
-      document.querySelector('.main-content').scrollTop = 0;
+      // Profile completion score
+      const completeness = window.scholarshipMatcher ? 
+        Math.round(window.scholarshipMatcher.calculateProfileCompleteness() * 100) : 75;
+      
+      html += `
+        <div class="profile-completeness">
+          <div class="completeness-header">
+            <h4>Profile Completeness: ${completeness}%</h4>
+            <div class="completeness-bar">
+              <div class="completeness-fill" style="width: ${completeness}%"></div>
+            </div>
+          </div>
+          ${completeness < 100 ? '<p class="completeness-tip">💡 Complete your profile for more accurate recommendations!</p>' : ''}
+        </div>
+      `;
+      
+      // Top recommendations
+      if (recommendations.length > 0) {
+        html += '<div class="ai-rec-section"><h3>🎯 Your Top Matches</h3>';
+        
+        recommendations.slice(0, 5).forEach((scholarship, index) => {
+          const matchPercentage = Math.round(scholarship.matchScore * 100);
+          const prediction = window.scholarshipMatcher ? 
+            window.scholarshipMatcher.generateSuccessPrediction(scholarship) : 
+            { percentage: matchPercentage, confidence: 'Medium', tips: ['Focus on your application materials'] };
+          
+          html += `
+            <div class="ai-rec-card ${index === 0 ? 'top-match' : ''}">
+              <div class="rec-header">
+                <div class="rec-title">
+                  <h4>${scholarship.name}</h4>
+                  ${index === 0 ? '<span class="top-match-badge">🏆 Best Match</span>' : ''}
+                </div>
+                <div class="match-scores">
+                  <div class="match-score">${matchPercentage}% Match</div>
+                  <div class="success-prediction">
+                    ${prediction.percentage}% Success Rate
+                    <span class="confidence ${prediction.confidence.toLowerCase()}">(${prediction.confidence} confidence)</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="rec-details">
+                <div class="rec-info">
+                  <span class="info-item">📍 ${scholarship.country}</span>
+                  <span class="info-item">🎓 ${scholarship.level}</span>
+                  <span class="info-item">💰 ${scholarship.funding}</span>
+                  <span class="info-item">⏰ ${scholarship.deadline}</span>
+                </div>
+                
+                ${scholarship.reasons && scholarship.reasons.length > 0 ? `
+                  <div class="match-reasons">
+                    <strong>Why this matches you:</strong>
+                    <ul>
+                      ${scholarship.reasons.map(reason => `<li>${reason}</li>`).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+                
+                ${prediction.tips && prediction.tips.length > 0 ? `
+                  <div class="application-tips">
+                    <strong>Application Tips:</strong>
+                    <ul>
+                      ${prediction.tips.map(tip => `<li>${tip}</li>`).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+              </div>
+              
+              <div class="rec-actions">
+                <a href="${scholarship.url}" target="_blank" class="rec-btn primary">Apply Now</a>
+                <button onclick="saveScholarship('${scholarship.name}')" class="rec-btn secondary">Save for Later</button>
+                <button onclick="shareScholarship('${scholarship.name}')" class="rec-btn outline">Share</button>
+              </div>
+            </div>
+          `;
+        });
+        html += '</div>';
+        
+        // Additional opportunities
+        if (recommendations.length > 5) {
+          html += `
+            <div class="additional-opportunities">
+              <h4>📚 More Opportunities (${recommendations.length - 5} additional matches)</h4>
+              <div class="compact-list">
+          `;
+          
+          recommendations.slice(5).forEach(scholarship => {
+            const matchPercentage = Math.round(scholarship.matchScore * 100);
+            html += `
+              <div class="compact-item">
+                <div class="compact-info">
+                  <strong>${scholarship.name}</strong> - ${scholarship.country}
+                  <span class="compact-match">${matchPercentage}% match</span>
+                </div>
+                <a href="${scholarship.url}" target="_blank" class="compact-btn">View</a>
+              </div>
+            `;
+          });
+          
+          html += '</div></div>';
+        }
+      } else {
+        html += `
+          <div class="no-matches">
+            <h3>🔍 No Close Matches Found</h3>
+            <p>Based on your current profile, we couldn't find scholarships that closely match your preferences.</p>
+            <div class="suggestions">
+              <h4>Try these suggestions:</h4>
+              <ul>
+                <li>Expand your country preferences</li>
+                <li>Consider related fields of study</li>
+                <li>Look into partial funding options</li>
+                <li>Check our complete scholarship database</li>
+              </ul>
+              <a href="scholarships.html" class="rec-btn primary">Browse All Scholarships</a>
+            </div>
+          </div>
+        `;
+      }
+      
+      // Personalized timeline
+      html += `
+        <div class="ai-timeline">
+          <h3>📅 Your Personalized Application Timeline</h3>
+          ${generateApplicationTimeline(formData)}
+        </div>
+      `;
+      
+      // Action plan
+      html += `
+        <div class="action-plan">
+          <h3>🎯 Next Steps Action Plan</h3>
+          <div class="action-checklist">
+            <div class="checklist-item">
+              <input type="checkbox" id="action1">
+              <label for="action1">Review and bookmark your top 3 scholarship matches</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" id="action2">
+              <label for="action2">Gather required documents (transcripts, certificates)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" id="action3"> 
+              <label for="action3">Prepare English proficiency test if needed (IELTS/TOEFL)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" id="action4">
+              <label for="action4">Draft statement of purpose and personal essays</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" id="action5">
+              <label for="action5">Submit applications before deadlines</label>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      html += '</div>';
+      return html;
+    }
+
+    function generateApplicationTimeline(formData) {
+      const timeline = formData.timeline || '1-year';
+      const timelineMonths = timeline === '6-months' ? 6 : timeline === '1-year' ? 12 : 24;
+      
+      let html = '<div class="timeline">';
+      
+      const phases = [
+        { 
+          title: 'Preparation Phase', 
+          duration: Math.ceil(timelineMonths * 0.4),
+          tasks: ['Research scholarships', 'Improve English', 'Gather documents']
+        },
+        { 
+          title: 'Application Phase', 
+          duration: Math.ceil(timelineMonths * 0.3),
+          tasks: ['Write SOPs', 'Get recommendations', 'Submit applications']
+        },
+        { 
+          title: 'Decision Phase', 
+          duration: Math.ceil(timelineMonths * 0.3),
+          tasks: ['Wait for results', 'Prepare for interviews', 'Make final choice']
+        }
+      ];
+      
+      phases.forEach((phase, index) => {
+        html += `
+          <div class="timeline-phase">
+            <div class="phase-header">
+              <h4>${phase.title}</h4>
+              <span class="phase-duration">${phase.duration} months</span>
+            </div>
+            <ul class="phase-tasks">
+              ${phase.tasks.map(task => `<li>${task}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      });
+      
+      html += '</div>';
+      return html;
     }
     
     function generatePersonalizedRecommendations(data) {
@@ -664,6 +911,46 @@
       }
       
       return suggestions;
+    }
+    
+    // New AI-powered utility functions
+    function saveScholarship(scholarshipName) {
+      let savedScholarships = JSON.parse(localStorage.getItem('civora_saved_scholarships') || '[]');
+      if (!savedScholarships.includes(scholarshipName)) {
+        savedScholarships.push(scholarshipName);
+        localStorage.setItem('civora_saved_scholarships', JSON.stringify(savedScholarships));
+        
+        // Show feedback
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = 'Saved!';
+        button.style.background = '#28a745';
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background = '';
+        }, 2000);
+      }
+    }
+    
+    function shareScholarship(scholarshipName) {
+      if (navigator.share) {
+        navigator.share({
+          title: `Check out this scholarship: ${scholarshipName}`,
+          text: `I found this scholarship opportunity on Civora that might interest you: ${scholarshipName}`,
+          url: window.location.href
+        });
+      } else {
+        // Fallback: copy to clipboard
+        const textToCopy = `Check out this scholarship: ${scholarshipName} - Found on Civora: ${window.location.origin}`;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const button = event.target;
+          const originalText = button.textContent;
+          button.textContent = 'Link Copied!';
+          setTimeout(() => {
+            button.textContent = originalText;
+          }, 2000);
+        });
+      }
     }
     
     function restartBuilder() {
