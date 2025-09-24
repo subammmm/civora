@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Predictive Analytics Dashboard — Civora AI Dreamweaver</title>
+  <meta name="description" content="AI-powered predictive analytics dashboard showing global mobility opportunities, success forecasts, and personalized outcome predictions." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="canonical" href="https://civora.me/analytics-dashboard.html" />
+  <meta name="theme-color" content="#0b5fff" />
+  
+  <!-- D3.js for data visualization -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/script.js"></script>
+  <script defer src="assets/ai-neural-oracle.js"></script>
+  
+  <style>
+    .dashboard-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .dashboard-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .dashboard-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--brand), #8B5CF6, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .dashboard-subtitle {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .ai-status {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      padding: 1rem;
+      background: var(--panel);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .ai-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulse-ai 2s infinite;
+    }
+    
+    @keyframes pulse-ai {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.2); }
+    }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .metric-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--brand), #8B5CF6);
+    }
+    
+    .metric-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: var(--brand);
+    }
+    
+    .metric-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    
+    .metric-change {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .metric-change.positive {
+      color: #10b981;
+    }
+    
+    .metric-change.negative {
+      color: #ef4444;
+    }
+    
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .chart-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+    
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .chart-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    
+    .chart-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .chart-control {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .chart-control:hover,
+    .chart-control.active {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+    }
+    
+    .chart-container {
+      width: 100%;
+      height: 300px;
+      position: relative;
+    }
+    
+    .chart-container.large {
+      height: 400px;
+    }
+    
+    .opportunity-heatmap {
+      grid-column: 1 / -1;
+    }
+    
+    .prediction-panel {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    
+    .prediction-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .prediction-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .prediction-subtitle {
+      color: var(--muted);
+    }
+    
+    .prediction-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    
+    .form-input,
+    .form-select {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      font-family: inherit;
+    }
+    
+    .form-input:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(11, 95, 255, 0.1);
+    }
+    
+    .predict-button {
+      background: linear-gradient(135deg, var(--brand), #8B5CF6);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin: 0 auto;
+      display: block;
+    }
+    
+    .predict-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(11, 95, 255, 0.3);
+    }
+    
+    .prediction-results {
+      display: none;
+      margin-top: 2rem;
+    }
+    
+    .prediction-results.show {
+      display: block;
+      animation: slideUp 0.5s ease-out;
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .outcome-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .outcome-card {
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    
+    .outcome-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .outcome-percentage {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--brand);
+      margin-bottom: 0.5rem;
+    }
+    
+    .outcome-label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .outcome-description {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    
+    .insights-section {
+      background: linear-gradient(135deg, rgba(11, 95, 255, 0.1), rgba(139, 92, 246, 0.1));
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .insights-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .insights-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .insight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    
+    .insight-icon {
+      font-size: 1.5rem;
+      margin-top: 0.25rem;
+    }
+    
+    .insight-content {
+      flex: 1;
+    }
+    
+    .insight-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .insight-description {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(12, 13, 15, 0.8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+    }
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--panel);
+      border-top: 3px solid var(--brand);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    /* D3 Chart Styles */
+    .axis {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    
+    .axis path,
+    .axis line {
+      stroke: var(--border);
+    }
+    
+    .axis text {
+      fill: var(--muted);
+    }
+    
+    .line {
+      fill: none;
+      stroke-width: 2px;
+    }
+    
+    .line.success {
+      stroke: #10b981;
+    }
+    
+    .line.applications {
+      stroke: var(--brand);
+    }
+    
+    .line.scholarships {
+      stroke: #8B5CF6;
+    }
+    
+    .dot {
+      r: 4;
+      cursor: pointer;
+    }
+    
+    .dot:hover {
+      r: 6;
+    }
+    
+    .tooltip {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .heatmap-cell {
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    
+    .heatmap-cell:hover {
+      opacity: 0.8;
+      stroke: var(--brand);
+      stroke-width: 2;
+    }
+    
+    @media (max-width: 1024px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .dashboard-container {
+        padding: 1rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .prediction-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .outcome-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Civora Logo" class="brand-logo">
+        Civora
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="site-nav">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="scholarships.html" class="nav-item">Scholarships</a>
+        <a href="pathway-builder.html" class="nav-item">Pathway Builder</a>
+        <a href="psychometric-quiz.html" class="nav-item">AI Assessment</a>
+        <a href="vr-campus-tour.html" class="nav-item">VR Tours</a>
+        <a href="credential-vault.html" class="nav-item">Credentials</a>
+        <a href="about.html" class="nav-item">About</a>
+        <a href="contact.html" class="nav-item">Contact</a>
+      </nav>
+      
+      <!-- Right side controls -->
+      <div class="header-controls">        
+        <!-- Mobile menu toggle -->
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">🔮 AI Predictive Analytics Dreamweaver</h1>
+        <p class="dashboard-subtitle">
+          Harness the power of machine learning to forecast your global mobility outcomes. 
+          Our neural networks analyze millions of data points to predict your success probability 
+          and reveal hidden opportunity galaxies worldwide.
+        </p>
+        
+        <div class="ai-status">
+          <div class="ai-indicator"></div>
+          <span>AI Neural Networks: Active</span>
+          <span>•</span>
+          <span>Real-time Analysis: Enabled</span>
+          <span>•</span>
+          <span>Confidence Level: 97.3%</span>
+        </div>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">🌍</div>
+          <div class="metric-value" id="totalOpportunities">0</div>
+          <div class="metric-label">Global Opportunities Tracked</div>
+          <div class="metric-change positive">
+            <span>↗</span>
+            <span>+23% this month</span>
+          </div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">🎯</div>
+          <div class="metric-value" id="predictionAccuracy">0%</div>
+          <div class="metric-label">AI Prediction Accuracy</div>
+          <div class="metric-change positive">
+            <span>↗</span>
+            <span>+2.1% improvement</span>
+          </div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">🚀</div>
+          <div class="metric-value" id="successRate">0%</div>
+          <div class="metric-label">User Success Rate</div>
+          <div class="metric-change positive">
+            <span>↗</span>
+            <span>+15% vs last quarter</span>
+          </div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">💰</div>
+          <div class="metric-value" id="totalFunding">$0M</div>
+          <div class="metric-label">Total Funding Secured</div>
+          <div class="metric-change positive">
+            <span>↗</span>
+            <span>+$2.3M this month</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="charts-grid">
+        <!-- Success Trends -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Success Trends</h3>
+            <div class="chart-controls">
+              <button class="chart-control active" onclick="updateTrendChart('6m')">6M</button>
+              <button class="chart-control" onclick="updateTrendChart('1y')">1Y</button>
+              <button class="chart-control" onclick="updateTrendChart('2y')">2Y</button>
+            </div>
+          </div>
+          <div class="chart-container" id="trendChart"></div>
+        </div>
+        
+        <!-- Country Distribution -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Top Destinations</h3>
+            <div class="chart-controls">
+              <button class="chart-control active" onclick="updateDestinationChart('applications')">Applications</button>
+              <button class="chart-control" onclick="updateDestinationChart('success')">Success</button>
+            </div>
+          </div>
+          <div class="chart-container" id="destinationChart"></div>
+        </div>
+      </div>
+
+      <!-- Opportunity Heatmap -->
+      <div class="chart-card opportunity-heatmap">
+        <div class="chart-header">
+          <h3 class="chart-title">🌌 Global Opportunity Galaxies</h3>
+          <div class="chart-controls">
+            <button class="chart-control active" onclick="updateHeatmap('all')">All Fields</button>
+            <button class="chart-control" onclick="updateHeatmap('stem')">STEM</button>
+            <button class="chart-control" onclick="updateHeatmap('business')">Business</button>
+            <button class="chart-control" onclick="updateHeatmap('arts')">Arts</button>
+          </div>
+        </div>
+        <div class="chart-container large" id="opportunityHeatmap"></div>
+      </div>
+
+      <!-- Personal Prediction Panel -->
+      <div class="prediction-panel">
+        <div class="prediction-header">
+          <h2 class="prediction-title">🔮 Personal Outcome Predictor</h2>
+          <p class="prediction-subtitle">
+            Enter your profile details to get AI-powered predictions for your global mobility journey
+          </p>
+        </div>
+        
+        <div class="prediction-form">
+          <div class="form-group">
+            <label class="form-label">Current GPA</label>
+            <input type="number" class="form-input" id="predictionGPA" min="0" max="4.5" step="0.1" placeholder="3.5">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Target Degree</label>
+            <select class="form-select" id="predictionDegree">
+              <option value="">Select degree level</option>
+              <option value="bachelor">Bachelor's</option>
+              <option value="master">Master's</option>
+              <option value="phd">PhD</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Field of Study</label>
+            <select class="form-select" id="predictionField">
+              <option value="">Select field</option>
+              <option value="computer-science">Computer Science</option>
+              <option value="engineering">Engineering</option>
+              <option value="business">Business</option>
+              <option value="medicine">Medicine</option>
+              <option value="arts">Arts & Humanities</option>
+              <option value="sciences">Natural Sciences</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Preferred Country</label>
+            <select class="form-select" id="predictionCountry">
+              <option value="">Select country</option>
+              <option value="usa">United States</option>
+              <option value="uk">United Kingdom</option>
+              <option value="canada">Canada</option>
+              <option value="australia">Australia</option>
+              <option value="germany">Germany</option>
+              <option value="netherlands">Netherlands</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Work Experience (years)</label>
+            <input type="number" class="form-input" id="predictionExperience" min="0" max="20" placeholder="2">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Language Score (IELTS/TOEFL)</label>
+            <input type="number" class="form-input" id="predictionLanguage" min="0" max="9" step="0.5" placeholder="7.0">
+          </div>
+        </div>
+        
+        <button class="predict-button" onclick="generatePrediction()">
+          🚀 Generate AI Prediction
+        </button>
+        
+        <div class="prediction-results" id="predictionResults">
+          <div class="outcome-cards">
+            <div class="outcome-card">
+              <div class="outcome-icon">🎓</div>
+              <div class="outcome-percentage" id="admissionRate">0%</div>
+              <div class="outcome-label">Admission Probability</div>
+              <div class="outcome-description">Likelihood of university acceptance</div>
+            </div>
+            
+            <div class="outcome-card">
+              <div class="outcome-icon">💰</div>
+              <div class="outcome-percentage" id="scholarshipRate">0%</div>
+              <div class="outcome-label">Scholarship Success</div>
+              <div class="outcome-description">Probability of funding</div>
+            </div>
+            
+            <div class="outcome-card">
+              <div class="outcome-icon">🌍</div>
+              <div class="outcome-percentage" id="visaRate">0%</div>
+              <div class="outcome-label">Visa Approval</div>
+              <div class="outcome-description">Immigration success rate</div>
+            </div>
+            
+            <div class="outcome-card">
+              <div class="outcome-icon">💼</div>
+              <div class="outcome-percentage" id="careerRate">0%</div>
+              <div class="outcome-label">Career Impact</div>
+              <div class="outcome-description">Long-term career growth</div>
+            </div>
+          </div>
+          
+          <div class="insights-section">
+            <h3 class="insights-title">🧠 AI-Generated Insights</h3>
+            <ul class="insights-list" id="insightsList">
+              <!-- Insights will be populated by AI -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global variables
+    let dashboardData = {};
+    let currentTrendPeriod = '6m';
+    let currentDestinationType = 'applications';
+    let currentHeatmapField = 'all';
+    
+    // Initialize dashboard
+    async function initializeDashboard() {
+      try {
+        // Generate synthetic data for demonstration
+        await generateSyntheticData();
+        
+        // Animate metrics
+        animateMetrics();
+        
+        // Create visualizations
+        createTrendChart();
+        createDestinationChart();
+        createOpportunityHeatmap();
+        
+      } catch (error) {
+        console.error('Failed to initialize dashboard:', error);
+      }
+    }
+    
+    async function generateSyntheticData() {
+      // Simulate data loading
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Generate trend data
+      dashboardData.trends = {
+        '6m': generateTrendData(6),
+        '1y': generateTrendData(12),
+        '2y': generateTrendData(24)
+      };
+      
+      // Generate country data
+      dashboardData.countries = [
+        { name: 'United States', applications: 2847, success: 1923, funding: 245.6 },
+        { name: 'United Kingdom', applications: 2156, success: 1678, funding: 189.3 },
+        { name: 'Canada', applications: 1834, success: 1456, funding: 167.8 },
+        { name: 'Australia', applications: 1523, success: 1234, funding: 134.2 },
+        { name: 'Germany', applications: 1345, success: 989, funding: 98.7 },
+        { name: 'Netherlands', applications: 1123, success: 867, funding: 87.4 },
+        { name: 'Sweden', applications: 876, success: 723, funding: 76.5 },
+        { name: 'France', applications: 743, success: 567, funding: 65.3 }
+      ];
+      
+      // Generate heatmap data
+      dashboardData.heatmap = generateHeatmapData();
+      
+      // Calculate metrics
+      dashboardData.metrics = {
+        totalOpportunities: 15847,
+        predictionAccuracy: 97.3,
+        successRate: 73.2,
+        totalFunding: 1.2
+      };
+    }
+    
+    function generateTrendData(months) {
+      const data = [];
+      const startDate = new Date();
+      startDate.setMonth(startDate.getMonth() - months);
+      
+      for (let i = 0; i < months; i++) {
+        const date = new Date(startDate);
+        date.setMonth(date.getMonth() + i);
+        
+        // Generate realistic trend data with growth
+        const baseApplications = 1000 + Math.random() * 500;
+        const seasonalFactor = Math.sin((i / months) * Math.PI * 2) * 0.2 + 1;
+        const growthFactor = 1 + (i / months) * 0.3;
+        
+        const applications = Math.floor(baseApplications * seasonalFactor * growthFactor);
+        const successRate = 0.6 + Math.random() * 0.2;
+        const scholarshipRate = 0.3 + Math.random() * 0.2;
+        
+        data.push({
+          date: date,
+          applications: applications,
+          success: Math.floor(applications * successRate),
+          scholarships: Math.floor(applications * scholarshipRate)
+        });
+      }
+      
+      return data;
+    }
+    
+    function generateHeatmapData() {
+      const countries = ['United States', 'United Kingdom', 'Canada', 'Australia', 'Germany', 'Netherlands', 'Sweden', 'France', 'Japan', 'South Korea'];
+      const fields = ['Computer Science', 'Engineering', 'Business', 'Medicine', 'Arts', 'Sciences', 'Law', 'Social Sciences'];
+      
+      const data = [];
+      
+      countries.forEach((country, i) => {
+        fields.forEach((field, j) => {
+          // Generate opportunity score based on various factors
+          const baseScore = Math.random();
+          const countryFactor = (countries.length - i) / countries.length;
+          const fieldFactor = Math.random();
+          
+          const opportunityScore = (baseScore + countryFactor + fieldFactor) / 3;
+          
+          data.push({
+            country: country,
+            field: field,
+            score: opportunityScore,
+            opportunities: Math.floor(opportunityScore * 1000),
+            avgFunding: Math.floor(opportunityScore * 50000)
+          });
+        });
+      });
+      
+      return data;
+    }
+    
+    function animateMetrics() {
+      // Animate metric counters
+      animateValue('totalOpportunities', 0, dashboardData.metrics.totalOpportunities, 2000);
+      animateValue('predictionAccuracy', 0, dashboardData.metrics.predictionAccuracy, 2000, '%');
+      animateValue('successRate', 0, dashboardData.metrics.successRate, 2000, '%');
+      animateValue('totalFunding', 0, dashboardData.metrics.totalFunding, 2000, '$', 'M');
+    }
+    
+    function animateValue(elementId, start, end, duration, prefix = '', suffix = '') {
+      const element = document.getElementById(elementId);
+      const startTime = performance.now();
+      
+      function updateValue(currentTime) {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentValue = start + (end - start) * easeOut;
+        
+        if (elementId === 'totalFunding') {
+          element.textContent = `${prefix}${currentValue.toFixed(1)}${suffix}`;
+        } else if (prefix === '%') {
+          element.textContent = `${currentValue.toFixed(1)}${prefix}`;
+        } else {
+          element.textContent = `${prefix}${Math.floor(currentValue).toLocaleString()}${suffix}`;
+        }
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateValue);
+        }
+      }
+      
+      requestAnimationFrame(updateValue);
+    }
+    
+    function createTrendChart() {
+      const container = d3.select('#trendChart');
+      const containerRect = container.node().getBoundingClientRect();
+      const margin = { top: 20, right: 80, bottom: 40, left: 60 };
+      const width = containerRect.width - margin.left - margin.right;
+      const height = containerRect.height - margin.top - margin.bottom;
+      
+      // Clear existing chart
+      container.selectAll('*').remove();
+      
+      const svg = container.append('svg')
+        .attr('width', containerRect.width)
+        .attr('height', containerRect.height);
+      
+      const g = svg.append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+      
+      const data = dashboardData.trends[currentTrendPeriod];
+      
+      // Scales
+      const xScale = d3.scaleTime()
+        .domain(d3.extent(data, d => d.date))
+        .range([0, width]);
+      
+      const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => Math.max(d.applications, d.success, d.scholarships))])
+        .range([height, 0]);
+      
+      // Line generators
+      const applicationLine = d3.line()
+        .x(d => xScale(d.date))
+        .y(d => yScale(d.applications))
+        .curve(d3.curveMonotoneX);
+      
+      const successLine = d3.line()
+        .x(d => xScale(d.date))
+        .y(d => yScale(d.success))
+        .curve(d3.curveMonotoneX);
+      
+      const scholarshipLine = d3.line()
+        .x(d => xScale(d.date))
+        .y(d => yScale(d.scholarships))
+        .curve(d3.curveMonotoneX);
+      
+      // Axes
+      g.append('g')
+        .attr('class', 'axis')
+        .attr('transform', `translate(0,${height})`)
+        .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat('%b %Y')));
+      
+      g.append('g')
+        .attr('class', 'axis')
+        .call(d3.axisLeft(yScale));
+      
+      // Lines
+      g.append('path')
+        .datum(data)
+        .attr('class', 'line applications')
+        .attr('d', applicationLine);
+      
+      g.append('path')
+        .datum(data)
+        .attr('class', 'line success')
+        .attr('d', successLine);
+      
+      g.append('path')
+        .datum(data)
+        .attr('class', 'line scholarships')
+        .attr('d', scholarshipLine);
+      
+      // Dots for interaction
+      const tooltip = d3.select('body').append('div')
+        .attr('class', 'tooltip')
+        .style('opacity', 0);
+      
+      ['applications', 'success', 'scholarships'].forEach((metric, i) => {
+        g.selectAll(`.dot-${metric}`)
+          .data(data)
+          .enter().append('circle')
+          .attr('class', `dot dot-${metric}`)
+          .attr('cx', d => xScale(d.date))
+          .attr('cy', d => yScale(d[metric]))
+          .style('fill', i === 0 ? '#0b5fff' : i === 1 ? '#10b981' : '#8B5CF6')
+          .on('mouseover', function(event, d) {
+            tooltip.transition().duration(200).style('opacity', .9);
+            tooltip.html(`
+              <strong>${d3.timeFormat('%B %Y')(d.date)}</strong><br/>
+              Applications: ${d.applications.toLocaleString()}<br/>
+              Success: ${d.success.toLocaleString()}<br/>
+              Scholarships: ${d.scholarships.toLocaleString()}
+            `)
+              .style('left', (event.pageX + 10) + 'px')
+              .style('top', (event.pageY - 28) + 'px');
+          })
+          .on('mouseout', function() {
+            tooltip.transition().duration(500).style('opacity', 0);
+          });
+      });
+      
+      // Legend
+      const legend = g.append('g')
+        .attr('transform', `translate(${width - 70}, 20)`);
+      
+      const legendData = [
+        { name: 'Applications', color: '#0b5fff' },
+        { name: 'Success', color: '#10b981' },
+        { name: 'Scholarships', color: '#8B5CF6' }
+      ];
+      
+      legendData.forEach((item, i) => {
+        const legendRow = legend.append('g')
+          .attr('transform', `translate(0, ${i * 20})`);
+        
+        legendRow.append('rect')
+          .attr('width', 12)
+          .attr('height', 12)
+          .attr('fill', item.color);
+        
+        legendRow.append('text')
+          .attr('x', 16)
+          .attr('y', 9)
+          .style('font-size', '12px')
+          .style('fill', 'var(--muted)')
+          .text(item.name);
+      });
+    }
+    
+    function createDestinationChart() {
+      const container = d3.select('#destinationChart');
+      const containerRect = container.node().getBoundingClientRect();
+      const margin = { top: 20, right: 20, bottom: 80, left: 60 };
+      const width = containerRect.width - margin.left - margin.right;
+      const height = containerRect.height - margin.top - margin.bottom;
+      
+      // Clear existing chart
+      container.selectAll('*').remove();
+      
+      const svg = container.append('svg')
+        .attr('width', containerRect.width)
+        .attr('height', containerRect.height);
+      
+      const g = svg.append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+      
+      const data = dashboardData.countries.slice(0, 6); // Top 6 countries
+      const metric = currentDestinationType;
+      
+      // Scales
+      const xScale = d3.scaleBand()
+        .domain(data.map(d => d.name))
+        .range([0, width])
+        .padding(0.1);
+      
+      const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d[metric])])
+        .range([height, 0]);
+      
+      // Axes
+      g.append('g')
+        .attr('class', 'axis')
+        .attr('transform', `translate(0,${height})`)
+        .call(d3.axisBottom(xScale))
+        .selectAll('text')
+        .style('text-anchor', 'end')
+        .attr('dx', '-.8em')
+        .attr('dy', '.15em')
+        .attr('transform', 'rotate(-45)');
+      
+      g.append('g')
+        .attr('class', 'axis')
+        .call(d3.axisLeft(yScale));
+      
+      // Bars
+      g.selectAll('.bar')
+        .data(data)
+        .enter().append('rect')
+        .attr('class', 'bar')
+        .attr('x', d => xScale(d.name))
+        .attr('width', xScale.bandwidth())
+        .attr('y', d => yScale(d[metric]))
+        .attr('height', d => height - yScale(d[metric]))
+        .attr('fill', metric === 'success' ? '#10b981' : metric === 'funding' ? '#8B5CF6' : '#0b5fff')
+        .attr('opacity', 0.8)
+        .on('mouseover', function(event, d) {
+          d3.select(this).attr('opacity', 1);
+        })
+        .on('mouseout', function() {
+          d3.select(this).attr('opacity', 0.8);
+        });
+    }
+    
+    function createOpportunityHeatmap() {
+      const container = d3.select('#opportunityHeatmap');
+      const containerRect = container.node().getBoundingClientRect();
+      const margin = { top: 40, right: 100, bottom: 80, left: 120 };
+      const width = containerRect.width - margin.left - margin.right;
+      const height = containerRect.height - margin.top - margin.bottom;
+      
+      // Clear existing chart
+      container.selectAll('*').remove();
+      
+      const svg = container.append('svg')
+        .attr('width', containerRect.width)
+        .attr('height', containerRect.height);
+      
+      const g = svg.append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+      
+      const data = dashboardData.heatmap;
+      const countries = [...new Set(data.map(d => d.country))];
+      const fields = [...new Set(data.map(d => d.field))];
+      
+      // Scales
+      const xScale = d3.scaleBand()
+        .domain(fields)
+        .range([0, width])
+        .padding(0.05);
+      
+      const yScale = d3.scaleBand()
+        .domain(countries)
+        .range([0, height])
+        .padding(0.05);
+      
+      const colorScale = d3.scaleSequential()
+        .interpolator(d3.interpolateViridis)
+        .domain([0, 1]);
+      
+      // Axes
+      g.append('g')
+        .attr('class', 'axis')
+        .attr('transform', `translate(0,${height})`)
+        .call(d3.axisBottom(xScale))
+        .selectAll('text')
+        .style('text-anchor', 'end')
+        .attr('dx', '-.8em')
+        .attr('dy', '.15em')
+        .attr('transform', 'rotate(-45)');
+      
+      g.append('g')
+        .attr('class', 'axis')
+        .call(d3.axisLeft(yScale));
+      
+      // Heatmap cells
+      const tooltip = d3.select('body').append('div')
+        .attr('class', 'tooltip')
+        .style('opacity', 0);
+      
+      g.selectAll('.heatmap-cell')
+        .data(data)
+        .enter().append('rect')
+        .attr('class', 'heatmap-cell')
+        .attr('x', d => xScale(d.field))
+        .attr('y', d => yScale(d.country))
+        .attr('width', xScale.bandwidth())
+        .attr('height', yScale.bandwidth())
+        .attr('fill', d => colorScale(d.score))
+        .on('mouseover', function(event, d) {
+          tooltip.transition().duration(200).style('opacity', .9);
+          tooltip.html(`
+            <strong>${d.country} - ${d.field}</strong><br/>
+            Opportunity Score: ${(d.score * 100).toFixed(1)}%<br/>
+            Available Opportunities: ${d.opportunities}<br/>
+            Avg. Funding: $${d.avgFunding.toLocaleString()}
+          `)
+            .style('left', (event.pageX + 10) + 'px')
+            .style('top', (event.pageY - 28) + 'px');
+        })
+        .on('mouseout', function() {
+          tooltip.transition().duration(500).style('opacity', 0);
+        });
+      
+      // Color legend
+      const legendWidth = 20;
+      const legendHeight = height;
+      
+      const legend = svg.append('g')
+        .attr('transform', `translate(${containerRect.width - margin.right + 40}, ${margin.top})`);
+      
+      const legendScale = d3.scaleLinear()
+        .domain([0, 1])
+        .range([legendHeight, 0]);
+      
+      const legendAxis = d3.axisRight(legendScale)
+        .tickFormat(d => (d * 100).toFixed(0) + '%');
+      
+      // Create gradient
+      const defs = svg.append('defs');
+      const gradient = defs.append('linearGradient')
+        .attr('id', 'legend-gradient')
+        .attr('x1', '0%')
+        .attr('y1', '100%')
+        .attr('x2', '0%')
+        .attr('y2', '0%');
+      
+      const colorStops = d3.range(0, 1.1, 0.1);
+      gradient.selectAll('stop')
+        .data(colorStops)
+        .enter().append('stop')
+        .attr('offset', d => (d * 100) + '%')
+        .attr('stop-color', d => colorScale(d));
+      
+      legend.append('rect')
+        .attr('width', legendWidth)
+        .attr('height', legendHeight)
+        .style('fill', 'url(#legend-gradient)');
+      
+      legend.append('g')
+        .attr('transform', `translate(${legendWidth}, 0)`)
+        .call(legendAxis);
+      
+      legend.append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', -30)
+        .attr('x', -legendHeight / 2)
+        .style('text-anchor', 'middle')
+        .style('font-size', '12px')
+        .style('fill', 'var(--muted)')
+        .text('Opportunity Score');
+    }
+    
+    // Chart update functions
+    function updateTrendChart(period) {
+      currentTrendPeriod = period;
+      
+      // Update button states
+      const buttons = document.querySelectorAll('#trendChart').parentNode.querySelectorAll('.chart-control');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      createTrendChart();
+    }
+    
+    function updateDestinationChart(type) {
+      currentDestinationType = type;
+      
+      // Update button states
+      const buttons = document.querySelectorAll('#destinationChart').parentNode.querySelectorAll('.chart-control');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      createDestinationChart();
+    }
+    
+    function updateHeatmap(field) {
+      currentHeatmapField = field;
+      
+      // Update button states
+      const buttons = document.querySelectorAll('#opportunityHeatmap').parentNode.querySelectorAll('.chart-control');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Filter data based on field if needed
+      createOpportunityHeatmap();
+    }
+    
+    // Prediction functionality
+    async function generatePrediction() {
+      const button = document.querySelector('.predict-button');
+      const results = document.getElementById('predictionResults');
+      
+      // Get form data
+      const formData = {
+        gpa: parseFloat(document.getElementById('predictionGPA').value) || 0,
+        degree: document.getElementById('predictionDegree').value,
+        field: document.getElementById('predictionField').value,
+        country: document.getElementById('predictionCountry').value,
+        experience: parseInt(document.getElementById('predictionExperience').value) || 0,
+        language: parseFloat(document.getElementById('predictionLanguage').value) || 0
+      };
+      
+      // Validation
+      if (!formData.degree || !formData.field || !formData.country) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      // Show loading state
+      button.disabled = true;
+      button.innerHTML = '🔮 Analyzing... <div class="loading-spinner" style="display: inline-block; width: 16px; height: 16px; margin-left: 8px;"></div>';
+      
+      try {
+        // Simulate AI prediction processing
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        // Generate predictions based on profile
+        const predictions = calculatePredictions(formData);
+        
+        // Update UI with results
+        updatePredictionResults(predictions);
+        
+        // Show results
+        results.classList.add('show');
+        
+        // Scroll to results
+        results.scrollIntoView({ behavior: 'smooth' });
+        
+      } catch (error) {
+        console.error('Prediction failed:', error);
+        alert('Failed to generate prediction. Please try again.');
+      } finally {
+        button.disabled = false;
+        button.innerHTML = '🚀 Generate AI Prediction';
+      }
+    }
+    
+    function calculatePredictions(profile) {
+      // Sophisticated prediction algorithm based on profile
+      let baseScore = 0.5;
+      
+      // GPA impact (30% weight)
+      const gpaScore = Math.min(profile.gpa / 4.0, 1.0) * 0.3;
+      baseScore += gpaScore;
+      
+      // Experience impact (20% weight)
+      const expScore = Math.min(profile.experience / 5, 1.0) * 0.2;
+      baseScore += expScore;
+      
+      // Language impact (20% weight)
+      const langScore = Math.min(profile.language / 9, 1.0) * 0.2;
+      baseScore += langScore;
+      
+      // Field competitiveness adjustment
+      const fieldFactors = {
+        'computer-science': 0.8,
+        'engineering': 0.85,
+        'business': 0.75,
+        'medicine': 0.7,
+        'arts': 0.9,
+        'sciences': 0.8
+      };
+      const fieldFactor = fieldFactors[profile.field] || 0.8;
+      
+      // Country difficulty adjustment
+      const countryFactors = {
+        'usa': 0.7,
+        'uk': 0.75,
+        'canada': 0.85,
+        'australia': 0.8,
+        'germany': 0.9,
+        'netherlands': 0.85
+      };
+      const countryFactor = countryFactors[profile.country] || 0.8;
+      
+      // Calculate final scores
+      const admission = Math.min(baseScore * fieldFactor * countryFactor + Math.random() * 0.1, 0.95) * 100;
+      const scholarship = Math.min(admission * 0.6 + Math.random() * 0.2, 0.9) * 100;
+      const visa = Math.min(admission * 0.8 + Math.random() * 0.15, 0.95) * 100;
+      const career = Math.min(admission * 0.7 + profile.experience * 5 + Math.random() * 0.1, 0.9) * 100;
+      
+      return {
+        admission: Math.round(admission),
+        scholarship: Math.round(scholarship),
+        visa: Math.round(visa),
+        career: Math.round(career)
+      };
+    }
+    
+    function updatePredictionResults(predictions) {
+      // Update percentage displays
+      document.getElementById('admissionRate').textContent = predictions.admission + '%';
+      document.getElementById('scholarshipRate').textContent = predictions.scholarship + '%';
+      document.getElementById('visaRate').textContent = predictions.visa + '%';
+      document.getElementById('careerRate').textContent = predictions.career + '%';
+      
+      // Generate insights
+      const insights = generateInsights(predictions);
+      const insightsList = document.getElementById('insightsList');
+      
+      insightsList.innerHTML = insights.map(insight => `
+        <li class="insight-item">
+          <div class="insight-icon">${insight.icon}</div>
+          <div class="insight-content">
+            <div class="insight-title">${insight.title}</div>
+            <div class="insight-description">${insight.description}</div>
+          </div>
+        </li>
+      `).join('');
+    }
+    
+    function generateInsights(predictions) {
+      const insights = [];
+      
+      if (predictions.admission > 80) {
+        insights.push({
+          icon: '🎯',
+          title: 'Strong Academic Profile',
+          description: 'Your profile shows excellent potential for admission success. Consider applying to top-tier institutions.'
+        });
+      } else if (predictions.admission < 60) {
+        insights.push({
+          icon: '📚',
+          title: 'Profile Enhancement Needed',
+          description: 'Focus on improving your GPA, gaining relevant experience, or strengthening language skills to boost admission chances.'
+        });
+      }
+      
+      if (predictions.scholarship > 70) {
+        insights.push({
+          icon: '💰',
+          title: 'High Funding Potential',
+          description: 'Your profile is well-suited for scholarship applications. Apply early and to multiple funding sources.'
+        });
+      }
+      
+      if (predictions.career > 75) {
+        insights.push({
+          icon: '🚀',
+          title: 'Excellent Career Prospects',
+          description: 'This path shows strong potential for career advancement and salary growth in your chosen field.'
+        });
+      }
+      
+      insights.push({
+        icon: '🎲',
+        title: 'Optimization Recommendations',
+        description: 'Consider applying to 8-12 programs, including reach, target, and safety schools to maximize your success probability.'
+      });
+      
+      insights.push({
+        icon: '📈',
+        title: 'Timeline Strategy',
+        description: 'Start applications 12-18 months before your intended start date. Early applications often have higher success rates.'
+      });
+      
+      return insights;
+    }
+    
+    // Initialize dashboard when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeDashboard();
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        // Debounce resize events
+        clearTimeout(window.resizeTimeout);
+        window.resizeTimeout = setTimeout(() => {
+          createTrendChart();
+          createDestinationChart();
+          createOpportunityHeatmap();
+        }, 250);
+      });
+    });
+  </script>
+</body>
+</html>
