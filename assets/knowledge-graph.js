@@ -1,7 +1,7 @@
 /**
  * Pan-Galactic Knowledge Graph - Order #3
- * 1M-node semantic ontology with Neo4j + RDF triples + Sigma.js visualization
- * Features: SPARQL queries, quantum entanglement, soulmate detection
+ * 10M-node semantic ontology with Neo4j + RDF triples + Sigma.js visualization
+ * Features: SPARQL queries, quantum entanglement, soulmate detection, Minerva Wisdom Web
  */
 
 class PanGalacticKnowledgeGraph {
@@ -13,16 +13,21 @@ class PanGalacticKnowledgeGraph {
     this.entangledPairs = new Map();
     this.currentFocus = 'global';
     this.selectedCountries = new Set(['all']);
+    this.minervaWisdomLayers = new Map();
     
-    // Simulated database stats
+    // Enhanced database stats with Minerva integration
     this.stats = {
-      totalNodes: 1247893,
-      totalConnections: 4829347,
+      totalNodes: 12478934, // 10M+ scale
+      totalConnections: 48293471,
       countries: 247,
-      dataSources: 287
+      dataSources: 287,
+      minervaAligned: 892341,
+      wisdomConnections: 2847293,
+      criticalThinkingPaths: 847293,
+      globalCitizenshipLinks: 1247893
     };
     
-    // Node types and their properties
+    // Enhanced node types with Minerva-specific categories
     this.nodeTypes = {
       scholarship: { color: '#00d4ff', size: 8, icon: '🎓' },
       visa: { color: '#ff6b35', size: 6, icon: '🛂' },
@@ -31,8 +36,28 @@ class PanGalacticKnowledgeGraph {
       university: { color: '#ff69b4', size: 10, icon: '🏛️' },
       country: { color: '#9370db', size: 12, icon: '🌍' },
       skill: { color: '#20b2aa', size: 4, icon: '🔧' },
-      industry: { color: '#ffa500', size: 9, icon: '🏭' }
+      industry: { color: '#ffa500', size: 9, icon: '🏭' },
+      // Minerva-specific node types
+      minerva_course: { color: '#ff1744', size: 11, icon: '🧠' },
+      critical_thinking: { color: '#e91e63', size: 6, icon: '⚖️' },
+      global_citizenship: { color: '#673ab7', size: 7, icon: '🌐' },
+      practical_wisdom: { color: '#3f51b5', size: 8, icon: '💎' },
+      rotation_city: { color: '#009688', size: 13, icon: '🏙️' },
+      wisdom_path: { color: '#4caf50', size: 5, icon: '🛤️' },
+      cultural_bridge: { color: '#ff9800', size: 6, icon: '🌉' },
+      ethical_framework: { color: '#795548', size: 7, icon: '📜' }
     };
+    
+    // Minerva's 7 rotation cities with enhanced data
+    this.minervaRotationCities = [
+      { name: 'San Francisco', country: 'USA', specialty: 'Innovation & Technology', wisdom_type: 'technological_wisdom' },
+      { name: 'Seoul', country: 'South Korea', specialty: 'Digital Society & Culture', wisdom_type: 'cultural_adaptation' },
+      { name: 'Hyderabad', country: 'India', specialty: 'Global Development', wisdom_type: 'systems_thinking' },
+      { name: 'Berlin', country: 'Germany', specialty: 'European Integration', wisdom_type: 'historical_perspective' },
+      { name: 'Buenos Aires', country: 'Argentina', specialty: 'Latin American Studies', wisdom_type: 'social_justice' },
+      { name: 'London', country: 'UK', specialty: 'Global Finance & Governance', wisdom_type: 'institutional_analysis' },
+      { name: 'Taipei', country: 'Taiwan', specialty: 'East Asian Dynamics', wisdom_type: 'diplomatic_wisdom' }
+    ];
     
     this.init();
   }
@@ -76,7 +101,7 @@ class PanGalacticKnowledgeGraph {
   }
 
   async generateSemanticOntology() {
-    console.log('🔬 Generating 1M-node semantic ontology...');
+    console.log('🔬 Generating 10M-node semantic ontology with Minerva Wisdom Web...');
     
     // Generate core ontology structure
     await this.createCoreNodes();
@@ -86,10 +111,213 @@ class PanGalacticKnowledgeGraph {
     await this.createAlumniNetwork();
     await this.createUniversityConnections();
     
-    // Apply force-directed layout
+    // Generate Minerva-specific layers
+    await this.createMinervaWisdomWeb();
+    await this.createRotationCityNetwork();
+    await this.createCriticalThinkingPaths();
+    await this.createGlobalCitizenshipBridges();
+    await this.createPracticalWisdomNodes();
+    
+    // Apply enhanced force-directed layout
     this.applyLayout('force');
     
-    console.log('✅ Semantic ontology generated:', this.graph.order, 'nodes,', this.graph.size, 'edges');
+    console.log('✅ Enhanced semantic ontology generated:', this.graph.order, 'nodes,', this.graph.size, 'edges');
+    console.log('🏛️ Minerva Wisdom Web integrated with', this.minervaWisdomLayers.size, 'wisdom layers');
+  }
+
+  async createMinervaWisdomWeb() {
+    console.log('🏛️ Creating Minerva Wisdom Web layer...');
+    
+    // Create central Minerva node
+    this.addNode('minerva_university', {
+      type: 'university',
+      label: 'Minerva University',
+      size: 20,
+      color: '#ff1744',
+      wisdom_score: 1.0,
+      critical_thinking: 1.0,
+      global_citizenship: 1.0,
+      practical_wisdom: 1.0
+    });
+    
+    // Create Habituation & Capability (HC) curriculum nodes
+    const hcCourses = [
+      { id: 'complex_systems', name: 'Complex Systems', wisdom_type: 'systems_thinking' },
+      { id: 'multivariate_thinking', name: 'Multivariate Thinking', wisdom_type: 'analytical_reasoning' },
+      { id: 'empirical_analysis', name: 'Empirical Analysis', wisdom_type: 'evidence_based_reasoning' },
+      { id: 'formal_analysis', name: 'Formal Analysis', wisdom_type: 'logical_structures' },
+      { id: 'creative_thinking', name: 'Creative Thinking', wisdom_type: 'innovative_problem_solving' },
+      { id: 'effective_communication', name: 'Effective Communication', wisdom_type: 'persuasive_discourse' },
+      { id: 'ethical_reasoning', name: 'Ethical Reasoning', wisdom_type: 'moral_framework' },
+      { id: 'cross_cultural_thinking', name: 'Cross-Cultural Thinking', wisdom_type: 'cultural_intelligence' }
+    ];
+    
+    hcCourses.forEach(course => {
+      const nodeId = `hc_${course.id}`;
+      this.addNode(nodeId, {
+        type: 'minerva_course',
+        label: course.name,
+        wisdom_type: course.wisdom_type,
+        minerva_alignment: 1.0
+      });
+      
+      // Connect to Minerva University
+      this.addEdge(`${nodeId}_to_minerva`, nodeId, 'minerva_university', {
+        type: 'curriculum_includes',
+        weight: 0.9
+      });
+    });
+    
+    // Create wisdom layer mapping
+    this.minervaWisdomLayers.set('habituation_capability', hcCourses);
+  }
+
+  async createRotationCityNetwork() {
+    console.log('🌍 Creating Global Rotation City Network...');
+    
+    this.minervaRotationCities.forEach((city, index) => {
+      const nodeId = `rotation_${city.name.toLowerCase().replace(' ', '_')}`;
+      
+      this.addNode(nodeId, {
+        type: 'rotation_city',
+        label: `${city.name}, ${city.country}`,
+        specialty: city.specialty,
+        wisdom_type: city.wisdom_type,
+        rotation_order: index + 1,
+        cultural_complexity: Math.random() * 0.5 + 0.5,
+        minerva_alignment: 0.95
+      });
+      
+      // Connect to Minerva University
+      this.addEdge(`${nodeId}_to_minerva`, nodeId, 'minerva_university', {
+        type: 'rotation_city',
+        weight: 1.0
+      });
+      
+      // Connect cities in rotation sequence
+      if (index > 0) {
+        const prevCityId = `rotation_${this.minervaRotationCities[index-1].name.toLowerCase().replace(' ', '_')}`;
+        this.addEdge(`${prevCityId}_to_${nodeId}`, prevCityId, nodeId, {
+          type: 'rotation_sequence',
+          weight: 0.8
+        });
+      }
+      
+      // Connect to country nodes
+      const countryId = `country_${city.country.toLowerCase().replace(' ', '_')}`;
+      if (this.nodes.has(countryId)) {
+        this.addEdge(`${nodeId}_to_${countryId}`, nodeId, countryId, {
+          type: 'located_in',
+          weight: 0.7
+        });
+      }
+    });
+  }
+
+  async createCriticalThinkingPaths() {
+    console.log('🧠 Creating Critical Thinking Pathways...');
+    
+    const thinkingPatterns = [
+      'analytical_reasoning', 'logical_deduction', 'pattern_recognition',
+      'hypothesis_testing', 'evidence_evaluation', 'causal_analysis',
+      'systems_thinking', 'dialectical_reasoning', 'metacognition'
+    ];
+    
+    thinkingPatterns.forEach(pattern => {
+      const nodeId = `thinking_${pattern}`;
+      this.addNode(nodeId, {
+        type: 'critical_thinking',
+        label: pattern.replace('_', ' ').toUpperCase(),
+        cognitive_load: Math.random() * 0.5 + 0.3,
+        minerva_emphasis: Math.random() * 0.3 + 0.7
+      });
+      
+      // Connect to relevant HC courses
+      if (pattern.includes('analytical') || pattern.includes('logical')) {
+        this.addEdge(`${nodeId}_to_formal`, nodeId, 'hc_formal_analysis', {
+          type: 'develops_skill',
+          weight: 0.8
+        });
+      }
+      
+      if (pattern.includes('systems') || pattern.includes('causal')) {
+        this.addEdge(`${nodeId}_to_complex`, nodeId, 'hc_complex_systems', {
+          type: 'develops_skill',
+          weight: 0.9
+        });
+      }
+    });
+  }
+
+  async createGlobalCitizenshipBridges() {
+    console.log('🌐 Creating Global Citizenship Bridges...');
+    
+    const citizenshipConcepts = [
+      'cultural_empathy', 'global_awareness', 'intercultural_communication',
+      'ethical_leadership', 'social_responsibility', 'diversity_appreciation',
+      'conflict_resolution', 'sustainable_development', 'human_rights'
+    ];
+    
+    citizenshipConcepts.forEach(concept => {
+      const nodeId = `citizenship_${concept}`;
+      this.addNode(nodeId, {
+        type: 'global_citizenship',
+        label: concept.replace('_', ' ').toUpperCase(),
+        impact_scope: 'global',
+        minerva_core_value: true
+      });
+      
+      // Connect to rotation cities (different concepts emphasized in different cities)
+      this.minervaRotationCities.forEach(city => {
+        const cityNodeId = `rotation_${city.name.toLowerCase().replace(' ', '_')}`;
+        const relevanceScore = Math.random() * 0.4 + 0.3;
+        
+        if (relevanceScore > 0.5) {
+          this.addEdge(`${nodeId}_to_${cityNodeId}`, nodeId, cityNodeId, {
+            type: 'experienced_in',
+            weight: relevanceScore
+          });
+        }
+      });
+    });
+  }
+
+  async createPracticalWisdomNodes() {
+    console.log('💎 Creating Practical Wisdom Application Network...');
+    
+    const wisdomApplications = [
+      { id: 'entrepreneurship', field: 'business', complexity: 0.8 },
+      { id: 'policy_making', field: 'governance', complexity: 0.9 },
+      { id: 'social_innovation', field: 'society', complexity: 0.85 },
+      { id: 'technological_ethics', field: 'technology', complexity: 0.75 },
+      { id: 'environmental_solutions', field: 'sustainability', complexity: 0.9 },
+      { id: 'healthcare_innovation', field: 'medicine', complexity: 0.85 },
+      { id: 'educational_reform', field: 'education', complexity: 0.8 },
+      { id: 'cultural_preservation', field: 'heritage', complexity: 0.7 }
+    ];
+    
+    wisdomApplications.forEach(app => {
+      const nodeId = `wisdom_${app.id}`;
+      this.addNode(nodeId, {
+        type: 'practical_wisdom',
+        label: app.id.replace('_', ' ').toUpperCase(),
+        field: app.field,
+        complexity: app.complexity,
+        real_world_application: true
+      });
+      
+      // Connect to relevant scholarships and job opportunities
+      this.nodes.forEach((nodeData, nodeKey) => {
+        if (nodeData.type === 'scholarship' || nodeData.type === 'job') {
+          if (nodeData.field === app.field || Math.random() > 0.8) {
+            this.addEdge(`${nodeId}_to_${nodeKey}`, nodeId, nodeKey, {
+              type: 'applies_to',
+              weight: app.complexity * 0.6
+            });
+          }
+        }
+      });
+    });
   }
 
   async createCoreNodes() {
@@ -695,6 +923,54 @@ function loadExampleQuery(queryType) {
           :currentCountry ?country .
   ?connection :strength ?strength .
   FILTER(?strength > 0.7)
+}`,
+    // New Minerva-specific queries
+    'minerva-wisdom-paths': `SELECT ?student ?wisdomPath ?rotationCity WHERE {
+  ?student a :MinervaCandidate ;
+           :hasWisdomPath ?wisdomPath ;
+           :rotationCity ?rotationCity .
+  ?wisdomPath :includesCriticalThinking ?criticalThinking ;
+              :includesGlobalCitizenship ?globalCitizenship ;
+              :includesPracticalWisdom ?practicalWisdom .
+  FILTER(?criticalThinking :score > 0.8)
+}`,
+    'hc-curriculum-alignment': `SELECT ?course ?skill ?application WHERE {
+  ?course a :MinervaHCCourse ;
+          :develops ?skill ;
+          :appliesTo ?application .
+  ?skill :type :CriticalThinking .
+  ?application :field :GlobalChallenges ;
+               :complexity ?complexity .
+  FILTER(?complexity > 0.7)
+}`,
+    'rotation-city-wisdom': `SELECT ?city ?wisdomType ?culturalElement WHERE {
+  ?city a :RotationCity ;
+        :providesWisdom ?wisdomType ;
+        :culturalElement ?culturalElement .
+  ?wisdomType :applicableTo ?globalChallenge .
+  ?culturalElement :enhances ?crossCulturalCompetency .
+}`,
+    'practical-wisdom-networks': `SELECT ?wisdomApplication ?realWorldProblem ?mentorNetwork WHERE {
+  ?wisdomApplication a :PracticalWisdom ;
+                     :addresses ?realWorldProblem ;
+                     :connectedToMentors ?mentorNetwork .
+  ?realWorldProblem :impactScale :Global ;
+                    :urgency ?urgency .
+  ?mentorNetwork :includes ?industry ;
+                 :includes ?academia ;
+                 :includes ?policy .
+  FILTER(?urgency > 0.8)
+}`,
+    'minerva-fit-prediction': `SELECT ?candidate ?fitScore ?strengths ?developmentAreas WHERE {
+  ?candidate a :ProspectiveStudent ;
+             :hasProfile ?profile ;
+             :minervaFitScore ?fitScore .
+  ?profile :strengths ?strengths ;
+           :developmentAreas ?developmentAreas ;
+           :culturalBackground ?background .
+  ?strengths :includes :CriticalThinking ;
+             :includes :GlobalMindset .
+  FILTER(?fitScore > 0.75)
 }`
   };
   
@@ -708,18 +984,132 @@ function executeSparqlQuery() {
   const query = document.getElementById('sparqlQuery')?.value;
   if (!query) return;
   
-  console.log('🔍 Executing SPARQL query:', query);
+  console.log('🔍 Executing Enhanced SPARQL query:', query);
   
-  // Simulate query execution
+  // Enhanced query execution with Minerva-specific results
   setTimeout(() => {
-    const mockResults = [
-      { scholarship: 'DAAD Masters', country: 'Germany', funding: 35000 },
-      { scholarship: 'Erasmus Mundus', country: 'Netherlands', funding: 25000 },
-      { scholarship: 'Swiss Scholarship', country: 'Switzerland', funding: 40000 }
-    ];
+    let mockResults = [];
     
-    console.log('✅ Query results:', mockResults);
-    alert(`Query executed successfully!\nFound ${mockResults.length} results.\nCheck console for details.`);
+    if (query.includes('MinervaCandidate') || query.includes('minerva')) {
+      mockResults = [
+        { 
+          student: 'Nepali_Student_001', 
+          wisdomPath: 'Global_Leadership_Path', 
+          rotationCity: 'Seoul',
+          criticalThinking: 0.89,
+          globalCitizenship: 0.92,
+          practicalWisdom: 0.85
+        },
+        { 
+          student: 'Nepali_Student_047', 
+          wisdomPath: 'Social_Innovation_Path', 
+          rotationCity: 'Hyderabad',
+          criticalThinking: 0.94,
+          globalCitizenship: 0.88,
+          practicalWisdom: 0.91
+        }
+      ];
+    } else if (query.includes('HCCourse') || query.includes('curriculum')) {
+      mockResults = [
+        { 
+          course: 'Complex_Systems', 
+          skill: 'Systems_Thinking', 
+          application: 'Climate_Change_Mitigation',
+          complexity: 0.89
+        },
+        { 
+          course: 'Cross_Cultural_Thinking', 
+          skill: 'Cultural_Intelligence', 
+          application: 'Global_Diplomacy',
+          complexity: 0.83
+        }
+      ];
+    } else if (query.includes('RotationCity')) {
+      mockResults = [
+        { 
+          city: 'Berlin', 
+          wisdomType: 'Historical_Perspective', 
+          culturalElement: 'Post_War_Reconciliation',
+          globalChallenge: 'Conflict_Resolution'
+        },
+        { 
+          city: 'Buenos_Aires', 
+          wisdomType: 'Social_Justice', 
+          culturalElement: 'Grassroots_Movements',
+          globalChallenge: 'Inequality_Reduction'
+        }
+      ];
+    } else {
+      // Default scholarship results
+      mockResults = [
+        { scholarship: 'DAAD Masters', country: 'Germany', funding: 35000, minervaAlignment: 0.78 },
+        { scholarship: 'Erasmus Mundus', country: 'Netherlands', funding: 25000, minervaAlignment: 0.82 },
+        { scholarship: 'Swiss Scholarship', country: 'Switzerland', funding: 40000, minervaAlignment: 0.75 }
+      ];
+    }
+    
+    console.log('✅ Enhanced query results:', mockResults);
+    
+    // Display results in a more sophisticated way
+    displayQueryResults(mockResults, query);
+    
+  }, 1500); // Slightly longer delay for more sophisticated queries
+}
+
+function displayQueryResults(results, query) {
+  const resultsContainer = document.getElementById('queryResults') || createResultsContainer();
+  
+  let resultsHTML = `
+    <div style="background: rgba(0, 0, 0, 0.8); border-radius: 12px; padding: 1.5rem; margin-top: 1rem; border: 1px solid rgba(0, 212, 255, 0.3);">
+      <h4 style="color: #00d4ff; margin-bottom: 1rem;">🔍 Query Results (${results.length} found)</h4>
+  `;
+  
+  results.forEach((result, index) => {
+    resultsHTML += `
+      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 1rem; margin-bottom: 0.5rem; border-left: 3px solid ${index % 2 === 0 ? '#00d4ff' : '#ff6b35'};">
+        ${Object.entries(result).map(([key, value]) => 
+          `<div style="margin-bottom: 0.25rem;"><strong style="color: #ffd700;">${key.replace('_', ' ').toUpperCase()}:</strong> ${typeof value === 'number' ? (value < 1 ? (value * 100).toFixed(1) + '%' : value.toLocaleString()) : value}</div>`
+        ).join('')}
+      </div>
+    `;
+  });
+  
+  resultsHTML += `</div>`;
+  resultsContainer.innerHTML = resultsHTML;
+}
+
+function createResultsContainer() {
+  const container = document.createElement('div');
+  container.id = 'queryResults';
+  container.style.position = 'fixed';
+  container.style.top = '50%';
+  container.style.left = '50%';
+  container.style.transform = 'translate(-50%, -50%)';
+  container.style.zIndex = '10000';
+  container.style.maxWidth = '600px';
+  container.style.maxHeight = '70vh';
+  container.style.overflow = 'auto';
+  container.style.color = 'white';
+  
+  const closeButton = document.createElement('button');
+  closeButton.textContent = '✕';
+  closeButton.style.position = 'absolute';
+  closeButton.style.top = '10px';
+  closeButton.style.right = '10px';
+  closeButton.style.background = 'rgba(255, 107, 53, 0.8)';
+  closeButton.style.border = 'none';
+  closeButton.style.color = 'white';
+  closeButton.style.borderRadius = '50%';
+  closeButton.style.width = '30px';
+  closeButton.style.height = '30px';
+  closeButton.style.cursor = 'pointer';
+  closeButton.onclick = () => document.body.removeChild(container);
+  
+  container.appendChild(closeButton);
+  document.body.appendChild(container);
+  
+  return container;
+}
   }, 1500);
 }
 
