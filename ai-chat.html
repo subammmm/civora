@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Global Ambassador - Civora</title>
+  <meta name="description" content="24/7 multilingual AI counseling powered by specialized avatars for personalized guidance." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="canonical" href="https://civora.me/ai-chat.html" />
+  <meta name="theme-color" content="#0C0D0F" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/script.js"></script>
+  <script defer src="assets/ai-global-ambassador.js"></script>
+  
+  <!-- TensorFlow.js for AI processing -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+  
+  <style>
+    .ai-chat-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #0c0d0f 0%, #1a1d23 100%);
+      min-height: 100vh;
+    }
+    
+    .ai-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: white;
+    }
+    
+    .ai-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #00d4ff, #ff6b35);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .ambassador-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .ambassador-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      text-align: center;
+      color: white;
+    }
+    
+    .ambassador-card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #00d4ff;
+    }
+    
+    .ambassador-card.active {
+      border-color: #ff6b35;
+      background: rgba(255, 107, 53, 0.2);
+    }
+    
+    .ambassador-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 auto 0.5rem;
+      background: linear-gradient(45deg, #00d4ff, #ff6b35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .chat-interface {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 1.5rem;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding-right: 0.5rem;
+    }
+    
+    .message {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    
+    .message.user {
+      flex-direction: row-reverse;
+    }
+    
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #00d4ff, #ff6b35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .message-content {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      max-width: 70%;
+      color: white;
+      line-height: 1.5;
+    }
+    
+    .message.user .message-content {
+      background: rgba(0, 212, 255, 0.2);
+    }
+    
+    .chat-input-container {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    
+    .chat-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      outline: none;
+    }
+    
+    .chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .send-button {
+      background: linear-gradient(45deg, #00d4ff, #ff6b35);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .language-selector {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
+    
+    .language-selector select {
+      background: transparent;
+      border: none;
+      color: white;
+      padding: 0.25rem;
+    }
+    
+    .ai-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1rem;
+      color: white;
+    }
+    
+    .typing-indicator {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .typing-dots {
+      display: flex;
+      gap: 2px;
+    }
+    
+    .typing-dots span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      animation: typing 1.4s infinite ease-in-out both;
+    }
+    
+    .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+    
+    @keyframes typing {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+    
+    @media (max-width: 768px) {
+      .ai-chat-container {
+        padding: 1rem 0.5rem;
+      }
+      
+      .chat-interface {
+        height: 400px;
+      }
+      
+      .ambassador-selector {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Civora Logo" class="brand-logo">
+        Civora
+      </a>
+      
+      <nav class="site-nav">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="scholarships.html" class="nav-item">Scholarships</a>
+        <a href="citizenship.html" class="nav-item">Citizenship</a>
+        <a href="guides.html" class="nav-item">Guides</a>
+      </nav>
+      
+      <button class="mobile-nav-toggle" id="mobileNavToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="ai-chat-container">
+    <div class="language-selector">
+      <select id="aiLanguageSelect">
+        <option value="en">🇺🇸 English</option>
+        <option value="ne">🇳🇵 नेपाली</option>
+        <option value="hi">🇮🇳 हिंदी</option>
+        <option value="ur">🇵🇰 اردو</option>
+        <option value="bn">🇧🇩 বাংলা</option>
+        <option value="ta">🇱🇰 தமிழ்</option>
+        <option value="si">🇱🇰 සිංහල</option>
+        <option value="my">🇲🇲 မြန်မာ</option>
+        <option value="km">🇰🇭 ខ្មែរ</option>
+        <option value="lo">🇱🇦 ລາວ</option>
+        <option value="th">🇹🇭 ไทย</option>
+        <option value="vi">🇻🇳 Tiếng Việt</option>
+        <option value="id">🇮🇩 Bahasa Indonesia</option>
+        <option value="ms">🇲🇾 Bahasa Melayu</option>
+        <option value="tl">🇵🇭 Filipino</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="ko">🇰🇷 한국어</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="fa">🇮🇷 فارسی</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="pt">🇧🇷 Português</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="sw">🇰🇪 Kiswahili</option>
+        <option value="am">🇪🇹 አማርኛ</option>
+        <option value="ha">🇳🇬 Hausa</option>
+        <option value="yo">🇳🇬 Yorùbá</option>
+        <option value="ig">🇳🇬 Igbo</option>
+      </select>
+    </div>
+
+    <div class="ai-header">
+      <h1>🌍 Global Ambassador AI Swarm</h1>
+      <p>24/7 multilingual counseling with specialized AI avatars modeled after global icons</p>
+    </div>
+
+    <div class="ambassador-selector">
+      <div class="ambassador-card active" data-ambassador="malala">
+        <div class="ambassador-avatar">🎓</div>
+        <h3>Malala</h3>
+        <p>Education Advocacy</p>
+      </div>
+      <div class="ambassador-card" data-ambassador="elon">
+        <div class="ambassador-avatar">🚀</div>
+        <h3>Innovator</h3>
+        <p>Tech & Innovation</p>
+      </div>
+      <div class="ambassador-card" data-ambassador="mandela">
+        <div class="ambassador-avatar">✊</div>
+        <h3>Leader</h3>
+        <p>Global Leadership</p>
+      </div>
+      <div class="ambassador-card" data-ambassador="einstein">
+        <div class="ambassador-avatar">🧠</div>
+        <h3>Scholar</h3>
+        <p>Research & Science</p>
+      </div>
+      <div class="ambassador-card" data-ambassador="oprah">
+        <div class="ambassador-avatar">💫</div>
+        <h3>Mentor</h3>
+        <p>Personal Growth</p>
+      </div>
+      <div class="ambassador-card" data-ambassador="gates">
+        <div class="ambassador-avatar">🌍</div>
+        <h3>Philanthropist</h3>
+        <p>Global Impact</p>
+      </div>
+    </div>
+
+    <div class="chat-interface">
+      <div class="chat-messages" id="chatMessages">
+        <div class="message">
+          <div class="message-avatar">🎓</div>
+          <div class="message-content">
+            <strong>Malala AI:</strong> Welcome! I'm here to help you navigate your educational journey. What challenges are you facing in your scholarship search?
+          </div>
+        </div>
+      </div>
+      
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="message-avatar">🎓</div>
+        <span>AI is thinking</span>
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      
+      <div class="chat-input-container">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask about scholarships, visas, applications..." />
+        <button class="send-button" id="sendButton">➤</button>
+      </div>
+    </div>
+
+    <div class="ai-features">
+      <div class="feature-card">
+        <h3>🧠 Neural Matching</h3>
+        <p>AI analyzes your profile against 1M+ data points for 99% accuracy</p>
+      </div>
+      <div class="feature-card">
+        <h3>🌍 50+ Languages</h3>
+        <p>Including Bhojpuri dialects and regional variations</p>
+      </div>
+      <div class="feature-card">
+        <h3>🎯 Sentiment Analysis</h3>
+        <p>Emotion-aware responses with automatic escalation to human experts</p>
+      </div>
+      <div class="feature-card">
+        <h3>📈 Success Prediction</h3>
+        <p>Federated learning from 500K+ sessions for continuous improvement</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-section">
+        <h3>Civora</h3>
+        <p>Opening doors for students worldwide</p>
+      </div>
+      <div class="footer-section">
+        <h4>AI Features</h4>
+        <ul>
+          <li><a href="ai-chat.html">Global Ambassador</a></li>
+          <li><a href="pathway-builder.html">Pathway Builder</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter">📱</a>
+          <a href="#" aria-label="LinkedIn">💼</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

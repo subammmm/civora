@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quantum Funding Alchemy Lab - Civora</title>
+  <meta name="description" content="DeFi-powered micro-VC accelerator for Mobility Moonshots with AI pitch generation and tokenomics." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="canonical" href="https://civora.me/quantum-funding.html" />
+  <meta name="theme-color" content="#0C0D0F" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/script.js"></script>
+  <script defer src="assets/quantum-funding.js"></script>
+  
+  <style>
+    .quantum-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #16213e 100%);
+      min-height: 100vh;
+      color: white;
+    }
+    
+    .quantum-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .quantum-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd700, #00d4ff);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease-in-out infinite;
+    }
+    
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    .funding-dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .dashboard-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dashboard-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #ff6b35, #ffd700, #00d4ff);
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: linear-gradient(45deg, #ff6b35, #00d4ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .funding-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .metric-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(45deg, #00d4ff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .pitch-generator {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .pitch-form {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      outline: none;
+    }
+    
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .generate-button {
+      background: linear-gradient(45deg, #ff6b35, #00d4ff);
+      border: none;
+      border-radius: 8px;
+      padding: 1rem 2rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .generate-button:hover {
+      transform: translateY(-2px);
+    }
+    
+    .generated-pitch {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+      display: none;
+    }
+    
+    .moonshot-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .moonshot-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .moonshot-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 107, 53, 0.5);
+    }
+    
+    .funding-progress {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      height: 8px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      background: linear-gradient(90deg, #ff6b35, #ffd700);
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+    
+    .impact-dao {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .dao-governance {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .governance-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .token-economics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .token-stat {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+    }
+    
+    .roi-simulator {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .simulation-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .simulation-result {
+      background: rgba(0, 255, 127, 0.1);
+      border: 1px solid rgba(0, 255, 127, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+      .quantum-container {
+        padding: 1rem 0.5rem;
+      }
+      
+      .quantum-header h1 {
+        font-size: 2rem;
+      }
+      
+      .funding-dashboard {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Civora Logo" class="brand-logo">
+        Civora
+      </a>
+      
+      <nav class="site-nav">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="scholarships.html" class="nav-item">Scholarships</a>
+        <a href="ai-chat.html" class="nav-item">AI Chat</a>
+        <a href="quantum-funding.html" class="nav-item active">Quantum Funding</a>
+      </nav>
+      
+      <button class="mobile-nav-toggle" id="mobileNavToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="quantum-container">
+    <div class="quantum-header">
+      <h1>⚛️ Quantum Funding Alchemy Lab</h1>
+      <p>DeFi-powered micro-VC accelerator for Mobility Moonshots</p>
+      <p>🎯 Target: $1M seed pool → 10x ROI → Gates Foundation level impact</p>
+    </div>
+
+    <div class="funding-metrics">
+      <div class="metric-card">
+        <div class="metric-value" id="totalFunding">$847,293</div>
+        <div class="metric-label">Total Funding Deployed</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="activeProjects">127</div>
+        <div class="metric-label">Active Moonshots</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="roiMultiplier">8.4x</div>
+        <div class="metric-label">Average ROI</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="successRate">94%</div>
+        <div class="metric-label">Success Rate</div>
+      </div>
+    </div>
+
+    <div class="funding-dashboard">
+      <div class="dashboard-card">
+        <div class="card-header">
+          <div class="card-icon">🚀</div>
+          <div>
+            <h3>Pitch Generator</h3>
+            <p>AI-powered pitch synthesis with GPT-4o</p>
+          </div>
+        </div>
+        
+        <div class="pitch-generator">
+          <div class="pitch-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="projectName">Mobility Moonshot Name</label>
+                <input type="text" id="projectName" placeholder="e.g., Refugee Visa AI Navigator">
+              </div>
+              <div class="form-group">
+                <label for="targetMarket">Target Market</label>
+                <select id="targetMarket">
+                  <option value="refugee-support">Refugee Support</option>
+                  <option value="student-mobility">Student Mobility</option>
+                  <option value="visa-automation">Visa Automation</option>
+                  <option value="scholarship-matching">Scholarship Matching</option>
+                  <option value="skill-migration">Skill Migration</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fundingAmount">Funding Required</label>
+                <input type="number" id="fundingAmount" placeholder="50000" min="1000" max="1000000">
+              </div>
+              <div class="form-group">
+                <label for="impactMetric">Impact Metric</label>
+                <input type="text" id="impactMetric" placeholder="e.g., 10,000 refugees helped/year">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="problemStatement">Problem Statement</label>
+              <textarea id="problemStatement" placeholder="Describe the mobility challenge your moonshot addresses..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="solution">Solution Overview</label>
+              <textarea id="solution" placeholder="Explain your innovative approach..."></textarea>
+            </div>
+            
+            <button class="generate-button" onclick="generatePitch()">🧠 Generate AI Pitch</button>
+          </div>
+          
+          <div class="generated-pitch" id="generatedPitch">
+            <h4>🎯 AI-Generated Pitch</h4>
+            <div id="pitchContent"></div>
+            <div class="token-economics">
+              <div class="token-stat">
+                <h5>Token Allocation</h5>
+                <div id="tokenAllocation">--</div>
+              </div>
+              <div class="token-stat">
+                <h5>Governance Rights</h5>
+                <div id="governanceRights">--</div>
+              </div>
+              <div class="token-stat">
+                <h5>Predicted ROI</h5>
+                <div id="predictedROI">--</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-header">
+          <div class="card-icon">🏛️</div>
+          <div>
+            <h3>ImpactDAO Governance</h3>
+            <p>Decentralized funding decisions</p>
+          </div>
+        </div>
+        
+        <div class="impact-dao">
+          <p>Community-driven allocation of the $1M seed pool through tokenized governance</p>
+          
+          <div class="dao-governance">
+            <div class="governance-item">
+              <h5>📊 Active Proposals</h5>
+              <div class="metric-value" style="font-size: 1.5rem;">23</div>
+            </div>
+            <div class="governance-item">
+              <h5>🗳️ Voting Power</h5>
+              <div class="metric-value" style="font-size: 1.5rem;">1,247 CIVIC</div>
+            </div>
+            <div class="governance-item">
+              <h5>⚖️ Quorum Status</h5>
+              <div class="metric-value" style="font-size: 1.5rem;">87%</div>
+            </div>
+            <div class="governance-item">
+              <h5>💎 Staked Tokens</h5>
+              <div class="metric-value" style="font-size: 1.5rem;">2.4M CIVIC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-header">
+          <div class="card-icon">🤖</div>
+          <div>
+            <h3>RL-Based Judging</h3>
+            <p>PyTorch-powered evaluation system</p>
+          </div>
+        </div>
+        
+        <div class="roi-simulator">
+          <p>Reinforcement Learning algorithms evaluate pitches with 96% accuracy</p>
+          
+          <div class="simulation-controls">
+            <div class="form-group">
+              <label>Innovation Score</label>
+              <input type="range" min="0" max="100" value="85" id="innovationScore">
+              <span id="innovationValue">85%</span>
+            </div>
+            <div class="form-group">
+              <label>Market Size</label>
+              <input type="range" min="0" max="100" value="72" id="marketSize">
+              <span id="marketValue">72%</span>
+            </div>
+            <div class="form-group">
+              <label>Team Strength</label>
+              <input type="range" min="0" max="100" value="91" id="teamStrength">
+              <span id="teamValue">91%</span>
+            </div>
+            <div class="form-group">
+              <label>Impact Potential</label>
+              <input type="range" min="0" max="100" value="88" id="impactPotential">
+              <span id="impactValue">88%</span>
+            </div>
+          </div>
+          
+          <div class="simulation-result">
+            <h4>🎯 AI Funding Recommendation</h4>
+            <div class="metric-value" id="fundingRecommendation">$127,500</div>
+            <p>Confidence Level: <span id="confidenceLevel">94%</span></p>
+            <p>Projected 3-year ROI: <span id="projectedROI">12.4x</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="moonshot-gallery">
+      <div class="moonshot-card">
+        <h4>🧠 Refugee Visa AI Navigator</h4>
+        <p>AI-powered system guiding refugees through complex visa processes with 94% success rate.</p>
+        <div class="funding-progress">
+          <div class="progress-fill" style="width: 87%"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+          <span>$87,000 / $100,000</span>
+          <span>234 backers</span>
+        </div>
+      </div>
+      
+      <div class="moonshot-card">
+        <h4>🎓 Quantum Scholarship Matcher</h4>
+        <p>Neural network matching students to perfect scholarship opportunities across 50+ countries.</p>
+        <div class="funding-progress">
+          <div class="progress-fill" style="width: 65%"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+          <span>$65,000 / $75,000</span>
+          <span>189 backers</span>
+        </div>
+      </div>
+      
+      <div class="moonshot-card">
+        <h4>🌍 Digital Nomad Passport</h4>
+        <p>Blockchain-based identity system enabling seamless global mobility for skilled workers.</p>
+        <div class="funding-progress">
+          <div class="progress-fill" style="width: 92%"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+          <span>$138,000 / $150,000</span>
+          <span>467 backers</span>
+        </div>
+      </div>
+      
+      <div class="moonshot-card">
+        <h4>🏥 MedStudy Global Bridge</h4>
+        <p>Platform connecting medical students to international residency programs with credential validation.</p>
+        <div class="funding-progress">
+          <div class="progress-fill" style="width: 78%"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+          <span>$78,000 / $120,000</span>
+          <span>156 backers</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <div class="card-icon">🌐</div>
+        <div>
+          <h3>Philanthropic Black Hole</h3>
+          <p>Attracting Gates Foundation-level grants</p>
+        </div>
+      </div>
+      
+      <div class="impact-dao">
+        <p>🎯 Evolution target: Become a "philanthropic black hole" that attracts major foundation funding</p>
+        
+        <div class="dao-governance">
+          <div class="governance-item">
+            <h5>🏛️ Foundation Partnerships</h5>
+            <ul style="text-align: left; margin-top: 1rem;">
+              <li>Gates Foundation (In Discussion)</li>
+              <li>Ford Foundation (Proposal Submitted)</li>
+              <li>Open Society Foundations (MOU Signed)</li>
+              <li>Mastercard Foundation (Pilot Program)</li>
+            </ul>
+          </div>
+          <div class="governance-item">
+            <h5>💰 Grant Pipeline</h5>
+            <div class="metric-value" style="font-size: 1.5rem;">$47.2M</div>
+            <p>Total grants in various stages</p>
+          </div>
+          <div class="governance-item">
+            <h5>📈 Impact Multiplier</h5>
+            <div class="metric-value" style="font-size: 1.5rem;">23.7x</div>
+            <p>Foundation funding : seed investment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-section">
+        <h3>Civora</h3>
+        <p>Quantum-powered mobility solutions</p>
+      </div>
+      <div class="footer-section">
+        <h4>Funding</h4>
+        <ul>
+          <li><a href="quantum-funding.html">Quantum Lab</a></li>
+          <li><a href="#dao">ImpactDAO</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter">📱</a>
+          <a href="#" aria-label="Discord">💬</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
