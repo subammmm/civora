@@ -358,7 +358,7 @@
     </div>
 
     <div class="sparql-query">
-      <h4>🔍 SPARQL Query Interface</h4>
+      <h4>🔍 Enhanced SPARQL Query Interface</h4>
       <div class="query-examples">
         <div class="example-query" onclick="loadExampleQuery('nepal-eu')">
           "Nepali CS PhD to EU startup path"
@@ -368,6 +368,22 @@
         </div>
         <div class="example-query" onclick="loadExampleQuery('alumni-network')">
           Alumni network connections
+        </div>
+        <!-- New Minerva-specific queries -->
+        <div class="example-query" onclick="loadExampleQuery('minerva-wisdom-paths')" style="border-left: 3px solid #ff1744;">
+          🏛️ Minerva wisdom pathways
+        </div>
+        <div class="example-query" onclick="loadExampleQuery('hc-curriculum-alignment')" style="border-left: 3px solid #ff1744;">
+          🧠 HC curriculum alignment
+        </div>
+        <div class="example-query" onclick="loadExampleQuery('rotation-city-wisdom')" style="border-left: 3px solid #ff1744;">
+          🌍 Rotation city wisdom
+        </div>
+        <div class="example-query" onclick="loadExampleQuery('practical-wisdom-networks')" style="border-left: 3px solid #ff1744;">
+          💎 Practical wisdom networks
+        </div>
+        <div class="example-query" onclick="loadExampleQuery('minerva-fit-prediction')" style="border-left: 3px solid #ff1744;">
+          🎯 Minerva fit prediction
         </div>
       </div>
       <textarea class="query-input" id="sparqlQuery" placeholder="SELECT ?scholarship ?country ?funding WHERE {
@@ -413,14 +429,14 @@
     </div>
 
     <div class="nebula-navigator">
-      <h4>🌌 Nebula Navigator Stats</h4>
+      <h4>🌌 Enhanced Nebula Navigator Stats</h4>
       <div class="navigator-stats">
         <div class="stat-item">
-          <div class="stat-value" id="totalNodes">1,247,893</div>
+          <div class="stat-value" id="totalNodes">12,478,934</div>
           <div class="stat-label">Total Nodes</div>
         </div>
         <div class="stat-item">
-          <div class="stat-value" id="totalConnections">4,829,347</div>
+          <div class="stat-value" id="totalConnections">48,293,471</div>
           <div class="stat-label">Connections</div>
         </div>
         <div class="stat-item">
@@ -433,12 +449,40 @@
         </div>
       </div>
       
+      <!-- New Minerva-specific stats -->
+      <div class="navigator-stats" style="margin-top: 1rem; border-top: 1px solid rgba(255, 28, 68, 0.3); padding-top: 1rem;">
+        <h5 style="color: #ff1744; margin-bottom: 0.5rem;">🏛️ Minerva Wisdom Web</h5>
+        <div class="stat-item">
+          <div class="stat-value" id="minervaAligned" style="color: #ff1744;">892,341</div>
+          <div class="stat-label">Minerva Aligned</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="wisdomConnections" style="color: #ff1744;">2,847,293</div>
+          <div class="stat-label">Wisdom Connections</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="criticalThinkingPaths" style="color: #ff1744;">847,293</div>
+          <div class="stat-label">Critical Thinking Paths</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="globalCitizenshipLinks" style="color: #ff1744;">1,247,893</div>
+          <div class="stat-label">Global Citizenship Links</div>
+        </div>
+      </div>
+      
       <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.2);">
         <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">🎯 Current Focus:</div>
         <div id="currentFocus" style="color: #00d4ff;">Global Overview</div>
         
         <div style="font-size: 0.9rem; margin: 0.5rem 0;">🔗 Quantum Entangled:</div>
         <div id="entangledNodes" style="color: #ff6b35;">0 soulmate pairs</div>
+        
+        <!-- New Minerva focus indicators -->
+        <div style="font-size: 0.9rem; margin: 0.5rem 0;">🏛️ Minerva Wisdom Layer:</div>
+        <div id="wisdomLayer" style="color: #ff1744;">Habituation & Capability</div>
+        
+        <div style="font-size: 0.9rem; margin: 0.5rem 0;">🌍 Active Rotation Cities:</div>
+        <div id="rotationCities" style="color: #ff1744;">7 cities connected</div>
       </div>
     </div>
 

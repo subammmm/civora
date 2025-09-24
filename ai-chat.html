@@ -71,6 +71,23 @@
       background: rgba(255, 107, 53, 0.2);
     }
     
+    .minerva-ambassador {
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 53, 0.1));
+    }
+    
+    .minerva-ambassador:hover {
+      border-color: #00d4ff;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(255, 107, 53, 0.15));
+    }
+    
+    .minerva-ambassador small {
+      display: block;
+      font-size: 0.75rem;
+      opacity: 0.8;
+      margin-top: 0.25rem;
+    }
+    
     .ambassador-avatar {
       width: 60px;
       height: 60px;
@@ -340,6 +357,31 @@
         <div class="ambassador-avatar">🌍</div>
         <h3>Philanthropist</h3>
         <p>Global Impact</p>
+      </div>
+      <!-- New Minerva-specific ambassadors -->
+      <div class="ambassador-card minerva-ambassador" data-ambassador="ben_nelson">
+        <div class="ambassador-avatar">🏛️</div>
+        <h3>Ben Nelson</h3>
+        <p>Minerva Education</p>
+        <small>Founder of Minerva</small>
+      </div>
+      <div class="ambassador-card minerva-ambassador" data-ambassador="kosslyn">
+        <div class="ambassador-avatar">🧪</div>
+        <h3>Stephen Kosslyn</h3>
+        <p>Cognitive Science</p>
+        <small>Learning Science Expert</small>
+      </div>
+      <div class="ambassador-card minerva-ambassador" data-ambassador="global_citizen">
+        <div class="ambassador-avatar">🌐</div>
+        <h3>Global Citizen</h3>
+        <p>Cultural Bridge</p>
+        <small>Cross-Cultural Expert</small>
+      </div>
+      <div class="ambassador-card minerva-ambassador" data-ambassador="wisdom_sage">
+        <div class="ambassador-avatar">⚖️</div>
+        <h3>Critical Wisdom</h3>
+        <p>Wisdom Cultivation</p>
+        <small>Philosophy & Ethics</small>
       </div>
     </div>
 

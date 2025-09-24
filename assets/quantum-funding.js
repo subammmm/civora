@@ -11,26 +11,63 @@ class QuantumFundingLab {
     this.activeProjects = 127;
     this.averageROI = 8.4;
     this.successRate = 0.94;
+    this.minervaSpecificFunding = 125000; // Minerva-focused funding pool
+    this.equityAcceleratorPool = 500000; // Underrepresented founders pool
     
     this.pitchTemplates = {
       'refugee-support': {
         problem: "Millions of refugees navigate complex visa systems without proper guidance, leading to delayed applications and missed opportunities.",
         solution: "AI-powered navigation system that provides step-by-step guidance through visa processes with real-time updates and multilingual support.",
         market: "60M+ displaced persons globally, $2.3B refugee assistance market",
-        impact: "Reduce visa processing time by 60%, increase approval rates by 35%"
+        impact: "Reduce visa processing time by 60%, increase approval rates by 35%",
+        minervaAlignment: 0.85
       },
       'student-mobility': {
         problem: "Students miss 70% of relevant scholarship opportunities due to information fragmentation and complex eligibility criteria.",
         solution: "Neural network that matches student profiles to perfect-fit scholarships across 200+ databases with 99% accuracy.",
         market: "5.6M international students, $300B education market",
-        impact: "Increase scholarship success rate by 250%, reduce search time by 90%"
+        impact: "Increase scholarship success rate by 250%, reduce search time by 90%",
+        minervaAlignment: 0.92
       },
       'visa-automation': {
         problem: "Manual visa application processes create bottlenecks, with 40% of applications containing errors that cause delays.",
         solution: "Automated form completion and error detection system with blockchain-verified credential management.",
         market: "1.4B visa applications annually, $12B visa services market",
-        impact: "Reduce processing errors by 85%, accelerate approval times by 50%"
+        impact: "Reduce processing errors by 85%, accelerate approval times by 50%",
+        minervaAlignment: 0.78
+      },
+      // New Minerva-specific templates
+      'global-rotation-prep': {
+        problem: "Students applying to global programs like Minerva lack preparation for cross-cultural adaptation and city-specific challenges.",
+        solution: "VR-powered cultural immersion platform with AI mentors from each rotation city, providing practical wisdom for global citizenship.",
+        market: "500K+ globally-minded students, growing international education demand",
+        impact: "Increase cross-cultural competency by 200%, reduce adaptation time by 75%",
+        minervaAlignment: 0.98
+      },
+      'critical-thinking-ai': {
+        problem: "Traditional education systems fail to develop practical wisdom and critical thinking skills needed for complex problem-solving.",
+        solution: "AI tutor that guides students through real-world case studies using Minerva's active learning methodology.",
+        market: "50M+ students seeking advanced critical thinking skills",
+        impact: "Improve analytical reasoning by 150%, increase problem-solving accuracy by 85%",
+        minervaAlignment: 0.96
+      },
+      'equity-blockchain': {
+        problem: "Underrepresented students face bias in admissions and lack verifiable impact documentation for their community work.",
+        solution: "Blockchain-verified impact portfolio system that documents and validates social contributions with AI bias detection.",
+        market: "10M+ underrepresented students globally",
+        impact: "Eliminate admissions bias by 90%, increase representation by 300%",
+        minervaAlignment: 0.94
       }
+    };
+    
+    // Enhanced DeFi simulation parameters
+    this.defiMetrics = {
+      tvl: 2500000, // Total Value Locked
+      apy: 12.5, // Annual Percentage Yield
+      liquidityProviders: 1247,
+      governanceTokens: 50000,
+      stakingRewards: 15.8,
+      flashLoanVolume: 890000
     };
     
     this.init();
@@ -65,6 +102,16 @@ class QuantumFundingLab {
     this.animateCounter('activeProjects', this.activeProjects, '', '');
     this.animateCounter('roiMultiplier', this.averageROI, '', 'x');
     this.animateCounter('successRate', this.successRate * 100, '', '%');
+    
+    // Update DeFi metrics
+    this.animateCounter('tvlAmount', this.defiMetrics.tvl, '$', '');
+    this.animateCounter('apyRate', this.defiMetrics.apy, '', '%');
+    this.animateCounter('liquidityProviders', this.defiMetrics.liquidityProviders, '', '');
+    this.animateCounter('stakingRewards', this.defiMetrics.stakingRewards, '', '%');
+    
+    // Update Minerva-specific pools
+    this.animateCounter('minervaPool', this.minervaSpecificFunding, '$', '');
+    this.animateCounter('equityPool', this.equityAcceleratorPool, '$', '');
   }
 
   animateCounter(elementId, targetValue, prefix = '', suffix = '') {
@@ -99,6 +146,13 @@ class QuantumFundingLab {
 
   generateAIPitch(formData) {
     const template = this.pitchTemplates[formData.targetMarket] || this.pitchTemplates['student-mobility'];
+    const minervaAlignment = template.minervaAlignment || 0.7;
+    
+    // Generate Minerva-specific funding recommendations
+    const minervaFunding = this.calculateMinervaFunding({
+      fundingAmount: formData.fundingAmount,
+      minervaAlignment: minervaAlignment
+    });
     
     const pitch = {
       executive_summary: `${formData.projectName} addresses the critical challenge in ${formData.targetMarket.replace('-', ' ')} through innovative AI-powered solutions.`,
@@ -123,7 +177,28 @@ class QuantumFundingLab {
       
       roi_projection: this.calculateROIProjection(formData.fundingAmount),
       
-      risk_mitigation: `Diversified revenue streams, strong IP portfolio, experienced advisory board, and proven market validation with 10,000+ beta users.`
+      risk_mitigation: `Diversified revenue streams, strong IP portfolio, experienced advisory board, and proven market validation with 10,000+ beta users.`,
+      
+      // New Minerva-specific sections
+      minerva_alignment_score: Math.round(minervaAlignment * 100),
+      
+      critical_thinking_integration: minervaAlignment > 0.8 ? 
+        "Platform incorporates Minerva's active learning methodology with real-time critical thinking assessments and Socratic questioning." : 
+        "Opportunity to enhance platform with critical thinking frameworks inspired by leading educational innovations.",
+      
+      global_citizenship_impact: minervaAlignment > 0.85 ?
+        "Designed to foster global citizenship through cross-cultural learning experiences and diverse perspective integration." :
+        "Framework ready for global citizenship development modules and cultural competency training.",
+        
+      practical_wisdom_application: minervaAlignment > 0.9 ?
+        "Emphasizes practical wisdom by connecting theoretical knowledge to real-world problem-solving scenarios." :
+        "Strong foundation for practical application modules and experiential learning components.",
+        
+      minerva_funding_opportunities: minervaFunding,
+      
+      educational_equity_focus: `Committed to serving underrepresented communities with 30% of resources dedicated to first-generation students and rural populations. Target: 500K+ students from 50+ countries.`,
+      
+      defi_tokenomics: this.calculateTokenomics(formData.fundingAmount)
     };
 
     return pitch;
@@ -156,13 +231,32 @@ class QuantumFundingLab {
   calculateROIProjection(fundingAmount) {
     const amount = parseInt(fundingAmount) || 50000;
     const baseROI = 8.4;
-    const adjustedROI = baseROI * (1 + (amount / 100000) * 0.1); // Scale with funding
+    
+    // Enhanced ROI calculation with DeFi factors
+    let adjustedROI = baseROI * (1 + (amount / 100000) * 0.1); // Scale with funding
+    
+    // DeFi yield farming bonus
+    const yieldFarmingBonus = this.defiMetrics.apy * 0.1; // 10% of APY
+    adjustedROI += yieldFarmingBonus;
+    
+    // Minerva alignment bonus (higher ROI for education-aligned projects)
+    const minervaBonus = 2.5; // Additional ROI for high-alignment projects
+    const hasMinervaCadidates = Math.random() > 0.7; // Simulate Minerva candidates
+    if (hasMinervaCadidates) {
+      adjustedROI += minervaBonus;
+    }
+    
+    // Liquidity provider rewards
+    const liquidityBonus = (this.defiMetrics.stakingRewards / 100) * amount * 0.001;
     
     return {
-      '1_year': Math.round(adjustedROI * 0.3 * 10) / 10,
-      '3_year': Math.round(adjustedROI * 10) / 10,
-      '5_year': Math.round(adjustedROI * 1.8 * 10) / 10,
-      confidence: '94%'
+      '1_year': Math.round((adjustedROI * 0.3 + liquidityBonus * 0.1) * 10) / 10,
+      '3_year': Math.round((adjustedROI + liquidityBonus * 0.3) * 10) / 10,
+      '5_year': Math.round((adjustedROI * 1.8 + liquidityBonus) * 10) / 10,
+      confidence: hasMinervaCadidates ? '97%' : '94%',
+      defi_yield: Math.round(yieldFarmingBonus * 10) / 10,
+      minerva_aligned: hasMinervaCadidates,
+      liquidity_rewards: Math.round(liquidityBonus * 100) / 100
     };
   }
 
@@ -171,10 +265,109 @@ class QuantumFundingLab {
     const tokenAllocation = Math.round((amount / this.seedPool) * 1000000); // Tokens out of 1M
     const governanceRights = Math.round((tokenAllocation / 1000000) * 100 * 10) / 10; // Percentage
     
+    // Enhanced tokenomics with DeFi features
+    const stakingRewards = Math.round(tokenAllocation * 0.15); // 15% staking bonus
+    const liquidityMining = Math.round(tokenAllocation * 0.1); // 10% liquidity mining
+    const governanceBonus = governanceRights > 5 ? tokenAllocation * 0.05 : 0; // Bonus for large stakes
+    
     return {
       tokens: tokenAllocation.toLocaleString(),
       governance: governanceRights + '%',
-      vesting: '4 years with 1-year cliff'
+      vesting: '4 years with 1-year cliff',
+      staking_rewards: stakingRewards.toLocaleString(),
+      liquidity_mining: liquidityMining.toLocaleString(),
+      governance_bonus: Math.round(governanceBonus).toLocaleString(),
+      estimated_apy: this.defiMetrics.apy + '%'
+    };
+  }
+
+  // New method: Calculate Minerva-specific funding opportunities
+  calculateMinervaFunding(projectData) {
+    const baseAmount = projectData.fundingAmount || 50000;
+    const alignment = projectData.minervaAlignment || 0.7;
+    
+    // Minerva-specific funding pools
+    const pools = {
+      'equity_accelerator': {
+        available: this.equityAcceleratorPool,
+        multiplier: alignment > 0.9 ? 2.0 : 1.5,
+        focus: 'Underrepresented founders and educational equity'
+      },
+      'minerva_innovation': {
+        available: this.minervaSpecificFunding,
+        multiplier: alignment > 0.95 ? 3.0 : 2.0,
+        focus: 'Critical thinking and global citizenship projects'
+      },
+      'global_rotation': {
+        available: 75000,
+        multiplier: alignment > 0.8 ? 1.8 : 1.2,
+        focus: 'Cross-cultural learning and adaptation tools'
+      }
+    };
+    
+    let recommendations = [];
+    
+    Object.entries(pools).forEach(([poolName, pool]) => {
+      const eligibleAmount = Math.min(baseAmount * pool.multiplier, pool.available * 0.1);
+      const probability = Math.min(95, alignment * 100);
+      
+      if (eligibleAmount > 10000) { // Minimum threshold
+        recommendations.push({
+          pool: poolName.replace('_', ' ').toUpperCase(),
+          amount: Math.round(eligibleAmount),
+          probability: Math.round(probability),
+          focus: pool.focus,
+          timeline: '6-8 weeks'
+        });
+      }
+    });
+    
+    return recommendations.sort((a, b) => b.amount - a.amount);
+  }
+
+  // New method: Simulate DeFi protocol interaction
+  async simulateDeFiProtocol(action, amount) {
+    console.log(`🚀 Executing DeFi action: ${action} with ${amount} tokens`);
+    
+    // Simulate network delay
+    await this.delay(2000);
+    
+    const protocols = {
+      'liquidity_providing': {
+        apy: this.defiMetrics.apy,
+        risk: 'Medium',
+        lockup: '30 days',
+        rewards: amount * 0.125 // 12.5% annual
+      },
+      'yield_farming': {
+        apy: this.defiMetrics.apy + 5,
+        risk: 'High',
+        lockup: '90 days',
+        rewards: amount * 0.175 // 17.5% annual
+      },
+      'governance_staking': {
+        apy: 8.0,
+        risk: 'Low',
+        lockup: 'Flexible',
+        rewards: amount * 0.08,
+        voting_power: Math.round(amount / 1000)
+      }
+    };
+    
+    const result = protocols[action] || protocols['governance_staking'];
+    
+    // Update metrics
+    this.defiMetrics.tvl += amount;
+    this.defiMetrics.liquidityProviders += 1;
+    
+    return {
+      transaction_hash: '0x' + Math.random().toString(16).substr(2, 64),
+      protocol: action,
+      amount: amount,
+      estimated_rewards: Math.round(result.rewards),
+      apy: result.apy,
+      status: 'confirmed',
+      ...result
     };
   }
 
@@ -341,9 +534,99 @@ async function generatePitch() {
       </div>
       
       <div style="margin-bottom: 2rem;">
-        <h5>📈 ROI Projection</h5>
-        <p>1-Year: ${pitch.roi_projection['1_year']}x | 3-Year: ${pitch.roi_projection['3_year']}x | 5-Year: ${pitch.roi_projection['5_year']}x</p>
-        <p>Confidence Level: ${pitch.roi_projection.confidence}</p>
+        <h5>🏛️ Minerva Alignment Score</h5>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="flex: 1; background: rgba(255,255,255,0.1); border-radius: 10px; height: 10px;">
+            <div style="width: ${pitch.minerva_alignment_score}%; background: linear-gradient(45deg, #00d4ff, #ff6b35); height: 100%; border-radius: 10px;"></div>
+          </div>
+          <strong>${pitch.minerva_alignment_score}%</strong>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Alignment with Minerva University's critical thinking and global citizenship values</p>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h5>🧠 Critical Thinking Integration</h5>
+        <p>${pitch.critical_thinking_integration}</p>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h5>🌍 Global Citizenship Impact</h5>
+        <p>${pitch.global_citizenship_impact}</p>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h5>⚖️ Practical Wisdom Application</h5>
+        <p>${pitch.practical_wisdom_application}</p>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h5>🚀 Minerva-Specific Funding Opportunities</h5>
+        ${pitch.minerva_funding_opportunities.map(fund => `
+          <div style="background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+              <strong>${fund.pool}</strong>
+              <span style="color: #00d4ff; font-weight: bold;">$${fund.amount.toLocaleString()}</span>
+            </div>
+            <p style="margin: 0.5rem 0; font-size: 0.9rem;">${fund.focus}</p>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.8;">
+              <span>Success Probability: ${fund.probability}%</span>
+              <span>Timeline: ${fund.timeline}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h5>🤝 Educational Equity Focus</h5>
+        <p>${pitch.educational_equity_focus}</p>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h5>📈 Enhanced ROI Projection</h5>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+          <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+            <strong>1-Year ROI</strong><br>
+            <span style="color: #00d4ff; font-size: 1.5rem;">${pitch.roi_projection['1_year']}x</span>
+            ${pitch.roi_projection.defi_yield ? `<br><small>+${pitch.roi_projection.defi_yield}% DeFi yield</small>` : ''}
+          </div>
+          <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+            <strong>3-Year ROI</strong><br>
+            <span style="color: #ff6b35; font-size: 1.5rem;">${pitch.roi_projection['3_year']}x</span>
+            ${pitch.roi_projection.minerva_aligned ? '<br><small>🏛️ Minerva aligned</small>' : ''}
+          </div>
+          <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+            <strong>5-Year ROI</strong><br>
+            <span style="color: #ffd700; font-size: 1.5rem;">${pitch.roi_projection['5_year']}x</span>
+            <br><small>Confidence: ${pitch.roi_projection.confidence}</small>
+          </div>
+        </div>
+        ${pitch.roi_projection.liquidity_rewards ? `<p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Liquidity Mining Rewards: $${pitch.roi_projection.liquidity_rewards.toLocaleString()}</p>` : ''}
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h5>🪙 Enhanced DeFi Tokenomics</h5>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+          <div style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem;">
+            <strong>Token Allocation</strong><br>
+            ${pitch.defi_tokenomics.tokens} CIVIC<br>
+            <small>Governance Rights: ${pitch.defi_tokenomics.governance}</small>
+          </div>
+          <div style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem;">
+            <strong>Staking Rewards</strong><br>
+            ${pitch.defi_tokenomics.staking_rewards} tokens<br>
+            <small>Estimated APY: ${pitch.defi_tokenomics.estimated_apy}</small>
+          </div>
+          <div style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem;">
+            <strong>Liquidity Mining</strong><br>
+            ${pitch.defi_tokenomics.liquidity_mining} tokens<br>
+            <small>Vesting: ${pitch.defi_tokenomics.vesting}</small>
+          </div>
+          <div style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem;">
+            <strong>Governance Bonus</strong><br>
+            ${pitch.defi_tokenomics.governance_bonus} tokens<br>
+            <small>Large stake holder bonus</small>
+          </div>
+        </div>
       </div>
     `;
     
