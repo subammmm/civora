@@ -861,4 +861,102 @@ function updateLastModified() {
 document.addEventListener('DOMContentLoaded', function() {
   loadSpotlightData();
   updateLastModified();
+  initializeAnalytics();
 });
+
+// Analytics tracking functions
+function initializeAnalytics() {
+  // Track form submissions
+  trackFormSubmissions();
+  // Track external link clicks
+  trackExternalLinks();
+  // Track scholarship searches
+  trackScholarshipInteractions();
+}
+
+function trackFormSubmissions() {
+  // Story submission form
+  const storyForm = document.querySelector('.story-form');
+  if (storyForm) {
+    storyForm.addEventListener('submit', function() {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'form_submit', {
+          'form_type': 'success_story',
+          'event_category': 'engagement',
+          'event_label': 'Student Story Submission'
+        });
+      }
+    });
+  }
+
+  // Contact forms
+  const contactForms = document.querySelectorAll('form[action*="formspree.io"]');
+  contactForms.forEach(form => {
+    if (!form.classList.contains('story-form')) {
+      form.addEventListener('submit', function() {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_submit', {
+            'form_type': 'contact',
+            'event_category': 'engagement',
+            'event_label': 'Contact Form'
+          });
+        }
+      });
+    }
+  });
+}
+
+function trackExternalLinks() {
+  // Track scholarship link clicks
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+    
+    const href = link.getAttribute('href');
+    if (!href) return;
+    
+    // Track external scholarship links
+    if (href.includes('http') && !href.includes(window.location.hostname)) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'click', {
+          'event_category': 'external_link',
+          'event_label': href,
+          'transport_type': 'beacon'
+        });
+      }
+    }
+  });
+}
+
+function trackScholarshipInteractions() {
+  // Track search usage
+  const searchInput = document.getElementById('q');
+  if (searchInput) {
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        if (this.value.length > 2 && typeof gtag !== 'undefined') {
+          gtag('event', 'search', {
+            'search_term': this.value,
+            'event_category': 'scholarship_search'
+          });
+        }
+      }, 1000);
+    });
+  }
+
+  // Track filter usage
+  const filterSelects = document.querySelectorAll('#country, #level');
+  filterSelects.forEach(select => {
+    select.addEventListener('change', function() {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'filter_change', {
+          'filter_type': this.id,
+          'filter_value': this.value,
+          'event_category': 'scholarship_filter'
+        });
+      }
+    });
+  });
+}
