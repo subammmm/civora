@@ -188,6 +188,34 @@ p {
   align-items: center;
 }
 
+/* Additional navbar compatibility styles for problem statement requirements */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--header-bg);
+  padding: 1rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--brand);
+}
+
 /* Support both .nav-item and .nav-link anchor classes */
 .site-nav .nav-item,
 .site-nav .nav-link{
@@ -295,6 +323,11 @@ p {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
   .site-nav.open { display: flex; }
+  
+  /* Additional mobile navbar styles from problem statement */
+  .navbar ul {
+    flex-direction: column;
+  }
 }
 
 /* Main Content Layout */
