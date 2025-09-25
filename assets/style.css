@@ -8,20 +8,27 @@
 }
 
 :root {
-  /* Linear.app Exact Color System */
-  --bg: #FFFFFF;
-  --text: #000000;
-  --text-secondary: #111111;
-  --muted: #666666;
-  --light-accent: #F5F5F5;
-  --border: #E0E0E0;
-  --brand: #1A73E8;
-  --brand-hover: #1557C0;
-  --button-bg: #1A73E8;
+  /* Dark Theme Variables - Linear.app Inspired */
+  --bg-primary: #121212; /* Dark background */
+  --bg-secondary: #1E1E1E; /* Cards/sections */
+  --text-primary: #E0E0E0; /* Main text */
+  --text-secondary: #A0A0A0; /* Subtext */
+  --accent: #BB86FC; /* Purple accents from Linear inspo */
+  --border: #333333; /* Subtle borders */
+  --shadow: 0 4px 8px rgba(0,0,0,0.2);
+  
+  /* Legacy mappings for existing styles */
+  --bg: var(--bg-primary);
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --light-accent: var(--bg-secondary);
+  --brand: var(--accent);
+  --brand-hover: #9965F4;
+  --button-bg: var(--accent);
   --button-text: #FFFFFF;
-  --button-hover: #1557C0;
-  --card-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  --subtle-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --button-hover: #9965F4;
+  --card-shadow: var(--shadow);
+  --subtle-shadow: 0 2px 6px rgba(0,0,0,0.15);
   --hover-transform: scale(1.02);
 }
 
@@ -82,6 +89,36 @@ p, body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem; /* 32px */
+}
+
+/* Card Component System - Dark Theme */
+.card {
+  background: var(--bg-secondary);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* Icon System */
+.icon {
+  margin-right: 8px;
+  color: var(--accent);
+}
+
+.icon-left {
+  margin-right: 8px;
+}
+
+.icon-right {
+  margin-left: 8px;
 }
 
 /* Skip to Content - Accessibility */
@@ -278,19 +315,20 @@ p, body {
 
 .feature-card {
   padding: 2rem; /* 32px */
-  background: var(--bg);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: var(--card-shadow);
+  box-shadow: var(--shadow);
   transition: all 0.3s ease;
 }
 
 .feature-card:hover {
   transform: var(--hover-transform);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 .feature-card h3 {
-  color: var(--brand);
+  color: var(--accent);
   margin-bottom: 1rem;
 }
 
@@ -304,35 +342,42 @@ p, body {
   margin: 1rem 0;
 }
 
-/* Table System */
+/* Table System - Dark Theme */
 .linear-table {
   width: 100%;
   border-collapse: collapse;
   margin: 2rem 0;
-  background: var(--bg);
+  background: var(--bg-secondary);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: var(--card-shadow);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
 .linear-table th {
-  background: var(--light-accent);
+  background: var(--bg-secondary);
   padding: 1rem; /* 16px */
   text-align: left;
   font-weight: 600;
   border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
 }
 
 .linear-table td {
   padding: 1rem; /* 16px */
   border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
 }
 
 .linear-table tr:hover {
-  background: #F9F9F9;
+  background: #2A2A2A;
 }
 
-/* Filter System */
+.linear-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Filter System - Dark Theme */
 .filter-section {
   display: flex;
   gap: 1rem;
@@ -341,12 +386,23 @@ p, body {
 }
 
 .filter-select {
-  padding: 0.5rem; /* 8px */
+  padding: 0.75rem; /* 12px */
   border: 1px solid var(--border);
   border-radius: 4px;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(187, 134, 252, 0.2);
+}
+
+.filter-select:hover {
+  border-color: var(--accent);
 }
 
 /* Timeline/Steps */
