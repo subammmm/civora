@@ -81,127 +81,83 @@
     </div>
   </header>
 
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+
   <div class="main-content">
-    <main class="container page">
-      <div class="contact-hero">
-        <h1>Get in touch</h1>
-        <p class="contact-subtitle">We're here to help you navigate your educational journey. Reach out with questions, suggestions, or collaboration ideas.</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-section">
-          <h2>Send us a message</h2>
-          <p>Have a question about scholarships, need help with your application, or want to suggest a new opportunity? We'd love to hear from you.</p>
-          
-          <form action="https://formspree.io/f/xldpregr" method="POST" class="contact-form">
-            <input type="hidden" name="_next" value="/thank-you.html">
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your full name" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <select id="subject" name="subject" required>
-                <option value="">Select a topic</option>
-                <option value="scholarship-question">Scholarship Question</option>
-                <option value="visa-guidance">Visa & Immigration Guidance</option>
-                <option value="technical-issue">Technical Issue</option>
-                <option value="partnership">Partnership Opportunity</option>
-                <option value="suggestion">Suggestion or Feedback</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Tell us how we can help you..." required rows="5"></textarea>
-            </div>
-            
-            <button type="submit" class="contact-submit-button">
-              <span>Send message</span>
-            </button>
-            
-            <div id="form-error" class="form-error-message" style="display: none;">
-              Something went wrong. Please try again.
-            </div>
-          </form>
+    <main id="main-content" class="container page">
+      <!-- Hero Section - Linear.app Contact Exact -->
+      <section class="hero">
+        <div class="container">
+          <h1>How Can We Help?</h1>
+          <p class="subtext">Get support, share feedback, or explore partnership opportunities.</p>
         </div>
+      </section>
 
-        <div class="contact-info">
-          <div class="contact-section">
-            <h2>Contact Founder</h2>
-            
-            <div class="contact-methods">
-              <div class="contact-method">
-                <div class="contact-icon">🔗</div>
-                <div class="contact-details">
-                  <h3>LinkedIn</h3>
-                  <p><a href="https://www.linkedin.com/in/subamdhakal" target="_blank" rel="noopener">Connect with our founder</a></p>
-                  <span>Professional networking and mentorship</span>
-                </div>
-              </div>
-              
-              <div class="contact-method">
-                <div class="contact-icon">✉️</div>
-                <div class="contact-details">
-                  <h3>Email</h3>
-                  <p><a href="mailto:subamdhakal1@gmail.com">subamdhakal1@gmail.com</a></p>
-                  <span>Direct contact with the founder</span>
-                </div>
-              </div>
+      <!-- Contact Grid - Linear.app Pattern -->
+      <section class="section">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="contact-card">
+              <h3>Support</h3>
+              <p>Questions about scholarships, application guidance, or technical issues.</p>
+              <a href="mailto:hello@civora.me" class="linear-button">Contact Support</a>
             </div>
-          </div>
-
-          <div class="contact-section">
-            <h2>Contribute to Civora</h2>
-            <p>Help us expand our database and improve our resources:</p>
             
-            <div class="contribution-options">
-              <div class="contribution-item">
-                <h3>📚 Research Volunteer</h3>
-                <p>Help verify scholarships and update deadlines</p>
-              </div>
-              
-              <div class="contribution-item">
-                <h3>🌍 Language Support</h3>
-                <p>Translate content to reach more students</p>
-              </div>
-              
-              <div class="contribution-item">
-                <h3>💡 Content Creation</h3>
-                <p>Share your success story or create helpful guides</p>
-              </div>
+            <div class="contact-card">
+              <h3>Contribute</h3>
+              <p>Share scholarship opportunities, help with research, or contribute content.</p>
+              <a href="mailto:hello@civora.me?subject=Contribution" class="linear-button">Get Involved</a>
+            </div>
+            
+            <div class="contact-card">
+              <h3>Partnership</h3>
+              <p>Organizations, universities, or educational consultants looking to collaborate.</p>
+              <a href="mailto:hello@civora.me?subject=Partnership" class="linear-button">Partner With Us</a>
+            </div>
+            
+            <div class="contact-card">
+              <h3>Feedback</h3>
+              <p>Suggestions for improvements, bug reports, or feature requests.</p>
+              <a href="mailto:hello@civora.me?subject=Feedback" class="linear-button">Send Feedback</a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Additional Contact Information -->
+      <section class="section">
+        <div class="container text-center">
+          <h2>Other Ways to Reach Us</h2>
+          <div class="margin-top-2">
+            <p class="subtext">Email: <a href="mailto:hello@civora.me" style="color: var(--brand); text-decoration: none;">hello@civora.me</a></p>
+            <p class="subtext">LinkedIn: <a href="https://linkedin.com/company/civora" target="_blank" rel="noopener" style="color: var(--brand); text-decoration: none;">linkedin.com/company/civora</a></p>
+          </div>
+          <div class="margin-top-2">
+            <p class="subtext">We typically respond within 24 hours during business days.</p>
+          </div>
+        </div>
+      </section>
     </main>
+  </div>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-info">
-          <div>© <span id="year"></span> Civora | Last updated: <span id="last-updated"></span></div>
-        </div>
-        <div class="footer-links">
-          <a href="about.html">About</a>
-          <a href="scholarships.html">Scholarships</a>
-          <a href="citizenship.html">Citizenship</a>
-          <a href="guides.html">Guides</a>
-          <a href="students-supported.html">Students & Stories</a>
-          <a href="ielts-prep.html">IELTS & Prep</a>
-          <a href="contact.html">Contact</a>
-        </div>
+  <!-- Footer - Linear.app Exact -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        © 2025 Civora
       </div>
-    </footer>
-  </div> <!-- Close main-content -->
+      <div class="footer-right">
+        <a href="privacy.html" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="https://linkedin.com/company/civora" class="social-icon" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
