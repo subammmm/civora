@@ -1599,7 +1599,7 @@ textarea:valid {
     transform: scale(0.75);
     transform-origin: top left;
     width: 133.333333333%; /* 100% / 0.75 = 133.333333333% to maintain full width */
-    min-height: 133.333333333vh; /* Adjust minimum height accordingly */
+    min-height: 100vh; /* Keep normal min-height to prevent excessive bottom space */
   }
 }
 }
