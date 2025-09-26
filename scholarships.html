@@ -26,6 +26,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
   <script defer src="assets/ai-matcher.js"></script>
@@ -99,166 +103,518 @@
   <!-- Main content area -->
   <div class="main-content">
     <main id="main-content" class="container page">
-      <!-- Hero Section - Linear.app Features Style -->
+      <!-- Hero Section - Dark Theme with Card -->
       <section class="hero">
         <div class="container">
-          <h1>Scholarship Database</h1>
-          <p class="subtext">Verified opportunities for Nepali students. Filter by country, deadline, and eligibility.</p>
+          <div class="card">
+            <h1><i class="fas fa-database icon-left" aria-hidden="true"></i>Scholarship Database</h1>
+            <p class="subtext">Verified opportunities for Nepali students. Filter by country, deadline, and eligibility.</p>
+          </div>
         </div>
       </section>
 
-      <!-- Filters Section - Linear.app Pattern -->
+      <!-- Filters Section - Dark Theme with Card -->
       <section class="section">
         <div class="container">
-          <div class="filter-section">
-            <select class="filter-select" id="country-filter">
-              <option value="">All Countries</option>
-              <option value="usa">United States</option>
-              <option value="canada">Canada</option>
-              <option value="uk">United Kingdom</option>
-              <option value="australia">Australia</option>
-              <option value="germany">Germany</option>
-              <option value="netherlands">Netherlands</option>
-            </select>
-            
-            <select class="filter-select" id="level-filter">
-              <option value="">All Levels</option>
-              <option value="undergraduate">Undergraduate</option>
-              <option value="graduate">Graduate</option>
-              <option value="phd">PhD</option>
-            </select>
-            
-            <select class="filter-select" id="field-filter">
-              <option value="">All Fields</option>
-              <option value="engineering">Engineering</option>
-              <option value="business">Business</option>
-              <option value="medicine">Medicine</option>
-              <option value="arts">Arts & Humanities</option>
-              <option value="science">Science</option>
-            </select>
-            
-            <select class="filter-select" id="deadline-filter">
-              <option value="">All Deadlines</option>
-              <option value="open">Applications Open</option>
-              <option value="closing">Closing Soon</option>
-              <option value="future">Future Deadlines</option>
+          <div class="card">
+            <div class="filter-section">
+              <select class="filter-select" id="country-filter">
+                <option value=""><i class="fas fa-globe" aria-hidden="true"></i> All Countries</option>
+                <option value="usa">United States</option>
+                <option value="canada">Canada</option>
+                <option value="uk">United Kingdom</option>
+                <option value="australia">Australia</option>
+                <option value="germany">Germany</option>
+                <option value="netherlands">Netherlands</option>
+              </select>
+              
+              <select class="filter-select" id="level-filter">
+                <option value=""><i class="fas fa-graduation-cap" aria-hidden="true"></i> All Levels</option>
+                <option value="undergraduate">Undergraduate</option>
+                <option value="graduate">Graduate</option>
+                <option value="phd">PhD</option>
+              </select>
+              
+              <select class="filter-select" id="field-filter">
+                <option value=""><i class="fas fa-book" aria-hidden="true"></i> All Fields</option>
+                <option value="engineering">Engineering</option>
+                <option value="business">Business</option>
+                <option value="medicine">Medicine</option>
+                <option value="arts">Arts & Humanities</option>
+                <option value="science">Science</option>
+              </select>
+              
+              <select class="filter-select" id="deadline-filter">
+                <option value=""><i class="fas fa-calendar" aria-hidden="true"></i> All Deadlines</option>
+                <option value="open">Applications Open</option>
+                <option value="closing">Closing Soon</option>
+                <option value="future">Future Deadlines</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
             </select>
           </div>
         </div>
       </section>
 
-      <!-- Scholarships Table - Linear.app Pattern -->
+      <!-- Scholarships Table - Dark Theme with 24 Verified Scholarships -->
       <section class="section">
         <div class="container">
-          <table class="linear-table" id="scholarships-table">
-            <thead>
-              <tr>
-                <th>Scholarship</th>
-                <th>Country</th>
-                <th>Level</th>
-                <th>Field</th>
-                <th>Deadline</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <strong>Fulbright Program</strong><br>
-                  <span class="subtext">Full funding for graduate studies</span>
-                </td>
-                <td>United States</td>
-                <td>Graduate</td>
-                <td>All Fields</td>
-                <td>
-                  <span style="color: var(--brand);">May 15, 2025</span>
-                </td>
-                <td>
-                  <a href="https://foreign.fulbrightonline.org/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Apply</a>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>
-                  <strong>DAAD Scholarships</strong><br>
-                  <span class="subtext">German Academic Exchange Service</span>
-                </td>
-                <td>Germany</td>
-                <td>Graduate</td>
-                <td>All Fields</td>
-                <td>
-                  <span style="color: var(--brand);">October 31, 2024</span>
-                </td>
-                <td>
-                  <a href="https://www.daad.de/en/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Apply</a>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>
-                  <strong>Chevening Scholarships</strong><br>
-                  <span class="subtext">UK government's global scholarship programme</span>
-                </td>
-                <td>United Kingdom</td>
-                <td>Graduate</td>
-                <td>All Fields</td>
-                <td>
-                  <span style="color: var(--brand);">November 7, 2024</span>
-                </td>
-                <td>
-                  <a href="https://www.chevening.org/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Apply</a>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>
-                  <strong>Australia Awards</strong><br>
-                  <span class="subtext">Australian Government Scholarships</span>
-                </td>
-                <td>Australia</td>
-                <td>Graduate</td>
-                <td>All Fields</td>
-                <td>
-                  <span style="color: var(--brand);">April 30, 2025</span>
-                </td>
-                <td>
-                  <a href="https://www.australiaawards.gov.au/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Apply</a>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>
-                  <strong>Vanier Canada Graduate Scholarships</strong><br>
-                  <span class="subtext">Doctoral scholarships for excellence</span>
-                </td>
-                <td>Canada</td>
-                <td>PhD</td>
-                <td>All Fields</td>
-                <td>
-                  <span style="color: var(--brand);">November 1, 2024</span>
-                </td>
-                <td>
-                  <a href="https://vanier.gc.ca/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Apply</a>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>
-                  <strong>Holland Scholarship</strong><br>
-                  <span class="subtext">For international students in the Netherlands</span>
-                </td>
-                <td>Netherlands</td>
-                <td>Undergraduate</td>
-                <td>All Fields</td>
-                <td>
-                  <span style="color: var(--brand);">February 1, 2025</span>
-                </td>
-                <td>
-                  <a href="https://www.studyinholland.nl/scholarships/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Apply</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="card">
+            <table class="linear-table" id="scholarships-table">
+              <thead>
+                <tr>
+                  <th>Scholarship</th>
+                  <th>Country</th>
+                  <th>Level</th>
+                  <th>Field</th>
+                  <th>Deadline</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Gates Cambridge Scholarships</strong><br>
+                    <span class="subtext">For international students; full funding</span>
+                  </td>
+                  <td>UK</td>
+                  <td>Masters/PhD</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Oct 15/Dec 2 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.gatescambridge.org/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Clarendon Fund Scholarships at Oxford</strong><br>
+                    <span class="subtext">Full tuition</span>
+                  </td>
+                  <td>UK</td>
+                  <td>Masters/PhD</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Dec 2 2025/Jan 8 2026</span>
+                  </td>
+                  <td>
+                    <a href="https://www.ox.ac.uk/clarendon" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>ICSP Scholarships at University of Oregon</strong><br>
+                    <span class="subtext">Partial tuition</span>
+                  </td>
+                  <td>USA</td>
+                  <td>Bachelors</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Jan 15/Feb 13 2026</span>
+                  </td>
+                  <td>
+                    <a href="https://international.uoregon.edu/icsp" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Reach Oxford Scholarships</strong><br>
+                    <span class="subtext">For developing countries</span>
+                  </td>
+                  <td>UK</td>
+                  <td>Bachelors</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Oct 15 2025/Feb 4 2026</span>
+                  </td>
+                  <td>
+                    <a href="https://www.ox.ac.uk/reach" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>International Scholars Program at UBC</strong><br>
+                    <span class="subtext">Merit-based</span>
+                  </td>
+                  <td>Canada</td>
+                  <td>Bachelors</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Nov 15/Dec 1 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://you.ubc.ca/financial-planning/scholarships-awards-international-students/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>University of Geneva Excellence Masters Fellowships</strong><br>
+                    <span class="subtext">Partial funding</span>
+                  </td>
+                  <td>Switzerland</td>
+                  <td>Masters</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Feb 28 2026</span>
+                  </td>
+                  <td>
+                    <a href="https://www.unige.ch/international/exchanges/masters-fellowship/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>American University Emerging Global Leader Scholarship</strong><br>
+                    <span class="subtext">Full tuition for leaders</span>
+                  </td>
+                  <td>USA</td>
+                  <td>Bachelors</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Jan 15 2026</span>
+                  </td>
+                  <td>
+                    <a href="https://www.american.edu/provost/undergrad/emerging-global-leader/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>East-West Center Graduate Degree Fellowship</strong><br>
+                    <span class="subtext">Full support at UH</span>
+                  </td>
+                  <td>USA (Hawaii)</td>
+                  <td>Graduate</td>
+                  <td>Relevant to EWC goals</td>
+                  <td>
+                    <span style="color: var(--accent);">Dec 1 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.eastwestcenter.org/education/student-programs/graduate-degree-fellowship" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>MPOWER Monthly Scholarship (October)</strong><br>
+                    <span class="subtext">$1,000 awards</span>
+                  </td>
+                  <td>USA/Canada</td>
+                  <td>All</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Oct 31 2025 (monthly)</span>
+                  </td>
+                  <td>
+                    <a href="https://www.mpowerfinancing.com/scholarships/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Sanima Bank Scholarship for Plus Two</strong><br>
+                    <span class="subtext">Local for Nepali students</span>
+                  </td>
+                  <td>Nepal</td>
+                  <td>Plus Two</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Oct 17 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.sanimabank.com/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Knight-Hennessy Scholars at Stanford</strong><br>
+                    <span class="subtext">Full funding</span>
+                  </td>
+                  <td>USA</td>
+                  <td>Graduate</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Oct 2025 (annual)</span>
+                  </td>
+                  <td>
+                    <a href="https://knight-hennessy.stanford.edu/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>P.E.O. International Peace Scholarship</strong><br>
+                    <span class="subtext">For women</span>
+                  </td>
+                  <td>USA</td>
+                  <td>Graduate</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Dec 15 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.peointernational.org/about-peo-international-peace-scholarship-ips" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Fulbright Foreign Student Program (2026 cycle)</strong><br>
+                    <span class="subtext">For Nepali citizens</span>
+                  </td>
+                  <td>USA</td>
+                  <td>Masters/PhD</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">April 2026 (opens early 2026)</span>
+                  </td>
+                  <td>
+                    <a href="https://foreign.fulbrightonline.org/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Hubert H. Humphrey Fellowship</strong><br>
+                    <span class="subtext">Mid-career</span>
+                  </td>
+                  <td>USA</td>
+                  <td>Professional</td>
+                  <td>Various</td>
+                  <td>
+                    <span style="color: var(--accent);">Oct 1 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.humphreyfellowship.org/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>AAUW International Fellowships</strong><br>
+                    <span class="subtext">For women</span>
+                  </td>
+                  <td>USA</td>
+                  <td>Masters/PhD</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Nov 15 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.aauw.org/resources/programs/fellowships-grants/international-fellowships/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Rotary Peace Fellowships</strong><br>
+                    <span class="subtext">Full funding</span>
+                  </td>
+                  <td>Various</td>
+                  <td>Masters</td>
+                  <td>Peace studies</td>
+                  <td>
+                    <span style="color: var(--accent);">May 15 2026 (apps open Oct)</span>
+                  </td>
+                  <td>
+                    <a href="https://www.rotary.org/en/our-programs/peace-fellowships" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Schwarzman Scholars</strong><br>
+                    <span class="subtext">Global affairs</span>
+                  </td>
+                  <td>China</td>
+                  <td>Masters</td>
+                  <td>Leadership</td>
+                  <td>
+                    <span style="color: var(--accent);">Oct 1 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.schwarzmanscholars.org/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Erasmus Mundus Joint Masters</strong><br>
+                    <span class="subtext">EU-funded</span>
+                  </td>
+                  <td>Europe</td>
+                  <td>Masters</td>
+                  <td>Various</td>
+                  <td>
+                    <span style="color: var(--accent);">Feb 2026</span>
+                  </td>
+                  <td>
+                    <a href="https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Commonwealth Scholarships</strong><br>
+                    <span class="subtext">For commonwealth</span>
+                  </td>
+                  <td>UK</td>
+                  <td>Masters/PhD</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Oct 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://cscuk.org.uk/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Vanier Canada Graduate Scholarships</strong><br>
+                    <span class="subtext">Excellence</span>
+                  </td>
+                  <td>Canada</td>
+                  <td>PhD</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Nov 1 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://vanier.gc.ca/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Australia Awards Scholarships</strong><br>
+                    <span class="subtext">For Pacific/Asia</span>
+                  </td>
+                  <td>Australia</td>
+                  <td>All</td>
+                  <td>Development</td>
+                  <td>
+                    <span style="color: var(--accent);">Feb 1 2026</span>
+                  </td>
+                  <td>
+                    <a href="https://www.australiaawards.gov.au/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>DAAD Scholarships</strong><br>
+                    <span class="subtext">Exchange</span>
+                  </td>
+                  <td>Germany</td>
+                  <td>All</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Varies Oct-Dec 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.daad.de/en/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Chevening Scholarships</strong><br>
+                    <span class="subtext">Leadership</span>
+                  </td>
+                  <td>UK</td>
+                  <td>Masters</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Nov 2025</span>
+                  </td>
+                  <td>
+                    <a href="https://www.chevening.org/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <strong>Holland Scholarship</strong><br>
+                    <span class="subtext">Non-EEA</span>
+                  </td>
+                  <td>Netherlands</td>
+                  <td>Bachelors/Masters</td>
+                  <td>All</td>
+                  <td>
+                    <span style="color: var(--accent);">Feb 1 2026</span>
+                  </td>
+                  <td>
+                    <a href="https://www.studyinholland.nl/scholarships/" target="_blank" class="linear-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                      <i class="fas fa-external-link-alt icon-left" aria-hidden="true"></i>Apply
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-secondary); border-radius: 4px; border-left: 3px solid var(--accent);">
+              <p style="color: var(--text-secondary); font-size: 0.875rem;">
+                <i class="fas fa-info-circle icon-left" aria-hidden="true"></i>
+                <strong>Disclaimer:</strong> Deadlines verified as of Sep 2025; check official sites for latest updates.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
