@@ -1656,21 +1656,3 @@ textarea:valid {
 .success {
   animation: success 0.3s ease;
 }
-
-/* Desktop Scaling - 75% scale with blank space elimination */
-@media (min-width: 769px) {
-  html {
-    overflow: hidden; /* Hide all scrollbars on html to contain scaled content */
-    height: 100vh; /* Fix the viewport height */
-    width: 100vw; /* Fix the viewport width */
-  }
-  
-  body {
-    transform: scale(0.75);
-    transform-origin: top left;
-    width: 133.333vw; /* 100vw / 0.75 = 133.333vw to compensate for scaling */
-    overflow-y: auto; /* Allow scrolling within the scaled body */
-    overflow-x: hidden; /* Hide horizontal scroll within body */
-  }
-}
-}
