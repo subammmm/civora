@@ -368,9 +368,10 @@ mark {
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  padding: 0 var(--space-8);
+  padding: 0 var(--space-12);
   max-width: var(--grid-max-width);
   margin: 0 auto;
+  position: relative;
 }
 
 /* Logo left */
@@ -382,6 +383,7 @@ mark {
   font-size: 24px;
   font-weight: 700;
   gap: var(--space-2);
+  flex-shrink: 0;
 }
 
 .brand-logo {
@@ -393,7 +395,11 @@ mark {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-8);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .nav-item {
@@ -432,6 +438,7 @@ mark {
   display: flex;
   align-items: center;
   gap: var(--space-4);
+  flex-shrink: 0;
 }
 
 .lang-select {
@@ -507,6 +514,28 @@ mark {
 @media (max-width: 768px) {
   .site-nav {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-primary);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    z-index: 200;
+    transform: none;
+  }
+  
+  .site-nav.open {
+    display: flex;
+  }
+  
+  .site-nav .nav-item {
+    font-size: 24px;
+    font-weight: 600;
+    padding: var(--space-4) 0;
   }
   
   .nav-toggle {
