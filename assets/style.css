@@ -107,7 +107,7 @@ body {
   -webkit-font-smoothing: antialiased;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  min-height: calc(100vh / 0.75); /* Adjust for 75% scaling */
   display: flex;
   flex-direction: column;
   font-size: var(--body-size);
@@ -116,9 +116,9 @@ body {
   
   /* 75% Website Scaling for Modern Clean Look */
   transform: scale(0.75);
-  transform-origin: top left;
+  transform-origin: top center;
   width: 133.33%; /* 100% / 0.75 = 133.33% to compensate for scaling */
-  margin-left: calc((100vw - 100vw * 0.75) / 2);
+  margin: 0 auto;
   position: relative;
 }
 
@@ -126,16 +126,36 @@ body {
 @media (max-width: 768px) {
   body {
     transform: scale(0.85); /* Less aggressive scaling on mobile */
+    transform-origin: top center;
     width: 117.65%; /* 100% / 0.85 = 117.65% */
-    margin-left: calc((100vw - 100vw * 0.85) / 2);
+    margin: 0 auto;
+    min-height: calc(100vh / 0.85); /* Adjust for 85% scaling */
+  }
+  
+  .main-content {
+    min-height: calc(100vh / 0.85 - 64px); /* Adjust for 85% scaling */
+  }
+  
+  .page-content {
+    min-height: calc(100vh / 0.85 - 64px - var(--space-8)); /* Adjust for 85% scaling */
   }
 }
 
 @media (max-width: 480px) {
   body {
     transform: scale(0.95); /* Even less scaling on very small screens */
+    transform-origin: top center;
     width: 105.26%; /* 100% / 0.95 = 105.26% */
-    margin-left: calc((100vw - 100vw * 0.95) / 2);
+    margin: 0 auto;
+    min-height: calc(100vh / 0.95); /* Adjust for 95% scaling */
+  }
+  
+  .main-content {
+    min-height: calc(100vh / 0.95 - 64px); /* Adjust for 95% scaling */
+  }
+  
+  .page-content {
+    min-height: calc(100vh / 0.95 - 64px - var(--space-8)); /* Adjust for 95% scaling */
   }
 }
 
@@ -626,14 +646,14 @@ mark {
 .main-content {
   flex: 1;
   margin-top: clamp(64px, 8vh, 72px); /* Header height */
-  min-height: calc(100vh - 64px); /* Ensure full viewport height minus header */
-  padding-bottom: 1rem; /* Minimal bottom padding to prevent excessive blank space */
+  min-height: calc(100vh / 0.75 - 64px); /* Adjust for 75% scaling */
+  padding-bottom: 0.5rem; /* Minimal bottom padding to prevent excessive blank space */
 }
 
 /* Page content wrapper - Add top padding to avoid header overlap */
 .page-content {
   padding-top: var(--space-8);
-  min-height: calc(100vh - 64px - var(--space-8));
+  min-height: calc(100vh / 0.75 - 64px - var(--space-8)); /* Adjust for 75% scaling */
 }
 
 /* Links - Inherit Color with Hover States */
