@@ -51,7 +51,7 @@ html, body {
   font-weight: 400;
 }
 
-/* Typography System - Exact Specification */
+/* Typography System - Complete Implementation */
 h1 {
   font-size: clamp(88px, 8vw, 96px); /* Hero H1: 88–96px */
   font-weight: 600;
@@ -76,6 +76,30 @@ h3 {
   margin-bottom: 0.5rem;
 }
 
+h4 {
+  font-size: clamp(20px, 2.5vw, 24px); /* Minor Headers: 20–24px */
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-hi);
+  margin-bottom: 0.5rem;
+}
+
+h5 {
+  font-size: clamp(16px, 2vw, 18px); /* Small Headers: 16–18px */
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-size: clamp(14px, 1.5vw, 16px); /* Micro Headers: 14–16px */
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
 p, body {
   font-size: 18px; /* Body: 18px */
   font-weight: 400;
@@ -88,6 +112,81 @@ p, body {
   font-weight: 400;
   color: var(--text-muted);
   line-height: 1.6;
+}
+
+.micro-text {
+  font-size: clamp(12px, 1.2vw, 14px); /* Micro text: 12–14px */
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Typography Utility Classes */
+/* Font Weights */
+.font-light { font-weight: 300; }
+.font-regular { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+/* Font Sizes */
+.text-xs { font-size: 12px; }
+.text-sm { font-size: 14px; }
+.text-base { font-size: 18px; }
+.text-lg { font-size: 20px; }
+.text-xl { font-size: 24px; }
+.text-2xl { font-size: 32px; }
+.text-3xl { font-size: 48px; }
+.text-4xl { font-size: 96px; }
+
+/* Line Heights */
+.leading-tight { line-height: 1.08; }
+.leading-snug { line-height: 1.15; }
+.leading-normal { line-height: 1.7; }
+.leading-relaxed { line-height: 1.8; }
+
+/* Text Colors */
+.text-hi { color: var(--text-hi); }
+.text-normal { color: var(--text); }
+.text-muted { color: var(--text-muted); }
+
+/* Text Transforms */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+/* Code and Monospace */
+code, .code {
+  font-family: 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  background: var(--surface);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+pre {
+  font-family: 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  background: var(--surface);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* Emphasis Elements */
+strong, b {
+  font-weight: 600;
+  color: var(--text-hi);
+}
+
+em, i {
+  font-style: italic;
+}
+
+mark {
+  background: rgba(255, 255, 0, 0.2);
+  padding: 1px 3px;
+  border-radius: 2px;
 }
 
 /* Global Container System - 8px Base Unit */
