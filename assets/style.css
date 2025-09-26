@@ -1466,6 +1466,27 @@ textarea:valid {
   .filter-section {
     flex-direction: column;
   }
+  
+  /* Sticky CTA buttons on mobile (bottom fixed) */
+  .mobile-cta-sticky {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: var(--space-4);
+    z-index: 100;
+    display: flex;
+    gap: var(--space-2);
+  }
+  
+  .mobile-cta-sticky .btn {
+    flex: 1;
+    justify-content: center;
+    padding: 14px 12px;
+    font-size: 14px;
+  }
 }
 
 /* Large Desktop */
