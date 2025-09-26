@@ -1669,7 +1669,6 @@ textarea:valid {
     transform: scale(0.75);
     transform-origin: top left;
     width: 133.333vw; /* 100vw / 0.75 = 133.333vw to compensate for scaling */
-    height: 133.333vh; /* 100vh / 0.75 = 133.333vh to compensate for scaling */
     overflow-y: auto; /* Allow scrolling within the scaled body */
     overflow-x: hidden; /* Hide horizontal scroll within body */
   }
