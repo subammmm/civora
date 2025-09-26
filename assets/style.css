@@ -272,6 +272,34 @@ mark {
   gap: var(--grid-gutter);
 }
 
+/* Responsive grid layouts */
+.grid-2x2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2rem;
+}
+
+.grid-3-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.grid-4-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .grid-2x2,
+  .grid-3-cols,
+  .grid-4-cols {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 .col-1 { grid-column: span 1; }
 .col-2 { grid-column: span 2; }
 .col-3 { grid-column: span 3; }
@@ -289,6 +317,24 @@ mark {
 .section {
   padding: var(--section-spacing) 0;
   margin: 0;
+}
+
+/* Reduce excessive spacing at bottom of pages */
+.page {
+  padding: 2rem 0;
+  padding-bottom: 1rem; /* Reduce bottom padding */
+}
+
+/* Reduce gaps between sections on about page */
+.about-section {
+  padding: 2rem 0; /* Reduced from default section spacing */
+}
+
+/* Footer - ensure proper spacing */
+.site-footer {
+  margin-top: 2rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
 }
 
 /* Card/Tile System - Updated with new specifications */
@@ -551,6 +597,13 @@ mark {
 .main-content {
   flex: 1;
   margin-top: clamp(64px, 8vh, 72px); /* Header height */
+  min-height: calc(100vh - 64px); /* Ensure full viewport height minus header */
+}
+
+/* Page content wrapper - Add top padding to avoid header overlap */
+.page-content {
+  padding-top: var(--space-8);
+  min-height: calc(100vh - 64px - var(--space-8));
 }
 
 /* Links - Inherit Color with Hover States */
@@ -564,6 +617,16 @@ a:hover {
   color: var(--text-hi);
   text-decoration: underline;
   text-decoration-color: var(--divider);
+}
+
+/* Better link colors in cards */
+.card a, .box a, .linear-card a, .tile a {
+  color: var(--accent);
+}
+
+.card a:hover, .box a:hover, .linear-card a:hover, .tile a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
 }
 
 /* Phase 4 - Components */

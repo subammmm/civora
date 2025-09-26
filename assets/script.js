@@ -224,6 +224,26 @@ const I18N = {
     'sch.results': '{count} result(s) shown',
 
     'cit.title': 'Citizenship & Residency Pathways',
+    'cit.intro': 'Quick pathways for Nepali students to secure permanent residency and citizenship through education and work.',
+    
+    // Additional citizenship content
+    'cit.canada_title': '🇨🇦 Canada (Easiest for Nepali Students)',
+    'cit.australia_title': '🇦🇺 Australia',
+    'cit.uk_title': '🇬🇧 UK',
+    'cit.germany_title': '🇩🇪 Germany',
+    'cit.warning_title': '⚠️ Nepal Dual Citizenship Warning',
+    
+    // Student stories content
+    'stories.title': 'Student Success Stories',
+    'stories.intro': 'Real journeys from Nepali students who transformed their dreams into reality through scholarships and international opportunities.',
+    'stories.submit_title': 'Share Your Success Story',
+    'stories.submit_intro': 'Inspire other Nepali students by sharing your scholarship and study abroad journey.',
+    
+    // IELTS content  
+    'ielts.title': 'IELTS & Test Preparation',
+    'ielts.intro': 'Proven strategies and free resources to help Nepali students achieve their target IELTS scores for international admissions.',
+    'ielts.essential_resources': 'Essential Resources',
+    'ielts.final_reminders': 'Final Reminders',
     'cit.intro': 'Navigating visas, residencies, and citizenship options can be overwhelming. This section summarizes verified pathways for Nepali students, including France’s alternance model, EU residency steps, and comparisons across regions.',
     'cit.li1': 'France Alternance → Work–study residency track from Year 2.',
     'cit.li2': 'EU Residency → Pathways through education + employment.',
