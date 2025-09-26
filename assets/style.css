@@ -114,12 +114,13 @@ body {
   line-height: calc(var(--body-line) / var(--body-size));
   font-weight: var(--body-weight);
   
-  /* 75% Website Scaling for Modern Clean Look */
+  /* 75% Website Scaling for Modern Clean Look - Improved Centering */
   transform: scale(0.75);
   transform-origin: top center;
   width: 133.33%; /* 100% / 0.75 = 133.33% to compensate for scaling */
   margin: 0 auto;
   position: relative;
+  left: calc(50% - 66.665%); /* Perfect centering for scaled content */
 }
 
 /* Adjust scaling for mobile devices to prevent issues */
@@ -130,6 +131,7 @@ body {
     width: 117.65%; /* 100% / 0.85 = 117.65% */
     margin: 0 auto;
     min-height: calc(100vh / 0.85); /* Adjust for 85% scaling */
+    left: calc(50% - 58.825%); /* Perfect centering for 85% scaled content */
   }
   
   .main-content {
@@ -148,6 +150,7 @@ body {
     width: 105.26%; /* 100% / 0.95 = 105.26% */
     margin: 0 auto;
     min-height: calc(100vh / 0.95); /* Adjust for 95% scaling */
+    left: calc(50% - 52.63%); /* Perfect centering for 95% scaled content */
   }
   
   .main-content {
