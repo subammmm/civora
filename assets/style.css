@@ -292,7 +292,7 @@ mark {
 }
 
 /* Card/Tile System - Updated with new specifications */
-.card, .linear-card, .tile {
+.card, .box, .linear-card, .tile {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
@@ -302,10 +302,20 @@ mark {
   margin-bottom: var(--space-8);
 }
 
-.card:hover, .linear-card:hover, .tile:hover {
+.card:hover, .box:hover, .linear-card:hover, .tile:hover {
   background: #1F1F22;
   border-color: #333336;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Image hover animations inside boxes */
+.card img, .box img, .linear-card img, .tile img {
+  transition: transform 300ms ease;
+}
+
+.card:hover img, .box:hover img, .linear-card:hover img, .tile:hover img {
+  transform: scale(1.03);
 }
 
 /* Icon System */
@@ -535,7 +545,7 @@ a:hover {
   align-items: center;
   gap: var(--space-2);
   padding: 12px 20px;
-  border-radius: var(--radius-card);
+  border-radius: 8px;
   background: var(--accent);
   color: var(--text-primary);
   border: none;
@@ -567,7 +577,7 @@ a:hover {
   align-items: center;
   gap: var(--space-2);
   padding: 12px 20px;
-  border-radius: var(--radius-card);
+  border-radius: 8px;
   background: transparent;
   color: var(--text-primary);
   border: 1px solid var(--border);
@@ -1386,7 +1396,7 @@ textarea:valid {
   }
   
   .section {
-    padding: clamp(48px, 8vh, 64px) 0;
+    padding: 64px 0; /* 64px vertical tablet */
   }
   
   .feature-grid {
@@ -1443,6 +1453,10 @@ textarea:valid {
 @media (max-width: 480px) {
   .container {
     padding: 0 0.75rem; /* 12px */
+  }
+  
+  .section {
+    padding: 32px 0; /* 32px vertical mobile */
   }
   
   .stats-grid {
