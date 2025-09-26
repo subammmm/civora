@@ -1580,3 +1580,14 @@ textarea:valid {
 .success {
   animation: success 0.3s ease;
 }
+
+/* Desktop Scaling - Scale website to 66% for PC and laptop displays */
+@media (min-width: 1024px) {
+  body {
+    transform: scale(0.66);
+    transform-origin: top left;
+    width: 151.515151515%; /* 100% / 0.66 = 151.515151515% to maintain full width */
+    min-height: 151.515151515vh; /* Adjust minimum height accordingly */
+  }
+}
+}
