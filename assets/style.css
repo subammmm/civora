@@ -1659,16 +1659,19 @@ textarea:valid {
 
 /* Desktop Scaling - 75% scale with blank space elimination */
 @media (min-width: 769px) {
+  html {
+    overflow: hidden; /* Hide all scrollbars on html to contain scaled content */
+    height: 100vh; /* Fix the viewport height */
+    width: 100vw; /* Fix the viewport width */
+  }
+  
   body {
     transform: scale(0.75);
     transform-origin: top left;
-    width: 133.333%; /* 100% / 0.75 = 133.333% to compensate for scaling */
-    height: 133.333%;
-  }
-  
-  /* Adjust viewport to eliminate blank space */
-  html {
-    overflow-x: hidden; /* Hide horizontal scrollbar caused by scaling */
+    width: 133.333vw; /* 100vw / 0.75 = 133.333vw to compensate for scaling */
+    height: 133.333vh; /* 100vh / 0.75 = 133.333vh to compensate for scaling */
+    overflow-y: auto; /* Allow scrolling within the scaled body */
+    overflow-x: hidden; /* Hide horizontal scroll within body */
   }
 }
 }
