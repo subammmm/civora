@@ -325,6 +325,11 @@ mark {
   padding-bottom: 1rem; /* Reduce bottom padding */
 }
 
+/* Reduce gaps between sections on about page */
+.about-section {
+  padding: 2rem 0; /* Reduced from default section spacing */
+}
+
 /* Footer - ensure proper spacing */
 .site-footer {
   margin-top: 2rem;
