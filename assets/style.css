@@ -72,7 +72,7 @@
   --container-padding-mobile: 24px;
   
   /* Section Spacing */
-  --section-spacing: 120px;
+  --section-spacing: 80px;
 
   /* Navigation */
   --nav-height: 64px;
@@ -1367,9 +1367,21 @@ textarea:valid {
 /* Contact Page Cards */
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
   margin: 2rem 0;
+}
+
+@media (max-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .contact-card {
@@ -1425,7 +1437,7 @@ textarea:valid {
   }
   
   .section {
-    padding: 64px 0; /* 64px vertical tablet */
+    padding: 48px 0; /* 48px vertical tablet - reduced from 64px */
   }
   
   .feature-grid {
@@ -1581,13 +1593,13 @@ textarea:valid {
   animation: success 0.3s ease;
 }
 
-/* Desktop Scaling - Scale website to 66% for PC and laptop displays */
+/* Desktop Scaling - Scale website to 75% for PC and laptop displays */
 @media (min-width: 1024px) {
   body {
-    transform: scale(0.66);
+    transform: scale(0.75);
     transform-origin: top left;
-    width: 151.515151515%; /* 100% / 0.66 = 151.515151515% to maintain full width */
-    min-height: 151.515151515vh; /* Adjust minimum height accordingly */
+    width: 133.333333333%; /* 100% / 0.75 = 133.333333333% to maintain full width */
+    min-height: 100vh; /* Keep normal min-height to prevent excessive bottom space */
   }
 }
 }
