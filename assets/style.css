@@ -1657,13 +1657,5 @@ textarea:valid {
   animation: success 0.3s ease;
 }
 
-/* Desktop Scaling - Scale website to 75% for PC and laptop displays */
-@media (min-width: 1024px) {
-  body {
-    transform: scale(0.75);
-    transform-origin: top left;
-    width: 133.333333333%; /* 100% / 0.75 = 133.333333333% to maintain full width */
-    min-height: 100vh; /* Keep normal min-height to prevent excessive bottom space */
-  }
-}
+/* Desktop Scaling removed - was causing excessive blank space at bottom of pages */
 }
