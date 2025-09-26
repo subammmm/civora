@@ -69,10 +69,10 @@
         <a href="scholarships.html" class="nav-item active" data-i18n="nav.scholarships">Scholarships</a>
         <a href="citizenship.html" class="nav-item" data-i18n="nav.citizenship">Citizenship</a>
         <a href="guides.html" class="nav-item" data-i18n="nav.guides">Guides</a>
-        <a href="students-supported.html" class="nav-item">Students & Stories</a>
-        <a href="ielts-prep.html" class="nav-item">IELTS & Prep</a>
+        <a href="students-supported.html" class="nav-item" data-i18n="nav.students_stories">Students & Stories</a>
+        <a href="ielts-prep.html" class="nav-item" data-i18n="nav.ielts_prep">IELTS & Prep</a>
         <a href="about.html" class="nav-item" data-i18n="nav.about">About</a>
-        <a href="contact.html" class="nav-item">Contact</a>
+        <a href="contact.html" class="nav-item" data-i18n="nav.contact">Contact</a>
       </nav>
       
       <!-- Right side controls -->
@@ -102,21 +102,15 @@
   <!-- Main content area -->
   <div class="main-content">
     <main id="main-content" class="container page">
-      <!-- Hero Section - Dark Theme with Card -->
-      <section class="hero">
+      <!-- Hero Section with Compact Layout -->
+      <section class="section" style="padding: 2rem 0;">
         <div class="container">
-          <div class="card">
-            <h1><i class="fas fa-database icon-left" aria-hidden="true"></i>Scholarship Database</h1>
-            <p class="subtext">Verified opportunities for Nepali students. Filter by country, deadline, and eligibility.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Filters Section - Dark Theme with Card -->
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <div class="filter-section">
+          <div class="card" style="margin-bottom: 2rem;">
+            <h1 data-i18n="sch.title"><i class="fas fa-database icon-left" aria-hidden="true"></i>Scholarship Database</h1>
+            <p class="subtext" data-i18n="sch.demo_intro">Verified opportunities for Nepali students. Filter by country, deadline, and eligibility.</p>
+            
+            <!-- Integrated Filters -->
+            <div class="filter-section" style="margin-top: 2rem;">
               <select class="filter-select" id="country-filter">
                 <option value=""><i class="fas fa-globe" aria-hidden="true"></i> All Countries</option>
                 <option value="usa">United States</option>
@@ -151,21 +145,13 @@
               </select>
             </div>
           </div>
-        </div>
-      </section>
-            </select>
-          </div>
-        </div>
-      </section>
 
-      <!-- Scholarships Table - Dark Theme with 24 Verified Scholarships -->
-      <section class="section">
-        <div class="container">
-          <div class="card">
+          <!-- Scholarships Table - Integrated -->
+          <div class="card" style="margin-top: 1rem;">
             <table class="linear-table" id="scholarships-table">
               <thead>
                 <tr>
-                  <th>Scholarship</th>
+                  <th data-i18n="sch.th_name">Scholarship</th>
                   <th>Country</th>
                   <th>Level</th>
                   <th>Field</th>
@@ -612,34 +598,6 @@
                 <i class="fas fa-info-circle icon-left" aria-hidden="true"></i>
                 <strong>Disclaimer:</strong> Deadlines verified as of Sep 2025; check official sites for latest updates.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Additional Resources -->
-      <section class="section">
-        <div class="container">
-          <div class="text-center margin-bottom-2">
-            <h2>Need Help with Applications?</h2>
-            <p class="subtext">Get comprehensive guides and templates to improve your success rate</p>
-          </div>
-          
-          <div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-            <div class="linear-card text-center">
-              <h3>Application Guides</h3>
-              <p>Step-by-step guides for scholarship applications</p>
-              <a href="guides.html" class="linear-button margin-top-1">View Guides</a>
-            </div>
-            <div class="linear-card text-center">
-              <h3>Success Stories</h3>
-              <p>Learn from students who won scholarships</p>
-              <a href="students-supported.html" class="linear-button margin-top-1">Read Stories</a>
-            </div>
-            <div class="linear-card text-center">
-              <h3>IELTS Preparation</h3>
-              <p>Resources to improve your test scores</p>
-              <a href="ielts-prep.html" class="linear-button margin-top-1">Start Prep</a>
             </div>
           </div>
         </div>

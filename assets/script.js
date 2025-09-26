@@ -165,7 +165,10 @@ const I18N = {
     'nav.scholarships': 'Scholarships',
     'nav.citizenship': 'Citizenship',
     'nav.guides': 'Guides',
+    'nav.students_stories': 'Students & Stories',
+    'nav.ielts_prep': 'IELTS & Prep',
     'nav.about': 'About',
+    'nav.contact': 'Contact',
 
     'footer.links.about': 'About',
     'footer.links.scholarships': 'Scholarships',
@@ -259,6 +262,60 @@ const I18N = {
     'support.contact': 'Contact us',
     'support.contact_suffix': 'for other ways to support',
     'support.volunteer': 'Volunteer to Help',
+    
+    // IELTS & Test Prep page translations
+    'ielts.title': 'IELTS & Test Preparation',
+    'ielts.intro': 'Proven strategies and free resources to help Nepali students achieve their target IELTS scores for international admissions.',
+    'ielts.essential_resources': 'Essential Resources',
+    'ielts.proven_strategies': 'Proven Strategies',
+    'ielts.time_management': 'Time Management',
+    'ielts.writing_templates': 'Writing Task 2 Templates',
+    'ielts.speaking_strategies': 'Speaking Strategies',
+    'ielts.reading_techniques': 'Reading Techniques',
+    'ielts.listening_practice': 'Listening Practice Drills',
+    'ielts.study_timeline': 'Study Timeline',
+    'ielts.nepal_tips': 'Nepal-Specific Tips',
+    'ielts.common_grammar': 'Common Grammar Issues',
+    'ielts.pronunciation_guide': 'Pronunciation Guide for Nepali Speakers',
+    'ielts.cultural_context': 'Cultural Context',
+    'ielts.final_reminders': 'Final Reminders',
+    
+    // Student Stories & Support page translations
+    'students.title': 'Students Supported & Success Stories',
+    'students.intro': 'Through Civora resources and guidance, Nepali students have successfully secured admissions and opportunities globally. Here are their inspiring journeys and the countries where they have achieved their dreams.',
+    'students.stats_helped': 'Students Helped',
+    'students.stats_countries': 'Countries Reached',
+    'students.stats_scholarships': 'Scholarships Secured',
+    'students.global_success': 'Global Success Stories',
+    'students.global_reach': 'Global Reach',
+    'students.success_stories': 'Featured Success Stories',
+    'students.share_story': 'Share Your Success Story',
+    'students.countries_success': 'Countries Where Our Students Have Succeeded',
+    
+    // Navigation elements
+    'nav.students_stories': 'Students & Stories',
+    'nav.ielts_prep': 'IELTS & Prep',
+    'nav.contact': 'Contact',
+    
+    // Footer elements
+    'footer.privacy': 'Privacy',
+    'footer.terms': 'Terms',
+    'footer.copyright': '© {year} Civora',
+    'footer.last_updated': 'Last updated: {date}',
+    
+    // Common buttons and actions
+    'btn.download': 'Download',
+    'btn.view_guides': 'View Guides',
+    'btn.read_stories': 'Read Stories',
+    'btn.start_prep': 'Start Prep',
+    'btn.explore_scholarships': 'Explore Scholarships',
+    'btn.submit': 'Submit',
+    'btn.learn_more': 'Learn More',
+    
+    // Page titles for missing pages
+    'title.students': 'Students Supported & Success Stories — Civora',
+    'title.ielts': 'IELTS & Test Prep — Civora',
+    'title.contact': 'Contact — Civora',
   },
 
   ne: {
@@ -267,7 +324,10 @@ const I18N = {
     'nav.scholarships': 'छात्रवृत्ति',
     'nav.citizenship': 'नागरिकता',
     'nav.guides': 'मार्गदर्शिका',
+    'nav.students_stories': 'विद्यार्थी र कथाहरू',
+    'nav.ielts_prep': 'IELTS र तयारी',
     'nav.about': 'बारेमा',
+    'nav.contact': 'सम्पर्क',
 
     'footer.links.about': 'बारेमा',
     'footer.links.scholarships': 'छात्रवृत्ति',
@@ -354,6 +414,60 @@ const I18N = {
     'support.contact': 'हामीलाई सम्पर्क गर्नुहोस्',
     'support.contact_suffix': 'सहयोगका अन्य तरिकाहरूका लागि',
     'support.volunteer': 'सहयोग गर्न स्वयंसेवक बन्नुहोस्',
+    
+    // IELTS & Test Prep page translations
+    'ielts.title': 'IELTS र परीक्षा तयारी',
+    'ielts.intro': 'नेपाली विद्यार्थीहरूलाई अन्तर्राष्ट्रिय भर्नाका लागि लक्षित IELTS स्कोर हासिल गर्न प्रमाणित रणनीति र निःशुल्क स्रोतहरू।',
+    'ielts.essential_resources': 'आवश्यक स्रोतहरू',
+    'ielts.proven_strategies': 'प्रमाणित रणनीतिहरू',
+    'ielts.time_management': 'समय व्यवस्थापन',
+    'ielts.writing_templates': 'लेखन कार्य २ ढाँचाहरू',
+    'ielts.speaking_strategies': 'बोलाइ रणनीतिहरू',
+    'ielts.reading_techniques': 'पढाइ प्रविधिहरू',
+    'ielts.listening_practice': 'सुनाइ अभ्यास',
+    'ielts.study_timeline': 'अध्ययन समयतालिका',
+    'ielts.nepal_tips': 'नेपाल-विशिष्ट सुझावहरू',
+    'ielts.common_grammar': 'सामान्य व्याकरणका समस्याहरू',
+    'ielts.pronunciation_guide': 'नेपाली वक्ताहरूका लागि उच्चारण गाइड',
+    'ielts.cultural_context': 'सांस्कृतिक सन्दर्भ',
+    'ielts.final_reminders': 'अन्तिम सम्झनाहरू',
+    
+    // Student Stories & Support page translations
+    'students.title': 'समर्थित विद्यार्थीहरू र सफलताका कथाहरू',
+    'students.intro': 'Civora स्रोत र मार्गदर्शनमार्फत नेपाली विद्यार्थीहरूले विश्वभरि भर्ना र अवसरहरू सुरक्षित गरेका छन्। यहाँ तिनीहरूका प्रेरणादायी यात्राहरू र सफलता पाका देशहरू छन्।',
+    'students.stats_helped': 'सहयोग प्राप्त विद्यार्थीहरू',
+    'students.stats_countries': 'पुगेका देशहरू',
+    'students.stats_scholarships': 'सुरक्षित छात्रवृत्तिहरू',
+    'students.global_success': 'विश्वव्यापी सफलताका कथाहरू',
+    'students.global_reach': 'विश्वव्यापी पहुँच',
+    'students.success_stories': 'विशेष सफलताका कथाहरू',
+    'students.share_story': 'आफ्नो सफलताको कथा साझा गर्नुहोस्',
+    'students.countries_success': 'हाम्रा विद्यार्थीहरू सफल भएका देशहरू',
+    
+    // Navigation elements
+    'nav.students_stories': 'विद्यार्थी र कथाहरू',
+    'nav.ielts_prep': 'IELTS र तयारी',
+    'nav.contact': 'सम्पर्क',
+    
+    // Footer elements
+    'footer.privacy': 'गोपनीयता',
+    'footer.terms': 'सर्तहरू',
+    'footer.copyright': '© {year} Civora',
+    'footer.last_updated': 'अन्तिम अद्यावधिक: {date}',
+    
+    // Common buttons and actions
+    'btn.download': 'डाउनलोड गर्नुहोस्',
+    'btn.view_guides': 'गाइडहरू हेर्नुहोस्',
+    'btn.read_stories': 'कथाहरू पढ्नुहोस्',
+    'btn.start_prep': 'तयारी सुरु गर्नुहोस्',
+    'btn.explore_scholarships': 'छात्रवृत्ति खोज्नुहोस्',
+    'btn.submit': 'पेश गर्नुहोस्',
+    'btn.learn_more': 'थप जान्नुहोस्',
+    
+    // Page titles for missing pages
+    'title.students': 'समर्थित विद्यार्थीहरू र सफलताका कथाहरू — Civora',
+    'title.ielts': 'IELTS र परीक्षा तयारी — Civora',
+    'title.contact': 'सम्पर्क — Civora',
   },
 
   fr: {
