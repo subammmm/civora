@@ -857,11 +857,74 @@ function updateLastModified() {
   }
 }
 
+function trackScholarshipInteractions() {
+  // Track search usage
+  const searchInput = document.getElementById('q');
+  if (searchInput) {
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        if (this.value.length > 2 && typeof gtag !== 'undefined') {
+          gtag('event', 'search', {
+            'search_term': this.value,
+            'event_category': 'scholarship_search'
+          });
+        }
+      }, 1000);
+    });
+  }
+
+  // Track filter usage
+  const filterSelects = document.querySelectorAll('#country, #level');
+  filterSelects.forEach(select => {
+    select.addEventListener('change', function() {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'filter_change', {
+          'filter_type': this.id,
+          'filter_value': this.value,
+          'event_category': 'scholarship_filter'
+        });
+      }
+    });
+  });
+}
+
+// Intersection Observer for Reveal Animations
+function initRevealAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('is-visible');
+        }, index * 90); // Stagger by 90ms
+      }
+    });
+  }, observerOptions);
+
+  // Observe all elements with .reveal class
+  document.querySelectorAll('.reveal').forEach(element => {
+    observer.observe(element);
+  });
+
+  // Auto-add reveal class to stat cards and feature cards
+  document.querySelectorAll('.stat-card, .feature-card, .timeline-step').forEach(element => {
+    element.classList.add('reveal');
+    observer.observe(element);
+  });
+}
+
 // Initialize spotlight and last modified on page load
 document.addEventListener('DOMContentLoaded', function() {
   loadSpotlightData();
   updateLastModified();
   initializeAnalytics();
+  initRevealAnimations();
 });
 
 // Analytics tracking functions
@@ -925,38 +988,5 @@ function trackExternalLinks() {
         });
       }
     }
-  });
-}
-
-function trackScholarshipInteractions() {
-  // Track search usage
-  const searchInput = document.getElementById('q');
-  if (searchInput) {
-    let searchTimeout;
-    searchInput.addEventListener('input', function() {
-      clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(() => {
-        if (this.value.length > 2 && typeof gtag !== 'undefined') {
-          gtag('event', 'search', {
-            'search_term': this.value,
-            'event_category': 'scholarship_search'
-          });
-        }
-      }, 1000);
-    });
-  }
-
-  // Track filter usage
-  const filterSelects = document.querySelectorAll('#country, #level');
-  filterSelects.forEach(select => {
-    select.addEventListener('change', function() {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'filter_change', {
-          'filter_type': this.id,
-          'filter_value': this.value,
-          'event_category': 'scholarship_filter'
-        });
-      }
-    });
   });
 }
