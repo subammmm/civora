@@ -72,7 +72,7 @@
   --container-padding-mobile: 24px;
   
   /* Section Spacing */
-  --section-spacing: 80px;
+  --section-spacing: 40px;
 
   /* Navigation */
   --nav-height: 64px;
@@ -321,19 +321,19 @@ mark {
 
 /* Reduce excessive spacing at bottom of pages */
 .page {
-  padding: 2rem 0;
-  padding-bottom: 1rem; /* Reduce bottom padding */
+  padding: 1rem 0;
+  padding-bottom: 0.5rem; /* Minimal bottom padding */
 }
 
 /* Reduce gaps between sections on about page */
 .about-section {
-  padding: 2rem 0; /* Reduced from default section spacing */
+  padding: 1.5rem 0; /* Further reduced from default section spacing */
 }
 
 /* Footer - ensure proper spacing */
 .site-footer {
-  margin-top: 2rem;
-  padding: 2rem 0;
+  margin-top: 1rem; /* Reduced from 2rem to 1rem */
+  padding: 1.5rem 0; /* Reduced from 2rem to 1.5rem */
   border-top: 1px solid var(--border);
 }
 
@@ -345,7 +345,7 @@ mark {
   padding: var(--space-6);
   box-shadow: var(--shadow-subtle);
   transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-4); /* Reduced from space-8 to space-4 (16px) */
 }
 
 .card:hover, .box:hover, .linear-card:hover, .tile:hover {
@@ -598,6 +598,7 @@ mark {
   flex: 1;
   margin-top: clamp(64px, 8vh, 72px); /* Header height */
   min-height: calc(100vh - 64px); /* Ensure full viewport height minus header */
+  padding-bottom: 1rem; /* Minimal bottom padding to prevent excessive blank space */
 }
 
 /* Page content wrapper - Add top padding to avoid header overlap */
@@ -1147,15 +1148,15 @@ textarea:valid {
 
 /* Section Spacing - 8px Base Unit System */
 .section {
-  padding: clamp(80px, 12vh, 120px) 0;
+  padding: clamp(40px, 8vh, 60px) 0; /* Reduced from 80px-120px to 40px-60px */
   margin: 0;
 }
 
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: clamp(24px, 4vw, 40px);
-  margin: 32px 0;
+  gap: clamp(16px, 3vw, 24px); /* Reduced from 24px-40px to 16px-24px */
+  margin: 24px 0; /* Reduced from 32px to 24px */
 }
 
 .feature-card {
@@ -1500,7 +1501,7 @@ textarea:valid {
   }
   
   .section {
-    padding: 48px 0; /* 48px vertical tablet - reduced from 64px */
+    padding: 32px 0; /* Reduced from 48px to 32px */
   }
   
   .feature-grid {
@@ -1560,7 +1561,7 @@ textarea:valid {
   }
   
   .section {
-    padding: 32px 0; /* 32px vertical mobile */
+    padding: 24px 0; /* Further reduced mobile vertical spacing */
   }
   
   .stats-grid {
