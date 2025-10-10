@@ -1,11 +1,13 @@
 export const metadata = {
   title: 'Privacy Policy',
   description: 'Learn about how Civora handles your data and protects your privacy.',
-}
+};
 
 export default function PrivacyPage() {
   return (
-    <div dangerouslySetInnerHTML={{ __html: `      <h1>Privacy Policy</h1>
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `      <h1>Privacy Policy</h1>
       <p className="page-intro">Last updated: <span id="last-updated"></span></p>
       
       <section>
@@ -59,6 +61,8 @@ export default function PrivacyPage() {
         <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated "Last updated" date.</p>
       </section>
     </main>
-` }} />
-  )
+`,
+      }}
+    />
+  );
 }

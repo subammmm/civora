@@ -1,11 +1,13 @@
 export const metadata = {
   title: 'IELTS & Prep Resources',
   description: 'Comprehensive IELTS preparation resources and study tips for Nepali students.',
-}
+};
 
 export default function Ielts_PrepPage() {
   return (
-    <div dangerouslySetInnerHTML={{ __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
         <h1 data-i18n="ielts.title" style="color: var(--text-primary); margin-bottom: 1rem;">IELTS Prep & Application Guides</h1>
         <p data-i18n="ielts.intro" style="color: var(--text-secondary); max-width: 800px; margin: 0 auto 3rem;">Complete preparation strategies, test resources, application guides, and templates to help Nepali students succeed in international admissions.</p>
 
@@ -421,6 +423,8 @@ Conclusion:
 
       </div>
     </main>
-` }} />
-  )
+`,
+      }}
+    />
+  );
 }

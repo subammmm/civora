@@ -1,11 +1,13 @@
 export const metadata = {
   title: 'Roadmap',
   description: 'Our vision and upcoming features for Civora.',
-}
+};
 
 export default function RoadmapPage() {
   return (
-    <div dangerouslySetInnerHTML={{ __html: `      <h1>Roadmap & Future Plans</h1>
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `      <h1>Roadmap & Future Plans</h1>
       <p className="page-intro">Our vision for expanding Civora into a comprehensive global mobility platform, with transparent timelines and community-driven development priorities.</p>
       
       <section className="roadmap-vision">
@@ -236,6 +238,8 @@ export default function RoadmapPage() {
       </section>
 
     </main>
-` }} />
-  )
+`,
+      }}
+    />
+  );
 }

@@ -1,0 +1,39 @@
+# Dependencies
+node_modules
+
+# Build output
+.next
+out
+build
+dist
+
+# Legacy files
+legacy
+
+# Git
+.git
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs
+*.log
+
+# Environment files
+.env*
+
+# IDE
+.vscode
+.idea
+
+# Public assets (already formatted)
+public/assets
+
+# Root HTML files (not part of Next.js app)
+*.html
+
+# Legacy asset files with syntax issues
+assets/accessibility-nexus.js
+assets/knowledge-graph.js

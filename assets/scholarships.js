@@ -9,9 +9,9 @@ class ScholarshipFilter {
       countrySelect: document.getElementById('country'),
       levelSelect: document.getElementById('level'),
       fullFundedCheckbox: document.getElementById('full'),
-      resultsNote: document.getElementById('resultsNote')
+      resultsNote: document.getElementById('resultsNote'),
     };
-    
+
     this.init();
   }
 
@@ -40,9 +40,30 @@ class ScholarshipFilter {
       console.warn('Failed to load external data, using fallback data');
       // Fallback data in case the JSON file fails to load
       this.data = [
-        { name: 'Eiffel Excellence Scholarship', country: 'France', level: "Master's", funding: 'Fully funded ($1,200/month + tuition)', deadline: 'Jan 8, 2025', url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence' },
-        { name: 'DAAD Development-Related Postgraduate Courses (EPOS)', country: 'Germany', level: "Master's", funding: 'Fully funded (€850/month + tuition)', deadline: 'Aug 31, 2025', url: 'https://www.daad.de/en/study-and-research-in-germany/scholarships/epos/' },
-        { name: 'Korean Government Scholarship Program (KGSP)', country: 'South Korea', level: "Bachelor's / Master's / PhD", funding: 'Fully funded (1.3M KRW/month + tuition)', deadline: 'Mar 31, 2025', url: 'https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do' }
+        {
+          name: 'Eiffel Excellence Scholarship',
+          country: 'France',
+          level: "Master's",
+          funding: 'Fully funded ($1,200/month + tuition)',
+          deadline: 'Jan 8, 2025',
+          url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence',
+        },
+        {
+          name: 'DAAD Development-Related Postgraduate Courses (EPOS)',
+          country: 'Germany',
+          level: "Master's",
+          funding: 'Fully funded (€850/month + tuition)',
+          deadline: 'Aug 31, 2025',
+          url: 'https://www.daad.de/en/study-and-research-in-germany/scholarships/epos/',
+        },
+        {
+          name: 'Korean Government Scholarship Program (KGSP)',
+          country: 'South Korea',
+          level: "Bachelor's / Master's / PhD",
+          funding: 'Fully funded (1.3M KRW/month + tuition)',
+          deadline: 'Mar 31, 2025',
+          url: 'https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do',
+        },
       ];
       this.filteredData = [...this.data];
     }
@@ -50,23 +71,29 @@ class ScholarshipFilter {
 
   setupFilters() {
     // Ensure all filter elements exist
-    if (!this.elements.tbody || !this.elements.searchInput || !this.elements.countrySelect || 
-        !this.elements.levelSelect || !this.elements.fullFundedCheckbox || !this.elements.resultsNote) {
+    if (
+      !this.elements.tbody ||
+      !this.elements.searchInput ||
+      !this.elements.countrySelect ||
+      !this.elements.levelSelect ||
+      !this.elements.fullFundedCheckbox ||
+      !this.elements.resultsNote
+    ) {
       throw new Error('Required filter elements not found');
     }
   }
 
   populateCountryOptions() {
     // Get unique countries and sort them
-    const countries = [...new Set(this.data.map(item => item.country))].sort();
-    
+    const countries = [...new Set(this.data.map((item) => item.country))].sort();
+
     // Clear existing options (except the first "All countries" option)
     while (this.elements.countrySelect.children.length > 1) {
       this.elements.countrySelect.removeChild(this.elements.countrySelect.lastChild);
     }
-    
+
     // Add country options
-    countries.forEach(country => {
+    countries.forEach((country) => {
       const option = document.createElement('option');
       option.value = country;
       option.textContent = country;
@@ -81,14 +108,15 @@ class ScholarshipFilter {
     const fullFundedOnly = this.elements.fullFundedCheckbox.checked;
 
     // Text search in name and country
-    const textMatch = !searchTerm || 
-      item.name.toLowerCase().includes(searchTerm) || 
+    const textMatch =
+      !searchTerm ||
+      item.name.toLowerCase().includes(searchTerm) ||
       item.country.toLowerCase().includes(searchTerm);
 
     // Country filter
     const countryMatch = !selectedCountry || item.country === selectedCountry;
 
-    // Level filter  
+    // Level filter
     const levelMatch = !selectedLevel || item.level.includes(selectedLevel);
 
     // Funding filter
@@ -98,9 +126,11 @@ class ScholarshipFilter {
   }
 
   render() {
-    this.filteredData = this.data.filter(item => this.matches(item));
-    
-    const rows = this.filteredData.map(item => `
+    this.filteredData = this.data.filter((item) => this.matches(item));
+
+    const rows = this.filteredData
+      .map(
+        (item) => `
       <tr>
         <td>
           <a href="${this.escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">
@@ -112,10 +142,12 @@ class ScholarshipFilter {
         <td><span class="badge">${this.escapeHtml(item.funding)}</span></td>
         <td>${this.escapeHtml(item.deadline)}</td>
       </tr>
-    `).join('');
+    `,
+      )
+      .join('');
 
     this.elements.tbody.innerHTML = rows;
-    
+
     // Update results note
     const count = this.filteredData.length;
     this.elements.resultsNote.textContent = `${count} result${count === 1 ? '' : 's'} shown`;

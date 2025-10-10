@@ -1,11 +1,13 @@
 export const metadata = {
   title: 'Blog & Updates',
   description: 'Insights, tips, and the latest developments in global education.',
-}
+};
 
 export default function BlogPage() {
   return (
-    <div dangerouslySetInnerHTML={{ __html: `      <h1>Blog & Updates</h1>
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `      <h1>Blog & Updates</h1>
       <p className="page-intro">Insights, tips, and the latest developments in global education. Stay informed about new scholarship opportunities, policy changes, and success strategies for international students.</p>
       
       <section className="blog-featured">
@@ -157,6 +159,8 @@ export default function BlogPage() {
       </section>
 
     </main>
-` }} />
-  )
+`,
+      }}
+    />
+  );
 }
