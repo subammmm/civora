@@ -90,6 +90,43 @@ To test site performance, run these checks:
    - [ ] Hover effects are smooth
    - [ ] No layout shift on page load
 
+### Page Scaling Testing (75% Scale)
+
+The site uses a 75% scale transform for better content density on desktop devices. To test:
+
+1. **Browser DevTools Testing**
+   ```bash
+   # Open Chrome DevTools (F12)
+   # Console tab - check for viewport logging:
+   #   "Viewport Before Scaling"
+   #   "Viewport After Scaling"
+   #   "Scaling Applied: Yes"
+   ```
+
+2. **Visual Testing Checklist**
+   - [ ] Desktop: Page appears 75% of original size
+   - [ ] Desktop: No extra black space at bottom
+   - [ ] Desktop: No horizontal scrollbar
+   - [ ] Desktop: All content visible and accessible
+   - [ ] Mobile (≤768px): Scaling disabled (full size)
+   - [ ] Mobile: No zoom issues
+   - [ ] Mobile: No overflow or clipping
+   - [ ] Tablet: Test at 768px breakpoint
+
+3. **Performance Validation**
+   ```bash
+   # Check for transform performance
+   # DevTools → Performance tab → Record page load
+   # Look for smooth rendering without lag
+   ```
+
+4. **Cross-browser Testing**
+   - [ ] Chrome/Edge (Chromium)
+   - [ ] Firefox
+   - [ ] Safari (if available)
+   - [ ] Mobile browsers (Chrome Mobile, Safari iOS)
+
+**Note:** The wrapper scaling uses `will-change: transform` for optimized performance and is disabled on mobile devices (max-width: 768px) to prevent zoom issues.
 ### Scholarship Filtering System
 
 The scholarships page includes a dynamic filtering system that allows users to filter scholarships by country, level, field, and deadline.
