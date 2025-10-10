@@ -148,9 +148,14 @@
 
           <!-- Scholarships Table - Integrated -->
           <div class="card" style="margin-top: 1rem;">
+            <div id="no-results-message" class="hidden" style="text-align: center; padding: 3rem; color: var(--text-secondary);">
+              <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+              <h3>No scholarships match your criteria</h3>
+              <p>Try adjusting your filters or <button id="reset-filters-btn" class="linear-button" style="display: inline-block; margin-top: 1rem;">Reset All Filters</button></p>
+            </div>
             <table class="linear-table" id="scholarships-table">
               <thead>
-                <tr>
+                <tr class="scholarship-item" data-country="other" data-level="undergraduate" data-field="all" data-deadline="open">
                   <th data-i18n="sch.th_name">Scholarship</th>
                   <th>Country</th>
                   <th>Level</th>
@@ -159,8 +164,8 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
+              <tbody id="scholarships-tbody">
+                <tr class="scholarship-item" data-country="uk" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Gates Cambridge Scholarships</strong><br>
                     <span class="subtext">For international students; full funding</span>
@@ -178,7 +183,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="uk" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Clarendon Fund Scholarships at Oxford</strong><br>
                     <span class="subtext">Full tuition</span>
@@ -196,7 +201,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="undergraduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>ICSP Scholarships at University of Oregon</strong><br>
                     <span class="subtext">Partial tuition</span>
@@ -214,7 +219,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="uk" data-level="undergraduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Reach Oxford Scholarships</strong><br>
                     <span class="subtext">For developing countries</span>
@@ -232,7 +237,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="canada" data-level="undergraduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>International Scholars Program at UBC</strong><br>
                     <span class="subtext">Merit-based</span>
@@ -250,7 +255,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="switzerland" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>University of Geneva Excellence Masters Fellowships</strong><br>
                     <span class="subtext">Partial funding</span>
@@ -268,7 +273,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="undergraduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>American University Emerging Global Leader Scholarship</strong><br>
                     <span class="subtext">Full tuition for leaders</span>
@@ -286,7 +291,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>East-West Center Graduate Degree Fellowship</strong><br>
                     <span class="subtext">Full support at UH</span>
@@ -304,7 +309,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="undergraduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>MPOWER Monthly Scholarship (October)</strong><br>
                     <span class="subtext">$1,000 awards</span>
@@ -322,7 +327,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="nepal" data-level="undergraduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Sanima Bank Scholarship for Plus Two</strong><br>
                     <span class="subtext">Local for Nepali students</span>
@@ -340,7 +345,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Knight-Hennessy Scholars at Stanford</strong><br>
                     <span class="subtext">Full funding</span>
@@ -358,7 +363,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>P.E.O. International Peace Scholarship</strong><br>
                     <span class="subtext">For women</span>
@@ -376,7 +381,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Fulbright Foreign Student Program (2026 cycle)</strong><br>
                     <span class="subtext">For Nepali citizens</span>
@@ -394,7 +399,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Hubert H. Humphrey Fellowship</strong><br>
                     <span class="subtext">Mid-career</span>
@@ -412,7 +417,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="usa" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>AAUW International Fellowships</strong><br>
                     <span class="subtext">For women</span>
@@ -430,7 +435,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="other" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Rotary Peace Fellowships</strong><br>
                     <span class="subtext">Full funding</span>
@@ -448,7 +453,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="china" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Schwarzman Scholars</strong><br>
                     <span class="subtext">Global affairs</span>
@@ -466,7 +471,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="europe" data-level="graduate" data-field="all" data-deadline="future">
                   <td>
                     <strong>Erasmus Mundus Joint Masters</strong><br>
                     <span class="subtext">EU-funded</span>
@@ -484,7 +489,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="uk" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Commonwealth Scholarships</strong><br>
                     <span class="subtext">For commonwealth</span>
@@ -502,7 +507,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="canada" data-level="phd" data-field="all" data-deadline="open">
                   <td>
                     <strong>Vanier Canada Graduate Scholarships</strong><br>
                     <span class="subtext">Excellence</span>
@@ -520,7 +525,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="australia" data-level="undergraduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Australia Awards Scholarships</strong><br>
                     <span class="subtext">For Pacific/Asia</span>
@@ -538,7 +543,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="germany" data-level="undergraduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>DAAD Scholarships</strong><br>
                     <span class="subtext">Exchange</span>
@@ -556,7 +561,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="uk" data-level="graduate" data-field="all" data-deadline="open">
                   <td>
                     <strong>Chevening Scholarships</strong><br>
                     <span class="subtext">Leadership</span>
@@ -574,7 +579,7 @@
                   </td>
                 </tr>
                 
-                <tr>
+                <tr class="scholarship-item" data-country="netherlands" data-level="undergraduate" data-field="all" data-deadline="future">
                   <td>
                     <strong>Holland Scholarship</strong><br>
                     <span class="subtext">Non-EEA</span>
