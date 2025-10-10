@@ -1,5 +1,7 @@
 # 🌍 Civora
 
+> **Note**: This project is a Next.js 14 App Router application with static export for GitHub Pages deployment. Legacy static HTML files have been archived to `legacy/` directory to avoid duplication - the Next.js app under `app/` is the single source of truth for all active pages.
+
 Civora is a research-based platform that compiles verified scholarships, visa pathways, and citizenship options for students from Nepal and other underrepresented countries.
 
 **Now built with Next.js 14!** 🚀
@@ -7,15 +9,16 @@ Civora is a research-based platform that compiles verified scholarships, visa pa
 ## Technology Stack
 
 - **Framework**: Next.js 14 (App Router)
-- **Language**: JavaScript
+- **Language**: JavaScript (with TypeScript support)
 - **Styling**: CSS (preserved from original site)
-- **Deployment**: GitHub Pages (static export)
+- **Deployment**: GitHub Pages (static export via CI/CD)
 - **Domain**: civora.me
+- **Quality Tools**: ESLint, Prettier, TypeScript type-checking
 
 ## Local Development
 
 ### Prerequisites
-- Node.js 18 or higher
+- Node.js 18.17.0 or higher (Node 20 recommended - see `.nvmrc`)
 - npm
 
 ### Development Server
@@ -29,6 +32,22 @@ npm run dev
 # Open http://localhost:3000/
 ```
 
+### Quality Checks
+
+```bash
+# Run ESLint
+npm run lint
+
+# Type check
+npm run type-check
+
+# Format check
+npm run format
+
+# Auto-format code
+npm run format:write
+```
+
 ### Production Build
 
 ```bash
@@ -40,6 +59,14 @@ cd out
 python3 -m http.server 8080
 # Open http://localhost:8080/
 ```
+
+## CI/CD
+
+The project uses GitHub Actions for continuous integration and deployment:
+
+- **CI Workflow** (`.github/workflows/ci.yml`): Runs lint and type-check on all pushes and PRs to main
+- **Deploy Workflow** (`.github/workflows/nextjs-deploy.yml`): Automatically builds and deploys to GitHub Pages on push to main
+- **Dependabot**: Automatically opens PRs for dependency updates weekly
 
 ## Live Site
 
@@ -62,10 +89,18 @@ civora/
 │   ├── CNAME             # Custom domain config
 │   ├── manifest.webmanifest
 │   └── robots.txt
+├── legacy/                # Archived static HTML files (not deployed)
 ├── next.config.js        # Next.js configuration
+├── tsconfig.json         # TypeScript configuration
+├── .eslintrc.json        # ESLint configuration
+├── .prettierrc           # Prettier configuration
+├── .nvmrc                # Node version (20)
 ├── package.json          # Dependencies
-└── .github/workflows/    # GitHub Actions for deployment
-    └── nextjs-deploy.yml
+└── .github/
+    ├── workflows/        # GitHub Actions
+    │   ├── ci.yml        # CI checks (lint, type-check)
+    │   └── nextjs-deploy.yml  # Deployment
+    └── dependabot.yml    # Automated dependency updates
 ```
 
 ## Next.js Configuration
@@ -382,6 +417,17 @@ This site was migrated from static HTML/CSS/JS to Next.js 14 in October 2024. Th
 - Optimized performance with Next.js
 - Automated deployment via GitHub Actions
 - Type-safe routing with App Router
+- CI/CD with automated quality checks
+- TypeScript support and type checking
+- Code formatting with Prettier
+- Linting with ESLint
 
-The original HTML files are kept in the repository for reference during the transition period.
+### Legacy HTML Files
+
+The original static HTML files have been moved to the `legacy/` directory to avoid confusion and content duplication. These files are:
+- **Not deployed** to GitHub Pages (only the Next.js build output in `out/` is deployed)
+- **Preserved for reference** in case rollback is needed
+- **Not maintained** - all updates should be made to the Next.js app under `app/`
+
+The Next.js app under `app/` is the single source of truth for all active pages.
 - No errors will appear in the console
