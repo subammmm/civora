@@ -1,13 +1,11 @@
 export const metadata = {
   title: 'Citizenship & Residency Pathways',
   description: 'Explore citizenship and visa options for Nepali students studying abroad.',
-};
+}
 
 export default function CitizenshipPage() {
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <div dangerouslySetInnerHTML={{ __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
         <h1 data-i18n="cit.title" style="margin-bottom: 1rem; color: var(--text-primary);">Citizenship & Tax Residency</h1>
         <p data-i18n="cit.intro" style="margin-bottom: 2rem; color: var(--text-secondary); max-width: 800px; margin-left: auto; margin-right: auto;">Comprehensive guide to citizenship pathways and strategic tax residency options for Nepali students. Understanding both citizenship routes and tax optimization strategies can significantly impact your long-term financial and mobility planning when studying abroad.</p>
 
@@ -607,8 +605,6 @@ export default function CitizenshipPage() {
     </blockquote>
     </div>
   </main>
-`,
-      }}
-    />
-  );
+` }} />
+  )
 }

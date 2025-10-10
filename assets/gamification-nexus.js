@@ -13,62 +13,50 @@ class GalacticGamificationNexus {
       questsCompleted: 23,
       achievements: new Set(['dragon_slayer', 'scholar', 'funded']),
       currentQuest: null,
-      location: 'nepal',
+      location: 'nepal'
     };
-
+    
     this.dragonHealth = 100;
     this.battleActive = false;
-
+    
     this.quests = new Map([
-      [
-        'visa-dragon',
-        {
-          name: 'Slay the Visa Dragon',
-          type: 'legendary',
-          reward: { scholarship: 'Fulbright', amount: 50000 },
-          steps: ['requirements', 'documents', 'interview', 'financial', 'language', 'apply'],
-          completedSteps: [],
-        },
-      ],
-      [
-        'scholarship-hunt',
-        {
-          name: 'The Great Scholarship Hunt',
-          type: 'epic',
-          reward: { scholarship: 'DAAD', amount: 35000 },
-          steps: ['research', 'filter', 'match', 'apply'],
-          completedSteps: [],
-        },
-      ],
-      [
-        'network-builder',
-        {
-          name: 'Network Builder',
-          type: 'common',
-          reward: { xp: 1000, badge: 'Social Butterfly' },
-          steps: ['connect', 'engage', 'collaborate'],
-          completedSteps: [],
-        },
-      ],
-      [
-        'funding-quest',
-        {
-          name: 'Quantum Funding Challenge',
-          type: 'epic',
-          reward: { grant: 25000, title: 'Entrepreneur' },
-          steps: ['pitch', 'present', 'fund'],
-          completedSteps: [],
-        },
-      ],
+      ['visa-dragon', {
+        name: 'Slay the Visa Dragon',
+        type: 'legendary',
+        reward: { scholarship: 'Fulbright', amount: 50000 },
+        steps: ['requirements', 'documents', 'interview', 'financial', 'language', 'apply'],
+        completedSteps: []
+      }],
+      ['scholarship-hunt', {
+        name: 'The Great Scholarship Hunt',
+        type: 'epic',
+        reward: { scholarship: 'DAAD', amount: 35000 },
+        steps: ['research', 'filter', 'match', 'apply'],
+        completedSteps: []
+      }],
+      ['network-builder', {
+        name: 'Network Builder',
+        type: 'common',
+        reward: { xp: 1000, badge: 'Social Butterfly' },
+        steps: ['connect', 'engage', 'collaborate'],
+        completedSteps: []
+      }],
+      ['funding-quest', {
+        name: 'Quantum Funding Challenge',
+        type: 'epic',
+        reward: { grant: 25000, title: 'Entrepreneur' },
+        steps: ['pitch', 'present', 'fund'],
+        completedSteps: []
+      }]
     ]);
-
+    
     this.leaderboard = [
       { name: 'ScholarMaster2024', xp: 127500, title: 'G20 Education Advisor', rank: 1 },
       { name: 'VisionaryVoyager', xp: 98750, title: 'G20 Youth Representative', rank: 2 },
       { name: 'QuestSeeker', xp: 87230, title: 'Dragon Slayer Elite', rank: 3 },
-      { name: 'You', xp: 65847, title: 'Rising Star', rank: 4 },
+      { name: 'You', xp: 65847, title: 'Rising Star', rank: 4 }
     ];
-
+    
     this.proceduralEvents = [
       'Generating new scholarship dungeons...',
       'Spawning visa pathway challenges...',
@@ -77,9 +65,9 @@ class GalacticGamificationNexus {
       'Legendary quest chain discovered!',
       'G20 summit preparation event active...',
       'Quantum entanglement detected between players...',
-      'New funding opportunities materialized...',
+      'New funding opportunities materialized...'
     ];
-
+    
     this.init();
   }
 
@@ -89,13 +77,13 @@ class GalacticGamificationNexus {
     this.initializeWorldMap();
     this.updatePlayerStats();
     this.checkG20Eligibility();
-
+    
     console.log('🎮 Galactic Gamification Nexus initialized');
   }
 
   setupEventListeners() {
     // World map locations
-    document.querySelectorAll('.world-location').forEach((location) => {
+    document.querySelectorAll('.world-location').forEach(location => {
       location.addEventListener('click', (e) => {
         this.travelToLocation(e.currentTarget.dataset.location);
       });
@@ -128,10 +116,10 @@ class GalacticGamificationNexus {
 
     const timestamp = new Date().toLocaleTimeString();
     const entry = `[${timestamp}] > ${message}\n`;
-
+    
     logElement.textContent += entry;
     logElement.scrollTop = logElement.scrollHeight;
-
+    
     // Keep only last 20 entries
     const lines = logElement.textContent.split('\n');
     if (lines.length > 20) {
@@ -141,7 +129,7 @@ class GalacticGamificationNexus {
 
   initializeWorldMap() {
     // Add dynamic effects to world locations
-    document.querySelectorAll('.world-location').forEach((location) => {
+    document.querySelectorAll('.world-location').forEach(location => {
       // Add pulsing effect for available locations
       if (!location.classList.contains('completed')) {
         setInterval(() => {
@@ -158,27 +146,27 @@ class GalacticGamificationNexus {
 
   travelToLocation(locationId) {
     console.log(`🚀 Traveling to ${locationId}`);
-
+    
     const location = document.querySelector(`[data-location="${locationId}"]`);
     if (!location) return;
-
+    
     this.player.location = locationId;
-
+    
     // Visual travel effect
     location.style.transform = 'scale(1.5)';
     location.style.boxShadow = '0 0 30px rgba(0, 212, 255, 1)';
-
+    
     setTimeout(() => {
       location.style.transform = '';
       location.style.boxShadow = '';
     }, 1000);
-
+    
     // Generate location-specific content
     this.generateLocationContent(locationId);
-
+    
     // Award XP for exploration
     this.awardXP(500, 'Location Discovery');
-
+    
     this.addLogEntry(`Player traveled to ${locationId.toUpperCase()}`);
   }
 
@@ -187,25 +175,25 @@ class GalacticGamificationNexus {
       nepal: {
         quests: ['cultural-ambassador', 'language-preservation'],
         scholarships: ['Nepal Government Scholarship'],
-        npcs: ['Local Education Officer', 'Cultural Guide'],
+        npcs: ['Local Education Officer', 'Cultural Guide']
       },
       usa: {
         quests: ['innovation-challenge', 'startup-bootcamp'],
         scholarships: ['Fulbright Program', 'USAID Scholarship'],
-        npcs: ['University Counselor', 'Tech Entrepreneur'],
+        npcs: ['University Counselor', 'Tech Entrepreneur']
       },
       uk: {
         quests: ['academic-excellence', 'research-collaboration'],
         scholarships: ['Chevening Scholarship', 'Commonwealth Scholarship'],
-        npcs: ['Oxford Professor', 'Cambridge Researcher'],
+        npcs: ['Oxford Professor', 'Cambridge Researcher']
       },
       germany: {
         quests: ['engineering-mastery', 'renewable-energy'],
         scholarships: ['DAAD Scholarship', 'Heinrich Böll Foundation'],
-        npcs: ['German Engineer', 'Research Scientist'],
-      },
+        npcs: ['German Engineer', 'Research Scientist']
+      }
     };
-
+    
     const data = locationData[locationId];
     if (data) {
       console.log(`📍 Location: ${locationId}`);
@@ -222,30 +210,29 @@ class GalacticGamificationNexus {
         name: 'Academic Achievement Challenge',
         type: 'rare',
         description: 'Maintain a 3.8+ GPA for one semester',
-        reward: { xp: 2000, scholarship: 'Merit Scholarship' },
+        reward: { xp: 2000, scholarship: 'Merit Scholarship' }
       },
       {
         name: 'Community Service Marathon',
         type: 'common',
         description: 'Complete 100 hours of community service',
-        reward: { xp: 1500, badge: 'Community Hero' },
+        reward: { xp: 1500, badge: 'Community Hero' }
       },
       {
         name: 'Innovation Hackathon',
         type: 'epic',
         description: 'Win a technology hackathon competition',
-        reward: { xp: 5000, scholarship: 'Tech Innovation Grant' },
+        reward: { xp: 5000, scholarship: 'Tech Innovation Grant' }
       },
       {
         name: 'Global Leadership Summit',
         type: 'legendary',
         description: 'Represent your country at an international summit',
-        reward: { xp: 10000, title: 'Global Ambassador', g20_points: 50 },
-      },
+        reward: { xp: 10000, title: 'Global Ambassador', g20_points: 50 }
+      }
     ];
-
-    if (Math.random() < 0.1) {
-      // 10% chance
+    
+    if (Math.random() < 0.1) { // 10% chance
       const template = questTemplates[Math.floor(Math.random() * questTemplates.length)];
       this.addLogEntry(`New ${template.type.toUpperCase()} quest discovered: ${template.name}`);
       console.log('🎯 New quest generated:', template);
@@ -255,26 +242,26 @@ class GalacticGamificationNexus {
   awardXP(amount, reason) {
     this.player.xp += amount;
     this.updatePlayerStats();
-
+    
     // Check for level up
     const newLevel = Math.floor(this.player.xp / 1000) + 1;
     if (newLevel > this.player.level) {
       this.levelUp(newLevel);
     }
-
+    
     console.log(`⭐ +${amount} XP awarded for: ${reason}`);
   }
 
   levelUp(newLevel) {
     const oldLevel = this.player.level;
     this.player.level = newLevel;
-
+    
     // Level up effects
     this.showLevelUpEffect(oldLevel, newLevel);
-
+    
     // Unlock new features based on level
     this.checkLevelUnlocks(newLevel);
-
+    
     this.addLogEntry(`LEVEL UP! ${oldLevel} → ${newLevel}`);
   }
 
@@ -296,19 +283,19 @@ class GalacticGamificationNexus {
       text-align: center;
       animation: levelUpPulse 3s ease-in-out;
     `;
-
+    
     notification.innerHTML = `
       <div style="font-size: 2rem; margin-bottom: 1rem;">🎉</div>
       <div>LEVEL UP!</div>
       <div style="font-size: 1.2rem; margin-top: 0.5rem;">${oldLevel} → ${newLevel}</div>
     `;
-
+    
     document.body.appendChild(notification);
-
+    
     setTimeout(() => {
       document.body.removeChild(notification);
     }, 3000);
-
+    
     // Add CSS animation
     const style = document.createElement('style');
     style.textContent = `
@@ -326,9 +313,9 @@ class GalacticGamificationNexus {
       25: { feature: 'Mentor System', description: 'Become a mentor for new players' },
       50: { feature: 'G20 Candidate', description: 'Eligible for G20 advisor selection' },
       75: { feature: 'Legendary Quests', description: 'Access to world-changing quests' },
-      100: { feature: 'Game Master', description: 'Create quests for other players' },
+      100: { feature: 'Game Master', description: 'Create quests for other players' }
     };
-
+    
     if (unlocks[level]) {
       const unlock = unlocks[level];
       console.log(`🔓 Feature unlocked: ${unlock.feature} - ${unlock.description}`);
@@ -351,9 +338,9 @@ class GalacticGamificationNexus {
       playerLevel: this.player.level,
       playerXP: this.player.xp.toLocaleString(),
       scholarshipsEarned: this.player.scholarshipsEarned,
-      questsCompleted: this.player.questsCompleted,
+      questsCompleted: this.player.questsCompleted
     };
-
+    
     Object.entries(elements).forEach(([id, value]) => {
       const element = document.getElementById(id);
       if (element) {
@@ -364,14 +351,11 @@ class GalacticGamificationNexus {
 
   savePlayerProgress() {
     try {
-      localStorage.setItem(
-        'civora_player_progress',
-        JSON.stringify({
-          ...this.player,
-          achievements: Array.from(this.player.achievements),
-          lastSaved: Date.now(),
-        }),
-      );
+      localStorage.setItem('civora_player_progress', JSON.stringify({
+        ...this.player,
+        achievements: Array.from(this.player.achievements),
+        lastSaved: Date.now()
+      }));
     } catch (error) {
       console.warn('Failed to save player progress:', error);
     }
@@ -385,7 +369,7 @@ class GalacticGamificationNexus {
         this.player = {
           ...this.player,
           ...data,
-          achievements: new Set(data.achievements || []),
+          achievements: new Set(data.achievements || [])
         };
         this.updatePlayerStats();
         console.log('Player progress loaded');
@@ -400,19 +384,19 @@ class GalacticGamificationNexus {
 function startQuest(questId) {
   const nexus = window.gamificationNexus;
   if (!nexus) return;
-
+  
   const quest = nexus.quests.get(questId);
   if (!quest) return;
-
+  
   console.log(`🎯 Starting quest: ${quest.name}`);
   nexus.player.currentQuest = questId;
-
+  
   if (questId === 'visa-dragon') {
     showBattleArena();
   } else {
     // Handle other quest types
     nexus.addLogEntry(`Quest started: ${quest.name}`);
-
+    
     // Simulate quest progression
     setTimeout(() => {
       nexus.awardXP(1000, `Completing ${quest.name}`);
@@ -442,28 +426,28 @@ function closeBattle() {
 function battleAction(action) {
   const nexus = window.gamificationNexus;
   if (!nexus || !nexus.battleActive) return;
-
+  
   const quest = nexus.quests.get('visa-dragon');
   if (!quest) return;
-
+  
   // Add action to completed steps
   if (!quest.completedSteps.includes(action)) {
     quest.completedSteps.push(action);
-
+    
     // Damage the dragon
     nexus.dragonHealth -= 15;
-
+    
     // Update health bar
     const healthBar = document.getElementById('dragonHealth');
     if (healthBar) {
       healthBar.style.width = Math.max(0, nexus.dragonHealth) + '%';
     }
-
+    
     nexus.addLogEntry(`Used ${action} attack - Dragon health: ${nexus.dragonHealth}%`);
-
+    
     // Award XP for each action
     nexus.awardXP(500, `Battle Action: ${action}`);
-
+    
     // Check if dragon is defeated
     if (nexus.dragonHealth <= 0) {
       setTimeout(() => {
@@ -472,12 +456,10 @@ function battleAction(action) {
         nexus.player.achievements.add('dragon_slayer_elite');
         nexus.player.scholarshipsEarned++;
         nexus.player.questsCompleted++;
-
+        
         // Show victory screen
-        alert(
-          '🏆 LEGENDARY QUEST COMPLETED!\n\n🎓 Fulbright Scholarship ($50,000) Unlocked!\n⭐ +5,000 XP Bonus\n🏅 Dragon Slayer Elite Achievement',
-        );
-
+        alert('🏆 LEGENDARY QUEST COMPLETED!\n\n🎓 Fulbright Scholarship ($50,000) Unlocked!\n⭐ +5,000 XP Bonus\n🏅 Dragon Slayer Elite Achievement');
+        
         closeBattle();
         nexus.dragonHealth = 100; // Reset for next battle
       }, 1000);
@@ -489,7 +471,7 @@ function battleAction(action) {
 document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.nexus-container')) {
     window.gamificationNexus = new GalacticGamificationNexus();
-
+    
     // Load saved progress
     window.gamificationNexus.loadPlayerProgress();
   }

@@ -1,13 +1,11 @@
 export const metadata = {
   title: 'About Civora',
   description: 'Why Civora exists and how to build, document, and share the project.',
-};
+}
 
 export default function AboutPage() {
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: `      
+    <div dangerouslySetInnerHTML={{ __html: `      
       <section className="hero">
         <div className="container">
           <div className="card">
@@ -159,8 +157,6 @@ export default function AboutPage() {
         </div>
       </section>
     </main>
-`,
-      }}
-    />
-  );
+` }} />
+  )
 }

@@ -17,21 +17,21 @@ function initializeLeafletMap() {
   try {
     // Initialize the map with OpenStreetMap tiles
     var map = L.map('students-map').setView([20, 0], 2);
-
+    
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     // Define locations as specified in the problem statement
     var locations = [
-      { name: 'South Korea', coords: [36.5, 127.8] },
-      { name: 'France', coords: [46.6, 2.2] },
-      { name: 'United Kingdom', coords: [55.3, -3.4] },
-      { name: 'United States', coords: [37.1, -95.7] },
-      { name: 'Australia', coords: [-25.3, 133.8] },
-      { name: 'Belgium', coords: [50.8, 4.4] },
-      { name: 'Canada', coords: [60.0, -95.0] },
-      { name: 'Japan', coords: [36.2, 138.3] },
+      { name: "South Korea", coords: [36.5, 127.8] },
+      { name: "France", coords: [46.6, 2.2] },
+      { name: "United Kingdom", coords: [55.3, -3.4] },
+      { name: "United States", coords: [37.1, -95.7] },
+      { name: "Australia", coords: [-25.3, 133.8] },
+      { name: "Belgium", coords: [50.8, 4.4] },
+      { name: "Canada", coords: [60.0, -95.0] },
+      { name: "Japan", coords: [36.2, 138.3] }
     ];
 
     // Create custom icon with Civora's navy + gold theme
@@ -44,28 +44,28 @@ function initializeLeafletMap() {
       `,
       iconSize: [24, 24],
       iconAnchor: [12, 12],
-      popupAnchor: [0, -12],
+      popupAnchor: [0, -12]
     });
 
     // Add markers for each location with tooltips
-    locations.forEach((loc) => {
+    locations.forEach(loc => {
       var marker = L.marker(loc.coords, { icon: customIcon }).addTo(map);
       marker.bindTooltip(`Student supported → admission secured in ${loc.name}`, {
         permanent: false,
         direction: 'top',
         offset: [0, -10],
-        className: 'civora-tooltip',
+        className: 'civora-tooltip'
       });
-
+      
       // Add click interaction to scroll to corresponding country card
-      marker.on('click', function () {
+      marker.on('click', function() {
         scrollToCountryCard(loc.name);
       });
     });
 
     // Add custom styles for markers and tooltips
     addCustomMapStyles();
-
+    
     console.log('Leaflet map initialized successfully');
   } catch (error) {
     console.error('Error initializing Leaflet map:', error);
@@ -104,7 +104,7 @@ function displayMapFallback() {
         </div>
       </div>
     `;
-
+    
     // Add fallback styles
     addFallbackStyles();
   }
@@ -113,16 +113,14 @@ function displayMapFallback() {
 function scrollToCountryCard(countryName) {
   // Scroll to the corresponding country card
   const countryCards = document.querySelectorAll('.card h3');
-  countryCards.forEach((card) => {
-    if (
-      card.textContent.includes(countryName) ||
-      (countryName === 'United States' && card.textContent.includes('United States')) ||
-      (countryName === 'United Kingdom' && card.textContent.includes('United Kingdom')) ||
-      (countryName === 'South Korea' && card.textContent.includes('South Korea'))
-    ) {
-      card.closest('.card').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
+  countryCards.forEach(card => {
+    if (card.textContent.includes(countryName) || 
+        (countryName === 'United States' && card.textContent.includes('United States')) ||
+        (countryName === 'United Kingdom' && card.textContent.includes('United Kingdom')) ||
+        (countryName === 'South Korea' && card.textContent.includes('South Korea'))) {
+      card.closest('.card').scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
       });
       // Add a brief highlight effect
       const cardElement = card.closest('.card');

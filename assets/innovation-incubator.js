@@ -12,15 +12,15 @@ class RogueInnovationIncubator {
     this.currentProject = null;
     this.chaosConclaves = [];
     this.hallOfFame = [];
-
+    
     // Innovation metrics
     this.metrics = {
       totalProjects: 12847,
       successRate: 94.7,
       minervaAligned: 8392,
-      globalImpact: 2300000000, // $2.3B
+      globalImpact: 2300000000 // $2.3B
     };
-
+    
     // Project templates with Minerva alignment scores
     this.projectTemplates = {
       'scholarship-ai': {
@@ -63,7 +63,7 @@ class ScholarshipMatcher {
 ## Expected Impact
 - Increase scholarship match accuracy by 250%
 - Reduce search time from hours to minutes
-- Serve 100K+ students globally`,
+- Serve 100K+ students globally`
       },
       'visa-navigator': {
         title: 'Visa Navigator',
@@ -91,7 +91,7 @@ Complex visa processes lead to 40% application errors and significant delays for
 ## Expected Impact
 - Reduce application errors by 85%
 - Accelerate processing time by 50%
-- Support 50+ visa types across 200+ countries`,
+- Support 50+ visa types across 200+ countries`
       },
       'critical-thinking-trainer': {
         title: 'Critical Thinking Trainer',
@@ -146,7 +146,7 @@ class CriticalThinkingTrainer {
 ## Expected Impact
 - Improve analytical reasoning by 150%
 - Increase problem-solving accuracy by 85%
-- Prepare students for Minerva-style learning`,
+- Prepare students for Minerva-style learning`
       },
       'global-citizenship-sim': {
         title: 'Global Citizenship Simulator',
@@ -180,7 +180,7 @@ Students lack cross-cultural experience and global awareness needed for effectiv
 ## Expected Impact
 - Increase cross-cultural competency by 200%
 - Prepare students for global rotation programs
-- Develop ethical reasoning skills`,
+- Develop ethical reasoning skills`
       },
       'equity-tracker': {
         title: 'Educational Equity Tracker',
@@ -208,7 +208,7 @@ Educational institutions lack comprehensive tools to measure and improve diversi
 ## Expected Impact
 - Improve representation by 300%
 - Reduce bias in admissions by 90%
-- Support 1M+ underrepresented students`,
+- Support 1M+ underrepresented students`
       },
       'wisdom-network': {
         title: 'Practical Wisdom Network',
@@ -242,10 +242,10 @@ Students struggle to apply theoretical knowledge to complex real-world problems 
 ## Expected Impact
 - Connect 100K+ students with mentors
 - Solve 10K+ real-world problems annually
-- Develop practical wisdom at scale`,
-      },
+- Develop practical wisdom at scale`
+      }
     };
-
+    
     this.init();
   }
 
@@ -256,7 +256,7 @@ Students struggle to apply theoretical knowledge to complex real-world problems 
       await this.loadAIEvaluationModel();
       this.loadProjectTemplates();
       this.initializeChaosConclaves();
-
+      
       console.log('🚀 Rogue Innovation Incubator initialized');
     } catch (error) {
       console.error('Failed to initialize Innovation Incubator:', error);
@@ -265,14 +265,7 @@ Students struggle to apply theoretical knowledge to complex real-world problems 
 
   setupEventListeners() {
     // Auto-save project data
-    [
-      'projectTitle',
-      'projectCategory',
-      'targetAudience',
-      'problemStatement',
-      'solutionApproach',
-      'expectedImpact',
-    ].forEach((id) => {
+    ['projectTitle', 'projectCategory', 'targetAudience', 'problemStatement', 'solutionApproach', 'expectedImpact'].forEach(id => {
       const element = document.getElementById(id);
       if (element) {
         element.addEventListener('input', () => this.autoSaveProject());
@@ -319,17 +312,17 @@ Students struggle to apply theoretical knowledge to complex real-world problems 
   async loadAIEvaluationModel() {
     // Simulate loading AI model for project evaluation
     console.log('🤖 Loading AI evaluation model...');
-
+    
     // In real implementation, would load actual TensorFlow.js model
     await this.delay(1500);
-
+    
     this.evaluationModel = {
       evaluateInnovation: (projectData) => this.mockEvaluateInnovation(projectData),
       assessMinervaAlignment: (projectData) => this.mockAssessMinervaAlignment(projectData),
       predictSuccess: (projectData) => this.mockPredictSuccess(projectData),
-      generateInsights: (projectData) => this.mockGenerateInsights(projectData),
+      generateInsights: (projectData) => this.mockGenerateInsights(projectData)
     };
-
+    
     console.log('✅ AI evaluation model loaded');
   }
 
@@ -346,15 +339,15 @@ Students struggle to apply theoretical knowledge to complex real-world problems 
         date: '2024-12-15',
         prizes: [150000, 75000, 50000],
         participants: 247,
-        status: 'upcoming',
+        status: 'upcoming'
       },
       {
         name: 'Minerva Innovation Showcase',
         date: '2025-03-20',
         prizes: [200000, 100000, 75000],
         participants: 0,
-        status: 'registration_open',
-      },
+        status: 'registration_open'
+      }
     ];
 
     this.hallOfFame = [
@@ -363,22 +356,22 @@ Students struggle to apply theoretical knowledge to complex real-world problems 
         creator: 'Sita Sharma',
         funding: 150000,
         impact: 'Reached 50K+ rural students',
-        quarter: 'Q3 2024',
+        quarter: 'Q3 2024'
       },
       {
         project: 'Visa Compass',
         creator: 'Raj Patel',
         funding: 75000,
         impact: '95% visa approval rate',
-        quarter: 'Q3 2024',
+        quarter: 'Q3 2024'
       },
       {
         project: 'Minerva Prep AI',
         creator: 'Maya Chen',
         funding: 50000,
         impact: '200% improvement in critical thinking',
-        quarter: 'Q3 2024',
-      },
+        quarter: 'Q3 2024'
+      }
     ];
   }
 
@@ -389,8 +382,7 @@ Students struggle to apply theoretical knowledge to complex real-world problems 
     // Populate form fields
     document.getElementById('projectTitle').value = template.title;
     document.getElementById('projectCategory').value = template.category;
-    document.getElementById('targetAudience').value =
-      'Students seeking ' + template.category.replace('-', ' ');
+    document.getElementById('targetAudience').value = 'Students seeking ' + template.category.replace('-', ' ');
     document.getElementById('problemStatement').value = template.description;
 
     // Load template content into workspace
@@ -416,7 +408,7 @@ ${template.template}
       category: template.category,
       template: template.template,
       minervaAlignment: template.minervaAlignment,
-      complexity: template.complexity,
+      complexity: template.complexity
     };
 
     // Auto-evaluate the template
@@ -430,7 +422,7 @@ ${template.template}
       targetAudience: document.getElementById('targetAudience').value,
       problemStatement: document.getElementById('problemStatement').value,
       solutionApproach: document.getElementById('solutionApproach').value,
-      expectedImpact: document.getElementById('expectedImpact').value,
+      expectedImpact: document.getElementById('expectedImpact').value
     };
 
     if (!formData.title || !formData.problemStatement) {
@@ -440,7 +432,7 @@ ${template.template}
 
     // Generate AI-enhanced project structure
     const generatedProject = this.generateProjectStructure(formData);
-
+    
     // Display in workspace
     const workspace = document.getElementById('projectWorkspace');
     workspace.innerHTML = `
@@ -463,7 +455,7 @@ ${generatedProject.content}
       ...formData,
       content: generatedProject.content,
       innovationScore: generatedProject.innovationScore,
-      minervaAlignment: generatedProject.minervaAlignment,
+      minervaAlignment: generatedProject.minervaAlignment
     };
 
     // Auto-evaluate
@@ -474,7 +466,7 @@ ${generatedProject.content}
     // AI-enhanced project generation
     const innovationScore = this.calculateInnovationScore(formData);
     const minervaAlignment = this.calculateMinervaAlignment(formData);
-
+    
     const content = `# ${formData.title}
 
 ## Problem Statement
@@ -535,97 +527,65 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
     return {
       content,
       innovationScore,
-      minervaAlignment,
+      minervaAlignment
     };
   }
 
   generateMinervaIntegration(category) {
     const integrations = {
-      'education-equity':
-        "Integration with Minerva's diversity and inclusion values, emphasizing equal access to quality education across cultural and socioeconomic boundaries.",
-      'critical-thinking':
-        "Direct alignment with Minerva's Habituation & Capability curriculum, incorporating formal analysis, complex systems thinking, and empirical reasoning.",
-      'global-citizenship':
-        "Supports Minerva's global rotation model by developing cross-cultural competency and global awareness through immersive experiences.",
-      'practical-wisdom':
-        "Embodies Minerva's emphasis on practical wisdom by connecting theoretical knowledge to real-world problem-solving scenarios.",
-      'minerva-prep':
-        "Specifically designed to prepare students for Minerva's unique pedagogical approach and global learning environment.",
-      'visa-innovation':
-        "Supports global mobility and international education access, aligning with Minerva's mission to educate global citizens.",
-      'scholarship-tech':
-        "Democratizes access to educational funding, supporting Minerva's commitment to merit-based selection regardless of financial background.",
-      'cultural-bridge':
-        "Facilitates cross-cultural understanding and communication, essential for Minerva's global rotation program success.",
+      'education-equity': 'Integration with Minerva\'s diversity and inclusion values, emphasizing equal access to quality education across cultural and socioeconomic boundaries.',
+      'critical-thinking': 'Direct alignment with Minerva\'s Habituation & Capability curriculum, incorporating formal analysis, complex systems thinking, and empirical reasoning.',
+      'global-citizenship': 'Supports Minerva\'s global rotation model by developing cross-cultural competency and global awareness through immersive experiences.',
+      'practical-wisdom': 'Embodies Minerva\'s emphasis on practical wisdom by connecting theoretical knowledge to real-world problem-solving scenarios.',
+      'minerva-prep': 'Specifically designed to prepare students for Minerva\'s unique pedagogical approach and global learning environment.',
+      'visa-innovation': 'Supports global mobility and international education access, aligning with Minerva\'s mission to educate global citizens.',
+      'scholarship-tech': 'Democratizes access to educational funding, supporting Minerva\'s commitment to merit-based selection regardless of financial background.',
+      'cultural-bridge': 'Facilitates cross-cultural understanding and communication, essential for Minerva\'s global rotation program success.'
     };
-
-    return (
-      integrations[category] ||
-      "Designed to complement Minerva's innovative approach to higher education and global citizenship development."
-    );
+    
+    return integrations[category] || 'Designed to complement Minerva\'s innovative approach to higher education and global citizenship development.';
   }
 
   calculateInnovationScore(formData) {
     let score = 0.5; // Base score
-
+    
     // Problem statement novelty
     if (formData.problemStatement.length > 100) score += 0.1;
-    if (formData.problemStatement.includes('AI') || formData.problemStatement.includes('ML'))
-      score += 0.15;
-    if (
-      formData.problemStatement.includes('global') ||
-      formData.problemStatement.includes('international')
-    )
-      score += 0.1;
-
+    if (formData.problemStatement.includes('AI') || formData.problemStatement.includes('ML')) score += 0.15;
+    if (formData.problemStatement.includes('global') || formData.problemStatement.includes('international')) score += 0.1;
+    
     // Solution complexity
     if (formData.solutionApproach.length > 150) score += 0.1;
-    if (
-      formData.solutionApproach.includes('blockchain') ||
-      formData.solutionApproach.includes('neural')
-    )
-      score += 0.15;
-
+    if (formData.solutionApproach.includes('blockchain') || formData.solutionApproach.includes('neural')) score += 0.15;
+    
     // Category bonus
     const categoryBonuses = {
       'critical-thinking': 0.2,
       'practical-wisdom': 0.18,
       'minerva-prep': 0.15,
       'education-equity': 0.12,
-      'global-citizenship': 0.1,
+      'global-citizenship': 0.1
     };
     score += categoryBonuses[formData.category] || 0.05;
-
+    
     return Math.min(1.0, score);
   }
 
   calculateMinervaAlignment(formData) {
     let alignment = 0.3; // Base alignment
-
+    
     // Minerva keywords
     const minervaKeywords = [
-      'critical thinking',
-      'global citizenship',
-      'practical wisdom',
-      'cross-cultural',
-      'complex systems',
-      'empirical analysis',
-      'ethical reasoning',
-      'multivariate',
+      'critical thinking', 'global citizenship', 'practical wisdom', 'cross-cultural',
+      'complex systems', 'empirical analysis', 'ethical reasoning', 'multivariate'
     ];
-
-    const allText = (
-      formData.problemStatement +
-      ' ' +
-      formData.solutionApproach +
-      ' ' +
-      formData.expectedImpact
-    ).toLowerCase();
-
-    minervaKeywords.forEach((keyword) => {
+    
+    const allText = (formData.problemStatement + ' ' + formData.solutionApproach + ' ' + formData.expectedImpact).toLowerCase();
+    
+    minervaKeywords.forEach(keyword => {
       if (allText.includes(keyword)) alignment += 0.08;
     });
-
+    
     // Category alignment
     const categoryAlignments = {
       'critical-thinking': 0.3,
@@ -633,19 +593,19 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
       'global-citizenship': 0.25,
       'minerva-prep': 0.35,
       'education-equity': 0.2,
-      'cultural-bridge': 0.22,
+      'cultural-bridge': 0.22
     };
-
+    
     alignment += categoryAlignments[formData.category] || 0.1;
-
+    
     return Math.min(1.0, alignment);
   }
 
   estimateFunding(innovationScore, minervaAlignment) {
     const baseFunding = 25000;
-    const innovationMultiplier = 1 + innovationScore * 2;
-    const minervaMultiplier = 1 + minervaAlignment * 1.5;
-
+    const innovationMultiplier = 1 + (innovationScore * 2);
+    const minervaMultiplier = 1 + (minervaAlignment * 1.5);
+    
     return Math.round(baseFunding * innovationMultiplier * minervaMultiplier);
   }
 
@@ -656,7 +616,7 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
     }
 
     console.log('🤖 Evaluating project with AI...');
-
+    
     // Simulate AI evaluation delay
     setTimeout(() => {
       const evaluation = this.evaluationModel.evaluateInnovation(this.currentProject);
@@ -670,14 +630,14 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
     const feasibility = Math.random() * 0.2 + 0.7; // 70-90%
     const impact = Math.random() * 0.4 + 0.5; // 50-90%
     const minerva = projectData.minervaAlignment || Math.random() * 0.4 + 0.4; // 40-80%
-
+    
     // Adjust for known templates
     const adjustments = {
       'Critical Thinking Trainer': { novelty: 0.95, minerva: 0.96 },
       'Practical Wisdom Network': { novelty: 0.92, minerva: 0.98 },
-      'Global Citizenship Simulator': { novelty: 0.88, minerva: 0.94 },
+      'Global Citizenship Simulator': { novelty: 0.88, minerva: 0.94 }
     };
-
+    
     if (adjustments[projectData.title]) {
       const adj = adjustments[projectData.title];
       return {
@@ -685,16 +645,16 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
         feasibility,
         impact,
         minerva: adj.minerva || minerva,
-        overall: (adj.novelty + feasibility + impact + adj.minerva) / 4,
+        overall: (adj.novelty + feasibility + impact + adj.minerva) / 4
       };
     }
-
+    
     return {
       novelty,
       feasibility,
       impact,
       minerva,
-      overall: (novelty + feasibility + impact + minerva) / 4,
+      overall: (novelty + feasibility + impact + minerva) / 4
     };
   }
 
@@ -706,8 +666,8 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
     const baseSuccess = 0.6;
     const innovation = projectData.innovationScore || 0.7;
     const alignment = projectData.minervaAlignment || 0.6;
-
-    return Math.min(0.95, baseSuccess + innovation * 0.3 + alignment * 0.2);
+    
+    return Math.min(0.95, baseSuccess + (innovation * 0.3) + (alignment * 0.2));
   }
 
   mockGenerateInsights(projectData) {
@@ -715,34 +675,34 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
       {
         type: 'strength',
         message: 'Strong alignment with current educational technology trends',
-        icon: '💪',
+        icon: '💪'
       },
       {
         type: 'opportunity',
         message: 'High potential for Minerva University partnership',
-        icon: '🎯',
+        icon: '🎯'
       },
       {
         type: 'recommendation',
         message: 'Consider integrating blockchain for credential verification',
-        icon: '💡',
+        icon: '💡'
       },
       {
         type: 'market',
         message: 'Large addressable market in underserved regions',
-        icon: '🌍',
-      },
+        icon: '🌍'
+      }
     ];
-
+    
     // Add specific insights for high-alignment projects
     if (projectData.minervaAlignment > 0.9) {
       insights.push({
         type: 'minerva',
-        message: "Exceptional alignment with Minerva's pedagogical model",
-        icon: '🏛️',
+        message: 'Exceptional alignment with Minerva\'s pedagogical model',
+        icon: '🏛️'
       });
     }
-
+    
     return insights.slice(0, 3 + Math.floor(Math.random() * 2));
   }
 
@@ -752,22 +712,14 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
     this.animateScoreBar('feasibilityScore', 'feasibilityValue', evaluation.feasibility);
     this.animateScoreBar('impactScore', 'impactValue', evaluation.impact);
     this.animateScoreBar('minervaScore', 'minervaValue', evaluation.minerva);
-
+    
     // Update overall metrics
     setTimeout(() => {
-      document.getElementById('overallScore').textContent =
-        Math.round(evaluation.overall * 100) + '%';
-      document.getElementById('fundingPotential').textContent =
-        '$' + this.estimateFunding(evaluation.overall, evaluation.minerva).toLocaleString();
-      document.getElementById('successProbability').textContent =
-        Math.round(
-          this.mockPredictSuccess({
-            innovationScore: evaluation.overall,
-            minervaAlignment: evaluation.minerva,
-          }) * 100,
-        ) + '%';
+      document.getElementById('overallScore').textContent = Math.round(evaluation.overall * 100) + '%';
+      document.getElementById('fundingPotential').textContent = '$' + this.estimateFunding(evaluation.overall, evaluation.minerva).toLocaleString();
+      document.getElementById('successProbability').textContent = Math.round(this.mockPredictSuccess({ innovationScore: evaluation.overall, minervaAlignment: evaluation.minerva }) * 100) + '%';
     }, 1000);
-
+    
     // Generate and display insights
     const insights = this.mockGenerateInsights(this.currentProject);
     this.displayInsights(insights);
@@ -776,55 +728,51 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
   animateScoreBar(barId, valueId, score) {
     const bar = document.getElementById(barId);
     const value = document.getElementById(valueId);
-
+    
     if (!bar || !value) return;
-
+    
     let currentWidth = 0;
     const targetWidth = score * 100;
     const duration = 1500;
     const startTime = Date.now();
-
+    
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const easeOut = 1 - Math.pow(1 - progress, 3);
-
+      
       currentWidth = targetWidth * easeOut;
       bar.style.width = currentWidth + '%';
       value.textContent = Math.round(currentWidth) + '%';
-
+      
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
     };
-
+    
     animate();
   }
 
   displayInsights(insights) {
     const insightsList = document.getElementById('insightsList');
     if (!insightsList) return;
-
-    insightsList.innerHTML = insights
-      .map(
-        (insight) => `
+    
+    insightsList.innerHTML = insights.map(insight => `
       <div style="margin-bottom: 0.75rem; padding: 0.5rem; background: rgba(255,255,255,0.05); border-radius: 6px; border-left: 3px solid ${this.getInsightColor(insight.type)};">
         <span style="margin-right: 0.5rem;">${insight.icon}</span>
         <strong style="color: ${this.getInsightColor(insight.type)};">${insight.type.toUpperCase()}:</strong>
         ${insight.message}
       </div>
-    `,
-      )
-      .join('');
+    `).join('');
   }
 
   getInsightColor(type) {
     const colors = {
-      strength: '#4caf50',
-      opportunity: '#00d4ff',
-      recommendation: '#ffd700',
-      market: '#ff6b35',
-      minerva: '#ff1744',
+      'strength': '#4caf50',
+      'opportunity': '#00d4ff',
+      'recommendation': '#ffd700',
+      'market': '#ff6b35',
+      'minerva': '#ff1744'
     };
     return colors[type] || '#ffffff';
   }
@@ -834,18 +782,18 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
       alert('Please evaluate a project first.');
       return;
     }
-
+    
     const recommendations = [
       '🎯 Consider applying to the Minerva Innovation Fund ($125K available)',
       '🌍 Partner with UNESCO for global reach and credibility',
       '💡 Integrate with existing educational platforms for faster adoption',
       '📊 Implement comprehensive analytics to measure learning outcomes',
       '🤝 Seek mentorship from Minerva University faculty members',
-      '🚀 Join the next Chaos Conclave for exposure and funding opportunities',
+      '🚀 Join the next Chaos Conclave for exposure and funding opportunities'
     ];
-
+    
     const selectedRecs = recommendations.slice(0, 3 + Math.floor(Math.random() * 2));
-
+    
     alert('AI Recommendations:\n\n' + selectedRecs.join('\n\n'));
   }
 
@@ -854,17 +802,17 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
       alert('No project to save. Please create or load a project first.');
       return;
     }
-
+    
     const projectId = Date.now().toString();
     this.projects.set(projectId, {
       ...this.currentProject,
       id: projectId,
       createdAt: new Date().toISOString(),
-      status: 'draft',
+      status: 'draft'
     });
-
+    
     localStorage.setItem('innovationProjects', JSON.stringify(Array.from(this.projects.entries())));
-
+    
     alert('Project saved successfully! 💾');
   }
 
@@ -873,7 +821,7 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
       alert('No project to publish. Please create or load a project first.');
       return;
     }
-
+    
     // Simulate publishing process
     const projectId = Date.now().toString();
     this.projects.set(projectId, {
@@ -882,17 +830,14 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
       createdAt: new Date().toISOString(),
       status: 'published',
       views: 0,
-      likes: 0,
+      likes: 0
     });
-
+    
     // Update metrics
     this.metrics.totalProjects++;
-    document.getElementById('totalProjects').textContent =
-      this.metrics.totalProjects.toLocaleString();
-
-    alert(
-      'Project published successfully! 🌟\n\nYour project is now visible to the community and eligible for Chaos Conclaves.',
-    );
+    document.getElementById('totalProjects').textContent = this.metrics.totalProjects.toLocaleString();
+    
+    alert('Project published successfully! 🌟\n\nYour project is now visible to the community and eligible for Chaos Conclaves.');
   }
 
   registerForConclave() {
@@ -900,18 +845,16 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
       alert('Please create and publish a project before registering for a Chaos Conclave.');
       return;
     }
-
-    const nextConclave = this.chaosConclaves.find((c) => c.status === 'registration_open');
+    
+    const nextConclave = this.chaosConclaves.find(c => c.status === 'registration_open');
     if (!nextConclave) {
       alert('No Chaos Conclaves currently accepting registrations. Check back soon!');
       return;
     }
-
+    
     nextConclave.participants++;
-
-    alert(
-      `Registration successful! 🎪\n\nYou're now registered for: ${nextConclave.name}\nDate: ${nextConclave.date}\nTotal Participants: ${nextConclave.participants}\n\nPrize Pool: $${nextConclave.prizes.reduce((a, b) => a + b, 0).toLocaleString()}`,
-    );
+    
+    alert(`Registration successful! 🎪\n\nYou're now registered for: ${nextConclave.name}\nDate: ${nextConclave.date}\nTotal Participants: ${nextConclave.participants}\n\nPrize Pool: $${nextConclave.prizes.reduce((a, b) => a + b, 0).toLocaleString()}`);
   }
 
   autoSaveProject() {
@@ -922,14 +865,14 @@ Estimated: $${this.estimateFunding(innovationScore, minervaAlignment).toLocaleSt
       targetAudience: document.getElementById('targetAudience')?.value || '',
       problemStatement: document.getElementById('problemStatement')?.value || '',
       solutionApproach: document.getElementById('solutionApproach')?.value || '',
-      expectedImpact: document.getElementById('expectedImpact')?.value || '',
+      expectedImpact: document.getElementById('expectedImpact')?.value || ''
     };
-
+    
     localStorage.setItem('currentProjectDraft', JSON.stringify(formData));
   }
 
   delay(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
 

@@ -20,7 +20,7 @@ a.animated-link::after {
   bottom: -2px;
   width: 0;
   height: 2px;
-  background: var(--accent, #5e6ad2);
+  background: var(--accent, #5E6AD2);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -40,9 +40,8 @@ a.animated-link:focus::after {
 .feature-card,
 .stat-card,
 .timeline-step {
-  transition:
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover,
@@ -64,7 +63,7 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--accent, #5e6ad2);
+  outline: 2px solid var(--accent, #5E6AD2);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -97,7 +96,7 @@ select:focus:not(:focus-visible),
   padding: 8px 16px;
   background: transparent;
   border: none;
-  color: var(--text-secondary, #9ca3af);
+  color: var(--text-secondary, #9CA3AF);
   font-size: 14px;
   font-weight: 500;
   border-radius: 6px;
@@ -106,18 +105,18 @@ select:focus:not(:focus-visible),
 }
 
 .tab:hover {
-  color: var(--text-primary, #ffffff);
+  color: var(--text-primary, #FFFFFF);
   background: rgba(255, 255, 255, 0.08);
 }
 
 .tab.active {
-  background: var(--accent, #5e6ad2);
+  background: var(--accent, #5E6AD2);
   color: white;
   box-shadow: 0 2px 8px rgba(94, 106, 210, 0.3);
 }
 
 .tab:focus-visible {
-  outline: 2px solid var(--accent, #5e6ad2);
+  outline: 2px solid var(--accent, #5E6AD2);
   outline-offset: 2px;
 }
 
@@ -132,11 +131,11 @@ select:focus:not(:focus-visible),
   right: 24px;
   max-width: 400px;
   padding: 16px 20px;
-  background: var(--surface, #1c1c1f);
-  border: 1px solid var(--border, #2a2a2d);
+  background: var(--surface, #1C1C1F);
+  border: 1px solid var(--border, #2A2A2D);
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  color: var(--text-primary, #ffffff);
+  color: var(--text-primary, #FFFFFF);
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -178,19 +177,19 @@ select:focus:not(:focus-visible),
 }
 
 .toast-success {
-  border-left: 3px solid var(--success, #10b981);
+  border-left: 3px solid var(--success, #10B981);
 }
 
 .toast-error {
-  border-left: 3px solid var(--error, #ef4444);
+  border-left: 3px solid var(--error, #EF4444);
 }
 
 .toast-info {
-  border-left: 3px solid var(--accent, #5e6ad2);
+  border-left: 3px solid var(--accent, #5E6AD2);
 }
 
 .toast-warning {
-  border-left: 3px solid var(--warning, #f59e0b);
+  border-left: 3px solid var(--warning, #F59E0B);
 }
 
 /* ========================================

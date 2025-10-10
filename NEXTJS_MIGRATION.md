@@ -7,7 +7,6 @@ Successfully migrated Civora from static HTML/CSS/JS to Next.js 14 with App Rout
 ## What Was Done
 
 ### 1. Next.js Initialization
-
 - Installed Next.js 14 with React 18
 - Created `next.config.js` with:
   - `output: 'export'` for static site generation
@@ -16,15 +15,12 @@ Successfully migrated Civora from static HTML/CSS/JS to Next.js 14 with App Rout
 - Set up `.gitignore` for Node.js projects
 
 ### 2. Asset Migration
-
 - Copied all assets from `assets/` to `public/assets/`
 - Preserved `CNAME`, `.nojekyll`, `manifest.webmanifest`, `robots.txt`
 - All file paths maintained for backward compatibility
 
 ### 3. Page Migration
-
 Created 13 pages in the `app/` directory:
-
 - Homepage: `app/page.js`
 - Scholarships: `app/scholarships/page.js`
 - Citizenship: `app/citizenship/page.js`
@@ -40,7 +36,6 @@ Created 13 pages in the `app/` directory:
 - Thank You: `app/thank-you/page.js`
 
 ### 4. Layout & Components
-
 - Created `app/layout.js` with:
   - Shared Header component with navigation
   - Shared Footer component
@@ -52,9 +47,7 @@ Created 13 pages in the `app/` directory:
   - `app/linear-layout.css`
 
 ### 5. GitHub Actions Deployment
-
 Created `.github/workflows/nextjs-deploy.yml`:
-
 - Automatic deployment on push to main
 - Node.js setup and dependency installation
 - Next.js build
@@ -63,18 +56,14 @@ Created `.github/workflows/nextjs-deploy.yml`:
 ## Technical Details
 
 ### URL Structure
-
 All URLs use trailing slashes for consistency:
-
 - `/` → Homepage
 - `/scholarships/` → Scholarships page
 - `/citizenship/` → Citizenship page
 - etc.
 
 ### Metadata
-
 Each page has:
-
 - Title and description
 - Open Graph tags
 - Twitter Card tags
@@ -82,9 +71,7 @@ Each page has:
 - Structured data (JSON-LD)
 
 ### Build Output
-
 Static export generates:
-
 - HTML files for each page
 - Optimized JavaScript bundles
 - CSS files
@@ -92,7 +79,6 @@ Static export generates:
 - `CNAME` for custom domain
 
 ### Performance
-
 - First Load JS: ~87.5 kB per page
 - Static HTML generation (no client-side routing overhead)
 - Optimized CSS and JS bundling
@@ -101,7 +87,6 @@ Static export generates:
 ## Testing
 
 ### Local Development
-
 ```bash
 npm install
 npm run dev
@@ -109,14 +94,12 @@ npm run dev
 ```
 
 ### Production Build
-
 ```bash
 npm run build
 # Output in out/ directory
 ```
 
 ### Verification
-
 - ✅ All 13 pages build successfully
 - ✅ URLs work with trailing slashes
 - ✅ CNAME file present in output
@@ -129,13 +112,11 @@ npm run build
 ## Deployment Instructions
 
 ### Automatic (Recommended)
-
 1. Merge PR to main branch
 2. GitHub Actions automatically deploys
 3. Site live at civora.me within 1-2 minutes
 
 ### Manual
-
 ```bash
 npm run build
 # Deploy contents of out/ directory to any static host
@@ -210,7 +191,6 @@ After the Next.js site is verified in production, consider:
 ## Rollback Plan
 
 If issues occur:
-
 1. Revert the PR merge
 2. Original HTML files still present in repository
 3. GitHub Pages will serve the old static site
@@ -219,7 +199,6 @@ If issues occur:
 ## Support
 
 For questions or issues:
-
 - Check Next.js documentation: https://nextjs.org/docs
 - Review build logs in GitHub Actions
 - Test locally with `npm run dev`

@@ -4,7 +4,7 @@
  * Accessible dialog with ARIA attributes and keyboard navigation
  */
 
-(function () {
+(function() {
   'use strict';
 
   const COMMAND_PALETTE_ID = 'command-palette';
@@ -13,44 +13,14 @@
   // Navigation entries
   const commands = [
     { name: 'Home', url: 'index.html', icon: '🏠', description: 'Return to homepage' },
-    {
-      name: 'Scholarships',
-      url: 'scholarships.html',
-      icon: '🎓',
-      description: 'Browse scholarship database',
-    },
-    {
-      name: 'Citizenship',
-      url: 'citizenship.html',
-      icon: '🌍',
-      description: 'Explore citizenship pathways',
-    },
-    {
-      name: 'Guides',
-      url: 'guides.html',
-      icon: '📚',
-      description: 'Application guides and templates',
-    },
-    {
-      name: 'AI Chat',
-      url: 'ai-chat.html',
-      icon: '🤖',
-      description: '24/7 AI counseling assistant',
-    },
-    {
-      name: 'Students & Stories',
-      url: 'students-supported.html',
-      icon: '👥',
-      description: 'Success stories from students',
-    },
-    {
-      name: 'IELTS & Prep',
-      url: 'ielts-prep.html',
-      icon: '✍️',
-      description: 'Test preparation resources',
-    },
+    { name: 'Scholarships', url: 'scholarships.html', icon: '🎓', description: 'Browse scholarship database' },
+    { name: 'Citizenship', url: 'citizenship.html', icon: '🌍', description: 'Explore citizenship pathways' },
+    { name: 'Guides', url: 'guides.html', icon: '📚', description: 'Application guides and templates' },
+    { name: 'AI Chat', url: 'ai-chat.html', icon: '🤖', description: '24/7 AI counseling assistant' },
+    { name: 'Students & Stories', url: 'students-supported.html', icon: '👥', description: 'Success stories from students' },
+    { name: 'IELTS & Prep', url: 'ielts-prep.html', icon: '✍️', description: 'Test preparation resources' },
     { name: 'About', url: 'about.html', icon: 'ℹ️', description: 'Learn about Civora' },
-    { name: 'Contact', url: 'contact.html', icon: '📧', description: 'Get in touch with us' },
+    { name: 'Contact', url: 'contact.html', icon: '📧', description: 'Get in touch with us' }
   ];
 
   let isOpen = false;
@@ -193,7 +163,7 @@
       return;
     }
 
-    filteredCommands.forEach(function (command, index) {
+    filteredCommands.forEach(function(command, index) {
       const item = document.createElement('div');
       item.setAttribute('role', 'option');
       item.setAttribute('aria-selected', index === selectedIndex ? 'true' : 'false');
@@ -223,11 +193,11 @@
         </div>
       `;
 
-      item.addEventListener('click', function () {
+      item.addEventListener('click', function() {
         navigateToCommand(command);
       });
 
-      item.addEventListener('mouseenter', function () {
+      item.addEventListener('mouseenter', function() {
         selectedIndex = index;
         renderCommands();
       });
@@ -244,11 +214,9 @@
       filteredCommands = commands;
     } else {
       const lowerQuery = query.toLowerCase();
-      filteredCommands = commands.filter(function (command) {
-        return (
-          command.name.toLowerCase().includes(lowerQuery) ||
-          command.description.toLowerCase().includes(lowerQuery)
-        );
+      filteredCommands = commands.filter(function(command) {
+        return command.name.toLowerCase().includes(lowerQuery) ||
+               command.description.toLowerCase().includes(lowerQuery);
       });
     }
     selectedIndex = 0;
@@ -282,16 +250,16 @@
     isOpen = true;
     backdrop.style.display = 'block';
     palette.style.display = 'block';
-
+    
     // Reset state
     selectedIndex = 0;
     filteredCommands = commands;
     input.value = '';
-
+    
     renderCommands();
-
+    
     // Focus input
-    setTimeout(function () {
+    setTimeout(function() {
       input.focus();
     }, 100);
 
@@ -377,7 +345,7 @@
     // Input event listener for search
     const input = document.getElementById('command-palette-input');
     if (input) {
-      input.addEventListener('input', function (e) {
+      input.addEventListener('input', function(e) {
         filterCommands(e.target.value);
       });
     }
@@ -391,7 +359,7 @@
     // Prevent palette clicks from closing
     const palette = document.getElementById(COMMAND_PALETTE_ID);
     if (palette) {
-      palette.addEventListener('click', function (e) {
+      palette.addEventListener('click', function(e) {
         e.stopPropagation();
       });
     }
@@ -407,6 +375,7 @@
   // Expose for debugging
   window.commandPalette = {
     open: openPalette,
-    close: closePalette,
+    close: closePalette
   };
+
 })();

@@ -7,6 +7,6 @@ const nextConfig = {
   },
   // Disable React strict mode for production build compatibility
   reactStrictMode: true,
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

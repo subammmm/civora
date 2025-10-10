@@ -3,12 +3,11 @@
 ## Twitter/X Posts
 
 ### Launch Announcement
-
 ```
 🎓 BREAKING: Just added 5 NEW scholarships to @Civora's database!
 
 ✅ ASEAN Scholarships (Singapore) 🇸🇬
-✅ Ireland Government Scholarships 🇮🇪
+✅ Ireland Government Scholarships 🇮🇪  
 ✅ Hong Kong PhD Fellowship 🇭🇰
 ✅ Schwarzman Scholars (China) 🇨🇳
 
@@ -19,18 +18,17 @@ All verified & fully funded!
 ```
 
 ### Success Story Thread
-
 ```
 🧵 THREAD: From Kathmandu to Seoul National University
 
 "I thought studying abroad was impossible until I found Civora"
 
-This student secured full KGSP funding worth $20K+
+This student secured full KGSP funding worth $20K+ 
 
 Here's how Civora helped: 🧵
 
 1/ Detailed application timeline & checklist
-2/ Official scholarship links (no spam!)
+2/ Official scholarship links (no spam!)  
 3/ Success story examples for motivation
 4/ Step-by-step guides for each program
 
@@ -41,7 +39,6 @@ Your turn next! 👉 civora.me
 ## Instagram Reel Scripts
 
 ### Success Story Reel
-
 ```
 🎯 SUCCESS STORY SPOTLIGHT
 
@@ -54,19 +51,18 @@ Your turn next! 👉 civora.me
 
 "I used Civora's timeline and got into my dream university"
 
-Ready to write your story?
+Ready to write your story? 
 👉 Link in bio
 
 #StudyAbroad #NepalEducation #KGSP #DreamsComeTrue #CivoraSuccess
 ```
 
 ### Scholarship Highlights Reel
-
 ```
 🎓 5 NEW SCHOLARSHIPS ADDED!
 
 1️⃣ ASEAN (Singapore) - Full funding
-2️⃣ Ireland Gov - €16K/year
+2️⃣ Ireland Gov - €16K/year  
 3️⃣ Hong Kong PhD - HKD 27K/month
 4️⃣ Schwarzman - Full coverage
 5️⃣ Updated deadlines for 2025!
@@ -81,13 +77,12 @@ Get access: civora.me
 ## LinkedIn Posts
 
 ### Professional Update
-
 ```
 Exciting milestone: Civora's scholarship database now features 24 verified opportunities for Nepali students, including recent additions from Singapore, Ireland, and Hong Kong.
 
 What makes this different:
 🔍 Every scholarship is verified with official sources
-📊 Updated deadlines and requirements
+📊 Updated deadlines and requirements  
 💯 Focus on fully-funded opportunities
 🌍 Success stories from 12+ countries
 
@@ -98,13 +93,12 @@ For organizations: Let's collaborate to reach more students
 ```
 
 ### Partnership Post
-
 ```
 Looking to connect with Nepali student organizations, education NGOs, and study abroad consultants.
 
 Civora provides free, verified scholarship resources that have helped students secure opportunities in:
 🇰🇷 South Korea (KGSP)
-🇫🇷 France (Eiffel)
+🇫🇷 France (Eiffel)  
 🇬🇧 UK (Chevening)
 🇺🇸 USA (Fulbright)
 And 20+ more programs
@@ -119,14 +113,13 @@ DM me to explore partnership opportunities.
 ## Facebook Posts
 
 ### Visual Post with Map
-
 ```
 🗺️ GLOBAL SUCCESS: Nepali students are studying in 12+ countries through scholarships found on Civora!
 
 From Seoul to Cambridge, from Toronto to Sydney - your dreams are possible too.
 
 ✨ 24 verified scholarships
-✨ Success stories for motivation
+✨ Success stories for motivation  
 ✨ Step-by-step application guides
 ✨ 100% free resources
 
@@ -138,7 +131,6 @@ Start your journey: civora.me
 ## Reddit Posts
 
 ### r/Nepal Post
-
 ```
 Title: Free scholarship database for Nepali students - just added 5 new opportunities
 
@@ -168,7 +160,6 @@ Disclaimer: I'm sharing this because I found it genuinely useful, not affiliated
 ```
 
 ### r/studyabroad Post
-
 ```
 Title: Comprehensive scholarship database for students from Nepal/South Asia
 
@@ -178,7 +169,7 @@ I came across this resource called Civora that specifically focuses on scholarsh
 
 Key features:
 - 24+ verified scholarships with official links
-- Covers undergrad through PhD programs
+- Covers undergrad through PhD programs  
 - Success stories from students now in 12+ countries
 - Application guides and templates
 - Mobile-friendly interface
@@ -195,7 +186,6 @@ Has anyone else used resources like this for finding scholarships? What worked b
 ## Analytics Tracking
 
 ### Social Media Metrics to Track
-
 - Click-through rate from each platform
 - Engagement rate (likes, shares, comments)
 - Reach and impressions
@@ -203,15 +193,13 @@ Has anyone else used resources like this for finding scholarships? What worked b
 - Form submissions from social media traffic
 
 ### Campaign Success Metrics
-
 - **Week 1 Goal**: 100-200 new website visitors
 - **Engagement Goal**: 2-3 success story submissions
 - **Social Goal**: 50+ total interactions
 - **Outreach Goal**: Contact 5 organizations
 
 Use UTM parameters for tracking:
-
 - Twitter: ?utm_source=twitter&utm_campaign=launch
-- Instagram: ?utm_source=instagram&utm_campaign=launch
+- Instagram: ?utm_source=instagram&utm_campaign=launch  
 - LinkedIn: ?utm_source=linkedin&utm_campaign=launch
 - Facebook: ?utm_source=facebook&utm_campaign=launch

@@ -1,13 +1,11 @@
 export const metadata = {
   title: 'Students & Stories',
   description: 'Real experiences and success stories from Nepali students studying worldwide.',
-};
+}
 
 export default function Students_SupportedPage() {
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: left;">
+    <div dangerouslySetInnerHTML={{ __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: left;">
         <h1 data-i18n="students.title" style="text-align: center;">Students Supported & Success Stories</h1>
         <p data-i18n="students.intro" style="text-align: center; margin-bottom: 3rem;">Through Civora resources and guidance, Nepali students have successfully secured admissions and opportunities globally. Here are their inspiring journeys and the countries where they've achieved their dreams.</p>
 
@@ -243,8 +241,6 @@ export default function Students_SupportedPage() {
     </div>
     </div>
   </main>
-`,
-      }}
-    />
-  );
+` }} />
+  )
 }

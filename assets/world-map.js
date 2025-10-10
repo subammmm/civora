@@ -12,18 +12,18 @@ class CustomWorldMap {
     this.isDragging = false;
     this.dragStart = { x: 0, y: 0 };
     this.markers = [];
-
+    
     this.supportedCountries = [
       { name: 'United States', lat: 37.0902, lng: -95.7129 },
-      { name: 'United Kingdom', lat: 55.3781, lng: -3.436 },
+      { name: 'United Kingdom', lat: 55.3781, lng: -3.4360 },
       { name: 'France', lat: 46.6034, lng: 1.8883 },
       { name: 'Belgium', lat: 50.8476, lng: 4.3572 },
-      { name: 'South Korea', lat: 37.5665, lng: 126.978 },
+      { name: 'South Korea', lat: 37.5665, lng: 126.9780 },
       { name: 'Australia', lat: -25.2744, lng: 133.7751 },
-      { name: 'Canada', lat: 60.0, lng: -95.0 },
-      { name: 'Japan', lat: 36.2048, lng: 138.2529 },
+      { name: 'Canada', lat: 60.0000, lng: -95.0000 },
+      { name: 'Japan', lat: 36.2048, lng: 138.2529 }
     ];
-
+    
     this.init();
   }
 
@@ -50,7 +50,7 @@ class CustomWorldMap {
     `;
     this.ctx = this.canvas.getContext('2d');
     this.container.appendChild(this.canvas);
-
+    
     // Center the map initially to show all continents
     this.offsetX = this.canvas.width / 2;
     this.offsetY = this.canvas.height / 2;
@@ -72,21 +72,21 @@ class CustomWorldMap {
     // Zoom controls
     this.container.querySelector('.zoom-in').addEventListener('click', () => this.zoomIn());
     this.container.querySelector('.zoom-out').addEventListener('click', () => this.zoomOut());
-
+    
     // Mouse events for panning
     this.canvas.addEventListener('mousedown', (e) => this.startDrag(e));
     this.canvas.addEventListener('mousemove', (e) => this.drag(e));
     this.canvas.addEventListener('mouseup', () => this.endDrag());
     this.canvas.addEventListener('mouseleave', () => this.endDrag());
-
+    
     // Touch events for mobile
     this.canvas.addEventListener('touchstart', (e) => this.startDrag(e));
     this.canvas.addEventListener('touchmove', (e) => this.drag(e));
     this.canvas.addEventListener('touchend', () => this.endDrag());
-
+    
     // Wheel zoom
     this.canvas.addEventListener('wheel', (e) => this.handleWheel(e));
-
+    
     // Resize handling
     window.addEventListener('resize', () => this.handleResize());
   }
@@ -99,7 +99,7 @@ class CustomWorldMap {
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     this.dragStart = {
       x: clientX - rect.left - this.offsetX,
-      y: clientY - rect.top - this.offsetY,
+      y: clientY - rect.top - this.offsetY
     };
     e.preventDefault();
   }
@@ -151,39 +151,39 @@ class CustomWorldMap {
     // Simple equirectangular projection with better scaling
     const canvasWidth = this.canvas.width;
     const canvasHeight = this.canvas.height;
-
+    
     // Map coordinates to fit better in view
     const x = ((lng + 180) / 360) * canvasWidth * 0.8 + canvasWidth * 0.1;
     const y = ((90 - lat) / 180) * canvasHeight * 0.6 + canvasHeight * 0.2;
-
+    
     return {
-      x: x * this.scale + this.offsetX - (canvasWidth * this.scale) / 2,
-      y: y * this.scale + this.offsetY - (canvasHeight * this.scale) / 2,
+      x: x * this.scale + this.offsetX - canvasWidth * this.scale / 2,
+      y: y * this.scale + this.offsetY - canvasHeight * this.scale / 2
     };
   }
 
   draw() {
     // Clear canvas
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+    
     // Draw world map background (simplified continents)
     this.drawWorldMap();
-
+    
     // Update marker positions
     this.updateMarkers();
   }
 
   drawWorldMap() {
     this.ctx.save();
-
+    
     // Draw simplified world continents
     this.ctx.fillStyle = '#334155';
     this.ctx.strokeStyle = '#475569';
     this.ctx.lineWidth = 1;
-
+    
     // Draw simplified continent shapes
     this.drawContinents();
-
+    
     this.ctx.restore();
   }
 
@@ -200,15 +200,15 @@ class CustomWorldMap {
       // Asia (simplified)
       { x: 300, y: 60, width: 140, height: 120 },
       // Australia (simplified)
-      { x: 380, y: 220, width: 70, height: 40 },
+      { x: 380, y: 220, width: 70, height: 40 }
     ];
 
-    continents.forEach((continent) => {
+    continents.forEach(continent => {
       const x = continent.x * this.scale + this.offsetX;
       const y = continent.y * this.scale + this.offsetY;
       const width = continent.width * this.scale;
       const height = continent.height * this.scale;
-
+      
       // Only draw if visible
       if (x + width > 0 && x < this.canvas.width && y + height > 0 && y < this.canvas.height) {
         this.ctx.beginPath();
@@ -220,7 +220,7 @@ class CustomWorldMap {
   }
 
   createMarkers() {
-    this.supportedCountries.forEach((country) => {
+    this.supportedCountries.forEach(country => {
       const markerElement = document.createElement('div');
       markerElement.className = 'custom-marker';
       markerElement.innerHTML = `
@@ -229,33 +229,30 @@ class CustomWorldMap {
         </div>
         <div class="marker-tooltip">${country.name}<br><em>Student supported → admission secured in ${country.name}</em></div>
       `;
-
+      
       // Add hover events
       markerElement.addEventListener('mouseenter', () => {
         markerElement.querySelector('.marker-tooltip').style.opacity = '1';
       });
-
+      
       markerElement.addEventListener('mouseleave', () => {
         markerElement.querySelector('.marker-tooltip').style.opacity = '0';
       });
-
+      
       this.container.appendChild(markerElement);
       this.markers.push({ element: markerElement, country });
     });
   }
 
   updateMarkers() {
-    this.markers.forEach((marker) => {
+    this.markers.forEach(marker => {
       const pos = this.latLngToCanvas(marker.country.lat, marker.country.lng);
       marker.element.style.left = pos.x + 'px';
       marker.element.style.top = pos.y + 'px';
-
+      
       // Hide markers that are outside visible area
-      const visible =
-        pos.x >= -50 &&
-        pos.x <= this.canvas.width + 50 &&
-        pos.y >= -50 &&
-        pos.y <= this.canvas.height + 50;
+      const visible = pos.x >= -50 && pos.x <= this.canvas.width + 50 && 
+                     pos.y >= -50 && pos.y <= this.canvas.height + 50;
       marker.element.style.display = visible ? 'block' : 'none';
     });
   }
@@ -430,7 +427,7 @@ class CustomWorldMap {
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('world-map')) {
     const worldMap = new CustomWorldMap();
-
+    
     // Handle orientation change on mobile
     window.addEventListener('orientationchange', () => {
       setTimeout(() => {

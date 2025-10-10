@@ -1,13 +1,11 @@
 export const metadata = {
   title: 'Student Stories',
   description: 'Real experiences from students who have used Civora.',
-};
+}
 
 export default function Student_StoriesPage() {
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <div dangerouslySetInnerHTML={{ __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
         <h1 style="color: var(--text-primary); margin-bottom: 1rem;">Student Success Stories</h1>
         <p className="page-intro" style="color: var(--text-secondary); max-width: 800px; margin: 0 auto 2rem;">Real journeys from Nepali students who transformed their dreams into reality through scholarships and international opportunities. These stories prove that with the right resources and determination, global education is achievable.</p>
         
@@ -247,8 +245,6 @@ export default function Student_StoriesPage() {
       </section>
 
     </main>
-`,
-      }}
-    />
-  );
+` }} />
+  )
 }
