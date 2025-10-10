@@ -19,6 +19,9 @@
   
   <!-- Twitter tags -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Students & Success Stories — Civora" />
+  <meta name="twitter:description" content="Global reach of Civora: supporting Nepali students and celebrating their success stories across multiple countries." />
+  <meta name="twitter:image" content="https://civora.me/assets/og-image.jpg" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,13 +32,14 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script defer src="assets/leaflet-map.js"></script>
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CIVORA2024"></script>
+  <!-- Analytics disabled by default for privacy. Set GA_MEASUREMENT_ID in script below to enable -->
+  <script>const GA_MEASUREMENT_ID = null;</script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     
-    gtag('config', 'G-CIVORA2024', {
+    gtag('config', 'YOUR-GA4-ID-HERE', {
       'anonymize_ip': true,
       'allow_google_signals': false,
       'allow_ad_personalization_signals': false

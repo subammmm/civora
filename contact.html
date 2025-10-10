@@ -19,6 +19,9 @@
   
   <!-- Twitter tags -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact & Contribute — Civora" />
+  <meta name="twitter:description" content="Get in touch with Civora, ask questions, suggest scholarships, or join our research network." />
+  <meta name="twitter:image" content="https://civora.me/assets/og-image.jpg" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,13 +29,14 @@
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CIVORA2024"></script>
+  <!-- Analytics disabled by default for privacy. Set GA_MEASUREMENT_ID in script below to enable -->
+  <script>const GA_MEASUREMENT_ID = null;</script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     
-    gtag('config', 'G-CIVORA2024', {
+    gtag('config', 'YOUR-GA4-ID-HERE', {
       'anonymize_ip': true,
       'allow_google_signals': false,
       'allow_ad_personalization_signals': false
