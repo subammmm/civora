@@ -32,7 +32,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # Keep original HTML files for reference during migration
 # We'll remove these after migration is complete
