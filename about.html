@@ -29,19 +29,6 @@
   
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
-  
-  <!-- Google Translate Widget -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,ne,hi,zh-CN,ja,ko',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'language-selector');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CIVORA2024"></script>
   <script>
@@ -85,8 +72,14 @@
       
       <!-- Right side controls -->
       <div class="header-controls">
-        <!-- Google Translate -->
-        <div id="language-selector"></div>
+        <select id="lang" class="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="ur">اردو</option>
+          <option value="hi">हिन्दी</option>
+        </select>
         
         <!-- Mobile menu toggle -->
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
