@@ -12,6 +12,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
+  
+  <!-- Google Translate Widget -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ne,hi,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'language-selector');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
   <!-- Top Navigation Header -->
@@ -36,14 +48,8 @@
       
       <!-- Right side controls -->
       <div class="header-controls">
-        <select id="lang" class="lang-select" aria-label="Language">
-          <option value="en">English</option>
-          <option value="ne">नेपाली</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="ur">اردو</option>
-          <option value="hi">हिन्दी</option>
-        </select>
+        <!-- Google Translate -->
+        <div id="language-selector"></div>
         
         <!-- Mobile menu toggle -->
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
