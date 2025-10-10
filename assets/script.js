@@ -10,6 +10,47 @@ if (lastUpdated) {
   lastUpdated.textContent = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 }
 
+// Animated Counter for Stats using IntersectionObserver
+function animateCounter(element, target, duration = 2000) {
+  let start = 0;
+  const increment = target / (duration / 16); // 60fps
+  
+  const updateCounter = () => {
+    start += increment;
+    if (start < target) {
+      element.textContent = Math.floor(start);
+      requestAnimationFrame(updateCounter);
+    } else {
+      element.textContent = target;
+    }
+  };
+  
+  updateCounter();
+}
+
+// Initialize counter animation on scroll
+document.addEventListener('DOMContentLoaded', () => {
+  const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+  
+  if (statNumbers.length > 0) {
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.target.textContent === '0') {
+          const target = parseInt(entry.target.getAttribute('data-count'));
+          animateCounter(entry.target, target);
+        }
+      });
+    }, observerOptions);
+    
+    statNumbers.forEach(stat => observer.observe(stat));
+  }
+});
+
 // Interactive World Map functionality
 function initializeWorldMap() {
   const mapPins = document.querySelectorAll('.map-pin');

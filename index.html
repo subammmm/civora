@@ -200,6 +200,20 @@
   
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
+  
+  <!-- Google Translate Widget -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ne,hi,ur,es,fr,de,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CIVORA2024"></script>
   <script>
@@ -218,6 +232,41 @@
       'page_title': document.title,
       'page_location': window.location.href
     });
+  </script>
+  
+  <!-- Firebase Analytics for Page View Tracking -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+  <script>
+    // Firebase Configuration - Replace with your actual credentials
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    
+    // Initialize Firebase and track page view
+    try {
+      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        
+        // Track page view anonymously
+        const pagePath = window.location.pathname.replace(/^\//, '') || 'index.html';
+        const today = new Date().toISOString().split('T')[0];
+        const viewRef = database.ref(`pageViews/${pagePath}/${today}`);
+        
+        viewRef.transaction((currentViews) => {
+          return (currentViews || 0) + 1;
+        });
+      }
+    } catch (error) {
+      console.log('Firebase tracking not configured');
+    }
   </script>
 </head>
 <body>
@@ -242,6 +291,9 @@
       
       <!-- Right side controls -->
       <div class="header-controls">
+        <!-- Google Translate -->
+        <div id="google_translate_element" class="translate-widget"></div>
+        
         <select id="lang" class="lang-select" aria-label="Language">
           <option value="en">English</option>
           <option value="ne">नेपाली</option>
@@ -285,27 +337,27 @@
       <section class="section">
         <div class="container text-center">
           <div class="card">
-            <h2 data-i18n="impact.title">Powering Students Worldwide</h2>
+            <h2 data-i18n="impact.title">Supporting Students Worldwide</h2>
             <div class="stats-grid">
               <div class="stat-card fade-in">
                 <i class="fas fa-users icon" style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true"></i>
-                <span class="stat-number">1000+</span>
-                <p>Students Supported</p>
+                <span class="stat-number" data-count="25">0</span>
+                <p>Students Helped</p>
               </div>
               <div class="stat-card fade-in">
                 <i class="fas fa-trophy icon" style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true"></i>
-                <span class="stat-number">24</span>
+                <span class="stat-number" data-count="24">0</span>
                 <p>Verified Scholarships</p>
               </div>
               <div class="stat-card fade-in">
                 <i class="fas fa-globe icon" style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true"></i>
-                <span class="stat-number">6+</span>
+                <span class="stat-number" data-count="6">0</span>
                 <p>Countries Covered</p>
               </div>
               <div class="stat-card fade-in">
                 <i class="fas fa-chart-line icon" style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true"></i>
-                <span class="stat-number">100%</span>
-                <p>Success Rate</p>
+                <span class="stat-number" data-count="12">0</span>
+                <p>Countries Reached</p>
               </div>
             </div>
           </div>
@@ -319,22 +371,22 @@
             <div class="feature-card hover-lift card">
               <h3><i class="fas fa-brain icon-left" aria-hidden="true"></i><span data-i18n="index.card_sch_title">Scholarship Intelligence</span></h3>
               <p data-i18n="index.card_sch_desc">Verified, ongoing opportunities — filter by country, deadline, and eligibility. Our database matches students with the most relevant scholarships based on their academic profile and destination preferences.</p>
-              <img src="assets/images/placeholder-800x450.jpg" alt="Scholarship Database Interface" class="feature-image" width="800" height="450" loading="lazy" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+              <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=450&fit=crop" alt="Scholarship Database Interface" class="feature-image" width="800" height="450" loading="lazy">
             </div>
             <div class="feature-card hover-lift card">
               <h3><i class="fas fa-file-alt icon-left" aria-hidden="true"></i><span data-i18n="index.card_guides_title">Application Guides</span></h3>
-              <p data-i18n="index.card_guides_desc">Step-by-step application guides and downloadable templates for scholarships. From SOP writing to visa applications, get comprehensive guides that have helped thousands of students succeed.</p>
-              <img src="assets/images/placeholder-800x450.jpg" alt="Application Guides" class="feature-image" width="800" height="450" loading="lazy" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+              <p data-i18n="index.card_guides_desc">Step-by-step application guides and downloadable templates for scholarships. From SOP writing to visa applications, get comprehensive guides to support your study abroad journey.</p>
+              <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=450&fit=crop" alt="Application Guides" class="feature-image" width="800" height="450" loading="lazy">
             </div>
             <div class="feature-card hover-lift card">
               <h3><i class="fas fa-passport icon-left" aria-hidden="true"></i><span data-i18n="index.card_cit_title">Citizenship Pathways</span></h3>
               <p data-i18n="index.card_cit_desc">Quick pathways and official links for study → work → PR → citizenship. Navigate complex immigration processes with clear timelines and requirements for each destination country.</p>
-              <img src="assets/images/placeholder-800x450.jpg" alt="Citizenship Pathways" class="feature-image" width="800" height="450" loading="lazy" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+              <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=450&fit=crop" alt="Citizenship Pathways" class="feature-image" width="800" height="450" loading="lazy">
             </div>
             <div class="feature-card hover-lift card">
               <h3><i class="fas fa-star icon-left" aria-hidden="true"></i><span data-i18n="index.card_stories_title">Success Stories</span></h3>
               <p data-i18n="index.card_stories_desc">Learn from students who have successfully navigated the scholarship and visa process. Real experiences, practical tips, and insights from Nepali students studying worldwide.</p>
-              <img src="assets/images/placeholder-800x450.jpg" alt="Success Stories" class="feature-image" width="800" height="450" loading="lazy" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=450&fit=crop" alt="Success Stories" class="feature-image" width="800" height="450" loading="lazy">
             </div>
           </div>
         </div>
@@ -354,21 +406,21 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                   <h3><i class="fas fa-shield-alt icon-left" aria-hidden="true"></i>Data Verification</h3>
-                  <p>Every scholarship opportunity is manually verified and updated regularly. We cross-reference with official sources and maintain direct contact with scholarship providers.</p>
+                  <p>Every scholarship opportunity is manually verified and updated regularly. We cross-reference with official sources to ensure accuracy.</p>
                 </div>
               </div>
               <div class="timeline-step">
                 <div class="step-number">2</div>
                 <div class="step-content">
                   <h3><i class="fas fa-user-check icon-left" aria-hidden="true"></i>Student Matching</h3>
-                  <p>Our algorithm considers academic background, financial need, destination preferences, and eligibility criteria to suggest the most relevant opportunities.</p>
+                  <p>Our database considers academic background, financial need, destination preferences, and eligibility criteria to help students find the most relevant opportunities.</p>
                 </div>
               </div>
               <div class="timeline-step">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                  <h3><i class="fas fa-chart-bar icon-left" aria-hidden="true"></i>Success Tracking</h3>
-                  <p>We follow up with students to track application success rates and continuously improve our guidance based on real outcomes.</p>
+                  <h3><i class="fas fa-chart-bar icon-left" aria-hidden="true"></i>Continuous Improvement</h3>
+                  <p>We regularly update our guidance and resources based on feedback and the latest information from official sources.</p>
                 </div>
               </div>
             </div>
@@ -386,8 +438,14 @@
         <i class="fas fa-copyright icon-left" aria-hidden="true"></i>2025 Civora
       </div>
       <div class="footer-right">
+        <a href="about.html" data-i18n="footer.links.about">About</a>
+        <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
+        <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
+        <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
+        <a href="students-supported.html">Students & Stories</a>
+        <a href="ielts-prep.html">IELTS & Prep</a>
+        <a href="contact.html">Contact</a>
         <a href="privacy.html" class="footer-link">Privacy</a>
-        <a href="#" class="footer-link">Terms</a>
         <a href="https://linkedin.com/company/civora" class="social-icon" target="_blank" rel="noopener" aria-label="LinkedIn">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
@@ -396,42 +454,5 @@
       </div>
     </div>
   </footer>
-            </p>
-            <div class="volunteer-cta">
-              <a href="contact.html" class="volunteer-btn" data-i18n="support.volunteer">Volunteer to Help</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="mission">
-      <div class="container">
-        <h2 data-i18n="index.mission_title">Mission</h2>
-        <p data-i18n="index.mission_body">
-          Civora helps Nepali students access global education opportunities. We provide verified scholarships, clear immigration pathways, and practical documents to make international education more accessible.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-info">
-        <div>© <span id="year"></span> Civora | Last updated: <span id="last-updated"></span></div>
-      </div>
-      <div class="footer-links">
-        <a href="about.html" data-i18n="footer.links.about">About</a>
-        <a href="scholarships.html" data-i18n="footer.links.scholarships">Scholarships</a>
-        <a href="citizenship.html" data-i18n="footer.links.citizenship">Citizenship</a>
-        <a href="guides.html" data-i18n="footer.links.guides">Guides</a>
-        <a href="students-supported.html">Students & Stories</a>
-        <a href="ielts-prep.html">IELTS & Prep</a>
-        <a href="contact.html">Contact</a>
-        <a href="privacy.html">Privacy</a>
-      </div>
-    </div>
-  </footer>
-  </div> <!-- Close main-content -->
 </body>
 </html>
