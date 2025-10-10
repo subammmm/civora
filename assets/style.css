@@ -94,12 +94,18 @@
   --focus: rgba(94, 106, 210, 0.3);
 }
 
-html {
-  background: var(--bg-primary);
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+html, body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  min-height: 100%;
+  height: 100%;
+}
+
+html {
+  background: var(--bg-primary);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -108,9 +114,6 @@ body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
   font-size: var(--body-size);
   line-height: calc(var(--body-line) / var(--body-size));
   font-weight: var(--body-weight);
@@ -118,14 +121,32 @@ body {
 
 /* Page Wrapper - 75% Scaling */
 #wrapper {
-  transform: scale(0.75);
   transform-origin: top left;
+  transform: scale(0.75);
   width: calc(100% / 0.75);
-  overflow: visible;
+  min-height: calc(100vh / 0.75);
+  position: relative;
   will-change: transform;
+  overflow: visible;
+  backface-visibility: hidden;
+  transform: translateZ(0);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+}
+
+/* Prevent bottom scroll gap */
+body > *:not(#wrapper) {
+  display: none;
+}
+
+.site-fixed, header.site-fixed, footer.site-fixed {
+  position: relative;
+}
+
+.header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 /* Typography System - Exact Specification Implementation */
@@ -1885,30 +1906,6 @@ a, button {
 .stat-card:nth-child(3) { --stat-order: 3; }
 .stat-card:nth-child(4) { --stat-order: 4; }
 
-/* Google Translate Widget Styling */
-.translate-widget {
-  display: inline-block;
-  margin-right: 12px;
-}
-
-.translate-widget .goog-te-gadget {
-  font-size: 0;
-  color: var(--text-primary);
-}
-
-.translate-widget .goog-te-gadget-simple {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 14px;
-  color: var(--text-primary);
-}
-
-.translate-widget .goog-te-gadget-simple:hover {
-  background: var(--border);
-}
-
 /* Main content full width */
 .main-content {
   width: 100%;
@@ -1932,16 +1929,11 @@ a, button {
     min-height: auto;
   }
   
-  .translate-widget {
-    display: none;
-  }
-  
   /* Disable scaling on mobile devices */
   #wrapper {
-    transform: scale(1);
+    transform: none;
     width: 100%;
     min-height: 100vh;
-    will-change: auto;
   }
 }
 }
