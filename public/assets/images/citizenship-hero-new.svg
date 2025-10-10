@@ -1,0 +1,46 @@
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Professional background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Clean citizenship/passport elements -->
+  <g opacity="0.15">
+    <!-- Passport -->
+    <rect x="200" y="120" width="80" height="120" fill="none" stroke="#C00000" stroke-width="2" rx="4"/>
+    <rect x="210" y="140" width="60" height="40" fill="#C00000" opacity="0.3" rx="2"/>
+    <line x1="210" y1="200" x2="270" y2="200" stroke="#C00000" stroke-width="1"/>
+    <line x1="210" y1="210" x2="250" y2="210" stroke="#C00000" stroke-width="1"/>
+    <line x1="210" y1="220" x2="260" y2="220" stroke="#C00000" stroke-width="1"/>
+    
+    <!-- Globe with pathways -->
+    <circle cx="450" cy="180" r="50" stroke="#C00000" stroke-width="2" fill="none"/>
+    <path d="M450 130 C450 130, 480 150, 480 180 C480 210, 450 230, 450 230" stroke="#C00000" stroke-width="1" fill="none"/>
+    <path d="M450 130 C450 130, 420 150, 420 180 C420 210, 450 230, 450 230" stroke="#C00000" stroke-width="1" fill="none"/>
+    <line x1="400" y1="180" x2="500" y2="180" stroke="#C00000" stroke-width="1"/>
+    
+    <!-- Target/Goal -->
+    <circle cx="600" cy="180" r="30" stroke="#C00000" stroke-width="2" fill="none"/>
+    <circle cx="600" cy="180" r="20" stroke="#C00000" stroke-width="1" fill="none"/>
+    <circle cx="600" cy="180" r="10" stroke="#C00000" stroke-width="1" fill="none"/>
+    <circle cx="600" cy="180" r="3" fill="#C00000"/>
+    
+    <!-- Pathway arrows -->
+    <path d="M280 180 Q 360 160 400 180" stroke="#C00000" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M500 180 Q 540 170 570 180" stroke="#C00000" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <!-- Arrow marker -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#C00000"/>
+      </marker>
+    </defs>
+  </g>
+  
+  <!-- Text overlay -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="18" fill="#666666" text-anchor="middle" opacity="0.5">Citizenship Pathways</text>
+</svg>
