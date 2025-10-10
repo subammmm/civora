@@ -67,6 +67,137 @@
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Inline Critical CSS for Above-the-Fold Content -->
+  <style>
+    /* Critical CSS - loaded inline for fast initial render */
+    :root {
+      --bg-primary: #0E0E10;
+      --surface: #1C1C1F;
+      --border: #2A2A2D;
+      --text-primary: #FFFFFF;
+      --text-secondary: #9CA3AF;
+      --accent: #5E6AD2;
+      --nav-height: 64px;
+      --space-4: 16px;
+      --space-6: 24px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      background: var(--bg-primary);
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text-primary);
+      line-height: 1.6;
+      background: var(--bg-primary);
+      min-height: 100vh;
+    }
+    
+    /* Header Critical Styles */
+    .site-header {
+      position: sticky;
+      top: 0;
+      background: rgba(14, 14, 16, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      height: var(--nav-height);
+    }
+    
+    .header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+    }
+    
+    /* Navigation Critical Styles */
+    .nav {
+      display: flex;
+      gap: var(--space-6);
+    }
+    
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+    
+    /* Hero Section Critical Styles */
+    .hero {
+      padding: 80px var(--space-6) 60px;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+    
+    .subtext {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Loading state */
+    .skip-to-content {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    
+    .skip-to-content:focus {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: auto;
+      height: auto;
+      padding: 10px;
+      background: var(--accent);
+      color: var(--text-primary);
+      z-index: 10000;
+      border-radius: 4px;
+    }
+  </style>
+  
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
   <!-- Google Analytics 4 -->
@@ -188,22 +319,22 @@
             <div class="feature-card hover-lift card">
               <h3><i class="fas fa-brain icon-left" aria-hidden="true"></i><span data-i18n="index.card_sch_title">Scholarship Intelligence</span></h3>
               <p data-i18n="index.card_sch_desc">Verified, ongoing opportunities — filter by country, deadline, and eligibility. Our database matches students with the most relevant scholarships based on their academic profile and destination preferences.</p>
-              <img src="assets/images/placeholder-800x450.jpg" alt="Scholarship Database Interface" class="feature-image" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+              <img src="assets/images/placeholder-800x450.jpg" alt="Scholarship Database Interface" class="feature-image" width="800" height="450" loading="lazy" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
             </div>
             <div class="feature-card hover-lift card">
               <h3><i class="fas fa-file-alt icon-left" aria-hidden="true"></i><span data-i18n="index.card_guides_title">Application Guides</span></h3>
               <p data-i18n="index.card_guides_desc">Step-by-step application guides and downloadable templates for scholarships. From SOP writing to visa applications, get comprehensive guides that have helped thousands of students succeed.</p>
-              <img src="assets/images/placeholder-800x450.jpg" alt="Application Guides" class="feature-image" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+              <img src="assets/images/placeholder-800x450.jpg" alt="Application Guides" class="feature-image" width="800" height="450" loading="lazy" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
             </div>
             <div class="feature-card hover-lift card">
               <h3><i class="fas fa-passport icon-left" aria-hidden="true"></i><span data-i18n="index.card_cit_title">Citizenship Pathways</span></h3>
               <p data-i18n="index.card_cit_desc">Quick pathways and official links for study → work → PR → citizenship. Navigate complex immigration processes with clear timelines and requirements for each destination country.</p>
-              <img src="assets/images/placeholder-800x450.jpg" alt="Citizenship Pathways" class="feature-image" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+              <img src="assets/images/placeholder-800x450.jpg" alt="Citizenship Pathways" class="feature-image" width="800" height="450" loading="lazy" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
             </div>
             <div class="feature-card hover-lift card">
               <h3><i class="fas fa-star icon-left" aria-hidden="true"></i><span data-i18n="index.card_stories_title">Success Stories</span></h3>
               <p data-i18n="index.card_stories_desc">Learn from students who have successfully navigated the scholarship and visa process. Real experiences, practical tips, and insights from Nepali students studying worldwide.</p>
-              <img src="assets/images/placeholder-800x450.jpg" alt="Success Stories" class="feature-image" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+              <img src="assets/images/placeholder-800x450.jpg" alt="Success Stories" class="feature-image" width="800" height="450" loading="lazy" style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
             </div>
           </div>
         </div>
