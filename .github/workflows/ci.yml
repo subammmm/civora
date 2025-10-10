@@ -44,5 +44,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run TypeScript type check
-        run: npm run type-check
+      - name: Run TypeScript type check (only if TS present)
+        shell: bash
+        run: |
+          if git ls-files '*.ts' '*.tsx' | grep -q . || [ -f next-env.d.ts ]; then
+            echo "TypeScript detected. Running type-check..."
+            npm run type-check
+          else
+            echo "No TypeScript files found; skipping type-check."
+          fi
