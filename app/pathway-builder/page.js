@@ -1,11 +1,13 @@
 export const metadata = {
   title: 'Pathway Builder',
   description: 'Build your personalized education and career pathway.',
-}
+};
 
 export default function Pathway_BuilderPage() {
   return (
-    <div dangerouslySetInnerHTML={{ __html: `      <h1>Personalized Pathway Builder</h1>
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `      <h1>Personalized Pathway Builder</h1>
       <p className="page-intro">Answer a few questions about your background and goals to receive personalized recommendations for scholarships, study programs, and visa pathways that match your profile.</p>
       
       <div className="pathway-builder" id="pathwayBuilder">
@@ -249,6 +251,8 @@ export default function Pathway_BuilderPage() {
         </div>
       </div>
     </main>
-` }} />
-  )
+`,
+      }}
+    />
+  );
 }

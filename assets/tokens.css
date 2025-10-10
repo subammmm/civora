@@ -2,19 +2,19 @@
 
 :root {
   /* Colors - Dark-first Design */
-  --bg-primary: #0E0E10;           /* Background */
-  --surface: #1C1C1F;             /* Surface panels */
-  --border: #2A2A2D;              /* Borders/dividers */
-  --text-primary: #FFFFFF;        /* Primary text */
-  --text-secondary: #9CA3AF;      /* Secondary text */
-  --accent: #5E6AD2;              /* Accent (brand purple) */
-  --success: #10B981;             /* Success */
-  --error: #EF4444;               /* Error */
-  --warning: #F59E0B;             /* Warning */
+  --bg-primary: #0e0e10; /* Background */
+  --surface: #1c1c1f; /* Surface panels */
+  --border: #2a2a2d; /* Borders/dividers */
+  --text-primary: #ffffff; /* Primary text */
+  --text-secondary: #9ca3af; /* Secondary text */
+  --accent: #5e6ad2; /* Accent (brand purple) */
+  --success: #10b981; /* Success */
+  --error: #ef4444; /* Error */
+  --warning: #f59e0b; /* Warning */
 
   /* Typography - Inter Font System */
-  --font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  
+  --font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
   /* Typography Scale */
   --h1-size: 48px;
   --h1-line: 56px;
@@ -61,11 +61,11 @@
   --grid-columns: 12;
   --grid-max-width: 1440px;
   --grid-gutter: 24px;
-  
+
   /* Container Padding */
   --container-padding-desktop: 80px;
   --container-padding-mobile: 24px;
-  
+
   /* Section Spacing */
   --section-spacing: 120px;
 
@@ -82,41 +82,105 @@
 }
 
 /* Utility Classes for Spacing */
-.space-1 { margin: var(--space-1); }
-.space-2 { margin: var(--space-2); }
-.space-3 { margin: var(--space-3); }
-.space-4 { margin: var(--space-4); }
-.space-6 { margin: var(--space-6); }
-.space-8 { margin: var(--space-8); }
-.space-12 { margin: var(--space-12); }
-.space-16 { margin: var(--space-16); }
+.space-1 {
+  margin: var(--space-1);
+}
+.space-2 {
+  margin: var(--space-2);
+}
+.space-3 {
+  margin: var(--space-3);
+}
+.space-4 {
+  margin: var(--space-4);
+}
+.space-6 {
+  margin: var(--space-6);
+}
+.space-8 {
+  margin: var(--space-8);
+}
+.space-12 {
+  margin: var(--space-12);
+}
+.space-16 {
+  margin: var(--space-16);
+}
 
-.p-1 { padding: var(--space-1); }
-.p-2 { padding: var(--space-2); }
-.p-3 { padding: var(--space-3); }
-.p-4 { padding: var(--space-4); }
-.p-6 { padding: var(--space-6); }
-.p-8 { padding: var(--space-8); }
-.p-12 { padding: var(--space-12); }
-.p-16 { padding: var(--space-16); }
+.p-1 {
+  padding: var(--space-1);
+}
+.p-2 {
+  padding: var(--space-2);
+}
+.p-3 {
+  padding: var(--space-3);
+}
+.p-4 {
+  padding: var(--space-4);
+}
+.p-6 {
+  padding: var(--space-6);
+}
+.p-8 {
+  padding: var(--space-8);
+}
+.p-12 {
+  padding: var(--space-12);
+}
+.p-16 {
+  padding: var(--space-16);
+}
 
-.mb-1 { margin-bottom: var(--space-1); }
-.mb-2 { margin-bottom: var(--space-2); }
-.mb-3 { margin-bottom: var(--space-3); }
-.mb-4 { margin-bottom: var(--space-4); }
-.mb-6 { margin-bottom: var(--space-6); }
-.mb-8 { margin-bottom: var(--space-8); }
-.mb-12 { margin-bottom: var(--space-12); }
-.mb-16 { margin-bottom: var(--space-16); }
+.mb-1 {
+  margin-bottom: var(--space-1);
+}
+.mb-2 {
+  margin-bottom: var(--space-2);
+}
+.mb-3 {
+  margin-bottom: var(--space-3);
+}
+.mb-4 {
+  margin-bottom: var(--space-4);
+}
+.mb-6 {
+  margin-bottom: var(--space-6);
+}
+.mb-8 {
+  margin-bottom: var(--space-8);
+}
+.mb-12 {
+  margin-bottom: var(--space-12);
+}
+.mb-16 {
+  margin-bottom: var(--space-16);
+}
 
-.mt-1 { margin-top: var(--space-1); }
-.mt-2 { margin-top: var(--space-2); }
-.mt-3 { margin-top: var(--space-3); }
-.mt-4 { margin-top: var(--space-4); }
-.mt-6 { margin-top: var(--space-6); }
-.mt-8 { margin-top: var(--space-8); }
-.mt-12 { margin-top: var(--space-12); }
-.mt-16 { margin-top: var(--space-16); }
+.mt-1 {
+  margin-top: var(--space-1);
+}
+.mt-2 {
+  margin-top: var(--space-2);
+}
+.mt-3 {
+  margin-top: var(--space-3);
+}
+.mt-4 {
+  margin-top: var(--space-4);
+}
+.mt-6 {
+  margin-top: var(--space-6);
+}
+.mt-8 {
+  margin-top: var(--space-8);
+}
+.mt-12 {
+  margin-top: var(--space-12);
+}
+.mt-16 {
+  margin-top: var(--space-16);
+}
 
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {

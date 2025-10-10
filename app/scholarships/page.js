@@ -1,11 +1,13 @@
 export const metadata = {
   title: 'Scholarships Database',
   description: 'Discover and compare scholarships tailored for Nepali students worldwide.',
-}
+};
 
 export default function ScholarshipsPage() {
   return (
-    <div dangerouslySetInnerHTML={{ __html: `      
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `      
       <section className="section" style="padding: 2rem 0;">
         <div className="container">
           <div className="card" style="margin-bottom: 2rem;">
@@ -719,6 +721,8 @@ export default function ScholarshipsPage() {
         </div>
       </section>
     </main>
-` }} />
-  )
+`,
+      }}
+    />
+  );
 }

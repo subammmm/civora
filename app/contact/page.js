@@ -1,11 +1,13 @@
 export const metadata = {
   title: 'Contact Us',
   description: 'Get in touch with Civora for questions, feedback, or partnership opportunities.',
-}
+};
 
 export default function ContactPage() {
   return (
-    <div dangerouslySetInnerHTML={{ __html: `      
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `      
       <section className="hero">
         <div className="container">
           <h1>How Can We Help?</h1>
@@ -130,6 +132,8 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
-` }} />
-  )
+`,
+      }}
+    />
+  );
 }

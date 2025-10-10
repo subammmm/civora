@@ -1,5 +1,7 @@
 # 🌍 Civora
 
+> **Note**: This project is a Next.js 14 App Router application with static export for GitHub Pages deployment. Legacy static HTML files have been archived to `legacy/` directory to avoid duplication - the Next.js app under `app/` is the single source of truth for all active pages.
+
 Civora is a research-based platform that compiles verified scholarships, visa pathways, and citizenship options for students from Nepal and other underrepresented countries.
 
 **Now built with Next.js 14!** 🚀
@@ -7,15 +9,17 @@ Civora is a research-based platform that compiles verified scholarships, visa pa
 ## Technology Stack
 
 - **Framework**: Next.js 14 (App Router)
-- **Language**: JavaScript
+- **Language**: JavaScript (with TypeScript support)
 - **Styling**: CSS (preserved from original site)
-- **Deployment**: GitHub Pages (static export)
+- **Deployment**: GitHub Pages (static export via CI/CD)
 - **Domain**: civora.me
+- **Quality Tools**: ESLint, Prettier, TypeScript type-checking
 
 ## Local Development
 
 ### Prerequisites
-- Node.js 18 or higher
+
+- Node.js 18.17.0 or higher (Node 20 recommended - see `.nvmrc`)
 - npm
 
 ### Development Server
@@ -29,6 +33,22 @@ npm run dev
 # Open http://localhost:3000/
 ```
 
+### Quality Checks
+
+```bash
+# Run ESLint
+npm run lint
+
+# Type check
+npm run type-check
+
+# Format check
+npm run format
+
+# Auto-format code
+npm run format:write
+```
+
 ### Production Build
 
 ```bash
@@ -40,6 +60,14 @@ cd out
 python3 -m http.server 8080
 # Open http://localhost:8080/
 ```
+
+## CI/CD
+
+The project uses GitHub Actions for continuous integration and deployment:
+
+- **CI Workflow** (`.github/workflows/ci.yml`): Runs lint and type-check on all pushes and PRs to main
+- **Deploy Workflow** (`.github/workflows/nextjs-deploy.yml`): Automatically builds and deploys to GitHub Pages on push to main
+- **Dependabot**: Automatically opens PRs for dependency updates weekly
 
 ## Live Site
 
@@ -62,10 +90,18 @@ civora/
 │   ├── CNAME             # Custom domain config
 │   ├── manifest.webmanifest
 │   └── robots.txt
+├── legacy/                # Archived static HTML files (not deployed)
 ├── next.config.js        # Next.js configuration
+├── tsconfig.json         # TypeScript configuration
+├── .eslintrc.json        # ESLint configuration
+├── .prettierrc           # Prettier configuration
+├── .nvmrc                # Node version (20)
 ├── package.json          # Dependencies
-└── .github/workflows/    # GitHub Actions for deployment
-    └── nextjs-deploy.yml
+└── .github/
+    ├── workflows/        # GitHub Actions
+    │   ├── ci.yml        # CI checks (lint, type-check)
+    │   └── nextjs-deploy.yml  # Deployment
+    └── dependabot.yml    # Automated dependency updates
 ```
 
 ## Next.js Configuration
@@ -91,6 +127,7 @@ Deployment is automated via GitHub Actions:
 4. Available at civora.me within 1-2 minutes
 
 Manual deployment:
+
 ```bash
 npm run build
 # The `out/` directory contains the static site
@@ -148,6 +185,7 @@ npm run build
 To test site performance, run these checks:
 
 1. **Google PageSpeed Insights**
+
    ```
    https://pagespeed.web.dev/
    Test URL: https://civora.me/
@@ -155,6 +193,7 @@ To test site performance, run these checks:
    ```
 
 2. **Lighthouse (Chrome DevTools)**
+
    ```bash
    # Open Chrome DevTools (F12)
    # Navigate to Lighthouse tab
@@ -177,6 +216,7 @@ To test site performance, run these checks:
 The site uses a 75% scale transform for better content density on desktop devices. To test:
 
 1. **Browser DevTools Testing**
+
    ```bash
    # Open Chrome DevTools (F12)
    # Console tab - check for viewport logging:
@@ -196,6 +236,7 @@ The site uses a 75% scale transform for better content density on desktop device
    - [ ] Tablet: Test at 768px breakpoint
 
 3. **Performance Validation**
+
    ```bash
    # Check for transform performance
    # DevTools → Performance tab → Record page load
@@ -209,6 +250,7 @@ The site uses a 75% scale transform for better content density on desktop device
    - [ ] Mobile browsers (Chrome Mobile, Safari iOS)
 
 **Note:** The wrapper scaling uses `will-change: transform` for optimized performance and is disabled on mobile devices (max-width: 768px) to prevent zoom issues.
+
 ### Scholarship Filtering System
 
 The scholarships page includes a dynamic filtering system that allows users to filter scholarships by country, level, field, and deadline.
@@ -216,6 +258,7 @@ The scholarships page includes a dynamic filtering system that allows users to f
 **Testing the Filter System:**
 
 1. **Basic Filtering**
+
    ```bash
    # Start local server
    python3 -m http.server 8080
@@ -241,6 +284,7 @@ The scholarships page includes a dynamic filtering system that allows users to f
    - All filters should clear and all 24 scholarships should be visible
 
 5. **Console Debugging**
+
    ```javascript
    // Open browser console to see:
    // - "Filters populated: X countries, Y levels..." on page load
@@ -256,6 +300,7 @@ The scholarships page includes a dynamic filtering system that allows users to f
    - Verify dynamic country options are populated from actual scholarship data
 
 **Expected Behavior:**
+
 - ✅ All 24 scholarships visible on page load
 - ✅ Filters use AND logic (must match ALL selected criteria)
 - ✅ No results message appears when no scholarships match
@@ -307,15 +352,16 @@ The site includes optional Firebase integration for anonymous page view tracking
 
 **For index.html:**
 Replace the placeholder config in the Firebase script section (around line 230):
+
 ```javascript
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
+  databaseURL: 'https://YOUR_PROJECT_ID.firebaseio.com',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: 'YOUR_PROJECT_ID.appspot.com',
+  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+  appId: 'YOUR_APP_ID',
 };
 ```
 
@@ -325,6 +371,7 @@ Update the same configuration in private.html (around line 157)
 ### 4. Set Database Rules
 
 In Firebase Console, go to Realtime Database → Rules:
+
 ```json
 {
   "rules": {
@@ -351,6 +398,7 @@ In Firebase Console, go to Realtime Database → Rules:
 ⚠️ **The authentication in private.html is for demonstration only!**
 
 For production use:
+
 - Implement proper server-side authentication
 - Use Firebase Authentication or OAuth
 - Never hardcode credentials in client-side code
@@ -360,6 +408,7 @@ For production use:
 ### Disabling Firebase
 
 If you don't want to use Firebase analytics:
+
 - The site will work normally without configuration
 - Page views simply won't be tracked
 
@@ -370,6 +419,7 @@ If you don't want to use Firebase analytics:
 This site was migrated from static HTML/CSS/JS to Next.js 14 in October 2024. The migration:
 
 ✅ **Preserved**:
+
 - All original content and design
 - URL structure (with trailing slashes)
 - Custom domain (civora.me)
@@ -377,11 +427,25 @@ This site was migrated from static HTML/CSS/JS to Next.js 14 in October 2024. Th
 - SEO metadata and structured data
 
 ✅ **Improved**:
+
 - Modern React-based architecture
 - Better build tooling and development experience
 - Optimized performance with Next.js
 - Automated deployment via GitHub Actions
 - Type-safe routing with App Router
+- CI/CD with automated quality checks
+- TypeScript support and type checking
+- Code formatting with Prettier
+- Linting with ESLint
 
-The original HTML files are kept in the repository for reference during the transition period.
+### Legacy HTML Files
+
+The original static HTML files have been moved to the `legacy/` directory to avoid confusion and content duplication. These files are:
+
+- **Not deployed** to GitHub Pages (only the Next.js build output in `out/` is deployed)
+- **Preserved for reference** in case rollback is needed
+- **Not maintained** - all updates should be made to the Next.js app under `app/`
+
+The Next.js app under `app/` is the single source of truth for all active pages.
+
 - No errors will appear in the console
