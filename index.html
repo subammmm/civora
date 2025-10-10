@@ -206,10 +206,9 @@
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        includedLanguages: 'en,ne,hi,ur,es,fr,de,zh-CN,ja,ko',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
+        includedLanguages: 'en,ne,hi,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'language-selector');
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -292,16 +291,7 @@
       <!-- Right side controls -->
       <div class="header-controls">
         <!-- Google Translate -->
-        <div id="google_translate_element" class="translate-widget"></div>
-        
-        <select id="lang" class="lang-select" aria-label="Language">
-          <option value="en">English</option>
-          <option value="ne">नेपाली</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="ur">اردو</option>
-          <option value="hi">हिन्दी</option>
-        </select>
+        <div id="language-selector"></div>
         
         <!-- Mobile menu toggle -->
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">

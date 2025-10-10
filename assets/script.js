@@ -1172,3 +1172,48 @@ function trackExternalLinks() {
     }
   });
 }
+
+// Google Translate handling
+(function initGoogleTranslate() {
+  // Wait for page load to check if Google Translate loaded
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      const languageSelector = document.getElementById('language-selector');
+      
+      // If Google Translate script failed to load, hide the selector
+      if (languageSelector && !window.google?.translate) {
+        console.warn('Google Translate failed to load');
+        languageSelector.style.display = 'none';
+      }
+    }, 2000);
+  });
+  
+  // Listen for language changes to refresh dynamic elements if needed
+  const checkForLanguageChange = setInterval(function() {
+    const gtCombo = document.querySelector('.goog-te-combo');
+    if (gtCombo) {
+      // Language selector found, add change listener
+      gtCombo.addEventListener('change', function() {
+        // Wait for translation to complete
+        setTimeout(function() {
+          // Re-trigger any animations or counters if needed
+          const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+          statNumbers.forEach(function(stat) {
+            if (stat.textContent !== '0') {
+              const target = parseInt(stat.getAttribute('data-count'));
+              if (!isNaN(target)) {
+                stat.textContent = target;
+              }
+            }
+          });
+        }, 500);
+      });
+      clearInterval(checkForLanguageChange);
+    }
+  }, 500);
+  
+  // Clear interval after 10 seconds to avoid infinite checking
+  setTimeout(function() {
+    clearInterval(checkForLanguageChange);
+  }, 10000);
+})();
