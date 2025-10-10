@@ -28,15 +28,25 @@
   <script defer src="assets/script.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script defer src="assets/leaflet-map.js"></script>
-  <!-- Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CIVORA2024"></script>
   <script>
-    if (typeof gtag !== 'undefined') {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
-    }
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-CIVORA2024', {
+      'anonymize_ip': true,
+      'allow_google_signals': false,
+      'allow_ad_personalization_signals': false
+    });
+    
+    // Track students & stories page views
+    gtag('event', 'page_view', {
+      'page_title': 'Students & Success Stories',
+      'page_location': window.location.href,
+      'content_group1': 'Community'
+    });
   </script>
 </head>
 <body>
