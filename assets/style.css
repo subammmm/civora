@@ -502,6 +502,71 @@ em, i {
   border-top: 1px solid var(--border);
 }
 
+.footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.footer-left {
+  color: var(--text-secondary);
+  font-size: var(--small-size);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.footer-right a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--small-size);
+  transition: color 0.2s ease;
+}
+
+.footer-right a:hover {
+  color: var(--text-primary);
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--small-size);
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.social-icon:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-3);
+  }
+  
+  .footer-right {
+    justify-content: center;
+  }
+}
+
 /* Card/Tile System - Updated with new specifications */
 .card, .box, .linear-card, .tile {
   background: var(--surface);

@@ -71,6 +71,14 @@
       
       <!-- Right side controls -->
       <div class="header-controls">
+        <select id="lang" class="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="ur">اردو</option>
+          <option value="hi">हिन्दी</option>
+        </select>
         
         <!-- Mobile menu toggle -->
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog & Updates — Civora</title>
+  <meta name="description" content="Latest insights, tips, and updates from the Civora team on scholarships, study abroad, and global education opportunities." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="canonical" href="https://civora.me/blog.html" />
+  <meta name="theme-color" content="#0b5fff" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  
+  <!-- Open Graph tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://civora.me/blog.html" />
+  <meta property="og:title" content="Blog & Updates — Civora" />
+  <meta property="og:description" content="Latest insights, tips, and updates from the Civora team on scholarships, study abroad, and global education opportunities." />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  
+  <!-- Twitter tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/script.js"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CIVORA2024"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-CIVORA2024', {
+      'anonymize_ip': true,
+      'allow_google_signals': false,
+      'allow_ad_personalization_signals': false
+    });
+    
+    // Track blog page views
+    gtag('event', 'page_view', {
+      'page_title': 'Blog & Updates',
+      'page_location': window.location.href,
+      'content_group1': 'Blog'
+    });
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Civora Logo" class="brand-logo">
+        Civora
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="site-nav">
+        <a href="index.html" class="nav-item" data-i18n="nav.home">Home</a>
+        <a href="scholarships.html" class="nav-item" data-i18n="nav.scholarships">Scholarships</a>
+        <a href="citizenship.html" class="nav-item" data-i18n="nav.citizenship">Citizenship</a>
+        <a href="guides.html" class="nav-item" data-i18n="nav.guides">Guides</a>
+        <a href="students-supported.html" class="nav-item">Students & Stories</a>
+        <a href="ielts-prep.html" class="nav-item">IELTS & Prep</a>
+        <a href="about.html" class="nav-item" data-i18n="nav.about">About</a>
+        <a href="contact.html" class="nav-item">Contact</a>
+      </nav>
+      
+      <!-- Right side controls -->
+      <div class="header-controls">
+        <select id="lang" class="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="ur">اردو</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+        
+        <!-- Mobile menu toggle -->
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <main class="container page">
+      <h1>Blog & Updates</h1>
+      <p class="page-intro">Insights, tips, and the latest developments in global education. Stay informed about new scholarship opportunities, policy changes, and success strategies for international students.</p>
+      
+      <section class="blog-featured">
+        <article class="blog-post featured-post">
+          <div class="post-header">
+            <span class="post-category">Featured</span>
+            <time class="post-date">December 15, 2024</time>
+          </div>
+          <h2><a href="#post-1">Top 10 Scholarship Mistakes Nepali Students Make (And How to Avoid Them)</a></h2>
+          <p class="post-excerpt">After analyzing hundreds of scholarship applications and talking to successful recipients, I've identified the most common mistakes that prevent talented Nepali students from securing funding. Here's what you need to know.</p>
+          <div class="post-meta">
+            <span class="reading-time">8 min read</span>
+            <div class="post-tags">
+              <span class="tag">Scholarships</span>
+              <span class="tag">Tips</span>
+              <span class="tag">Application Strategy</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="blog-posts">
+        <article class="blog-post">
+          <div class="post-header">
+            <span class="post-category">Analysis</span>
+            <time class="post-date">December 8, 2024</time>
+          </div>
+          <h3><a href="#post-2">2025 Scholarship Landscape: What's Changing for International Students</a></h3>
+          <p class="post-excerpt">Major shifts in global education policy are affecting scholarship availability and eligibility criteria. From new programs in emerging destinations to changes in traditional scholarship powerhouses.</p>
+          <div class="post-meta">
+            <span class="reading-time">6 min read</span>
+            <div class="post-tags">
+              <span class="tag">Global Trends</span>
+              <span class="tag">Policy</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-post">
+          <div class="post-header">
+            <span class="post-category">Guide</span>
+            <time class="post-date">November 30, 2024</time>
+          </div>
+          <h3><a href="#post-3">Building Civora: Lessons from Creating a Student Resource Platform</a></h3>
+          <p class="post-excerpt">The technical and strategic decisions behind building Civora, from choosing a static site architecture to implementing multilingual support. A case study in mission-driven development.</p>
+          <div class="post-meta">
+            <span class="reading-time">10 min read</span>
+            <div class="post-tags">
+              <span class="tag">Tech</span>
+              <span class="tag">Leadership</span>
+              <span class="tag">Case Study</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-post">
+          <div class="post-header">
+            <span class="post-category">Strategy</span>
+            <time class="post-date">November 22, 2024</time>
+          </div>
+          <h3><a href="#post-4">Why Europe is Becoming the Top Choice for Nepali Students</a></h3>
+          <p class="post-excerpt">Data analysis showing the shift in student preferences from traditional English-speaking countries to European destinations. What's driving this change and what it means for future applicants.</p>
+          <div class="post-meta">
+            <span class="reading-time">7 min read</span>
+            <div class="post-tags">
+              <span class="tag">Europe</span>
+              <span class="tag">Trends</span>
+              <span class="tag">Data</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-post">
+          <div class="post-header">
+            <span class="post-category">Update</span>
+            <time class="post-date">November 15, 2024</time>
+          </div>
+          <h3><a href="#post-5">Civora Platform Updates: New Features and Improvements</a></h3>
+          <p class="post-excerpt">Recent additions to the platform including the Pathway Builder tool, enhanced student stories section, and improved mobile experience. Plus a sneak peek at what's coming next.</p>
+          <div class="post-meta">
+            <span class="reading-time">4 min read</span>
+            <div class="post-tags">
+              <span class="tag">Platform</span>
+              <span class="tag">Updates</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="blog-sidebar-content">
+        <div class="sidebar-section">
+          <h3>Subscribe to Updates</h3>
+          <p>Get the latest scholarship opportunities and study abroad tips delivered to your inbox.</p>
+          <form class="newsletter-form" action="https://formspree.io/f/xldpregr" method="POST">
+            <input type="hidden" name="_subject" value="Newsletter Subscription">
+            <input type="email" name="email" placeholder="Your email address" required>
+            <button type="submit" class="subscribe-btn">Subscribe</button>
+          </form>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Popular Topics</h3>
+          <div class="topic-tags">
+            <a href="#" class="topic-tag">KGSP</a>
+            <a href="#" class="topic-tag">Eiffel Scholarship</a>
+            <a href="#" class="topic-tag">Erasmus+</a>
+            <a href="#" class="topic-tag">Canada Study Permit</a>
+            <a href="#" class="topic-tag">SOP Writing</a>
+            <a href="#" class="topic-tag">IELTS Preparation</a>
+            <a href="#" class="topic-tag">Visa Applications</a>
+            <a href="#" class="topic-tag">European Universities</a>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Recent Scholarship Alerts</h3>
+          <div class="scholarship-alerts">
+            <div class="alert-item">
+              <span class="alert-date">Dec 10</span>
+              <div class="alert-content">
+                <strong>KGSP 2025</strong> applications now open
+                <a href="scholarships.html" class="alert-link">View Details</a>
+              </div>
+            </div>
+            <div class="alert-item">
+              <span class="alert-date">Dec 5</span>
+              <div class="alert-content">
+                <strong>Eiffel Excellence</strong> deadline extended
+                <a href="scholarships.html" class="alert-link">View Details</a>
+              </div>
+            </div>
+            <div class="alert-item">
+              <span class="alert-date">Nov 28</span>
+              <div class="alert-content">
+                <strong>New Dutch Scholarships</strong> announced
+                <a href="scholarships.html" class="alert-link">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="blog-cta">
+        <div class="cta-content">
+          <h2>Have a Topic Suggestion?</h2>
+          <p>What would you like to read about? Suggest topics or ask questions that could become our next blog post.</p>
+          <a href="contact.html" class="cta-btn">Suggest a Topic</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-info">
+          <div>© <span id="year"></span> Civora | Last updated: <span id="last-updated"></span></div>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="scholarships.html">Scholarships</a>
+          <a href="citizenship.html">Citizenship</a>
+          <a href="guides.html">Guides</a>
+          <a href="students-supported.html">Students Supported</a>
+          <a href="ielts-prep.html">IELTS & Prep</a>
+          <a href="student-stories.html">Student Stories</a>
+          <a href="pathway-builder.html">Pathway Builder</a>
+          <a href="blog.html">Blog & Updates</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/scale-fix.js"></script>
+</body>
+</html>
