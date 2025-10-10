@@ -220,41 +220,6 @@
       'page_location': window.location.href
     });
   </script>
-  
-  <!-- Firebase Analytics for Page View Tracking -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-  <script>
-    // Firebase Configuration - Replace with your actual credentials
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-    
-    // Initialize Firebase and track page view
-    try {
-      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-        
-        // Track page view anonymously
-        const pagePath = window.location.pathname.replace(/^\//, '') || 'index.html';
-        const today = new Date().toISOString().split('T')[0];
-        const viewRef = database.ref(`pageViews/${pagePath}/${today}`);
-        
-        viewRef.transaction((currentViews) => {
-          return (currentViews || 0) + 1;
-        });
-      }
-    } catch (error) {
-      console.log('Firebase tracking not configured');
-    }
-  </script>
 </head>
 <body>
   <div id="wrapper">
@@ -279,15 +244,6 @@
       
       <!-- Right side controls -->
       <div class="header-controls">
-        <select id="lang" class="lang-select" aria-label="Language">
-          <option value="en">English</option>
-          <option value="ne">नेपाली</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="ur">اردو</option>
-          <option value="hi">हिन्दी</option>
-        </select>
-        
         <!-- Mobile menu toggle -->
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span>
@@ -326,8 +282,8 @@
             <div class="stats-grid">
               <div class="stat-card fade-in">
                 <i class="fas fa-users icon" style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true"></i>
-                <span class="stat-number" data-count="25">0</span>
-                <p>Students Helped</p>
+                <span class="stat-number" data-count="1000">0</span>
+                <p>Students Reached</p>
               </div>
               <div class="stat-card fade-in">
                 <i class="fas fa-trophy icon" style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true"></i>
@@ -339,11 +295,7 @@
                 <span class="stat-number" data-count="6">0</span>
                 <p>Countries Covered</p>
               </div>
-              <div class="stat-card fade-in">
-                <i class="fas fa-chart-line icon" style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true"></i>
-                <span class="stat-number" data-count="12">0</span>
-                <p>Countries Reached</p>
-              </div>
+
             </div>
           </div>
         </div>
