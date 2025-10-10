@@ -1845,72 +1845,27 @@ a, button {
 .stat-card:nth-child(4) { --stat-order: 4; }
 
 /* Google Translate Widget Styling */
-#language-selector {
-  position: relative;
+.translate-widget {
   display: inline-block;
   margin-right: 12px;
-  transform: scale(1);
 }
 
-#language-selector .goog-te-gadget {
-  font-size: 0 !important;
+.translate-widget .goog-te-gadget {
+  font-size: 0;
   color: var(--text-primary);
 }
 
-#language-selector .goog-te-combo {
+.translate-widget .goog-te-gadget-simple {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 5px 8px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  border-radius: 6px;
+  padding: 6px 12px;
   font-size: 14px;
   color: var(--text-primary);
-  cursor: pointer;
-  outline: none;
 }
 
-#language-selector .goog-te-combo:hover {
+.translate-widget .goog-te-gadget-simple:hover {
   background: var(--border);
-}
-
-#language-selector .goog-te-combo:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(94, 106, 210, 0.2);
-}
-
-.goog-logo-link {
-  display: none !important;
-}
-
-.goog-te-gadget img {
-  display: none !important;
-}
-
-.goog-te-gadget span {
-  display: none !important;
-}
-
-.skiptranslate {
-  display: inline-block !important;
-}
-
-/* Hide extra Google branding */
-.goog-te-banner-frame {
-  display: none !important;
-}
-
-body {
-  top: 0 !important;
-}
-
-/* Prevent extra bottom space from Google elements */
-.skiptranslate iframe {
-  display: none !important;
-}
-
-/* Old translate widget - remove if present */
-.translate-widget {
-  display: none !important;
 }
 
 /* Main content full width */
@@ -1936,7 +1891,7 @@ body {
     min-height: auto;
   }
   
-  #language-selector {
+  .translate-widget {
     display: none;
   }
 }
