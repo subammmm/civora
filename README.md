@@ -127,6 +127,59 @@ The site uses a 75% scale transform for better content density on desktop device
    - [ ] Mobile browsers (Chrome Mobile, Safari iOS)
 
 **Note:** The wrapper scaling uses `will-change: transform` for optimized performance and is disabled on mobile devices (max-width: 768px) to prevent zoom issues.
+### Scholarship Filtering System
+
+The scholarships page includes a dynamic filtering system that allows users to filter scholarships by country, level, field, and deadline.
+
+**Testing the Filter System:**
+
+1. **Basic Filtering**
+   ```bash
+   # Start local server
+   python3 -m http.server 8080
+   # Navigate to http://localhost:8080/scholarships.html
+   ```
+
+2. **Test Individual Filters**
+   - Open browser console (F12) to see filter debug logs
+   - Select "United States" from country filter → should show 9 USA scholarships
+   - Select "United Kingdom" from country filter → should show 5 UK scholarships
+   - Select "Undergraduate" from level filter → filters by bachelor's programs
+   - Select "Graduate" from level filter → filters by master's/professional programs
+   - Select "PhD" from level filter → filters by doctoral programs
+
+3. **Test Combined Filters (AND Logic)**
+   - Select "United States" + "Undergraduate" → should show 3 results
+   - Select "Canada" + "PhD" → should show 1 result
+   - Select "Nepal" + "PhD" → should show "No scholarships match your criteria" message
+
+4. **Test Reset Functionality**
+   - Apply any combination of filters
+   - Click "Reset All Filters" button
+   - All filters should clear and all 24 scholarships should be visible
+
+5. **Console Debugging**
+   ```javascript
+   // Open browser console to see:
+   // - "Filters populated: X countries, Y levels..." on page load
+   // - "Applying filters: {selectedCountry: usa, ...}" when filters change
+   // - "X scholarships visible" after each filter application
+   ```
+
+6. **Edge Cases to Test**
+   - Select filters with no matching scholarships (e.g., Nepal + PhD)
+   - Verify "no results" message displays correctly
+   - Verify reset button appears in no-results message
+   - Apply multiple filters in different orders
+   - Verify dynamic country options are populated from actual scholarship data
+
+**Expected Behavior:**
+- ✅ All 24 scholarships visible on page load
+- ✅ Filters use AND logic (must match ALL selected criteria)
+- ✅ No results message appears when no scholarships match
+- ✅ Reset button clears all filters and shows all scholarships
+- ✅ Country dropdown dynamically populated with 11 unique countries
+- ✅ Console logs show filter state for debugging
 
 ### Regenerating Sitemap
 

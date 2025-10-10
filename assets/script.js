@@ -1176,6 +1176,144 @@ function trackFormSubmissions() {
   });
 }
 
+// Scholarship Table Filtering System
+function initScholarshipFilters() {
+  // Only run on scholarships page
+  if (!document.getElementById('scholarships-table')) return;
+  
+  const filters = {
+    country: document.getElementById('country-filter'),
+    level: document.getElementById('level-filter'),
+    field: document.getElementById('field-filter'),
+    deadline: document.getElementById('deadline-filter')
+  };
+  
+  const table = document.getElementById('scholarships-table');
+  const tbody = document.getElementById('scholarships-tbody');
+  const noResults = document.getElementById('no-results-message');
+  const resetBtn = document.getElementById('reset-filters-btn');
+  
+  // Check if all elements exist
+  if (!filters.country || !filters.level || !filters.field || !filters.deadline || !tbody || !noResults) {
+    console.warn('Scholarship filter elements not found');
+    return;
+  }
+  
+  // Populate filter options dynamically from existing scholarships
+  function populateFilters() {
+    const items = tbody.querySelectorAll('.scholarship-item');
+    const countries = new Set();
+    const levels = new Set();
+    const fields = new Set();
+    const deadlines = new Set();
+    
+    items.forEach(item => {
+      const country = item.dataset.country;
+      const level = item.dataset.level;
+      const field = item.dataset.field;
+      const deadline = item.dataset.deadline;
+      
+      if (country) countries.add(country);
+      if (level) levels.add(level);
+      if (field && field !== 'all') fields.add(field);
+      if (deadline) deadlines.add(deadline);
+    });
+    
+    // Populate country filter (skip first option which is "All")
+    const sortedCountries = Array.from(countries).sort();
+    sortedCountries.forEach(country => {
+      const option = document.createElement('option');
+      option.value = country;
+      option.textContent = country.charAt(0).toUpperCase() + country.slice(1);
+      // Check if option doesn't already exist
+      const exists = Array.from(filters.country.options).some(opt => opt.value === country);
+      if (!exists) {
+        filters.country.appendChild(option);
+      }
+    });
+    
+    console.log(`Filters populated: ${sortedCountries.length} countries, ${levels.size} levels, ${fields.size} fields, ${deadlines.size} deadlines`);
+  }
+  
+  // Apply all filters
+  function applyFilters() {
+    const selectedCountry = filters.country.value.toLowerCase();
+    const selectedLevel = filters.level.value.toLowerCase();
+    const selectedField = filters.field.value.toLowerCase();
+    const selectedDeadline = filters.deadline.value.toLowerCase();
+    
+    const items = tbody.querySelectorAll('.scholarship-item');
+    let visibleCount = 0;
+    
+    console.log('Applying filters:', { selectedCountry, selectedLevel, selectedField, selectedDeadline });
+    
+    items.forEach(item => {
+      const country = (item.dataset.country || '').toLowerCase();
+      const level = (item.dataset.level || '').toLowerCase();
+      const field = (item.dataset.field || '').toLowerCase();
+      const deadline = (item.dataset.deadline || '').toLowerCase();
+      
+      // AND logic: item must match ALL selected filters
+      const countryMatch = !selectedCountry || country === selectedCountry;
+      const levelMatch = !selectedLevel || level === selectedLevel;
+      const fieldMatch = !selectedField || field === selectedField || field === 'all';
+      const deadlineMatch = !selectedDeadline || deadline === selectedDeadline;
+      
+      const isVisible = countryMatch && levelMatch && fieldMatch && deadlineMatch;
+      
+      if (isVisible) {
+        item.classList.remove('hidden');
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.classList.add('hidden');
+        item.style.display = 'none';
+      }
+    });
+    
+    // Show/hide table and no results message
+    if (visibleCount === 0) {
+      if (table) table.style.display = 'none';
+      if (noResults) noResults.classList.remove('hidden');
+    } else {
+      if (table) table.style.display = '';
+      if (noResults) noResults.classList.add('hidden');
+    }
+    
+    console.log(`${visibleCount} scholarships visible`);
+  }
+  
+  // Reset all filters
+  function resetFilters() {
+    filters.country.value = '';
+    filters.level.value = '';
+    filters.field.value = '';
+    filters.deadline.value = '';
+    applyFilters();
+  }
+  
+  // Add event listeners to all filters
+  Object.values(filters).forEach(filter => {
+    filter.addEventListener('change', applyFilters);
+  });
+  
+  // Add reset button listener
+  if (resetBtn) {
+    resetBtn.addEventListener('click', resetFilters);
+  }
+  
+  // Populate filters on page load
+  populateFilters();
+  
+  // Initial application (show all)
+  applyFilters();
+  
+  console.log('Scholarship filtering system initialized');
+}
+
+// Initialize scholarship filters when DOM is loaded
+document.addEventListener('DOMContentLoaded', initScholarshipFilters);
+
 function trackExternalLinks() {
   // Track scholarship link clicks
   document.addEventListener('click', function(e) {
