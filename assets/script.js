@@ -10,6 +10,47 @@ if (lastUpdated) {
   lastUpdated.textContent = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 }
 
+// Animated Counter for Stats using IntersectionObserver
+function animateCounter(element, target, duration = 2000) {
+  let start = 0;
+  const increment = target / (duration / 16); // 60fps
+  
+  const updateCounter = () => {
+    start += increment;
+    if (start < target) {
+      element.textContent = Math.floor(start);
+      requestAnimationFrame(updateCounter);
+    } else {
+      element.textContent = target;
+    }
+  };
+  
+  updateCounter();
+}
+
+// Initialize counter animation on scroll
+document.addEventListener('DOMContentLoaded', () => {
+  const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+  
+  if (statNumbers.length > 0) {
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.target.textContent === '0') {
+          const target = parseInt(entry.target.getAttribute('data-count'));
+          animateCounter(entry.target, target);
+        }
+      });
+    }, observerOptions);
+    
+    statNumbers.forEach(stat => observer.observe(stat));
+  }
+});
+
 // Interactive World Map functionality
 function initializeWorldMap() {
   const mapPins = document.querySelectorAll('.map-pin');
@@ -190,7 +231,7 @@ const I18N = {
     'index.card_sch_title': 'Scholarship Intelligence',
     'index.card_sch_desc': 'Verified, ongoing opportunities — filter by country, deadline, and eligibility. Our database matches students with the most relevant scholarships based on their academic profile and destination preferences.',
     'index.card_guides_title': 'Application Guides',
-    'index.card_guides_desc': 'Step-by-step application guides and downloadable templates for scholarships. From SOP writing to visa applications, get comprehensive guides that have helped thousands of students succeed.',
+    'index.card_guides_desc': 'Step-by-step application guides and downloadable templates for scholarships. From SOP writing to visa applications, get comprehensive guides to support your study abroad journey.',
     'index.card_pathway_title': 'Pathway Builder',
     'index.card_pathway_desc': 'Get personalized scholarship recommendations that match your profile.',
     'index.card_cit_title': 'Citizenship Pathways',
@@ -259,8 +300,7 @@ const I18N = {
 
     'spotlight.title': 'Scholarship Spotlight',
     'spotlight.subtitle': 'Featured opportunities with proven success rates for Nepali students',
-    'impact.title': 'Our Impact',
-    'impact.title': 'Powering Students Worldwide',
+    'impact.title': 'Supporting Students Worldwide',
     'impact.scholarships': 'Scholarships Verified',
     'impact.countries': 'Countries Where Students Supported',
     'impact.visitors': 'Visitors Reached',
@@ -369,7 +409,7 @@ const I18N = {
     'index.card_sch_title': 'छात्रवृत्ति बुद्धिमत्ता',
     'index.card_sch_desc': 'प्रमाणित, चलिरहेका अवसरहरू — देश, समयसीमा र पात्रताअनुसार फिल्टर गर्नुहोस्। हाम्रो डाटाबेसले विद्यार्थीहरूलाई उनीहरूको शैक्षिक प्रोफाइल र गन्तव्य प्राथमिकताका आधारमा सबैभन्दा प्रासंगिक छात्रवृत्तिहरूसँग मिलाउँछ।',
     'index.card_guides_title': 'आवेदन मार्गदर्शिका',
-    'index.card_guides_desc': 'छात्रवृत्तिका लागि चरणबद्ध आवेदन मार्गदर्शिका र डाउनलोड गर्न मिल्ने टेम्प्लेटहरू। SOP लेखनदेखि भिसा आवेदनसम्म, हजारौं विद्यार्थीहरूलाई सफल बनाउने व्यापक मार्गदर्शिकाहरू पाउनुहोस्।',
+    'index.card_guides_desc': 'छात्रवृत्तिका लागि चरणबद्ध आवेदन मार्गदर्शिका र डाउनलोड गर्न मिल्ने टेम्प्लेटहरू। SOP लेखनदेखि भिसा आवेदनसम्म, तपाईंको विदेश अध्ययन यात्रालाई समर्थन गर्ने व्यापक मार्गदर्शिकाहरू पाउनुहोस्।',
     'index.card_pathway_title': 'मार्ग निर्माणकर्ता',
     'index.card_pathway_desc': 'तपाईंको प्रोफाइलसँग मिल्ने व्यक्तिगत छात्रवृत्ति सिफारिसहरू पाउनुहोस्।',
     'index.card_cit_title': 'नागरिकता मार्गहरू',

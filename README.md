@@ -112,3 +112,81 @@ To update the sitemap with new pages:
 - **Alt text**: Always descriptive, never empty
 - **Lazy loading**: Add `loading="lazy"` to images below the fold
 - **Dimensions**: Always include width/height attributes
+
+## Firebase Analytics Setup (Optional)
+
+The site includes optional Firebase integration for anonymous page view tracking. To enable:
+
+### 1. Create a Firebase Project
+
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project or use an existing one
+3. Enable Realtime Database in the Firebase Console
+4. Set database rules to allow writes but restrict reads (for security)
+
+### 2. Get Firebase Configuration
+
+1. In Firebase Console, go to Project Settings
+2. Scroll down to "Your apps" and select "Web app"
+3. Copy the Firebase configuration object
+
+### 3. Update Configuration Files
+
+**For index.html:**
+Replace the placeholder config in the Firebase script section (around line 230):
+```javascript
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+```
+
+**For private.html:**
+Update the same configuration in private.html (around line 157)
+
+### 4. Set Database Rules
+
+In Firebase Console, go to Realtime Database → Rules:
+```json
+{
+  "rules": {
+    "pageViews": {
+      ".read": false,
+      ".write": true
+    }
+  }
+}
+```
+
+**Note:** This allows anonymous writes for page tracking but prevents public reads for privacy.
+
+### 5. Access Analytics Dashboard
+
+1. Visit `https://yourdomain.com/private.html` (keep this URL private)
+2. Login credentials (default):
+   - Username: `admin`
+   - Password: `civora2025`
+3. **IMPORTANT:** Change the password in `private.html` before deployment!
+
+### Security Considerations
+
+⚠️ **The authentication in private.html is for demonstration only!**
+
+For production use:
+- Implement proper server-side authentication
+- Use Firebase Authentication or OAuth
+- Never hardcode credentials in client-side code
+- Consider using Firebase Security Rules for row-level access control
+- Use environment variables for sensitive configuration
+
+### Disabling Firebase
+
+If you don't want to use Firebase analytics:
+- The site will work normally without configuration
+- Page views simply won't be tracked
+- No errors will appear in the console
