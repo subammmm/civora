@@ -95,26 +95,37 @@
 }
 
 html {
-  background: var(--bg);
-  overflow-x: hidden; /* Prevent horizontal scrollbar from scaling */
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  background: var(--bg-primary);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--bg);
+  background: var(--bg-primary);
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   margin: 0;
   padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  overflow-x: hidden;
   font-size: var(--body-size);
   line-height: calc(var(--body-line) / var(--body-size));
   font-weight: var(--body-weight);
+}
+
+/* Page Wrapper - 75% Scaling */
+#wrapper {
+  transform: scale(0.75);
+  transform-origin: top left;
+  width: calc(100% / 0.75);
+  overflow: visible;
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Typography System - Exact Specification Implementation */
@@ -1893,6 +1904,14 @@ a, button {
   
   .translate-widget {
     display: none;
+  }
+  
+  /* Disable scaling on mobile devices */
+  #wrapper {
+    transform: scale(1);
+    width: 100%;
+    min-height: 100vh;
+    will-change: auto;
   }
 }
 }

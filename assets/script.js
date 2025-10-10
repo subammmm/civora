@@ -1,3 +1,28 @@
+// Viewport Height Scaling Check - Debug logging
+(function() {
+  const viewportBefore = {
+    height: window.innerHeight,
+    width: window.innerWidth,
+    documentHeight: document.documentElement.scrollHeight
+  };
+  
+  console.log('Viewport Before Scaling:', viewportBefore);
+  
+  // Check after DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrapper = document.getElementById('wrapper');
+    const viewportAfter = {
+      height: window.innerHeight,
+      width: window.innerWidth,
+      documentHeight: document.documentElement.scrollHeight,
+      wrapperScale: wrapper ? window.getComputedStyle(wrapper).transform : 'none'
+    };
+    
+    console.log('Viewport After Scaling:', viewportAfter);
+    console.log('Scaling Applied:', wrapper ? 'Yes' : 'No');
+  });
+})();
+
 // Footer year and last updated date
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
