@@ -646,26 +646,34 @@ a:hover {
   background: var(--accent);
   color: var(--text-primary);
   border: none;
-  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease, opacity 0.3s ease;
   font-size: var(--body-size);
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
   line-height: 1;
+  opacity: 0.5;
 }
 
-/* Hover: darken background by 10% */
+/* Hover: darken background by 10% and full brightness text */
 .btn:hover, .btn-primary:hover {
   background: var(--button-hover);
   transform: translateY(-1px);
   text-decoration: none;
+  opacity: 1;
+}
+
+/* Focus: match hover for keyboard navigation */
+.btn:focus, .btn-primary:focus {
+  opacity: 1;
 }
 
 /* Active: inset shadow */
 .btn:active, .btn-primary:active {
   transform: translateY(0);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 1;
 }
 
 /* Secondary: border #2A2A2D, transparent background */
@@ -678,13 +686,14 @@ a:hover {
   background: transparent;
   color: var(--text-primary);
   border: 1px solid var(--border);
-  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease, opacity 0.3s ease;
   font-size: var(--body-size);
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
   line-height: 1;
+  opacity: 0.5;
 }
 
 .btn-secondary:hover {
@@ -692,11 +701,32 @@ a:hover {
   border-color: #404043;
   transform: translateY(-1px);
   text-decoration: none;
+  opacity: 1;
+}
+
+.btn-secondary:focus {
+  opacity: 1;
 }
 
 .btn-secondary:active {
   transform: translateY(0);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+/* Apply translucent text to all button elements */
+button {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+button:hover,
+button:focus {
+  opacity: 1;
+}
+
+button:active {
+  opacity: 1;
 }
 
 /* Inputs */
