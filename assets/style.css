@@ -333,6 +333,130 @@ em, i {
   }
 }
 
+/* Uniform Box Layout System - For Metrics, Stats, and Info Cards */
+.stats-grid, .info-box-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--grid-gutter);
+  margin: 2rem 0;
+}
+
+.stat-card, .info-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-subtle);
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+.stat-card:hover, .info-box:hover {
+  background: #1F1F22;
+  border-color: #333336;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Info box icon styling */
+.info-box-icon, .stat-card .icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+/* Info box title/heading */
+.info-box-title {
+  font-size: var(--h3-size);
+  font-weight: var(--h3-weight);
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+/* Stat number styling */
+.stat-number, .info-box-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Info box description */
+.info-box-desc, .stat-card p, .info-box p {
+  font-size: var(--body-size);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: var(--body-line);
+}
+
+/* Feature grid for homepage feature cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--grid-gutter);
+  margin: 2rem 0;
+}
+
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-subtle);
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  text-align: left;
+}
+
+.feature-card:hover {
+  background: #1F1F22;
+  border-color: #333336;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.feature-card h3 {
+  font-size: var(--h3-size);
+  font-weight: var(--h3-weight);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.feature-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-input);
+  margin-top: 1rem;
+  transition: transform 300ms ease;
+}
+
+.feature-card:hover .feature-image {
+  transform: scale(1.03);
+}
+
+/* Mobile responsiveness for box grids */
+@media (max-width: 768px) {
+  .stats-grid, .info-box-grid, .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .stat-card, .info-box {
+    min-height: 150px;
+  }
+}
+
 .col-1 { grid-column: span 1; }
 .col-2 { grid-column: span 2; }
 .col-3 { grid-column: span 3; }
