@@ -233,7 +233,7 @@ let I18N = {
 };
 
 // Load full I18N from JSON file
-(async function loadI18N() {
+const i18nReady = (async function loadI18N() {
   try {
     const response = await fetch('assets/data/i18n.json');
     if (!response.ok) throw new Error('Failed to load i18n.json');
@@ -266,21 +266,26 @@ function applyI18n(lang) {
   const titleEl = document.querySelector('head title[data-i18n]');
   if (titleEl) {
     const key = titleEl.getAttribute('data-i18n');
-    if (key) document.title = t(key, {}, L);
+    if (key) {
+      const translation = t(key, {}, L);
+      if (translation) document.title = translation;
+    }
   }
 
-  // Text nodes
+  // Text nodes - preserve original content if translation is empty
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (!key) return;
-    el.textContent = t(key, {}, L);
+    const translation = t(key, {}, L);
+    if (translation) el.textContent = translation;
   });
 
-  // Placeholders
+  // Placeholders - preserve original if translation is empty
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
     if (!key) return;
-    el.setAttribute('placeholder', t(key, {}, L));
+    const translation = t(key, {}, L);
+    if (translation) el.setAttribute('placeholder', translation);
   });
 
   // Re-render page-specific components if needed
@@ -297,7 +302,10 @@ function applyI18n(lang) {
 window.I18N_T = (key, params) => t(key, params);
 
 // Initialize language control
-(function initLang() {
+(async function initLang() {
+  // Wait for i18n to load
+  await i18nReady;
+  
   const sel = document.getElementById('lang');
   const stored = localStorage.getItem('lang') || 'en';
   if (sel) sel.value = stored;
