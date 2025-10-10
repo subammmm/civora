@@ -2,18 +2,100 @@
 
 Civora is a research-based platform that compiles verified scholarships, visa pathways, and citizenship options for students from Nepal and other underrepresented countries.
 
+**Now built with Next.js 14!** 🚀
+
+## Technology Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: JavaScript
+- **Styling**: CSS (preserved from original site)
+- **Deployment**: GitHub Pages (static export)
+- **Domain**: civora.me
+
 ## Local Development
 
-For local testing, use:
+### Prerequisites
+- Node.js 18 or higher
+- npm
+
+### Development Server
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+# Open http://localhost:3000/
+```
+
+### Production Build
+
+```bash
+# Build static site
+npm run build
+
+# Test production build locally
+cd out
 python3 -m http.server 8080
-# open http://localhost:8080/
+# Open http://localhost:8080/
 ```
 
 ## Live Site
 
-Visit: https://subammmm.github.io/civora
+Visit: https://civora.me or https://subammmm.github.io/civora
+
+## Project Structure
+
+```
+civora/
+├── app/                    # Next.js App Router pages
+│   ├── layout.js          # Root layout (Header/Footer)
+│   ├── page.js            # Homepage
+│   ├── globals.css        # Global styles
+│   ├── scholarships/      # Scholarships page
+│   ├── citizenship/       # Citizenship page
+│   ├── about/             # About page
+│   └── ...                # Other pages
+├── public/                # Static assets
+│   ├── assets/           # Images, CSS, JS
+│   ├── CNAME             # Custom domain config
+│   ├── manifest.webmanifest
+│   └── robots.txt
+├── next.config.js        # Next.js configuration
+├── package.json          # Dependencies
+└── .github/workflows/    # GitHub Actions for deployment
+    └── nextjs-deploy.yml
+```
+
+## Next.js Configuration
+
+The site uses static export for GitHub Pages compatibility:
+
+```javascript
+// next.config.js
+{
+  output: 'export',           // Static site generation
+  trailingSlash: true,        // Directory-style URLs
+  images: { unoptimized: true } // GitHub Pages compatibility
+}
+```
+
+## Deployment
+
+Deployment is automated via GitHub Actions:
+
+1. Push to `main` branch
+2. GitHub Actions builds the Next.js site
+3. Deploys to GitHub Pages
+4. Available at civora.me within 1-2 minutes
+
+Manual deployment:
+```bash
+npm run build
+# The `out/` directory contains the static site
+# Deploy contents of `out/` to any static hosting
+```
 
 ## Performance & SEO Features
 
@@ -280,4 +362,26 @@ For production use:
 If you don't want to use Firebase analytics:
 - The site will work normally without configuration
 - Page views simply won't be tracked
+
+---
+
+## Migration from Static HTML to Next.js
+
+This site was migrated from static HTML/CSS/JS to Next.js 14 in October 2024. The migration:
+
+✅ **Preserved**:
+- All original content and design
+- URL structure (with trailing slashes)
+- Custom domain (civora.me)
+- All assets and functionality
+- SEO metadata and structured data
+
+✅ **Improved**:
+- Modern React-based architecture
+- Better build tooling and development experience
+- Optimized performance with Next.js
+- Automated deployment via GitHub Actions
+- Type-safe routing with App Router
+
+The original HTML files are kept in the repository for reference during the transition period.
 - No errors will appear in the console
