@@ -97,6 +97,7 @@
 html {
   background: var(--bg);
   overflow-x: hidden; /* Prevent horizontal scrollbar from scaling */
+  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
 }
 
 body {
@@ -1684,4 +1685,104 @@ textarea:valid {
 
 .success {
   animation: success 0.3s ease;
+}
+
+/* Contact Form Styles */
+.linear-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--accent);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--radius-input);
+  font-size: var(--body-size);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.linear-button:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(94, 106, 210, 0.3);
+}
+
+.linear-button:active {
+  transform: translateY(0);
+}
+
+/* Form input styles */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.2);
+}
+
+/* Contact grid styles */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.contact-card {
+  background: var(--surface);
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.contact-card h3 {
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+.contact-card p {
+  margin-bottom: var(--space-4);
+  color: var(--text-secondary);
+}
+
+/* Fade-in animation for sections */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Hover effects for all clickable elements */
+a, button {
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover, .feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
 }
