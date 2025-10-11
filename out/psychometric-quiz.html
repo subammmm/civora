@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Psychometric Assessment — Civora AI Oracle</title>
+  <meta name="description" content="10-question psychometric assessment to determine your archetype for personalized scholarship matching with 95% accuracy." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="canonical" href="https://civora.me/psychometric-quiz.html" />
+  <meta name="theme-color" content="#0b5fff" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/script.js"></script>
+  <script defer src="assets/ai-neural-oracle.js"></script>
+  
+  <style>
+    .quiz-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, var(--brand), #8B5CF6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--panel);
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand), #8B5CF6);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    
+    .question-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+    
+    .question-card.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .question-number {
+      color: var(--brand);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .question-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+    
+    .answer-options {
+      display: grid;
+      gap: 1rem;
+    }
+    
+    .answer-option {
+      background: var(--panel);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      text-align: left;
+    }
+    
+    .answer-option:hover {
+      border-color: var(--brand);
+      background: rgba(11, 95, 255, 0.1);
+    }
+    
+    .answer-option.selected {
+      border-color: var(--brand);
+      background: rgba(11, 95, 255, 0.2);
+    }
+    
+    .answer-option::before {
+      content: '';
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+    
+    .answer-option.selected::before {
+      border-color: var(--brand);
+      background: var(--brand);
+      box-shadow: inset 0 0 0 4px var(--panel);
+    }
+    
+    .quiz-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    
+    .nav-button {
+      background: var(--brand);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(11, 95, 255, 0.3);
+    }
+    
+    .nav-button:disabled {
+      background: var(--muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .nav-button.secondary {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    
+    .results-container {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    
+    .archetype-result {
+      background: linear-gradient(135deg, var(--card), var(--panel));
+      border-radius: 16px;
+      padding: 3rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+    
+    .archetype-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    
+    .archetype-name {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--brand), #8B5CF6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .archetype-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: var(--muted);
+    }
+    
+    .trait-meters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .trait-meter {
+      text-align: left;
+    }
+    
+    .trait-label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .trait-bar {
+      height: 8px;
+      background: var(--panel);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .trait-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand), #8B5CF6);
+      border-radius: 4px;
+      transition: width 1s ease;
+      width: 0%;
+    }
+    
+    .recommendations-preview {
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    
+    .cta-button {
+      background: var(--brand);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(11, 95, 255, 0.3);
+    }
+    
+    .secondary-button {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    
+    @media (max-width: 768px) {
+      .quiz-container {
+        padding: 1rem;
+      }
+      
+      .question-card {
+        padding: 1.5rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .trait-meters {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Civora Logo" class="brand-logo">
+        Civora
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="site-nav">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="scholarships.html" class="nav-item">Scholarships</a>
+        <a href="ielts-prep.html" class="nav-item">IELTS & Prep</a>
+        <a href="citizenship.html" class="nav-item">Citizenship Pathways</a>
+        <a href="students-supported.html" class="nav-item">Success Stories</a>
+        <a href="about.html" class="nav-item">About</a>
+        <a href="contact.html" class="nav-item">Contact</a>
+      </nav>
+      
+      <!-- Right side controls -->
+      <div class="header-controls">        
+        <!-- Mobile menu toggle -->
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h1>🧠 AI Archetype Assessment</h1>
+        <p>Discover your academic archetype for personalized scholarship matching with 95% accuracy</p>
+      </div>
+      
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      
+      <div id="quizQuestions">
+        <!-- Questions will be dynamically generated -->
+      </div>
+      
+      <div class="quiz-navigation">
+        <button class="nav-button secondary" id="prevBtn" onclick="previousQuestion()" disabled>
+          ← Previous
+        </button>
+        <span id="questionCounter">1 / 10</span>
+        <button class="nav-button" id="nextBtn" onclick="nextQuestion()" disabled>
+          Next →
+        </button>
+      </div>
+      
+      <div class="results-container" id="resultsContainer">
+        <div class="archetype-result" id="archetypeResult">
+          <!-- Results will be displayed here -->
+        </div>
+        
+        <div class="action-buttons">
+          <a href="pathway-builder.html?archetype=true" class="cta-button">
+            🚀 Get Personalized Recommendations
+          </a>
+          <button class="cta-button secondary-button" onclick="restartQuiz()">
+            🔄 Retake Assessment
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        id: 1,
+        text: "When approaching a complex problem, what's your first instinct?",
+        options: [
+          { text: "Break it down into logical components and analyze each part systematically", traits: { analytical: 0.9, creative: 0.3, leadership: 0.4, resilience: 0.6 } },
+          { text: "Look for creative, unconventional solutions that others might miss", traits: { analytical: 0.4, creative: 0.9, leadership: 0.6, resilience: 0.7 } },
+          { text: "Gather a team and delegate different aspects to specialists", traits: { analytical: 0.6, creative: 0.5, leadership: 0.9, resilience: 0.7 } },
+          { text: "Take time to understand all perspectives before deciding", traits: { analytical: 0.7, creative: 0.6, leadership: 0.5, resilience: 0.8 } }
+        ]
+      },
+      {
+        id: 2,
+        text: "In a high-pressure academic situation, how do you typically respond?",
+        options: [
+          { text: "Create detailed plans and stick to proven methodologies", traits: { analytical: 0.8, creative: 0.4, leadership: 0.5, resilience: 0.9 } },
+          { text: "Find innovative ways to stand out from the crowd", traits: { analytical: 0.5, creative: 0.9, leadership: 0.7, resilience: 0.6 } },
+          { text: "Rally others and create collaborative solutions", traits: { analytical: 0.6, creative: 0.6, leadership: 0.9, resilience: 0.8 } },
+          { text: "Stay calm and adapt my strategy as needed", traits: { analytical: 0.7, creative: 0.7, leadership: 0.6, resilience: 0.9 } }
+        ]
+      },
+      {
+        id: 3,
+        text: "What motivates you most in your academic pursuits?",
+        options: [
+          { text: "The pursuit of knowledge and understanding complex systems", traits: { analytical: 0.9, creative: 0.5, leadership: 0.4, resilience: 0.7 } },
+          { text: "Creating something new that hasn't been done before", traits: { analytical: 0.4, creative: 0.9, leadership: 0.6, resilience: 0.6 } },
+          { text: "Making a positive impact on communities and society", traits: { analytical: 0.6, creative: 0.6, leadership: 0.9, resilience: 0.8 } },
+          { text: "Overcoming challenges and proving what's possible", traits: { analytical: 0.6, creative: 0.5, leadership: 0.7, resilience: 0.9 } }
+        ]
+      },
+      {
+        id: 4,
+        text: "When working on group projects, what role do you naturally take?",
+        options: [
+          { text: "The researcher who provides data and analysis", traits: { analytical: 0.9, creative: 0.4, leadership: 0.5, resilience: 0.6 } },
+          { text: "The idea generator who thinks outside the box", traits: { analytical: 0.5, creative: 0.9, leadership: 0.6, resilience: 0.7 } },
+          { text: "The coordinator who manages people and deadlines", traits: { analytical: 0.6, creative: 0.5, leadership: 0.9, resilience: 0.8 } },
+          { text: "The problem-solver who adapts when things go wrong", traits: { analytical: 0.7, creative: 0.7, leadership: 0.6, resilience: 0.9 } }
+        ]
+      },
+      {
+        id: 5,
+        text: "How do you prefer to learn new concepts?",
+        options: [
+          { text: "Through systematic study and comprehensive research", traits: { analytical: 0.9, creative: 0.3, leadership: 0.4, resilience: 0.7 } },
+          { text: "By experimenting and finding my own unique approach", traits: { analytical: 0.4, creative: 0.9, leadership: 0.5, resilience: 0.8 } },
+          { text: "Through discussions and collaborative learning", traits: { analytical: 0.6, creative: 0.6, leadership: 0.9, resilience: 0.7 } },
+          { text: "By applying concepts to real-world challenges", traits: { analytical: 0.7, creative: 0.7, leadership: 0.7, resilience: 0.9 } }
+        ]
+      },
+      {
+        id: 6,
+        text: "What's your approach to setbacks or failures?",
+        options: [
+          { text: "Analyze what went wrong and create a better plan", traits: { analytical: 0.9, creative: 0.4, leadership: 0.5, resilience: 0.8 } },
+          { text: "Find a completely different approach that's never been tried", traits: { analytical: 0.4, creative: 0.9, leadership: 0.6, resilience: 0.7 } },
+          { text: "Learn from it and help others avoid the same mistakes", traits: { analytical: 0.6, creative: 0.5, leadership: 0.9, resilience: 0.8 } },
+          { text: "See it as a stepping stone and keep pushing forward", traits: { analytical: 0.6, creative: 0.6, leadership: 0.7, resilience: 0.9 } }
+        ]
+      },
+      {
+        id: 7,
+        text: "In your ideal future career, you would be:",
+        options: [
+          { text: "A leading researcher or technical expert in your field", traits: { analytical: 0.9, creative: 0.5, leadership: 0.6, resilience: 0.7 } },
+          { text: "An innovator creating breakthrough solutions", traits: { analytical: 0.5, creative: 0.9, leadership: 0.7, resilience: 0.8 } },
+          { text: "A leader driving positive change in organizations or society", traits: { analytical: 0.6, creative: 0.6, leadership: 0.9, resilience: 0.8 } },
+          { text: "Someone who overcomes impossible challenges", traits: { analytical: 0.7, creative: 0.7, leadership: 0.8, resilience: 0.9 } }
+        ]
+      },
+      {
+        id: 8,
+        text: "How do you handle uncertainty and ambiguous situations?",
+        options: [
+          { text: "Gather more data until I can make an informed decision", traits: { analytical: 0.9, creative: 0.4, leadership: 0.5, resilience: 0.6 } },
+          { text: "Embrace the ambiguity and see what creative solutions emerge", traits: { analytical: 0.4, creative: 0.9, leadership: 0.6, resilience: 0.8 } },
+          { text: "Bring people together to navigate the uncertainty as a team", traits: { analytical: 0.6, creative: 0.6, leadership: 0.9, resilience: 0.7 } },
+          { text: "Trust my instincts and adapt as new information comes", traits: { analytical: 0.6, creative: 0.7, leadership: 0.7, resilience: 0.9 } }
+        ]
+      },
+      {
+        id: 9,
+        text: "What kind of academic environment do you thrive in?",
+        options: [
+          { text: "Structured programs with clear expectations and rigorous standards", traits: { analytical: 0.9, creative: 0.3, leadership: 0.5, resilience: 0.7 } },
+          { text: "Flexible environments that encourage experimentation", traits: { analytical: 0.4, creative: 0.9, leadership: 0.6, resilience: 0.8 } },
+          { text: "Collaborative spaces with diverse perspectives and teamwork", traits: { analytical: 0.6, creative: 0.6, leadership: 0.9, resilience: 0.7 } },
+          { text: "Challenging environments that push me beyond my comfort zone", traits: { analytical: 0.7, creative: 0.7, leadership: 0.8, resilience: 0.9 } }
+        ]
+      },
+      {
+        id: 10,
+        text: "When you imagine your greatest academic achievement, it involves:",
+        options: [
+          { text: "Making a significant discovery through meticulous research", traits: { analytical: 0.9, creative: 0.5, leadership: 0.5, resilience: 0.8 } },
+          { text: "Creating something revolutionary that changes how people think", traits: { analytical: 0.5, creative: 0.9, leadership: 0.7, resilience: 0.7 } },
+          { text: "Leading a movement or initiative that benefits many people", traits: { analytical: 0.6, creative: 0.6, leadership: 0.9, resilience: 0.8 } },
+          { text: "Achieving something others said was impossible", traits: { analytical: 0.7, creative: 0.7, leadership: 0.8, resilience: 0.9 } }
+        ]
+      }
+    ];
+
+    let currentQuestion = 0;
+    let responses = {};
+    let userTraits = { analytical: 0, creative: 0, leadership: 0, resilience: 0 };
+
+    // Initialize quiz
+    function initializeQuiz() {
+      renderQuestion();
+      updateProgress();
+      updateNavigationButtons();
+    }
+
+    function renderQuestion() {
+      const question = questions[currentQuestion];
+      const questionsContainer = document.getElementById('quizQuestions');
+      
+      questionsContainer.innerHTML = `
+        <div class="question-card active">
+          <div class="question-number">Question ${question.id} of 10</div>
+          <div class="question-text">${question.text}</div>
+          <div class="answer-options">
+            ${question.options.map((option, index) => `
+              <div class="answer-option" onclick="selectAnswer(${index})" data-index="${index}">
+                ${option.text}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      
+      // Restore previous selection if exists
+      if (responses[currentQuestion] !== undefined) {
+        const selectedOption = document.querySelector(`[data-index="${responses[currentQuestion]}"]`);
+        if (selectedOption) {
+          selectedOption.classList.add('selected');
+        }
+      }
+    }
+
+    function selectAnswer(index) {
+      // Remove previous selection
+      document.querySelectorAll('.answer-option').forEach(option => {
+        option.classList.remove('selected');
+      });
+      
+      // Add selection to clicked option
+      document.querySelector(`[data-index="${index}"]`).classList.add('selected');
+      
+      // Store response
+      responses[currentQuestion] = index;
+      
+      // Update navigation
+      updateNavigationButtons();
+    }
+
+    function nextQuestion() {
+      if (responses[currentQuestion] === undefined) return;
+      
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+        updateProgress();
+        updateNavigationButtons();
+      } else {
+        calculateResults();
+      }
+    }
+
+    function previousQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+        updateProgress();
+        updateNavigationButtons();
+      }
+    }
+
+    function updateProgress() {
+      const progress = ((currentQuestion + 1) / questions.length) * 100;
+      document.getElementById('progressFill').style.width = `${progress}%`;
+      document.getElementById('questionCounter').textContent = `${currentQuestion + 1} / ${questions.length}`;
+    }
+
+    function updateNavigationButtons() {
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      
+      prevBtn.disabled = currentQuestion === 0;
+      
+      if (currentQuestion === questions.length - 1) {
+        nextBtn.textContent = responses[currentQuestion] !== undefined ? 'See Results →' : 'Next →';
+      } else {
+        nextBtn.textContent = 'Next →';
+      }
+      
+      nextBtn.disabled = responses[currentQuestion] === undefined;
+    }
+
+    function calculateResults() {
+      // Reset traits
+      userTraits = { analytical: 0, creative: 0, leadership: 0, resilience: 0, cultural_adaptability: 0.7 };
+      
+      // Calculate weighted trait scores
+      for (let i = 0; i < questions.length; i++) {
+        if (responses[i] !== undefined) {
+          const selectedOption = questions[i].options[responses[i]];
+          for (const trait in selectedOption.traits) {
+            if (userTraits[trait] !== undefined) {
+              userTraits[trait] += selectedOption.traits[trait];
+            }
+          }
+        }
+      }
+      
+      // Normalize scores
+      for (const trait in userTraits) {
+        if (trait !== 'cultural_adaptability') {
+          userTraits[trait] = userTraits[trait] / questions.length;
+        }
+      }
+      
+      // Determine archetype
+      const archetype = determineArchetype(userTraits);
+      
+      // Display results
+      displayResults(archetype, userTraits);
+      
+      // Store results for use in pathway builder
+      localStorage.setItem('civoraArchetype', JSON.stringify({
+        archetype: archetype,
+        traits: userTraits,
+        timestamp: Date.now()
+      }));
+      
+      // Send to AI Oracle if available
+      if (window.supremeAIOracle) {
+        window.supremeAIOracle.conductPsychometricAssessment(userTraits);
+      }
+    }
+
+    function determineArchetype(traits) {
+      const archetypes = {
+        analytical_scholar: {
+          name: "Analytical Scholar",
+          icon: "🔬",
+          description: "You thrive on systematic analysis and deep understanding. Your strength lies in breaking down complex problems and finding evidence-based solutions. Perfect for research-intensive programs and technical fields.",
+          strengths: ["Research Excellence", "Systematic Thinking", "Data Analysis", "Academic Rigor"],
+          idealPrograms: ["Research Universities", "STEM Programs", "PhD Opportunities", "Technical Fields"],
+          scholarshipTypes: ["Research Grants", "Academic Excellence Awards", "STEM Scholarships"],
+          weight: traits.analytical * 0.4 + traits.resilience * 0.3 + (1 - traits.creative) * 0.3
+        },
+        creative_innovator: {
+          name: "Creative Innovator",
+          icon: "🎨",
+          description: "You bring fresh perspectives and innovative solutions to every challenge. Your creativity combined with resilience makes you ideal for programs that value originality and entrepreneurial thinking.",
+          strengths: ["Innovation", "Creative Problem-Solving", "Adaptability", "Original Thinking"],
+          idealPrograms: ["Design Schools", "Entrepreneurship Programs", "Innovation Hubs", "Liberal Arts"],
+          scholarshipTypes: ["Innovation Awards", "Entrepreneurship Grants", "Creative Arts Scholarships"],
+          weight: traits.creative * 0.4 + traits.resilience * 0.3 + traits.leadership * 0.3
+        },
+        global_leader: {
+          name: "Global Leader",
+          icon: "🌍",
+          description: "You naturally inspire and guide others toward common goals. Your combination of leadership skills and analytical thinking makes you perfect for programs focused on social impact and international affairs.",
+          strengths: ["Team Leadership", "Social Impact", "Strategic Thinking", "Cultural Intelligence"],
+          idealPrograms: ["Public Policy Schools", "International Relations", "Business Schools", "Social Impact Programs"],
+          scholarshipTypes: ["Leadership Scholarships", "Public Service Awards", "International Programs"],
+          weight: traits.leadership * 0.4 + traits.analytical * 0.3 + traits.resilience * 0.3
+        },
+        resilient_achiever: {
+          name: "Resilient Achiever",
+          icon: "⚡",
+          description: "You excel at overcoming obstacles and thriving in challenging environments. Your resilience and adaptability make you ideal for competitive programs and demanding academic journeys.",
+          strengths: ["Perseverance", "Adaptability", "Challenge Navigation", "Goal Achievement"],
+          idealPrograms: ["Competitive Universities", "Intensive Programs", "Challenge-Based Learning", "Professional Schools"],
+          scholarshipTypes: ["Merit-Based Awards", "Overcoming Adversity Scholarships", "Achievement Grants"],
+          weight: traits.resilience * 0.4 + traits.leadership * 0.3 + traits.analytical * 0.3
+        }
+      };
+      
+      // Find the archetype with the highest weight
+      let bestArchetype = null;
+      let highestWeight = 0;
+      
+      for (const [key, archetype] of Object.entries(archetypes)) {
+        if (archetype.weight > highestWeight) {
+          highestWeight = archetype.weight;
+          bestArchetype = { key, ...archetype };
+        }
+      }
+      
+      return bestArchetype;
+    }
+
+    function displayResults(archetype, traits) {
+      // Hide quiz questions
+      document.getElementById('quizQuestions').style.display = 'none';
+      document.querySelector('.quiz-navigation').style.display = 'none';
+      
+      // Show results
+      const resultsContainer = document.getElementById('resultsContainer');
+      const archetypeResult = document.getElementById('archetypeResult');
+      
+      archetypeResult.innerHTML = `
+        <div class="archetype-icon">${archetype.icon}</div>
+        <div class="archetype-name">${archetype.name}</div>
+        <div class="archetype-description">${archetype.description}</div>
+        
+        <div class="trait-meters">
+          <div class="trait-meter">
+            <div class="trait-label">
+              <span>Analytical</span>
+              <span>${Math.round(traits.analytical * 100)}%</span>
+            </div>
+            <div class="trait-bar">
+              <div class="trait-fill" data-width="${traits.analytical * 100}"></div>
+            </div>
+          </div>
+          
+          <div class="trait-meter">
+            <div class="trait-label">
+              <span>Creative</span>
+              <span>${Math.round(traits.creative * 100)}%</span>
+            </div>
+            <div class="trait-bar">
+              <div class="trait-fill" data-width="${traits.creative * 100}"></div>
+            </div>
+          </div>
+          
+          <div class="trait-meter">
+            <div class="trait-label">
+              <span>Leadership</span>
+              <span>${Math.round(traits.leadership * 100)}%</span>
+            </div>
+            <div class="trait-bar">
+              <div class="trait-fill" data-width="${traits.leadership * 100}"></div>
+            </div>
+          </div>
+          
+          <div class="trait-meter">
+            <div class="trait-label">
+              <span>Resilience</span>
+              <span>${Math.round(traits.resilience * 100)}%</span>
+            </div>
+            <div class="trait-bar">
+              <div class="trait-fill" data-width="${traits.resilience * 100}"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="recommendations-preview">
+          <h3>🎯 Your Ideal Opportunities</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div>
+              <h4>📚 Program Types</h4>
+              <ul style="text-align: left; color: var(--muted);">
+                ${archetype.idealPrograms.map(program => `<li>${program}</li>`).join('')}
+              </ul>
+            </div>
+            <div>
+              <h4>🏆 Scholarship Types</h4>
+              <ul style="text-align: left; color: var(--muted);">
+                ${archetype.scholarshipTypes.map(type => `<li>${type}</li>`).join('')}
+              </ul>
+            </div>
+            <div>
+              <h4>💪 Your Strengths</h4>
+              <ul style="text-align: left; color: var(--muted);">
+                ${archetype.strengths.map(strength => `<li>${strength}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      resultsContainer.style.display = 'block';
+      
+      // Animate trait bars
+      setTimeout(() => {
+        document.querySelectorAll('.trait-fill').forEach(fill => {
+          const width = fill.getAttribute('data-width');
+          fill.style.width = `${width}%`;
+        });
+      }, 500);
+      
+      // Scroll to results
+      resultsContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      responses = {};
+      userTraits = { analytical: 0, creative: 0, leadership: 0, resilience: 0 };
+      
+      document.getElementById('quizQuestions').style.display = 'block';
+      document.querySelector('.quiz-navigation').style.display = 'flex';
+      document.getElementById('resultsContainer').style.display = 'none';
+      
+      initializeQuiz();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', initializeQuiz);
+  </script>
+  <script src="assets/scale-fix.js"></script>
+</body>
+</html>
