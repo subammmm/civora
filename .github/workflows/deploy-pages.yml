@@ -1,0 +1,58 @@
+name: Deploy Next.js static export to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js site
+        run: npm run build
+
+      - name: Verify critical files in build output
+        run: |
+          echo "Checking for critical files in out/ directory..."
+          ls -la out/
+          test -f out/CNAME && echo "✓ CNAME present" || echo "✗ CNAME missing"
+          test -f out/.nojekyll && echo "✓ .nojekyll present" || echo "✗ .nojekyll missing"
+          test -f out/404.html && echo "✓ 404.html present" || echo "✗ 404.html missing"
+          test -f out/psychometric-quiz.html && echo "✓ psychometric-quiz.html present" || echo "✗ psychometric-quiz.html missing"
+          test -d out/assets && echo "✓ assets/ directory present" || echo "✗ assets/ directory missing"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3

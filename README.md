@@ -66,7 +66,7 @@ python3 -m http.server 8080
 The project uses GitHub Actions for continuous integration and deployment:
 
 - **CI Workflow** (`.github/workflows/ci.yml`): Runs lint and type-check on all pushes and PRs to main
-- **Deploy Workflow** (`.github/workflows/nextjs-deploy.yml`): Automatically builds and deploys to GitHub Pages on push to main
+- **Deploy Workflow** (`.github/workflows/deploy-pages.yml`): Automatically builds and deploys to GitHub Pages on push to main
 - **Dependabot**: Automatically opens PRs for dependency updates weekly
 
 ## Live Site
@@ -88,9 +88,11 @@ civora/
 ├── public/                # Static assets
 │   ├── assets/           # Images, CSS, JS
 │   ├── CNAME             # Custom domain config
+│   ├── .nojekyll         # GitHub Pages config
 │   ├── manifest.webmanifest
 │   ├── robots.txt
-│   └── sitemap.xml       # SEO sitemap (deployed to root)
+│   ├── sitemap.xml       # SEO sitemap (deployed to root)
+│   └── psychometric-quiz.html  # Standalone quiz page
 ├── legacy/                # Archived static HTML files (not deployed)
 ├── next.config.js        # Next.js configuration
 ├── tsconfig.json         # TypeScript configuration
