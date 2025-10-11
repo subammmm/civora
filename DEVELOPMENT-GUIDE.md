@@ -93,7 +93,6 @@ civora/
 │   ├── manifest.webmanifest
 │   ├── robots.txt
 │   └── sitemap.xml
-├── legacy/                  # Archived static HTML (NOT deployed)
 ├── .github/workflows/       # CI/CD automation
 │   ├── ci.yml              # Lint and type-check
 │   └── deploy-pages.yml    # Build and deploy
@@ -251,13 +250,6 @@ The project uses `eslint-config-next` which includes:
 - Import order rules
 
 Some warnings are expected (e.g., using `<img>` instead of `<Image>`). These are recommendations, not errors.
-
-## Legacy Files
-
-The `legacy/` directory contains the original static HTML files before the Next.js migration. These files:
-- Are **NOT deployed** to production
-- Are preserved for reference only
-- Should **NOT be edited** - make changes in `app/` instead
 
 ## Support
 
