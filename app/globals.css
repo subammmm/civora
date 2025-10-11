@@ -599,6 +599,54 @@ i {
   padding: 1.5rem 0; /* Further reduced from default section spacing */
 }
 
+/* Content wrapper for non-homepage pages - adds consistent spacing and centering */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) 0;
+}
+
+/* Text alignment utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Content section wrapper - for major content blocks on non-homepage pages */
+.content-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+  box-shadow: var(--shadow-subtle);
+}
+
+.content-section h1,
+.content-section h2,
+.content-section h3 {
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.content-section > h1:first-child,
+.content-section > h2:first-child,
+.content-section > h3:first-child {
+  margin-top: 0;
+}
+
+/* Ensure proper spacing between content sections */
+.content-section + .content-section {
+  margin-top: var(--space-6);
+}
+
 /* Timeline Components */
 .timeline {
   display: flex;
@@ -700,6 +748,38 @@ i {
   margin-top: 1rem;
 }
 
+.margin-top-2 {
+  margin-top: 2rem;
+}
+
+.margin-top-3 {
+  margin-top: 3rem;
+}
+
+.margin-bottom-1 {
+  margin-bottom: 1rem;
+}
+
+.margin-bottom-2 {
+  margin-bottom: 2rem;
+}
+
+.margin-bottom-3 {
+  margin-bottom: 3rem;
+}
+
+.padding-1 {
+  padding: 1rem;
+}
+
+.padding-2 {
+  padding: 2rem;
+}
+
+.padding-3 {
+  padding: 3rem;
+}
+
 /* Footer - ensure proper spacing */
 .site-footer {
   margin-top: 1rem; /* Reduced from 2rem to 1rem */
@@ -786,7 +866,7 @@ i {
     background 160ms ease,
     border-color 160ms ease,
     transform 160ms ease;
-  margin-bottom: var(--space-4); /* Reduced from space-8 to space-4 (16px) */
+  margin-bottom: var(--space-6); /* Updated from space-4 for better section separation */
 }
 
 .card:hover,
@@ -797,6 +877,46 @@ i {
   border-color: #333336;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Enhanced card styling for non-homepage pages */
+.section .card,
+.section .box {
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+/* Centered content in cards for non-homepage sections */
+.section .card h1,
+.section .card h2,
+.section .box h1,
+.section .box h2 {
+  text-align: center;
+  color: var(--text-primary);
+}
+
+/* Hero sections on non-homepage pages */
+.hero:not(.halo) {
+  text-align: center;
+  padding: var(--space-12) 0;
+}
+
+.hero:not(.halo) .card {
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.hero:not(.halo) h1,
+.hero:not(.halo) h2 {
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.hero:not(.halo) .subtext {
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 /* Image hover animations inside boxes */
@@ -1085,6 +1205,102 @@ a:hover {
 .tile a:hover {
   color: var(--text-primary);
   text-decoration: underline;
+}
+
+/* Contact grid and cards - for contact page */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+  margin: var(--space-8) 0;
+}
+
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-8);
+  text-align: center;
+  box-shadow: var(--shadow-subtle);
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.contact-card:hover {
+  background: #1f1f22;
+  border-color: #333336;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.contact-card h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  text-align: center;
+}
+
+.contact-card p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+  text-align: center;
+}
+
+/* Filter section for scholarships page */
+.filter-section {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin: var(--space-6) 0;
+}
+
+.filter-select {
+  flex: 1;
+  min-width: 200px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  color: var(--text-primary);
+  font-size: var(--body-size);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Linear table - for scholarships */
+.linear-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.linear-table thead {
+  background: var(--border);
+}
+
+.linear-table th,
+.linear-table td {
+  padding: var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.linear-table th {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.linear-table tr:hover {
+  background: #1f1f22;
+}
+
+/* Ensure proper text colors for readability */
+.linear-table strong {
+  color: var(--text-primary);
 }
 
 /* Phase 4 - Components */
