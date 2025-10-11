@@ -53,12 +53,13 @@ Created 13 pages in the `app/` directory:
 
 ### 5. GitHub Actions Deployment
 
-Created `.github/workflows/nextjs-deploy.yml`:
+Created `.github/workflows/deploy-pages.yml`:
 
 - Automatic deployment on push to main
 - Node.js setup and dependency installation
-- Next.js build
+- Next.js build with verification step
 - GitHub Pages deployment
+- Moved static files to `public/` for automatic export
 
 ## Technical Details
 
@@ -176,10 +177,13 @@ civora/
 ├── public/                   # Static assets
 │   ├── assets/              # Images, CSS, JS
 │   ├── CNAME
+│   ├── .nojekyll
 │   ├── manifest.webmanifest
-│   └── robots.txt
+│   ├── robots.txt
+│   └── psychometric-quiz.html
 ├── .github/workflows/        # GitHub Actions
-│   └── nextjs-deploy.yml
+│   ├── ci.yml
+│   └── deploy-pages.yml
 ├── next.config.js           # Next.js config
 ├── package.json             # Dependencies
 ├── .gitignore               # Git ignore rules
