@@ -5,7 +5,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Disable React strict mode for production build compatibility
   reactStrictMode: true,
 };
 
