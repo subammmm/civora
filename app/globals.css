@@ -131,23 +131,17 @@ body {
   font-weight: var(--body-weight);
 }
 
-/* Page Wrapper - 75% Scaling */
+/* Page Wrapper - No scaling for better layout control */
 #wrapper {
-  transform-origin: top left;
-  transform: scale(0.75) translateZ(0);
-  width: calc(100% / 0.75);
-  min-height: calc(100vh / 0.75);
-  position: absolute;
-  top: 0;
-  left: 0;
-  will-change: transform;
-  overflow: visible;
-  backface-visibility: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Prevent bottom scroll gap */
-body > *:not(#wrapper) {
-  display: none;
+/* Ensure body displays wrapper properly */
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 .site-fixed,
