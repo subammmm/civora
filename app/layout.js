@@ -1,5 +1,7 @@
 import './globals.css';
+import './sidebar.css';
 import Script from 'next/script';
+import Sidebar from './components/Sidebar';
 
 export const metadata = {
   metadataBase: new URL('https://civora.me'),
@@ -77,7 +79,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
@@ -115,9 +117,10 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body>
+      <body className="has-sidebar">
         <div id="wrapper">
           <Header />
+          <Sidebar />
           <a href="#main-content" className="skip-to-content">
             Skip to content
           </a>
@@ -168,40 +171,34 @@ export default function RootLayout({ children }) {
 
 function Header() {
   return (
-    <header className="site-header">
+    <header className="site-header linear-header">
       <div className="header-inner">
         <a className="brand" href="/">
           <img src="/assets/logo.svg" alt="Civora Logo" className="brand-logo" />
-          Civora
+          <span className="brand-text">Civora</span>
         </a>
 
-        <nav id="site-nav" className="site-nav">
-          <a href="/scholarships/" className="nav-item">
-            Scholarships
-          </a>
-          <a href="/citizenship/" className="nav-item">
-            Citizenship
-          </a>
-          <a href="/student-stories/" className="nav-item">
-            Students & Stories
-          </a>
-          <a href="/ielts-prep/" className="nav-item">
-            IELTS & Prep
-          </a>
-          <a href="/about/" className="nav-item">
-            About
-          </a>
-          <a href="/contact/" className="nav-item">
-            Contact
-          </a>
-        </nav>
-
+        {/* Right side controls */}
         <div className="header-controls">
-          <button className="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
+          <button
+            className="header-action-btn"
+            aria-label="Search"
+            title="Search (⌘K)"
+          >
+            <i className="fas fa-search"></i>
           </button>
+          <a href="/privacy/" className="header-link">
+            Privacy
+          </a>
+          <a
+            href="https://linkedin.com/company/civora"
+            className="header-link"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <i className="fab fa-linkedin"></i>
+          </a>
         </div>
       </div>
     </header>
