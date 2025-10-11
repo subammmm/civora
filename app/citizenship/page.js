@@ -12,15 +12,15 @@ export default function CitizenshipPage() {
         <p data-i18n="cit.intro" style="margin-bottom: 2rem; color: var(--text-secondary); max-width: 800px; margin-left: auto; margin-right: auto;">Comprehensive guide to citizenship pathways and strategic tax residency options for Nepali students. Understanding both citizenship routes and tax optimization strategies can significantly impact your long-term financial and mobility planning when studying abroad.</p>
 
         
-        <div className="callout" style="background: linear-gradient(135deg, var(--accent), #1e40af); color: white; margin: 2rem 0; text-align: center;">
-          <h2><i className="fas fa-graduation-cap" style="margin-right: 0.5rem;"></i>Best Paths for Nepali Students (2025 Focus)</h2>
+        <div class="callout" style="background: linear-gradient(135deg, var(--accent), #1e40af); color: white; margin: 2rem 0; text-align: center;">
+          <h2><i class="fas fa-graduation-cap" style="margin-right: 0.5rem;"></i>Best Paths for Nepali Students (2025 Focus)</h2>
           <p>Top student-friendly countries with high success rates for Nepali applicants. Nepal doesn't allow dual citizenship - consider renunciation risks carefully.</p>
         </div>
 
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-          <div className="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i className="fas fa-flag" style="color: #ff6b35;"></i> Canada (Easiest for Nepali Students)</h3>
+          <div class="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
+            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-flag" style="color: #ff6b35;"></i> Canada (Easiest for Nepali Students)</h3>
             <p><strong>Timeline:</strong> Study (2-4 years) → PGWP (1-3 years) → PR (6-12 months) → Citizenship (3 years)</p>
             <p><strong>Requirements:</strong> Valid study permit, full-time program completion, IELTS 6.0+</p>
             <p><strong>Cost:</strong> CAD $255 PGWP fee, CAD $630 citizenship fee</p>
@@ -29,8 +29,8 @@ export default function CitizenshipPage() {
             <p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html" target="_blank" style="color: var(--accent);">Official IRCC →</a></p>
           </div>
           
-          <div className="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i className="fas fa-flag" style="color: #f39c12;"></i> Australia</h3>
+          <div class="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
+            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-flag" style="color: #f39c12;"></i> Australia</h3>
             <p><strong>Timeline:</strong> Study (2 years) → Graduate Visa (2-6 years) → PR (1-2 years) → Citizenship (4 years)</p>
             <p><strong>Requirements:</strong> IELTS 6.0+, relevant degree from Australian institution</p>
             <p><strong>Cost:</strong> AUD $1,895 visa fee, AUD $490 citizenship fee</p>
@@ -39,8 +39,8 @@ export default function CitizenshipPage() {
             <p><a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485" target="_blank" style="color: var(--accent);">Official Home Affairs →</a></p>
           </div>
           
-          <div className="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i className="fas fa-flag" style="color: #e74c3c;"></i> UK</h3>
+          <div class="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
+            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-flag" style="color: #e74c3c;"></i> UK</h3>
             <p><strong>Timeline:</strong> Study (1-4 years) → Graduate Visa (2-3 years) → Skilled Worker (5 years) → PR</p>
             <p><strong>Requirements:</strong> Tier 4/Student Visa completion, IELTS 6.0+</p>
             <p><strong>Cost:</strong> £490 visa fee, sponsor license fees vary</p>
@@ -49,8 +49,8 @@ export default function CitizenshipPage() {
             <p><a href="https://www.gov.uk/graduate-visa" target="_blank" style="color: var(--accent);">Official UK Gov →</a></p>
           </div>
           
-          <div className="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i className="fas fa-flag" style="color: #27ae60;"></i> Germany</h3>
+          <div class="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
+            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-flag" style="color: #27ae60;"></i> Germany</h3>
             <p><strong>Timeline:</strong> Study (2-4 years) → Job Seeker (6 months) → Blue Card (5 years) → PR</p>
             <p><strong>Requirements:</strong> Degree recognition, German B1 level, €45,300+ salary for Blue Card</p>
             <p><strong>Cost:</strong> €100 visa fee, €11,208 blocked account requirement</p>
@@ -60,14 +60,14 @@ export default function CitizenshipPage() {
           </div>
         </div>
 
-    <div className="callout" style="background: #fee2e2; color: #7f1d1d; border-left: 4px solid #dc2626;">
+    <div class="callout" style="background: #fee2e2; color: #7f1d1d; border-left: 4px solid #dc2626;">
       <h3>⚠️ Nepal Dual Citizenship Warning</h3>
       <p><strong>Important:</strong> Nepal does not allow dual citizenship. Acquiring foreign citizenship means automatic loss of Nepali citizenship unless you renounce the foreign citizenship within 2 years. Consider this carefully before naturalizing.</p>
       <p><strong>Resources:</strong> <a href="https://mofa.gov.np/" target="_blank" style="color: #7f1d1d;">Nepal Ministry of Foreign Affairs</a> | <a href="https://www.nepalembassyusa.org/" target="_blank" style="color: #7f1d1d;">Nepal Embassy USA</a></p>
     </div>
 
     <h2>Quick Pathways Summary</h2>
-    <ul className="pathway-list">
+    <ul class="pathway-list">
       <li><strong>France</strong> → Study → Alternance → 5 years → PR → Citizenship. <a href="https://www.service-public.fr/particuliers/vosdroits/F2213" target="_blank">Official Info</a></li>
       <li><strong>Argentina</strong> → 2 years residency → Naturalization. <a href="https://www.argentina.gob.ar/interior/migraciones/ciudadania" target="_blank">Official Info</a></li>
       <li><strong>Portugal</strong> → 5 years legal stay → Citizenship. <a href="https://www.sef.pt/en/pages/generic-page.aspx?nID=17" target="_blank">Official Info</a></li>
@@ -75,25 +75,25 @@ export default function CitizenshipPage() {
       <li><strong>Germany</strong> → 8 years residency (6 with integration). <a href="https://www.gesetze-im-internet.de/stag/StAG.pdf" target="_blank">Official Info</a></li>
     </ul>
 
-    <hr className="muted" style="border-color: var(--border); opacity:.4; margin:2rem 0" />
+    <hr class="muted" style="border-color: var(--border); opacity:.4; margin:2rem 0" />
 
     <h2>Fastest Citizenship Pathways 2025</h2>
     <p>Based on the latest global research, here are the quickest and most reliable routes to citizenship for international students and professionals. All pathways include official sources and processing timelines.</p>
 
-    <div className="callout">
+    <div class="callout">
       <h3>Express Routes (3-12 months)</h3>
       <p>Caribbean and European investment programs offering the fastest citizenship options globally.</p>
     </div>
 
     
-    <div className="collapsible-section">
-      <button className="collapsible-header" type="button" aria-expanded="false">
+    <div class="collapsible-section">
+      <button class="collapsible-header" type="button" aria-expanded="false">
         <h2>Caribbean Citizenship by Investment</h2>
-        <span className="collapsible-icon">▼</span>
+        <span class="collapsible-icon">▼</span>
       </button>
-      <div className="collapsible-content">
-        <div className="grid-3-cols">
-          <div className="card">
+      <div class="collapsible-content">
+        <div class="grid-3-cols">
+          <div class="card">
             <h3>St. Kitts & Nevis</h3>
             <p><strong>Timeline:</strong> 3-6 months</p>
             <p><strong>Investment:</strong> $250,000 real estate or $150,000 donation</p>
@@ -101,7 +101,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.ciu.gov.kn/" target="_blank">Official CIU Portal →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇩🇲 Dominica</h3>
             <p><strong>Timeline:</strong> 3-4 months</p>
             <p><strong>Investment:</strong> $200,000 real estate or $100,000 donation</p>
@@ -109,7 +109,7 @@ export default function CitizenshipPage() {
             <p><a href="https://cbiu.gov.dm/" target="_blank">Official CBIU Portal →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇦🇬 Antigua & Barbuda</h3>
             <p><strong>Timeline:</strong> 4-6 months</p>
             <p><strong>Investment:</strong> $230,000 real estate or $130,000 donation</p>
@@ -121,14 +121,14 @@ export default function CitizenshipPage() {
     </div>
 
     
-    <div className="collapsible-section">
-      <button className="collapsible-header" type="button" aria-expanded="false">
+    <div class="collapsible-section">
+      <button class="collapsible-header" type="button" aria-expanded="false">
         <h2>🇪🇺 European Investment Routes</h2>
-        <span className="collapsible-icon">▼</span>
+        <span class="collapsible-icon">▼</span>
       </button>
-      <div className="collapsible-content">
-        <div className="grid-3-cols">
-          <div className="card">
+      <div class="collapsible-content">
+        <div class="grid-3-cols">
+          <div class="card">
             <h3>🇲🇹 Malta Golden Passport</h3>
             <p><strong>Timeline:</strong> 12-14 months</p>
             <p><strong>Investment:</strong> €600,000+ (reduced from €650,000 in 2024)</p>
@@ -136,7 +136,7 @@ export default function CitizenshipPage() {
             <p><a href="https://identitymalta.com/" target="_blank">Identity Malta →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>Turkey Citizenship</h3>
             <p><strong>Timeline:</strong> 3-6 months</p>
             <p><strong>Investment:</strong> $400,000 real estate (held for 3 years)</p>
@@ -148,14 +148,14 @@ export default function CitizenshipPage() {
     </div>
 
     
-    <div className="collapsible-section">
-      <button className="collapsible-header" type="button" aria-expanded="false">
+    <div class="collapsible-section">
+      <button class="collapsible-header" type="button" aria-expanded="false">
         <h2>💼 Skilled Worker Fast Tracks</h2>
-        <span className="collapsible-icon">▼</span>
+        <span class="collapsible-icon">▼</span>
       </button>
-      <div className="collapsible-content">
-        <div className="grid-3-cols">
-          <div className="card">
+      <div class="collapsible-content">
+        <div class="grid-3-cols">
+          <div class="card">
             <h3>🇨🇦 Canada Express Entry</h3>
             <p><strong>Timeline:</strong> 6-12 months after PR</p>
             <p><strong>Path:</strong> Study → PGWP → Express Entry → PR → Citizenship (3 years)</p>
@@ -163,7 +163,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html" target="_blank">Official Express Entry →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇦🇺 Australia SkillSelect</h3>
             <p><strong>Timeline:</strong> 12-24 months to PR</p>
             <p><strong>Path:</strong> Study → Graduate visa → Skilled visa → PR → Citizenship (4 years)</p>
@@ -175,19 +175,19 @@ export default function CitizenshipPage() {
     </div>
 
     
-    <div className="collapsible-section">
-      <button className="collapsible-header" type="button" aria-expanded="true">
+    <div class="collapsible-section">
+      <button class="collapsible-header" type="button" aria-expanded="true">
         <h2>Post-Study Work-to-Citizenship</h2>
-        <span className="collapsible-icon">▲</span>
+        <span class="collapsible-icon">▲</span>
       </button>
-      <div className="collapsible-content" style="display: block;">
-        <div className="callout">
+      <div class="collapsible-content" style="display: block;">
+        <div class="callout">
           <h3>Student-Friendly Countries</h3>
           <p>Countries with streamlined pathways from student visa to permanent residency and citizenship.</p>
         </div>
 
-        <div className="grid-3-cols">
-          <div className="card">
+        <div class="grid-3-cols">
+          <div class="card">
             <h3>🇩🇪 Germany</h3>
             <p><strong>Timeline:</strong> 6-8 years total</p>
             <p><strong>Path:</strong> Study → Job seeker visa → Work permit → PR (5 years) → Citizenship</p>
@@ -195,7 +195,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.make-it-in-germany.com/" target="_blank">Make it in Germany →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇳🇿 New Zealand</h3>
             <p><strong>Timeline:</strong> 5-7 years total</p>
             <p><strong>Path:</strong> Study → Post-study work visa → Skilled Migrant → PR → Citizenship</p>
@@ -203,7 +203,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.immigration.govt.nz/" target="_blank">Immigration New Zealand →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇸🇬 Singapore</h3>
             <p><strong>Timeline:</strong> 6-10 years</p>
             <p><strong>Path:</strong> Study → Work pass → PR application → Citizenship</p>
@@ -215,14 +215,14 @@ export default function CitizenshipPage() {
     </div>
 
     
-    <div className="collapsible-section">
-      <button className="collapsible-header" type="button" aria-expanded="false">
+    <div class="collapsible-section">
+      <button class="collapsible-header" type="button" aria-expanded="false">
         <h2>Alternative Fast Routes</h2>
-        <span className="collapsible-icon">▼</span>
+        <span class="collapsible-icon">▼</span>
       </button>
-      <div className="collapsible-content">
-        <div className="grid-3-cols">
-          <div className="card">
+      <div class="collapsible-content">
+        <div class="grid-3-cols">
+          <div class="card">
             <h3>🇪🇸 Spain Golden Visa</h3>
             <p><strong>Timeline:</strong> 10 years to citizenship (2 years if from Latin America)</p>
             <p><strong>Investment:</strong> €500,000 real estate</p>
@@ -230,7 +230,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.exteriores.gob.es/" target="_blank">Spanish Ministry →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇮🇪 Ireland Stamp 0</h3>
             <p><strong>Timeline:</strong> 5 years to citizenship</p>
             <p><strong>Investment:</strong> €1 million+ in various programs</p>
@@ -242,19 +242,19 @@ export default function CitizenshipPage() {
     </div>
 
     
-    <div className="collapsible-section">
-      <button className="collapsible-header" type="button" aria-expanded="false">
+    <div class="collapsible-section">
+      <button class="collapsible-header" type="button" aria-expanded="false">
         <h2>💰 Tax Residency Options (Low-Tax Jurisdictions for Students)</h2>
-        <span className="collapsible-icon">▼</span>
+        <span class="collapsible-icon">▼</span>
       </button>
-      <div className="collapsible-content">
-        <div className="callout">
+      <div class="collapsible-content">
+        <div class="callout">
           <h3>Strategic Tax Residency for Nepali Students</h3>
           <p>Minimize taxes on global income while studying/working abroad. These jurisdictions offer favorable tax regimes with easy residency setups for students. <strong>Important:</strong> Consider Nepal tax treaties to avoid double taxation.</p>
         </div>
 
-        <div className="grid-3-cols">
-          <div className="card" style="border-left: 4px solid #f39c12;">
+        <div class="grid-3-cols">
+          <div class="card" style="border-left: 4px solid #f39c12;">
             <h3>🇦🇪 UAE (Dubai/Abu Dhabi) - RECOMMENDED</h3>
             <p><strong>Tax Rate:</strong> 0% income tax on individuals</p>
             <p><strong>Timeline:</strong> 183 days presence/year for tax residency</p>
@@ -265,7 +265,7 @@ export default function CitizenshipPage() {
             <p><a href="https://u.ae/en/information-and-services/visa-and-emirate-id/residence-visa" target="_blank">UAE Residence Portal →</a></p>
           </div>
           
-          <div className="card" style="border-left: 4px solid #27ae60;">
+          <div class="card" style="border-left: 4px solid #27ae60;">
             <h3>🇵🇦 Panama (Friendly Nations Visa)</h3>
             <p><strong>Tax Rate:</strong> 0% on foreign income (territorial taxation)</p>
             <p><strong>Timeline:</strong> 6 months → residency → tax resident status</p>
@@ -276,7 +276,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.migracion.gob.pa/" target="_blank">Panama Immigration →</a></p>
           </div>
           
-          <div className="card" style="border-left: 4px solid #e74c3c;">
+          <div class="card" style="border-left: 4px solid #e74c3c;">
             <h3>🇵🇾 Paraguay</h3>
             <p><strong>Tax Rate:</strong> 10% flat tax on local income, 0% on foreign income</p>
             <p><strong>Timeline:</strong> 3 months → residency → tax benefits</p>
@@ -287,7 +287,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.migraciones.gov.py/" target="_blank">Paraguay Immigration →</a></p>
           </div>
           
-          <div className="card" style="border-left: 4px solid #3498db;">
+          <div class="card" style="border-left: 4px solid #3498db;">
             <h3>🇲🇹 Malta (Non-Dom Scheme)</h3>
             <p><strong>Tax Rate:</strong> 15% on foreign income remitted to Malta</p>
             <p><strong>Timeline:</strong> 6 months → residency → non-dom tax status</p>
@@ -299,7 +299,7 @@ export default function CitizenshipPage() {
           </div>
         </div>
 
-        <div className="callout" style="background: #e8f4fd; color: #1e40af; border-left: 4px solid #3b82f6;">
+        <div class="callout" style="background: #e8f4fd; color: #1e40af; border-left: 4px solid #3b82f6;">
           <h3>💡 Tax Planning Tips for Nepali Students</h3>
           <ul>
             <li><strong>Timing:</strong> Establish tax residency before earning significant income</li>
@@ -316,8 +316,8 @@ export default function CitizenshipPage() {
           <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Strategic combinations for maximizing global mobility and minimizing tax burden</p>
           
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-            <div className="card" style="border-left: 4px solid var(--accent); padding: 1.5rem; background: var(--surface);">
-              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i className="fas fa-trophy" style="color: #f39c12;"></i> Canada Citizenship + UAE Tax Residency</h3>
+            <div class="card" style="border-left: 4px solid var(--accent); padding: 1.5rem; background: var(--surface);">
+              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-trophy" style="color: #f39c12;"></i> Canada Citizenship + UAE Tax Residency</h3>
               <p><strong>Why This Combo:</strong> Canadian passport offers visa-free travel to 185+ countries, while UAE provides 0% income tax on global income.</p>
               <p><strong>How to Get:</strong></p>
               <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
@@ -329,8 +329,8 @@ export default function CitizenshipPage() {
               <p><strong>Best For:</strong> Digital entrepreneurs, remote workers, international consultants</p>
             </div>
             
-            <div className="card" style="border-left: 4px solid var(--accent); padding: 1.5rem; background: var(--surface);">
-              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i className="fas fa-star" style="color: #5E6AD2;"></i> Germany Citizenship + Malta Tax Residency</h3>
+            <div class="card" style="border-left: 4px solid var(--accent); padding: 1.5rem; background: var(--surface);">
+              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-star" style="color: #5E6AD2;"></i> Germany Citizenship + Malta Tax Residency</h3>
               <p><strong>Why This Combo:</strong> German passport (EU) allows living/working anywhere in EU, while Malta non-dom scheme offers 15% tax on remitted foreign income.</p>
               <p><strong>How to Get:</strong></p>
               <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
@@ -342,8 +342,8 @@ export default function CitizenshipPage() {
               <p><strong>Best For:</strong> EU-based professionals, business owners with international income</p>
             </div>
             
-            <div className="card" style="border-left: 4px solid var(--accent); padding: 1.5rem; background: var(--surface);">
-              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i className="fas fa-globe" style="color: #27ae60;"></i> UK Citizenship + Panama Tax Residency</h3>
+            <div class="card" style="border-left: 4px solid var(--accent); padding: 1.5rem; background: var(--surface);">
+              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-globe" style="color: #27ae60;"></i> UK Citizenship + Panama Tax Residency</h3>
               <p><strong>Why This Combo:</strong> UK passport provides visa-free access to 190+ countries, while Panama offers 0% tax on foreign-sourced income.</p>
               <p><strong>How to Get:</strong></p>
               <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
@@ -355,8 +355,8 @@ export default function CitizenshipPage() {
               <p><strong>Best For:</strong> Location-independent workers, online business owners</p>
             </div>
             
-            <div className="card" style="border-left: 4px solid var(--accent); padding: 1.5rem; background: var(--surface);">
-              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i className="fas fa-lightbulb" style="color: #ff6b35;"></i> Australia Citizenship + Paraguay Tax Residency</h3>
+            <div class="card" style="border-left: 4px solid var(--accent); padding: 1.5rem; background: var(--surface);">
+              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-lightbulb" style="color: #ff6b35;"></i> Australia Citizenship + Paraguay Tax Residency</h3>
               <p><strong>Why This Combo:</strong> Australian passport offers visa-free travel to 185+ countries, while Paraguay provides 0% tax on foreign income with easy residency.</p>
               <p><strong>How to Get:</strong></p>
               <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
@@ -369,7 +369,7 @@ export default function CitizenshipPage() {
             </div>
           </div>
           
-          <div className="callout" style="background: #fff7ed; color: #9a3412; border-left: 4px solid #f97316; margin-top: 2rem;">
+          <div class="callout" style="background: #fff7ed; color: #9a3412; border-left: 4px solid #f97316; margin-top: 2rem;">
             <h3>⚠️ Important Legal Considerations</h3>
             <ul>
               <li><strong>Nepal Citizenship:</strong> Nepal does NOT allow dual citizenship. Obtaining foreign citizenship means losing Nepali citizenship.</li>
@@ -384,19 +384,19 @@ export default function CitizenshipPage() {
     </div>
 
     
-    <div className="collapsible-section">
-      <button className="collapsible-header" type="button" aria-expanded="false">
+    <div class="collapsible-section">
+      <button class="collapsible-header" type="button" aria-expanded="false">
         <h2>💰 Foreign Investor Visas & Start-up Visas</h2>
-        <span className="collapsible-icon">▼</span>
+        <span class="collapsible-icon">▼</span>
       </button>
-      <div className="collapsible-content">
-        <div className="callout">
+      <div class="collapsible-content">
+        <div class="callout">
           <h3>Investment-Based Residency for Young Entrepreneurs</h3>
           <p>Lower-threshold investment programs perfect for students and young professionals looking to start businesses or invest abroad.</p>
         </div>
 
-        <div className="grid-3-cols">
-          <div className="card">
+        <div class="grid-3-cols">
+          <div class="card">
             <h3>🇪🇸 Spain Entrepreneur Visa</h3>
             <p><strong>Investment:</strong> €50,000+ business investment or innovative project</p>
             <p><strong>Timeline:</strong> Initial 2 years → Renewable → PR → Citizenship (10 years)</p>
@@ -404,7 +404,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.exteriores.gob.es/Consulados/sanfrancisco/en/ServiciosConsulares/Paginas/SpanishEntrepreneurVisa.aspx" target="_blank">Spain Entrepreneur Portal →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇳🇱 Netherlands Start-up Visa</h3>
             <p><strong>Investment:</strong> €4,500 + business plan approval</p>
             <p><strong>Timeline:</strong> 1 year visa → Extension → PR (5 years) → Citizenship</p>
@@ -412,7 +412,7 @@ export default function CitizenshipPage() {
             <p><a href="https://ind.nl/en/residence-permits/work/startup" target="_blank">Netherlands IND →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇨🇦 Canada Start-up Visa</h3>
             <p><strong>Investment:</strong> $75,000+ with incubator/accelerator support</p>
             <p><strong>Timeline:</strong> Direct PR → Citizenship (3 years)</p>
@@ -420,7 +420,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa.html" target="_blank">Canada Start-up Portal →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇦🇺 Australia Business Innovation Visa (188A)</h3>
             <p><strong>Investment:</strong> AUD $150,000+ business/investment</p>
             <p><strong>Timeline:</strong> 4 years temporary → PR → Citizenship (4 years)</p>
@@ -428,7 +428,7 @@ export default function CitizenshipPage() {
             <p><a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/business-innovation-and-investment-188" target="_blank">Australia Business Visa →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇬🇧 UK Innovator Founder Visa</h3>
             <p><strong>Investment:</strong> £50,000+ innovative business</p>
             <p><strong>Timeline:</strong> 3 years → PR → Citizenship (6 years total)</p>
@@ -436,7 +436,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.gov.uk/innovator-founder-visa" target="_blank">UK Innovator Portal →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇩🇪 Germany Investor/Self-Employment Visa</h3>
             <p><strong>Investment:</strong> €25,000+ business capital</p>
             <p><strong>Timeline:</strong> 3 years → PR → Citizenship (6-8 years total)</p>
@@ -448,19 +448,19 @@ export default function CitizenshipPage() {
     </div>
 
     
-    <div className="collapsible-section">
-      <button className="collapsible-header" type="button" aria-expanded="false">
+    <div class="collapsible-section">
+      <button class="collapsible-header" type="button" aria-expanded="false">
         <h2>⚡ Fast-Track Naturalization for Students</h2>
-        <span className="collapsible-icon">▼</span>
+        <span class="collapsible-icon">▼</span>
       </button>
-      <div className="collapsible-content">
-        <div className="callout">
+      <div class="collapsible-content">
+        <div class="callout">
           <h3>Accelerated Citizenship Through Study & Integration</h3>
           <p>Countries offering faster naturalization timelines for students who demonstrate language proficiency, integration, and long-term commitment.</p>
         </div>
 
-        <div className="grid-3-cols">
-          <div className="card">
+        <div class="grid-3-cols">
+          <div class="card">
             <h3>🇦🇷 Argentina</h3>
             <p><strong>Timeline:</strong> 2 years legal residence → Citizenship</p>
             <p><strong>Student Path:</strong> Student visa → Work permit → Naturalization (fastest in Americas)</p>
@@ -468,7 +468,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.argentina.gob.ar/interior/migraciones" target="_blank">Argentina Immigration →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇵🇪 Peru</h3>
             <p><strong>Timeline:</strong> 2 years legal residence → Citizenship</p>
             <p><strong>Student Path:</strong> Student visa → Work permit → Naturalization</p>
@@ -476,7 +476,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.gob.pe/migraciones" target="_blank">Peru Immigration →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇺🇾 Uruguay</h3>
             <p><strong>Timeline:</strong> 3 years legal residence → Citizenship</p>
             <p><strong>Student Path:</strong> Student visa → Work permit → Naturalization</p>
@@ -484,7 +484,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.gub.uy/tramites/solicitud-nacionalizacion-uruguaya" target="_blank">Uruguay Naturalization →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇧🇷 Brazil</h3>
             <p><strong>Timeline:</strong> 4 years legal residence → Citizenship (1 year if married to Brazilian)</p>
             <p><strong>Student Path:</strong> Student visa → Work permit → Naturalization</p>
@@ -492,7 +492,7 @@ export default function CitizenshipPage() {
             <p><a href="https://www.gov.br/pt-br/servicos/adquirir-nacionalidade-brasileira-por-naturalizacao-ordinaria" target="_blank">Brazil Naturalization →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇧🇪 Belgium</h3>
             <p><strong>Timeline:</strong> 5 years legal residence → Citizenship (accelerated for EU students)</p>
             <p><strong>Student Path:</strong> EU study → Work → Integration → Naturalization</p>
@@ -500,7 +500,7 @@ export default function CitizenshipPage() {
             <p><a href="https://dofi.ibz.be/" target="_blank">Belgium Integration →</a></p>
           </div>
           
-          <div className="card">
+          <div class="card">
             <h3>🇱🇺 Luxembourg</h3>
             <p><strong>Timeline:</strong> 5 years legal residence → Citizenship (language requirement)</p>
             <p><strong>Student Path:</strong> EU study → Work → Language proficiency → Naturalization</p>
@@ -512,11 +512,11 @@ export default function CitizenshipPage() {
     </div>
 
     
-    <div className="callout" style="background: #f0fdf4; color: #166534; border-left: 4px solid #16a34a;">
+    <div class="callout" style="background: #f0fdf4; color: #166534; border-left: 4px solid #16a34a;">
       <h2>📋 Official Sources & Free Verification Resources</h2>
       
       <h3>Government Websites (Official/Free Sources)</h3>
-      <div className="grid-3-cols" style="margin: 1rem 0;">
+      <div class="grid-3-cols" style="margin: 1rem 0;">
         <div>
           <h4>🇨🇦 Canada</h4>
           <ul>
@@ -551,7 +551,7 @@ export default function CitizenshipPage() {
       </div>
 
       <h3>Embassies in Nepal (Direct Assistance)</h3>
-      <div className="grid-3-cols" style="margin: 1rem 0;">
+      <div class="grid-3-cols" style="margin: 1rem 0;">
         <div>
           <h4>🏛️ Kathmandu Embassies</h4>
           <ul>
@@ -589,7 +589,7 @@ export default function CitizenshipPage() {
       </ul>
     </div>
 
-    <div className="callout">
+    <div class="callout">
       <h3>⚠️ Important Considerations for Students</h3>
       <ul>
         <li><strong>Tax Planning:</strong> Consider global tax implications before establishing tax residency</li>
