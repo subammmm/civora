@@ -1,10 +1,10 @@
 # 🌍 Civora
 
-> **Note**: This project is a Next.js 14 App Router application with static export for GitHub Pages deployment. Legacy static HTML files have been archived to `legacy/` directory to avoid duplication - the Next.js app under `app/` is the single source of truth for all active pages.
+> **Important**: This project is a **Next.js 14 App Router application** with static export for GitHub Pages deployment. The migration from static HTML to Next.js is **complete**. Legacy static HTML files have been archived to the `legacy/` directory for reference only - they are **not deployed**. The Next.js app under `app/` is the single source of truth for all active pages.
 
 Civora is a research-based platform that compiles verified scholarships, visa pathways, and citizenship options for students from Nepal and other underrepresented countries.
 
-**Now built with Next.js 14!** 🚀
+**Built with Next.js 14** 🚀
 
 ## Technology Stack
 
@@ -418,9 +418,9 @@ If you don't want to use Firebase analytics:
 
 ---
 
-## Migration from Static HTML to Next.js
+## Migration from Static HTML to Next.js - COMPLETED ✅
 
-This site was migrated from static HTML/CSS/JS to Next.js 14 in October 2024. The migration:
+This site was successfully migrated from static HTML/CSS/JS to Next.js 14 in October 2024. **The migration is complete and the site is fully operational.**
 
 ✅ **Preserved**:
 
@@ -452,4 +452,66 @@ The original static HTML files have been moved to the `legacy/` directory to avo
 
 The Next.js app under `app/` is the single source of truth for all active pages.
 
-- No errors will appear in the console
+## Contributing
+
+### For New Contributors
+
+This project uses **Next.js 14** with the App Router. Here's what you need to know:
+
+#### Setup
+
+1. Clone the repository
+2. Install Node.js 20 (see `.nvmrc`)
+3. Run `npm install`
+4. Start development server: `npm run dev`
+5. Visit http://localhost:3000/
+
+#### Making Changes
+
+- **Pages**: Edit React components in `app/` directory (e.g., `app/page.js`, `app/scholarships/page.js`)
+- **Shared layout**: Edit `app/layout.js` for header/footer changes
+- **Styles**: Edit CSS files in `app/` directory
+- **Assets**: Place images, fonts, etc. in `public/assets/`
+- **DO NOT** edit files in `legacy/` directory - they are archived and not deployed
+
+#### Testing Your Changes
+
+```bash
+# Lint your code
+npm run lint
+
+# Type check
+npm run type-check
+
+# Format code
+npm run format:write
+
+# Build for production
+npm run build
+
+# Test the production build locally
+cd out && python3 -m http.server 8080
+```
+
+#### Submitting Changes
+
+1. Create a new branch
+2. Make your changes
+3. Test locally with `npm run dev` and `npm run build`
+4. Run `npm run lint` and `npm run type-check`
+5. Commit and push to your branch
+6. Open a Pull Request
+
+The CI/CD pipeline will automatically:
+- Run linting and type checks
+- Build the Next.js site
+- Deploy to GitHub Pages on merge to `main`
+
+### Quick Reference
+
+- **Development**: `npm run dev` → http://localhost:3000/
+- **Production build**: `npm run build` → outputs to `out/`
+- **Test production**: `cd out && python3 -m http.server 8080`
+- **Deployed site**: https://civora.me
+- **Deploy time**: 1-2 minutes after push to `main`
+
