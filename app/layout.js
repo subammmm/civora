@@ -175,14 +175,14 @@ function Header() {
           Civora
         </a>
 
-        <nav className="site-nav">
+        <nav id="site-nav" className="site-nav">
           <a href="/scholarships/" className="nav-item">
             Scholarships
           </a>
           <a href="/citizenship/" className="nav-item">
             Citizenship
           </a>
-          <a href="/students-supported/" className="nav-item">
+          <a href="/student-stories/" className="nav-item">
             Students & Stories
           </a>
           <a href="/ielts-prep/" className="nav-item">
@@ -220,7 +220,7 @@ function Footer() {
           <a href="/about/">About</a>
           <a href="/scholarships/">Scholarships</a>
           <a href="/citizenship/">Citizenship</a>
-          <a href="/students-supported/">Students & Stories</a>
+          <a href="/student-stories/">Students & Stories</a>
           <a href="/ielts-prep/">IELTS & Prep</a>
           <a href="/contact/">Contact</a>
           <a href="/privacy/" className="footer-link">

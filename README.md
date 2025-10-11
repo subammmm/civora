@@ -89,7 +89,8 @@ civora/
 │   ├── assets/           # Images, CSS, JS
 │   ├── CNAME             # Custom domain config
 │   ├── manifest.webmanifest
-│   └── robots.txt
+│   ├── robots.txt
+│   └── sitemap.xml       # SEO sitemap (deployed to root)
 ├── legacy/                # Archived static HTML files (not deployed)
 ├── next.config.js        # Next.js configuration
 ├── tsconfig.json         # TypeScript configuration
@@ -312,16 +313,17 @@ The scholarships page includes a dynamic filtering system that allows users to f
 
 To update the sitemap with new pages:
 
-1. Edit `sitemap.xml`
-2. Add new URL entries following the existing format:
+1. Edit `public/sitemap.xml` (deployed to root via Next.js build)
+2. Add new URL entries following the Next.js route format with trailing slashes:
    ```xml
    <url>
-     <loc>https://civora.me/new-page.html</loc>
+     <loc>https://civora.me/new-page/</loc>
      <lastmod>YYYY-MM-DD</lastmod>
      <priority>0.8</priority>
    </url>
    ```
 3. Update lastmod dates for changed pages
+4. Rebuild the site with `npm run build` to deploy the updated sitemap
 
 ### Image Guidelines
 
