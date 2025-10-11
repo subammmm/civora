@@ -1,6 +1,6 @@
 # 🌍 Civora
 
-> **Important**: This project is a **Next.js 14 App Router application** with static export for GitHub Pages deployment. The migration from static HTML to Next.js is **complete**. Legacy static HTML files have been archived to the `legacy/` directory for reference only - they are **not deployed**. The Next.js app under `app/` is the single source of truth for all active pages.
+> **Important**: This project is a **Next.js 14 App Router application** with static export for GitHub Pages deployment. The migration from static HTML to Next.js is **complete**. The Next.js app under `app/` is the single source of truth for all active pages.
 
 Civora is a research-based platform that compiles verified scholarships, visa pathways, and citizenship options for students from Nepal and other underrepresented countries.
 
@@ -93,7 +93,6 @@ civora/
 │   ├── robots.txt
 │   ├── sitemap.xml       # SEO sitemap (deployed to root)
 │   └── psychometric-quiz.html  # Standalone quiz page
-├── legacy/                # Archived static HTML files (not deployed)
 ├── next.config.js        # Next.js configuration
 ├── tsconfig.json         # TypeScript configuration
 ├── .eslintrc.json        # ESLint configuration
@@ -103,7 +102,7 @@ civora/
 └── .github/
     ├── workflows/        # GitHub Actions
     │   ├── ci.yml        # CI checks (lint, type-check)
-    │   └── nextjs-deploy.yml  # Deployment
+    │   └── deploy-pages.yml  # Deployment
     └── dependabot.yml    # Automated dependency updates
 ```
 
@@ -442,14 +441,6 @@ This site was successfully migrated from static HTML/CSS/JS to Next.js 14 in Oct
 - Code formatting with Prettier
 - Linting with ESLint
 
-### Legacy HTML Files
-
-The original static HTML files have been moved to the `legacy/` directory to avoid confusion and content duplication. These files are:
-
-- **Not deployed** to GitHub Pages (only the Next.js build output in `out/` is deployed)
-- **Preserved for reference** in case rollback is needed
-- **Not maintained** - all updates should be made to the Next.js app under `app/`
-
 The Next.js app under `app/` is the single source of truth for all active pages.
 
 ## Contributing
@@ -472,7 +463,6 @@ This project uses **Next.js 14** with the App Router. Here's what you need to kn
 - **Shared layout**: Edit `app/layout.js` for header/footer changes
 - **Styles**: Edit CSS files in `app/` directory
 - **Assets**: Place images, fonts, etc. in `public/assets/`
-- **DO NOT** edit files in `legacy/` directory - they are archived and not deployed
 
 #### Testing Your Changes
 
