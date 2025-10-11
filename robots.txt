@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://civora.me/sitemap.xml

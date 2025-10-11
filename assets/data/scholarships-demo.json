@@ -1,0 +1,194 @@
+[
+  {
+    "name": "Eiffel Excellence Scholarship",
+    "country": "France",
+    "level": "Master's",
+    "funding": "Fully funded ($1,200/month + tuition)",
+    "deadline": "Jan 8, 2025",
+    "url": "https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence"
+  },
+  {
+    "name": "DAAD Development-Related Postgraduate Courses (EPOS)",
+    "country": "Germany",
+    "level": "Master's",
+    "funding": "Fully funded (€850/month + tuition)",
+    "deadline": "Aug 31, 2025",
+    "url": "https://www.daad.de/en/study-and-research-in-germany/scholarships/epos/"
+  },
+  {
+    "name": "Korean Government Scholarship Program (KGSP)",
+    "country": "South Korea",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded (1.3M KRW/month + tuition)",
+    "deadline": "Mar 31, 2025",
+    "url": "https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do"
+  },
+  {
+    "name": "Chevening Scholarships",
+    "country": "UK", 
+    "level": "Master's",
+    "funding": "Fully funded (£1,347/month + tuition)",
+    "deadline": "Nov 5, 2024",
+    "url": "https://www.chevening.org/scholarships/apply/"
+  },
+  {
+    "name": "Australia Awards Scholarships",
+    "country": "Australia",
+    "level": "Master's",
+    "funding": "Fully funded (AUD 3,000/month + tuition)",
+    "deadline": "Apr 30, 2025",
+    "url": "https://australiaawards.gov.au/scholarships/find-a-scholarship"
+  },
+  {
+    "name": "Canada Graduate Scholarships",
+    "country": "Canada",
+    "level": "Master's / PhD",
+    "funding": "Fully funded (CAD 17,500-35,000/year)",
+    "deadline": "Dec 1, 2024",
+    "url": "https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/CGS-Program-BES_eng.asp"
+  },
+  {
+    "name": "MEXT (Monbukagakusho) Scholarship",
+    "country": "Japan",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded (¥143,000-145,000/month + tuition)",
+    "deadline": "May 10, 2025",
+    "url": "https://www.studyinjapan.go.jp/en/planning/scholarship/application/mext/"
+  },
+  {
+    "name": "Fulbright Foreign Student Program",
+    "country": "USA",
+    "level": "Master's / PhD",
+    "funding": "Fully funded ($2,000/month + tuition)",
+    "deadline": "May 15, 2025",
+    "url": "https://us.fulbrightonline.org/applicants/getting-started"
+  },
+  {
+    "name": "Swiss Government Excellence Scholarships",
+    "country": "Switzerland",
+    "level": "PhD / Postdoc",
+    "funding": "Fully funded (CHF 1,920/month + tuition)",
+    "deadline": "Nov 15, 2024",
+    "url": "https://www.sbfi.admin.ch/sbfi/en/home/education/scholarships-and-grants/swiss-government-excellence-scholarships.html"
+  },
+  {
+    "name": "Netherlands Fellowship Programmes (NFP)",
+    "country": "Netherlands",
+    "level": "Master's",
+    "funding": "Fully funded (€1,200/month + tuition)",
+    "deadline": "Feb 1, 2025",
+    "url": "https://www.nuffic.nl/en/subjects/netherlands-fellowship-programmes"
+  },
+  {
+    "name": "Erasmus Mundus Joint Masters",
+    "country": "EU",
+    "level": "Master's",
+    "funding": "Fully funded (€1,100/month + tuition)",
+    "deadline": "Jan 15, 2025",
+    "url": "https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters"
+  },
+  {
+    "name": "Belgian Development Cooperation Scholarships",
+    "country": "Belgium",
+    "level": "Master's",
+    "funding": "Fully funded (€1,000/month + tuition)",
+    "deadline": "Feb 28, 2025",
+    "url": "https://www.vliruos.be/en/projects/scholarships/6"
+  },
+  {
+    "name": "Swedish Institute Scholarships for Global Professionals",
+    "country": "Sweden",
+    "level": "Master's",
+    "funding": "Fully funded (SEK 9,000/month + tuition)",
+    "deadline": "Feb 17, 2025",
+    "url": "https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/"
+  },
+  {
+    "name": "Norway Quota Scheme Scholarships",
+    "country": "Norway",
+    "level": "Master's / PhD",
+    "funding": "Fully funded (NOK 11,400/month + tuition)",
+    "deadline": "Mar 1, 2025",
+    "url": "https://www.siu.no/en/external-funding/quota-scheme"
+  },
+  {
+    "name": "ANSO Scholarship for Young Talents",
+    "country": "China",
+    "level": "Master's / PhD",
+    "funding": "Fully funded (CNY 3,000-3,500/month + tuition)",
+    "deadline": "Feb 28, 2025",
+    "url": "https://www.anso.org.cn/scholars/young-talents/"
+  },
+  {
+    "name": "Commonwealth Scholarships for Developing Countries",
+    "country": "UK",
+    "level": "Master's / PhD",
+    "funding": "Fully funded (£1,200/month + tuition)",
+    "deadline": "Dec 16, 2024",
+    "url": "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/"
+  },
+  {
+    "name": "ADB–Japan Scholarship Program",
+    "country": "Asia-Pacific",
+    "level": "Master's",
+    "funding": "Fully funded ($1,500/month + tuition)",
+    "deadline": "Jul 31, 2025",
+    "url": "https://www.adb.org/work-with-us/careers/japan-scholarship-program/how-to-apply"
+  },
+  {
+    "name": "Gates Cambridge Scholarships",
+    "country": "UK",
+    "level": "PhD / Master's",
+    "funding": "Fully funded (£18,000/year + tuition)",
+    "deadline": "Dec 3, 2024",
+    "url": "https://www.gatescambridge.org/apply/"
+  },
+  {
+    "name": "New Zealand Development Scholarships",
+    "country": "New Zealand",
+    "level": "Bachelor's / Master's",
+    "funding": "Fully funded (NZD 465/week + tuition)",
+    "deadline": "Jul 1, 2025",
+    "url": "https://www.mfat.govt.nz/en/aid-and-development/scholarships/new-zealand-development-scholarships/"
+  },
+  {
+    "name": "Turkiye Burslari",
+    "country": "Turkey",
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded (TRY 1,200-2,400/month + tuition)",
+    "deadline": "Feb 20, 2025",
+    "url": "https://www.turkiyeburslari.gov.tr/en/page/how-to-apply/how-to-apply"
+  },
+  {
+    "name": "ASEAN Scholarships",
+    "country": "Singapore",
+    "level": "Bachelor's",
+    "funding": "Fully funded (SGD 500/month + tuition + allowances)",
+    "deadline": "Feb 21, 2025",
+    "url": "https://www.moe.gov.sg/financial-matters/awards-scholarships/asean-scholarships"
+  },
+  {
+    "name": "Government of Ireland International Education Scholarships",
+    "country": "Ireland", 
+    "level": "Bachelor's / Master's / PhD",
+    "funding": "Fully funded (€10,000-16,000/year + tuition fees)",
+    "deadline": "Mar 31, 2025",
+    "url": "https://www.gov.ie/en/publication/719b4-government-of-ireland-international-education-scholarships/"
+  },
+  {
+    "name": "Hong Kong PhD Fellowship Scheme",
+    "country": "Hong Kong",
+    "level": "PhD",
+    "funding": "Fully funded (HKD 27,600/month + conference allowance)",
+    "deadline": "Dec 1, 2024",
+    "url": "https://www.ugc.edu.hk/eng/rgc/funding_opport/hkphd/"
+  },
+  {
+    "name": "Schwarzman Scholars",
+    "country": "China",
+    "level": "Master's",
+    "funding": "Fully funded (accommodation + stipend + travel)",
+    "deadline": "Sep 15, 2025",
+    "url": "https://www.schwarzmanscholars.org/admissions/"
+  }
+]

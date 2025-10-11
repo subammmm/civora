@@ -10,7 +10,7 @@
 
 # next.js
 /.next/
-/out/
+# /out/   <-- out is now INCLUDED in git for GitHub Pages
 
 # production
 /build
