@@ -7,65 +7,84 @@ export default function CitizenshipPage() {
   return (
     <div
       dangerouslySetInnerHTML={{
-        __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        <h1 data-i18n="cit.title" style="margin-bottom: 1rem; color: var(--text-primary);">Citizenship & Tax Residency</h1>
-        <p data-i18n="cit.intro" style="margin-bottom: 2rem; color: var(--text-secondary); max-width: 800px; margin-left: auto; margin-right: auto;">Comprehensive guide to citizenship pathways and strategic tax residency options for Nepali students. Understanding both citizenship routes and tax optimization strategies can significantly impact your long-term financial and mobility planning when studying abroad.</p>
-
-        
-        <div class="callout" style="background: linear-gradient(135deg, var(--accent), #1e40af); color: white; margin: 2rem 0; text-align: center;">
-          <h2><i class="fas fa-graduation-cap" style="margin-right: 0.5rem;"></i>Best Paths for Nepali Students (2025 Focus)</h2>
-          <p>Top student-friendly countries with high success rates for Nepali applicants. Nepal doesn't allow dual citizenship - consider renunciation risks carefully.</p>
+        __html: `      
+      <section class="section">
+        <div class="container text-center">
+          <div class="card reveal">
+            <h1 data-i18n="cit.title">Citizenship & Tax Residency</h1>
+            <p class="subtext" data-i18n="cit.intro">Comprehensive guide to citizenship pathways and strategic tax residency options for Nepali students. Understanding both citizenship routes and tax optimization strategies can significantly impact your long-term financial and mobility planning when studying abroad.</p>
+          </div>
         </div>
+      </section>
 
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-          <div class="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-flag" style="color: #ff6b35;"></i> Canada (Easiest for Nepali Students)</h3>
+      <section class="section">
+        <div class="container">
+          <div class="card reveal callout" style="background: linear-gradient(135deg, var(--accent), #1e40af); color: white;">
+            <h2><i class="fas fa-graduation-cap icon-left"></i>Best Paths for Nepali Students (2025 Focus)</h2>
+            <p>Top student-friendly countries with high success rates for Nepali applicants. Nepal doesn't allow dual citizenship - consider renunciation risks carefully.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="grid-3-cols">
+            <div class="card reveal" style="border-left: 4px solid var(--accent);">
+            <h3><i class="fas fa-flag icon-left" style="color: #ff6b35;"></i> Canada (Easiest for Nepali Students)</h3>
             <p><strong>Timeline:</strong> Study (2-4 years) → PGWP (1-3 years) → PR (6-12 months) → Citizenship (3 years)</p>
             <p><strong>Requirements:</strong> Valid study permit, full-time program completion, IELTS 6.0+</p>
             <p><strong>Cost:</strong> CAD $255 PGWP fee, CAD $630 citizenship fee</p>
             <p><strong>Success Rate:</strong> High - Many Nepali students get PR in 5-7 years via Express Entry</p>
             <p><strong>Easy Tip:</strong> Provincial Nominee Programs (PNPs) like Ontario prioritize Nepali tech/health grads</p>
-            <p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html" target="_blank" style="color: var(--accent);">Official IRCC →</a></p>
+            <p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html" target="_blank">Official IRCC →</a></p>
           </div>
           
-          <div class="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-flag" style="color: #f39c12;"></i> Australia</h3>
+          <div class="card reveal" style="border-left: 4px solid var(--accent);">
+            <h3><i class="fas fa-flag icon-left" style="color: #f39c12;"></i> Australia</h3>
             <p><strong>Timeline:</strong> Study (2 years) → Graduate Visa (2-6 years) → PR (1-2 years) → Citizenship (4 years)</p>
             <p><strong>Requirements:</strong> IELTS 6.0+, relevant degree from Australian institution</p>
             <p><strong>Cost:</strong> AUD $1,895 visa fee, AUD $490 citizenship fee</p>
             <p><strong>Success Rate:</strong> 70% for skilled migrants, higher for regional study</p>
             <p><strong>Easy Tip:</strong> Regional study adds points; Nepali students use Global Talent Visa for fast-track</p>
-            <p><a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485" target="_blank" style="color: var(--accent);">Official Home Affairs →</a></p>
+            <p><a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485" target="_blank">Official Home Affairs →</a></p>
           </div>
           
-          <div class="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-flag" style="color: #e74c3c;"></i> UK</h3>
+          <div class="card reveal" style="border-left: 4px solid var(--accent);">
+            <h3><i class="fas fa-flag icon-left" style="color: #e74c3c;"></i> UK</h3>
             <p><strong>Timeline:</strong> Study (1-4 years) → Graduate Visa (2-3 years) → Skilled Worker (5 years) → PR</p>
             <p><strong>Requirements:</strong> Tier 4/Student Visa completion, IELTS 6.0+</p>
             <p><strong>Cost:</strong> £490 visa fee, sponsor license fees vary</p>
             <p><strong>Success Rate:</strong> High for post-grads in tech/health sectors</p>
             <p><strong>Easy Tip:</strong> Nepali grads in tech/health get sponsor licenses easily - no job offer needed for Graduate Route</p>
-            <p><a href="https://www.gov.uk/graduate-visa" target="_blank" style="color: var(--accent);">Official UK Gov →</a></p>
+            <p><a href="https://www.gov.uk/graduate-visa" target="_blank">Official UK Gov →</a></p>
           </div>
           
-          <div class="card" style="border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; background: var(--surface);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fas fa-flag" style="color: #27ae60;"></i> Germany</h3>
+          <div class="card reveal" style="border-left: 4px solid var(--accent);">
+            <h3><i class="fas fa-flag icon-left" style="color: #27ae60;"></i> Germany</h3>
             <p><strong>Timeline:</strong> Study (2-4 years) → Job Seeker (6 months) → Blue Card (5 years) → PR</p>
             <p><strong>Requirements:</strong> Degree recognition, German B1 level, €45,300+ salary for Blue Card</p>
             <p><strong>Cost:</strong> €100 visa fee, €11,208 blocked account requirement</p>
             <p><strong>Success Rate:</strong> 80% for STEM graduates meeting salary threshold</p>
             <p><strong>Easy Tip:</strong> Nepali STEM grads get Blue Card fast - high demand for IT/engineering skills</p>
-            <p><a href="https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card" target="_blank" style="color: var(--accent);">Official Germany.info →</a></p>
+            <p><a href="https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card" target="_blank">Official Germany.info →</a></p>
           </div>
         </div>
+      </div>
+      </section>
 
-    <div class="callout" style="background: #fee2e2; color: #7f1d1d; border-left: 4px solid #dc2626;">
+      <section class="section">
+        <div class="container">
+          <div class="card reveal callout" style="background: #fee2e2; color: #7f1d1d; border-left: 4px solid #dc2626;">
       <h3>⚠️ Nepal Dual Citizenship Warning</h3>
       <p><strong>Important:</strong> Nepal does not allow dual citizenship. Acquiring foreign citizenship means automatic loss of Nepali citizenship unless you renounce the foreign citizenship within 2 years. Consider this carefully before naturalizing.</p>
       <p><strong>Resources:</strong> <a href="https://mofa.gov.np/" target="_blank" style="color: #7f1d1d;">Nepal Ministry of Foreign Affairs</a> | <a href="https://www.nepalembassyusa.org/" target="_blank" style="color: #7f1d1d;">Nepal Embassy USA</a></p>
     </div>
+        </div>
+      </section>
 
+      <section class="section">
+        <div class="container">
+          <div class="card reveal">
     <h2>Quick Pathways Summary</h2>
     <ul class="pathway-list">
       <li><strong>France</strong> → Study → Alternance → 5 years → PR → Citizenship. <a href="https://www.service-public.fr/particuliers/vosdroits/F2213" target="_blank">Official Info</a></li>
@@ -74,9 +93,13 @@ export default function CitizenshipPage() {
       <li><strong>Canada</strong> → Study → Work Permit → PR → Citizenship. <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants/citizenship-life-canada/path-citizenship.html" target="_blank">Official Info</a></li>
       <li><strong>Germany</strong> → 8 years residency (6 with integration). <a href="https://www.gesetze-im-internet.de/stag/StAG.pdf" target="_blank">Official Info</a></li>
     </ul>
+          </div>
+        </div>
+      </section>
 
-    <hr class="muted" style="border-color: var(--border); opacity:.4; margin:2rem 0" />
-
+      <section class="section">
+        <div class="container">
+          <div class="card reveal">
     <h2>Fastest Citizenship Pathways 2025</h2>
     <p>Based on the latest global research, here are the quickest and most reliable routes to citizenship for international students and professionals. All pathways include official sources and processing timelines.</p>
 
@@ -84,9 +107,14 @@ export default function CitizenshipPage() {
       <h3>Express Routes (3-12 months)</h3>
       <p>Caribbean and European investment programs offering the fastest citizenship options globally.</p>
     </div>
+          </div>
+        </div>
+      </section>
 
+      <section class="section">
+        <div class="container">
     
-    <div class="collapsible-section">
+    <div class="collapsible-section card reveal">
       <button class="collapsible-header" type="button" aria-expanded="false">
         <h2>Caribbean Citizenship by Investment</h2>
         <span class="collapsible-icon">▼</span>
