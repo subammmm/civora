@@ -1,346 +1,354 @@
-"use client";
-import { useState, useRef, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import "./globals.css";
+// v51 - Final production version for Vercel: streaming, context-first, transcript fix, typo dict, safe math, consistent error shape, OpenAI fallback, strict CORS, health check
+// Native modules removed for serverless compatibility
 
-function CivoraAIChat() {
-  const [input, setInput] = useState("");
-  const [messages, setMessages] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = window.localStorage.getItem("civoraHistory");
-      return saved ? JSON.parse(saved) : [];
-    }
-    return [];
-  });
-  const [loading, setLoading] = useState(false);
-  const [streamBuffer, setStreamBuffer] = useState(""); // For streaming
-  const chatEndRef = useRef(null);
-  const fileInputRef = useRef(null);
+import { z } from 'zod';
+import { create, all } from 'mathjs';
+const OpenAI = process.env.FALLBACK_PROVIDER === 'openai' ? require('openai') : null;
 
-  useEffect(() => {
-    if (chatEndRef.current) chatEndRef.current.scrollIntoView({ behavior: "smooth" });
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("civoraHistory", JSON.stringify(messages));
-    }
-  }, [messages]);
-
-  function handleInputKeyDown(e) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      if (!loading) sendMessage({ preventDefault: () => {}, target: { file: fileInputRef.current } });
-    }
+// Env validation
+const envSchema = z.object({
+  NODE_ENV: z.enum(['development', 'production']).default('development'),
+  GEMINI_API_KEY: z.string().min(1),
+  LANGSEARCH_API_KEY: z.string().min(1),
+  FALLBACK_PROVIDER: z.string().optional(),
+  OPENAI_API_KEY: z.string().optional(),
+});
+try {
+  envSchema.parse(process.env);
+} catch (error) {
+  if (error instanceof z.ZodError) {
+    console.error('Invalid env/config:', error.issues.map(i => i.message).join('; '));
   }
-
-  async function sendMessage(e) {
-    e.preventDefault();
-    if (loading) return;
-    const fileInput = fileInputRef.current;
-    let fileUploadObject = null;
-    let newMessages = [...messages];
-    const userText = input.trim();
-
-    // File upload logic: only images, pdf, max 2MB
-    if (fileInput && fileInput.files.length) {
-      const file = fileInput.files[0];
-      if (!file.type.match(/(image|pdf)/)) {
-        alert("Only images or PDF files are supported.");
-        return;
-      }
-      if (file.size > 2 * 1024 * 1024) {
-        alert("File too large (max 2MB).");
-        return;
-      }
-      // Convert to base64 for backend OCR/PDF
-      const base64 = await new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = ev => resolve(ev.target.result.split(',')[1] || "");
-        reader.readAsDataURL(file);
-      });
-      fileUploadObject = {
-        name: file.name,
-        content: base64,
-      };
-      newMessages.push({ role: "user", content: `Uploaded file: ${file.name}` });
-      fileInput.value = "";
-    } else if (input.trim()) {
-      newMessages.push({ role: "user", content: input });
-    } else {
-      return;
-    }
-
-    setMessages(newMessages);
-    setLoading(true);
-    setStreamBuffer("");
-
-    // Prepare last 5 turns as transcript context
-    const historyPayload = newMessages.slice(-5).map(m => ({
-      user: m.role === "user" ? m.content : undefined,
-      assistant: m.role === "assistant" ? m.content : undefined
-    }));
-
-    try {
-      // Use SSE streaming if no file, else fallback to JSON POST
-      if (!fileUploadObject) {
-        // Streaming for text-only
-        const eventSource = new EventSourcePolyfill("/api/ai-assistant/", {
-          headers: { "Content-Type": "application/json" },
-          payload: JSON.stringify({ input, history: historyPayload }),
-        });
-        let streamed = "";
-        eventSource.onmessage = (event) => {
-          streamed += event.data;
-          setStreamBuffer(streamed);
-        };
-        eventSource.onerror = () => {
-          eventSource.close();
-          setLoading(false);
-          setMessages(prev => [...prev, { role: "assistant", content: streamed || "⚠️ Sorry, streaming failed." }]);
-          setStreamBuffer("");
-        };
-        eventSource.addEventListener("end", () => {
-          setMessages(prev => [...prev, { role: "assistant", content: streamed }]);
-          setLoading(false);
-          setStreamBuffer("");
-        });
-      } else {
-        // Fallback for file uploads (no SSE)
-        const res = await fetch("/api/ai-assistant/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ input, history: historyPayload, file: fileUploadObject }),
-        });
-        const data = await res.json();
-        let reply = data.reply || "";
-        if (data.error) {
-          newMessages.push({ role: "assistant", content: `⚠️ ${data.error}` });
-        } else {
-          newMessages.push({ role: "assistant", content: reply });
-        }
-        setMessages(newMessages);
-        setLoading(false);
-        setStreamBuffer("");
-        setInput("");
-        return;
-      }
-    } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Sorry, something went wrong. Please try again." }]);
-      setLoading(false);
-      setStreamBuffer("");
-    }
-    setInput("");
-  }
-
-  function handleClearHistory() {
-    setMessages([]);
-    if (typeof window !== "undefined") window.localStorage.removeItem("civoraHistory");
-  }
-
-  return (
-    <div className="ai-chat-main">
-      <div className="ai-chat-header"></div>
-      <div className="ai-chat-area">
-        {messages.length === 0 && (
-          <div className="ai-welcome">
-            <span>Welcome! Ask anything about scholarships, citizenship, global student life, or exams.</span>
-          </div>
-        )}
-        {messages.map((m, i) => (
-          <div key={i} className={`ai-chat-bubble ${m.role}`}>
-            <div className="ai-bubble-content">
-              {m.content.startsWith("<img") ? (
-                <span dangerouslySetInnerHTML={{ __html: m.content }} />
-              ) : (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  allowedElements={[
-                    "h2", "h3", "strong", "em", "ul", "ol", "li", "a", "code", "pre", "blockquote", "br", "p"
-                  ]}
-                  components={{
-                    h2: props => <div style={{margin:"22px 0 6px 0",borderBottom:"1px solid #333",fontWeight:"700",fontSize:"1.09rem",color:"#5e6ad2"}}>{props.children}</div>,
-                    h3: props => <div style={{marginTop:"16px",fontWeight:"600",fontSize:"1.02rem",color:"#7c83e4"}}>{props.children}</div>,
-                    li: props => <li style={{marginBottom:"8px"}}>{props.children}</li>,
-                    p: props => <p style={{margin:"7px 0"}}>{props.children}</p>
-                  }}
-                >{m.content}</ReactMarkdown>
-              )}
-            </div>
-          </div>
-        ))}
-        {/* Streaming buffer UI */}
-        {loading && streamBuffer && (
-          <div className="ai-chat-bubble assistant">
-            <div className="ai-bubble-content">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{streamBuffer}</ReactMarkdown>
-            </div>
-          </div>
-        )}
-        <div ref={chatEndRef}></div>
-      </div>
-      <form onSubmit={sendMessage} className="ai-chat-input-row">
-        <textarea
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          placeholder="Type your question…"
-          className="ai-chat-input"
-          disabled={loading}
-          aria-label="Type your question"
-          rows={1}
-          onKeyDown={handleInputKeyDown}
-        />
-        <input
-          type="file"
-          name="file"
-          accept="image/*,application/pdf"
-          ref={fileInputRef}
-          className="ai-file-input"
-          disabled={loading}
-          aria-label="Upload image or PDF"
-        />
-        <button
-          type="submit"
-          className="btn"
-          disabled={loading}
-          aria-label="Send message"
-        >
-          {loading ? "..." : "Send"}
-        </button>
-        <button type="button" className="btn" onClick={handleClearHistory}>
-          Clear
-        </button>
-      </form>
-      <style>{`
-        .ai-chat-main {
-          background: #0d0d0d;
-          color: #f5f5f5;
-          border-radius: 12px;
-          padding: 20px;
-          max-width: 800px;
-          margin: auto;
-          font-family: 'Inter', sans-serif;
-        }
-        .ai-chat-header {
-          border-bottom: 1px solid #222;
-          padding-bottom: 10px;
-          margin-bottom: 15px;
-        }
-        .ai-chat-bubble.user {
-          background: #1a1a1a;
-          border-radius: 12px;
-          padding: 10px 14px;
-          margin: 8px 0;
-          align-self: flex-end;
-        }
-        .ai-chat-bubble.assistant {
-          background: #111;
-          border-radius: 12px;
-          padding: 10px 14px;
-          margin: 8px 0;
-          align-self: flex-start;
-        }
-        .ai-chat-area {
-          min-height: 380px;
-          margin-bottom: 20px;
-        }
-        .ai-chat-input-row {
-          margin-top: 15px;
-          display: flex;
-          gap: 10px;
-        }
-        .ai-chat-input {
-          flex: 1;
-          border-radius: 8px;
-          border: 1px solid #333;
-          background: #1a1a1a;
-          color: #f5f5f5;
-          padding: 10px;
-        }
-        .ai-file-input {
-          background: #23232d;
-          color: #aaa;
-          border-radius: 8px;
-          border: none;
-          font-size: 0.9rem;
-          padding: 6px 0;
-          width: 110px;
-        }
-        .btn {
-          background: #333;
-          color: #f5f5f5;
-          border-radius: 8px;
-          padding: 8px 14px;
-          border: none;
-          cursor: pointer;
-        }
-        .btn:hover {
-          background: #444;
-        }
-        .ai-bubble-content {
-          word-break: break-word;
-        }
-        .ai-welcome {
-          font-size: 1.1rem;
-          color: #aaa;
-          text-align: center;
-          margin-bottom: 32px;
-        }
-        @media (max-width: 540px) {
-          .ai-chat-main {
-            max-width: 100vw;
-            border-radius: 0;
-            padding: 8px;
-          }
-        }
-      `}</style>
-    </div>
-  );
 }
 
-// Polyfill for EventSource with POST support (for SSE streaming, if needed)
-class EventSourcePolyfill {
-  constructor(url, { headers, payload }) {
-    this.events = {};
-    this.closed = false;
-    fetch(url, {
-      method: "POST",
-      headers,
-      body: payload,
-    }).then(res => {
-      if (!res.body) return;
-      const reader = res.body.getReader();
-      let buffer = "";
-      const decoder = new TextDecoder();
-      const pump = async () => {
-        while (!this.closed) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value);
-          const events = buffer.split("\n\n");
-          buffer = events.pop();
-          for (let event of events) {
-            if (event.startsWith("data:")) {
-              const data = event.slice(5).trim();
-              if (this.events["message"]) this.events["message"]({ data });
-            }
-            if (event.startsWith("event: end")) {
-              if (this.events["end"]) this.events["end"]();
-              this.close();
-            }
-          }
-        }
-      };
-      pump();
+if (!process.env.GEMINI_API_KEY || !process.env.LANGSEARCH_API_KEY) {
+  console.error('Missing API keys! Set GEMINI_API_KEY and LANGSEARCH_API_KEY in .env');
+}
+
+let requestCount = 0;
+const math = create(all, { number: 'BigNumber' });
+
+const CORS_HEADERS = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': process.env.NODE_ENV === 'production' ? 'https://civora.me' : '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS, GET',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
+export async function OPTIONS() {
+  return new Response(null, { status: 204, headers: CORS_HEADERS });
+}
+
+export async function GET() {
+  return new Response(JSON.stringify({ status: 'ok', version: 'v51' }), { status: 200, headers: CORS_HEADERS });
+}
+
+export async function POST(req) {
+  if (!global.rateLimits) global.rateLimits = {};
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "local";
+  const now = Date.now();
+  if (global.rateLimits[ip] && now - global.rateLimits[ip] < 1000) {
+    return new Response(JSON.stringify({ reply: null, error: "Too many requests. Please wait a moment." }), { status: 429, headers: CORS_HEADERS });
+  }
+  global.rateLimits[ip] = now;
+
+  requestCount++;
+  try {
+    // Input Validation
+    const body = await req.json();
+    const schema = z.object({
+      input: z.string().min(1).max(2000).trim(),
+      history: z.array(z.object({
+        user: z.string().optional(),
+        assistant: z.string().optional(),
+      })).max(10).default([]),
+      file: z.object({ name: z.string(), content: z.string().optional() }).optional(),
     });
-  }
-  onmessage = fn => { this.events["message"] = fn; };
-  addEventListener(type, fn) { this.events[type] = fn; }
-  close() { this.closed = true; }
-}
+    const { input: rawInput, history, file } = schema.parse(body);
 
-export default function Home() {
-  return <CivoraAIChat />;
-<<<<<<< HEAD
+    console.log(`Request #${requestCount} from ${ip}: Input "${rawInput}"`);
+
+    // Typo correction
+    const typoDict = {
+      'shcolarship': 'scholarship', 'scholorship': 'scholarship', 'scolarship': 'scholarship',
+      'scholership': 'scholarship', 'scholaship': 'scholarship',
+      'citizenshipp': 'citizenship', 'citiznship': 'citizenship', 'citizneshipo': 'citizenship',
+      'citizinship': 'citizenship', 'citizenhip': 'citizenship', 'univerity': 'university',
+      'ielts': 'IELTS', 'toefl': 'TOEFL', 'imigration': 'immigration', 'immigartion': 'immigration',
+      'immgration': 'immigration', 'immigrationn': 'immigration', 'immigratoin': 'immigration',
+      'universites': 'universities', 'univercities': 'universities', 'unveristy': 'university', 'unversity': 'university',
+      'frensh': 'french', 'franch': 'french',
+      'studing': 'studying', 'studdying': 'studying', 'studdy': 'studying',
+      'abrod': 'abroad', 'abroaded': 'abroad',
+      'visaa': 'visa', 'viza': 'visa',
+      'accomodation': 'accommodation', 'accomadation': 'accommodation',
+      'career': 'career'
+    };
+    let correctedInput = rawInput.split(' ').map(word => typoDict[word.toLowerCase()] || word).join(' ');
+
+    // File Handling (PDF + Image OCR removed for Vercel compatibility)
+    let fileContent = '';
+    if (file?.content) {
+      fileContent = 'File parsing not supported on Vercel serverless.';
+    }
+
+    // Math Pre-Check (safe with mathjs)
+    if (/^[\d\s\+\-\*\/\(\)\.]+$/.test(correctedInput)) {
+      try {
+        const result = math.evaluate(correctedInput);
+        return new Response(JSON.stringify({ reply: `Result: ${result}`, error: null }), { status: 200, headers: CORS_HEADERS });
+      } catch {}
+    }
+
+    // Pre-checks
+    const casualGreetings = ["yo", "hi", "hello", "hey", "sup", "whats up", "namaste"];
+    if (casualGreetings.includes(correctedInput.toLowerCase())) {
+      return new Response(
+        JSON.stringify({ reply: "Hey! All good here — what’s on your mind?", error: null }),
+        { status: 200, headers: CORS_HEADERS }
+      );
+    }
+    if (/date|today|day|time/.test(correctedInput.toLowerCase())) {
+      const now = new Date();
+      const formatted = now.toLocaleDateString("en-US", {
+        weekday: "long", year: "numeric", month: "long", day: "numeric"
+      }) + " " + now.toLocaleTimeString("en-US");
+      return new Response(
+        JSON.stringify({ reply: `Today's date and time: ${formatted}`, error: null }),
+        { status: 200, headers: CORS_HEADERS }
+      );
+    }
+    if (/who.*(owner|founder|made|created)/.test(correctedInput.toLowerCase()) && /(civora|civora\.me)/.test(correctedInput.toLowerCase())) {
+      return new Response(
+        JSON.stringify({ reply: "Civora is a civic-tech platform founded by Shubham Dhakal.", error: null }),
+        { status: 200, headers: CORS_HEADERS }
+      );
+    }
+    if (/apis? (are|do you) (you )?use/.test(correctedInput.toLowerCase()) || /api/.test(correctedInput.toLowerCase())) {
+      return new Response(
+        JSON.stringify({ reply: "Civora uses LangSearch for real-time web search and Gemini for reasoning and structured answers.", error: null }),
+        { status: 200, headers: CORS_HEADERS }
+      );
+    }
+
+    // Conditional Search triggers
+    const searchTriggers = [
+      /current|latest|news|202[0-9]|president|nobel|who won|what happened/i,
+      /study|scholarship|citizenship|university|abroad|ielts|toefl|visa|career|path|job|internship/i
+    ];
+    const searchNeeded = searchTriggers.some(trigger => trigger.test(correctedInput));
+    let searchContext = 'No live web context found.';
+    if (searchNeeded) {
+      try {
+        const langController = new AbortController();
+        const langTimeout = setTimeout(() => langController.abort(), 10000);
+        const langsearchResponse = await fetch('https://api.langsearch.com/v1/web-search', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.LANGSEARCH_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            query: correctedInput,
+            summary: true,
+            count: 5,
+          }),
+          signal: langController.signal,
+        });
+        clearTimeout(langTimeout);
+
+        if (langsearchResponse.ok) {
+          const langsearchData = await langsearchResponse.json();
+          searchContext = langsearchData.data?.webPages?.value?.map(page => page.snippet || page.summary || "").join('\n') || '';
+        }
+        if (!searchContext) searchContext = 'No live web context found.';
+      } catch (err) {
+        if (err.name === 'AbortError') {
+          console.error('LangSearch timeout');
+          return new Response(JSON.stringify({ reply: null, error: 'LangSearch API request timed out' }), { status: 504, headers: CORS_HEADERS });
+        }
+        console.error('LangSearch error:', err.message);
+        searchContext = 'No live web context found.';
+      }
+    }
+
+    // Build transcript (last 5 turns, consistent casing)
+    const transcript = history.slice(-5).map(turn =>
+      `${turn.user ? `User: ${turn.user}\n` : ''}${turn.assistant ? `Civora: ${turn.assistant}` : ''}`
+    ).filter(Boolean).join('\n\n');
+
+    // Persona/roadmap prompt
+    const mentorPrompt = `
+Live info (must use if relevant):
+${searchContext}
+${fileContent ? `\n\nUploaded file context:\n${fileContent}` : ''}
+
+Conversation so far:
+${transcript}
+
+You are Civora, a civic-tech mentor for students and global nomads. Never act like a dictionary. Never claim to be made by Google. Civora is a civic-tech platform founded by Shubham Dhakal.
+
+Always prioritize live info from search context if it exists. Do not ignore it. Use the conversation history for context chaining. Interpret follow-up questions based on previous turns as a mentor.
+
+User question:
+${correctedInput}
+
+If the question is about studying abroad, scholarships, citizenship, or career paths:
+- Output a roadmap with sections:
+  ### Pathways
+  ### Requirements
+  ### Documents
+  ### ECAs
+  ### Next Steps
+- Use bullet points and short actionable advice.
+- Do NOT explain obvious words or give dictionary definitions.
+
+Example roadmap:
+
+### Pathways
+- Naturalization (residency years)
+- Marriage to citizen (duration + language)
+- Descent (proof of parentage)
+
+### Requirements
+- Language: B1–B2 (CEFR)
+- Clean record, integration proof
+
+### Documents
+- Passport, residence permits, birth/marriage certificates
+
+### ECAs
+- Community engagement, leadership, volunteering
+
+### Next Steps
+1. Confirm eligibility pathway.
+2. Gather documents.
+3. Book language test.
+4. Submit application.
+
+If the question is general knowledge:
+- Give a direct, factual answer in 2–3 sentences max.
+- NO dictionary-style breakdowns.
+- If asked "in Europe" or similar follow-ups, interpret in context of previous question.
+
+Always format everything in Markdown with headings and bullet lists.
+If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate a complete roadmap. Try rephrasing your question."
+`;
+
+    // Gemini call with timeout and streaming
+    let answer = '';
+    let geminiFailed = false;
+    const start = Date.now();
+    try {
+      const gemController = new AbortController();
+      const gemTimeout = setTimeout(() => gemController.abort(), 15000);
+      const geminiRes = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?key=${process.env.GEMINI_API_KEY}&alt=sse`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: mentorPrompt }] }],
+            generationConfig: {
+              temperature: 0.3,
+              maxOutputTokens: 1200,
+              stopSequences: ['User:'],
+            },
+            stream: true,
+          }),
+          signal: gemController.signal,
+        }
+      );
+      clearTimeout(gemTimeout);
+
+      // Streaming response
+      if (geminiRes.ok && geminiRes.body) {
+        const stream = new ReadableStream({
+          async start(controller) {
+            const reader = geminiRes.body.getReader();
+            let buffer = '';
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              buffer += new TextDecoder().decode(value);
+              const events = buffer.split('\n\n');
+              buffer = events.pop();
+              events.forEach(event => {
+                if (event.startsWith('data:')) {
+                  const jsonStr = event.slice(5).trim();
+                  try {
+                    const chunk = JSON.parse(jsonStr);
+                    const text = chunk.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                    if (text) controller.enqueue(text);
+                  } catch (e) { console.error('Parse error:', e); }
+                }
+              });
+            }
+            controller.close();
+          }
+        });
+        const latency = Date.now() - start;
+        console.log(`Request #${requestCount} latency: ${latency}ms (streamed)`);
+        return new Response(stream, { headers: { ...CORS_HEADERS, 'Content-Type': 'text/event-stream' } });
+      }
+
+      // Fallback: non-stream (should not happen but for completeness)
+      if (!geminiRes.ok) {
+        console.error("Gemini status:", geminiRes.status);
+        geminiFailed = true;
+      } else {
+        const geminiData = await geminiRes.json();
+        if (geminiData.error) {
+          console.error("Gemini error:", geminiData.error.message);
+          geminiFailed = true;
+        } else {
+          answer = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '_No answer_';
+        }
+      }
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        console.error('Gemini timeout');
+        return new Response(JSON.stringify({ reply: null, error: 'Gemini API request timed out' }), { status: 504, headers: CORS_HEADERS });
+      }
+      console.error('Gemini error:', err.message);
+      geminiFailed = true;
+    }
+
+    // OpenAI fallback
+    if (geminiFailed && process.env.FALLBACK_PROVIDER === 'openai' && process.env.OPENAI_API_KEY && OpenAI) {
+      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+      const fallbackRes = await openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          { role: 'system', content: mentorPrompt },
+          { role: 'user', content: correctedInput },
+        ],
+        max_tokens: 1200,
+        temperature: 0.3,
+        stop: ['User:'],
+      });
+      answer = fallbackRes.choices[0].message.content.trim() || "_No answer_";
+      answer = `---\n${answer}\n--- (via fallback)`;
+    }
+
+    if (geminiFailed && !answer) {
+      return new Response(
+        JSON.stringify({ reply: null, error: 'Gemini failed to generate a response' }),
+        { status: 502, headers: CORS_HEADERS }
+      );
+    }
+
+    answer = `---\n${answer}\n---`;
+    const latency = Date.now() - start;
+    console.log(`Request #${requestCount} latency: ${latency}ms`);
+
+    return new Response(
+      JSON.stringify({ reply: answer, error: null }),
+      { status: 200, headers: CORS_HEADERS }
+    );
+  } catch (error) {
+    const msg = error?.message || 'API failed';
+    console.error('Error:', msg);
+    return new Response(JSON.stringify({ reply: null, error: msg }), { status: 502, headers: CORS_HEADERS });
+  }
 }
-=======
-}
->>>>>>> 210380c04b8db625929fd439612f68690ed23ff5
