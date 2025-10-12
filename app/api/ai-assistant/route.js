@@ -351,8 +351,4 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
     console.error('Error:', msg);
     return new Response(JSON.stringify({ reply: null, error: msg }), { status: 502, headers: CORS_HEADERS });
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 210380c04b8db625929fd439612f68690ed23ff5
