@@ -7,23 +7,32 @@ export default function Ielts_PrepPage() {
   return (
     <div
       dangerouslySetInnerHTML={{
-        __html: `      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        <h1 data-i18n="ielts.title" style="color: var(--text-primary); margin-bottom: 1rem;">IELTS Prep & Application Guides</h1>
-        <p data-i18n="ielts.intro" style="color: var(--text-secondary); max-width: 800px; margin: 0 auto 3rem;">Complete preparation strategies, test resources, application guides, and templates to help Nepali students succeed in international admissions.</p>
+        __html: `      
+      <section class="section">
+        <div class="container text-center">
+          <div class="card reveal">
+            <h1 data-i18n="ielts.title">IELTS Prep & Application Guides</h1>
+            <p class="subtext" data-i18n="ielts.intro">Complete preparation strategies, test resources, application guides, and templates to help Nepali students succeed in international admissions.</p>
+          </div>
+        </div>
+      </section>
 
         
-        <section id="overview" className="section">
-          <h2 style="color: var(--text-primary); margin: 3rem 0 2rem; text-align: center;">Overview</h2>
-          <div className="callout" style="text-align: left; max-width: 900px; margin: 0 auto 2rem;">
-            <p>This comprehensive guide combines IELTS test preparation strategies with step-by-step application guidance. Whether you're starting your preparation or finalizing your applications, you'll find proven resources and templates to streamline your study abroad journey from Nepal.</p>
+        <section id="overview" class="section">
+          <div class="container">
+            <div class="card reveal">
+              <h2>Overview</h2>
+              <p>This comprehensive guide combines IELTS test preparation strategies with step-by-step application guidance. Whether you're starting your preparation or finalizing your applications, you'll find proven resources and templates to streamline your study abroad journey from Nepal.</p>
+            </div>
           </div>
         </section>
 
         
-        <section id="preparation-steps" className="section">
-          <h2 style="color: var(--text-primary); margin: 3rem 0 2rem; text-align: center;">Application Preparation Steps</h2>
-          <div style="max-width: 1000px; margin: 0 auto; text-align: left;">
-            <div className="timeline">
+        <section id="preparation-steps" class="section">
+          <div class="container">
+            <div class="card reveal">
+              <h2>Application Preparation Steps</h2>
+            <div class="timeline">
             <div className="timeline-step">
               <div className="step-number">1</div>
               <div className="step-content">
@@ -98,73 +107,89 @@ export default function Ielts_PrepPage() {
               </div>
             </div>
           </div>
+            </div>
+          </div>
         </div>
       </section>
 
         
-        <section id="guides-and-resources" className="section">
-          <h2 style="color: var(--text-primary); margin: 3rem 0 2rem; text-align: center;">Guides & Resources</h2>
-          
-          
-          <div style="text-align: center; margin-bottom: 2rem;">
-            <h3>Templates & Downloads</h3>
-            <p className="subtext" style="color: var(--text-secondary);">Download proven templates to strengthen your applications</p>
-          </div>
-          
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-            <div className="card" style="text-align: center; padding: 2rem; background: var(--surface);">
-              <i className="fas fa-file-text" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
-              <h4>SOP Templates</h4>
-              <p style="margin: 1rem 0;">Statement of Purpose templates for different fields of study</p>
-              <a href="#" className="linear-button" style="display: inline-block;">
-                <i className="fas fa-download icon-left"></i>Download
-              </a>
+        <section id="guides-and-resources" class="section">
+          <div class="container">
+            <div class="card reveal text-center">
+              <h2>Guides & Resources</h2>
             </div>
-            <div className="card" style="text-align: center; padding: 2rem; background: var(--surface);">
-              <i className="fas fa-file-invoice-dollar" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
-              <h4>Financial Checklist</h4>
-              <p style="margin: 1rem 0;">Complete checklist for financial documentation</p>
-              <a href="#" className="linear-button" style="display: inline-block;">
-                <i className="fas fa-download icon-left"></i>Download
-              </a>
-            </div>
-            <div className="card" style="text-align: center; padding: 2rem; background: var(--surface);">
-              <i className="fas fa-calendar-alt" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
-              <h4>Application Timeline</h4>
-              <p style="margin: 1rem 0;">Month-by-month application planning template</p>
-              <a href="#" className="linear-button" style="display: inline-block;">
-                <i className="fas fa-download icon-left"></i>Download
-              </a>
-            </div>
-            <div className="card" style="text-align: center; padding: 2rem; background: var(--surface);">
-              <i className="fas fa-comments" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
-              <h4>Interview Prep</h4>
-              <p style="margin: 1rem 0;">Common visa interview questions and preparation guide</p>
-              <a href="#" className="linear-button" style="display: inline-block;">
-                <i className="fas fa-download icon-left"></i>Download
-              </a>
-            </div>
-          </div>
 
-        <h3 data-i18n="ielts.essential_resources" style="color: var(--text-primary); margin: 3rem 0 2rem; text-align: center;">IELTS Resources</h3>
-        <div className="grid-3-cols" style="text-align: left;">
-      <a className="card" href="https://www.britishcouncil.org/exam/ielts/prepare" target="_blank">
+            <div class="card reveal text-center">
+              <h3>Templates & Downloads</h3>
+              <p class="subtext">Download proven templates to strengthen your applications</p>
+            </div>
+          
+          <div class="feature-grid">
+            <div class="card reveal text-center">
+              <i class="fas fa-file-text" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+              <h4>SOP Templates</h4>
+              <p>Statement of Purpose templates for different fields of study</p>
+              <a href="#" class="linear-button">
+                <i class="fas fa-download icon-left"></i>Download
+              </a>
+            </div>
+            <div class="card reveal text-center">
+              <i class="fas fa-file-invoice-dollar" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+              <h4>Financial Checklist</h4>
+              <p>Complete checklist for financial documentation</p>
+              <a href="#" class="linear-button">
+                <i class="fas fa-download icon-left"></i>Download
+              </a>
+            </div>
+            <div class="card reveal text-center">
+              <i class="fas fa-calendar-alt" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+              <h4>Application Timeline</h4>
+              <p>Month-by-month application planning template</p>
+              <a href="#" class="linear-button">
+                <i class="fas fa-download icon-left"></i>Download
+              </a>
+            </div>
+            <div class="card reveal text-center">
+              <i class="fas fa-comments" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+              <h4>Interview Prep</h4>
+              <p>Common visa interview questions and preparation guide</p>
+              <a href="#" class="linear-button">
+                <i class="fas fa-download icon-left"></i>Download
+              </a>
+            </div>
+          </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="card reveal text-center">
+              <h3 data-i18n="ielts.essential_resources">IELTS Resources</h3>
+            </div>
+
+            <div class="grid-3-cols">
+              <a class="card reveal" href="https://www.britishcouncil.org/exam/ielts/prepare" target="_blank">
         <h4>British Council IELTS Prep</h4>
         <p>Official preparation materials, practice tests, and study plans directly from the test makers.</p>
       </a>
       
-      <a className="card" href="https://ieltsliz.com/" target="_blank">
+      <a class="card reveal" href="https://ieltsliz.com/" target="_blank">
         <h4>IELTS Liz</h4>
         <p>Free lessons, tips, and practice exercises. Excellent for understanding band descriptors and common mistakes.</p>
       </a>
       
-      <a className="card" href="https://www.cambridgeenglish.org/exams-and-tests/ielts/preparation/" target="_blank">
+      <a class="card reveal" href="https://www.cambridgeenglish.org/exams-and-tests/ielts/preparation/" target="_blank">
         <h4>Cambridge Practice Tests</h4>
         <p>Authentic practice materials and sample tests with detailed answer keys and explanations.</p>
       </a>
     </div>
+          </div>
+        </section>
 
-        <h3 style="color: var(--text-primary); margin: 3rem 0 2rem; text-align: center;">Proven Test Strategies</h3>
+        <section class="section">
+          <div class="container">
+            <div class="card reveal">
+              <h3 class="text-center">Proven Test Strategies</h3>
         
         <div className="callout" style="text-align: left; max-width: 900px; margin: 0 auto 2rem;">
           <h3>⏰ Time Management</h3>

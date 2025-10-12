@@ -339,4 +339,8 @@ class EventSourcePolyfill {
 
 export default function Home() {
   return <CivoraAIChat />;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 210380c04b8db625929fd439612f68690ed23ff5
