@@ -1,10 +1,8 @@
-
-// v51 - Final production version: streaming, context-first, transcript fix, typo dict, PDF+OCR, safe math, consistent error shape, OpenAI fallback, strict CORS, health check
+// v51 - Final production version for Vercel: streaming, context-first, transcript fix, typo dict, safe math, consistent error shape, OpenAI fallback, strict CORS, health check
+// Native modules removed for serverless compatibility
 
 import { z } from 'zod';
 import { create, all } from 'mathjs';
-const pdfParse = require('pdf-parse');
-const { createWorker } = require('tesseract.js');
 const OpenAI = process.env.FALLBACK_PROVIDER === 'openai' ? require('openai') : null;
 
 // Env validation
@@ -88,27 +86,10 @@ export async function POST(req) {
     };
     let correctedInput = rawInput.split(' ').map(word => typoDict[word.toLowerCase()] || word).join(' ');
 
-    // File Handling (PDF + Image OCR via tesseract.js)
+    // File Handling (PDF + Image OCR removed for Vercel compatibility)
     let fileContent = '';
     if (file?.content) {
-      try {
-        const buffer = Buffer.from(file.content, 'base64');
-        if (file.name.endsWith('.pdf')) {
-          const data = await pdfParse(buffer);
-          fileContent = data.text.slice(0, 4000);
-        } else if (file.name.match(/\.(jpg|jpeg|png)$/i)) {
-          const worker = await createWorker('eng');
-          await worker.load();
-          await worker.loadLanguage('eng');
-          await worker.initialize('eng');
-          const { data: { text } } = await worker.recognize(buffer);
-          fileContent = text.slice(0, 4000);
-          await worker.terminate();
-        }
-      } catch (err) {
-        console.error('File processing error:', err.message);
-        fileContent = 'Uploaded file could not be processed.';
-      }
+      fileContent = 'File parsing not supported on Vercel serverless.';
     }
 
     // Math Pre-Check (safe with mathjs)
