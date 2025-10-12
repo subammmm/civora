@@ -11,7 +11,10 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
-    "export": "next export"
+    "export": "next export",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "link:check": "node scripts/link-check.mjs",
+    "prebuild": "npm run sitemap"
   },
   "engines": {
     "node": ">=18.17.0"
@@ -25,11 +28,13 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@sentry/browser": "^7.118.0",
     "@types/node": "^24.7.1",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.33",
+    "linkinator": "^6.0.4",
     "prettier": "^3.3.0",
     "typescript": "^5.5.0"
   }

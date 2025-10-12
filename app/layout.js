@@ -74,8 +74,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Performance: Preconnect to external resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+        
+        {/* Fonts with font-display: swap for better performance */}
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap"
           rel="stylesheet"
@@ -132,6 +136,18 @@ export default function RootLayout({ children }) {
         <Script src="/assets/reveal.js" strategy="lazyOnload" />
         <Script src="/assets/command-palette.js" strategy="lazyOnload" />
         <Script src="/assets/scale-fix.js" strategy="lazyOnload" />
+
+        {/* Monitoring - Sentry initialization */}
+        <Script id="sentry-init" strategy="afterInteractive">
+          {`
+            // Initialize Sentry if DSN is configured
+            if (typeof window !== 'undefined') {
+              import('/lib/monitoring/sentry.js')
+                .then(module => module.initSentry())
+                .catch(err => console.warn('Failed to load Sentry:', err));
+            }
+          `}
+        </Script>
 
         {/* Google Analytics */}
         <Script id="google-analytics" strategy="afterInteractive">
@@ -223,9 +239,8 @@ function Footer() {
           <a href="/student-stories/">Students & Stories</a>
           <a href="/ielts-prep/">IELTS & Prep</a>
           <a href="/contact/">Contact</a>
-          <a href="/privacy/" className="footer-link">
-            Privacy
-          </a>
+          <a href="/legal/privacy/">Privacy Policy</a>
+          <a href="/legal/terms/">Terms of Service</a>
           <a
             href="https://linkedin.com/company/civora"
             className="social-icon"
