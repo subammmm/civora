@@ -8,9 +8,9 @@ export default function Student_StoriesPage() {
     <>
       <section className="section">
         <div className="container">
-          <div className="card text-center">
-            <h1 style={{ marginBottom: '1rem' }}>Student Success Stories</h1>
-            <p className="subtext" style={{ maxWidth: '800px', margin: '0 auto 2rem' }}>
+          <div className="card reveal text-center">
+            <h1>Student Success Stories</h1>
+            <p className="subtext">
               Real journeys from Nepali students who transformed their dreams into reality through scholarships and international opportunities. These stories prove that with the right resources and determination, global education is achievable.
             </p>
           </div>
@@ -19,7 +19,7 @@ export default function Student_StoriesPage() {
 
       <section className="section">
         <div className="container">
-          <div className="card">
+          <div className="card reveal">
             <div className="stats-grid">
               <div className="stat-card">
                 <div className="stat-number">25+</div>
@@ -42,7 +42,7 @@ export default function Student_StoriesPage() {
         <div className="container">
           <div className="success-stories">
             <div className="grid-2x2">
-              <div className="story-card featured-story">
+              <div className="story-card card reveal featured-story">
                 <div className="story-header">
                   <h3>From Kathmandu to Seoul: My KGSP Journey</h3>
                   <div className="story-meta">
@@ -85,7 +85,7 @@ export default function Student_StoriesPage() {
                 </div>
               </div>
 
-              <div className="story-card">
+              <div className="story-card card reveal">
                 <div className="story-header">
                   <h3>Eiffel Scholarship Success: Engineering Dreams in France</h3>
                   <div className="story-meta">
@@ -116,7 +116,7 @@ export default function Student_StoriesPage() {
                 </div>
               </div>
 
-              <div className="story-card">
+              <div className="story-card card reveal">
                 <div className="story-header">
                   <h3>Graduate School in Canada: A Research Journey</h3>
                   <div className="story-meta">
@@ -152,7 +152,7 @@ export default function Student_StoriesPage() {
                 </div>
               </div>
 
-              <div className="story-card">
+              <div className="story-card card reveal">
                 <div className="story-header">
                   <h3>Erasmus+ Adventures: Multiple Countries, One Degree</h3>
                   <div className="story-meta">

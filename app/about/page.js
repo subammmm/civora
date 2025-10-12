@@ -8,19 +8,19 @@ export default function AboutPage() {
     <div
       dangerouslySetInnerHTML={{
         __html: `      
-      <section className="hero">
-        <div className="container">
-          <div className="card">
-            <h1><i className="fas fa-info-circle icon-left" aria-hidden="true"></i>About Civora</h1>
-            <p className="subtext">Opening doors for Nepali students to study, work, and belong anywhere in the world.</p>
+      <section class="section">
+        <div class="container">
+          <div class="card reveal">
+            <h1><i class="fas fa-info-circle icon-left" aria-hidden="true"></i>About Civora</h1>
+            <p class="subtext">Opening doors for Nepali students to study, work, and belong anywhere in the world.</p>
           </div>
         </div>
       </section>
 
       
-      <section className="section">
-        <div className="container">
-          <div className="card">
+      <section class="section">
+        <div class="container">
+          <div class="card reveal">
             <div className="flex align-center gap-2" style="flex-direction: row;">
               <div style="flex: 1;">
                 <h2><i className="fas fa-bullseye icon-left" aria-hidden="true"></i>Our Mission</h2>
@@ -42,32 +42,32 @@ export default function AboutPage() {
       </section>
 
       
-      <section className="section">
-        <div className="container">
-          <div className="card">
-            <div className="text-center margin-bottom-2">
-              <h2><i className="fas fa-heart icon-left" aria-hidden="true"></i>Our Values</h2>
-              <p className="subtext">The principles that guide everything we do</p>
+      <section class="section">
+        <div class="container">
+          <div class="card reveal">
+            <div class="text-center margin-bottom-2">
+              <h2><i class="fas fa-heart icon-left" aria-hidden="true"></i>Our Values</h2>
+              <p class="subtext">The principles that guide everything we do</p>
             </div>
             
-            <div className="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-              <div className="linear-card text-center card">
-                <i className="fas fa-check-circle" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+            <div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+              <div class="card reveal text-center">
+                <i class="fas fa-check-circle" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
                 <h3>Accuracy</h3>
                 <p>Every scholarship and pathway is verified through official sources and updated regularly to ensure students receive accurate information.</p>
               </div>
-              <div className="linear-card text-center card">
-                <i className="fas fa-universal-access" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+              <div class="card reveal text-center">
+                <i class="fas fa-universal-access" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
                 <h3>Accessibility</h3>
                 <p>We make information available in multiple languages and formats, ensuring it reaches students regardless of their technical expertise.</p>
               </div>
-              <div className="linear-card text-center card">
-                <i className="fas fa-users-cog" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+              <div class="card reveal text-center">
+                <i class="fas fa-users-cog" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
                 <h3>Community</h3>
                 <p>We connect students with each other and share success stories to build a supportive network of learners and achievers.</p>
               </div>
-              <div className="linear-card text-center card">
-                <i className="fas fa-eye" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+              <div class="card reveal text-center">
+                <i class="fas fa-eye" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
                 <h3>Transparency</h3>
                 <p>All our resources are open and free. We clearly cite sources and provide direct links to official application portals.</p>
               </div>
@@ -77,11 +77,11 @@ export default function AboutPage() {
       </section>
 
       
-      <section className="section">
-        <div className="container">
-          <div className="card">
-            <div className="text-center margin-bottom-2">
-              <h2><i className="fas fa-chart-line icon-left" aria-hidden="true"></i>Our Impact</h2>
+      <section class="section">
+        <div class="container">
+          <div class="card reveal">
+            <div class="text-center margin-bottom-2">
+              <h2><i class="fas fa-chart-line icon-left" aria-hidden="true"></i>Our Impact</h2>
               <p className="subtext">Helping students achieve their global education dreams</p>
             </div>
             

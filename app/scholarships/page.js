@@ -8,9 +8,9 @@ export default function ScholarshipsPage() {
     <div
       dangerouslySetInnerHTML={{
         __html: `      
-      <section class="section" style="padding: 2rem 0;">
+      <section class="section">
         <div class="container">
-          <div class="card" style="margin-bottom: 2rem;">
+          <div class="card reveal">
             <h1 data-i18n="sch.title"><i class="fas fa-search icon-left" aria-hidden="true"></i>Filter Scholarships</h1>
             <p class="subtext" data-i18n="sch.demo_intro">Find the perfect scholarship by filtering by country, level, field, and deadline.</p>
             
@@ -62,7 +62,7 @@ export default function ScholarshipsPage() {
           </div>
 
           
-          <div class="card" style="margin-top: 1rem;">
+          <div class="card reveal">
             <div id="no-results-message" class="hidden" style="text-align: center; padding: 3rem; color: var(--text-secondary);">
               <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
               <h3>No scholarships match your criteria</h3>
