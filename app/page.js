@@ -1,464 +1,136 @@
-"use client";
-import { useState, useRef, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import "./globals.css";
 
-function CivoraAIChat() {
-  const [input, setInput] = useState("");
-  const [messages, setMessages] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = window.localStorage.getItem("civoraHistory");
-      return saved ? JSON.parse(saved) : [];
-    }
-    return [];
-  });
-  const [loading, setLoading] = useState(false);
-  const [streamBuffer, setStreamBuffer] = useState("");
-  const chatEndRef = useRef(null);
-  const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    if (chatEndRef.current) chatEndRef.current.scrollIntoView({ behavior: "smooth" });
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("civoraHistory", JSON.stringify(messages));
-    }
-  }, [messages]);
-
-  function handleInputKeyDown(e) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      if (!loading) sendMessage({ preventDefault: () => {}, target: { file: fileInputRef.current } });
-    }
-  }
-
-  async function sendMessage(e) {
-    e.preventDefault();
-    if (loading) return;
-    const fileInput = fileInputRef.current;
-    let fileUploadObject = null;
-    let newMessages = [...messages];
-    const userText = input.trim();
-
-    // File upload logic: only images, pdf, max 2MB
-    if (fileInput && fileInput.files.length) {
-      const file = fileInput.files[0];
-      if (!file.type.match(/(image|pdf)/)) {
-        alert("Only images or PDF files are supported.");
-        return;
-      }
-      if (file.size > 2 * 1024 * 1024) {
-        alert("File too large (max 2MB).");
-        return;
-      }
-      // Convert to base64 for backend OCR/PDF
-      const base64 = await new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = ev => resolve(ev.target.result.split(',')[1] || "");
-        reader.readAsDataURL(file);
-      });
-      fileUploadObject = {
-        name: file.name,
-        content: base64,
-      };
-      newMessages.push({ role: "user", content: `Uploaded file: ${file.name}` });
-      fileInput.value = "";
-    } else if (input.trim()) {
-      newMessages.push({ role: "user", content: input });
-    } else {
-      return;
-    }
-
-    setMessages(newMessages);
-    setLoading(true);
-    setStreamBuffer("");
-
-    // Prepare last 5 turns as transcript context
-    const historyPayload = newMessages.slice(-5).map(m => ({
-      user: m.role === "user" ? m.content : undefined,
-      assistant: m.role === "assistant" ? m.content : undefined
-    }));
-
-    try {
-      // Use SSE streaming if no file, else fallback to JSON POST
-      if (!fileUploadObject) {
-        // Streaming for text-only
-        const eventSource = new EventSourcePolyfill("/api/ai-assistant/", {
-          headers: { "Content-Type": "application/json" },
-          payload: JSON.stringify({ input, history: historyPayload }),
-        });
-        let streamed = "";
-        eventSource.onmessage = (event) => {
-          streamed += event.data;
-          setStreamBuffer(streamed);
-        };
-        eventSource.onerror = (error) => {
-          console.error("EventSource error:", error);
-          eventSource.close();
-          setLoading(false);
-          // Display error message to user, prioritizing streamed content if available
-          if (streamed) {
-            setMessages(prev => [...prev, { role: "assistant", content: streamed }]);
-          } else {
-            // Extract error message from error object if available
-            const errorMsg = error?.message || "Sorry, streaming failed. Please check the console for details.";
-            setMessages(prev => [...prev, { role: "assistant", content: `⚠️ ${errorMsg}` }]);
-          }
-          setStreamBuffer("");
-        };
-        eventSource.addEventListener("end", () => {
-          // Always add the streamed content when stream ends successfully
-          if (streamed) {
-            setMessages(prev => [...prev, { role: "assistant", content: streamed }]);
-          } else {
-            // If no content was streamed, show a helpful message
-            setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Received empty response from server." }]);
-          }
-          setLoading(false);
-          setStreamBuffer("");
-        });
-        setInput(""); // Clear input immediately after starting stream
-      } else {
-        // Fallback for file uploads (no SSE)
-        const res = await fetch("/api/ai-assistant/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ input, history: historyPayload, file: fileUploadObject }),
-        });
-        
-        // Check for redirect or non-OK status
-        if (!res.ok) {
-          console.error(`API request failed with status ${res.status}`);
-          newMessages.push({ 
-            role: "assistant", 
-            content: `⚠️ API request failed (HTTP ${res.status}). Please ensure the API endpoint is accessible.` 
-          });
-          setMessages(newMessages);
-          setLoading(false);
-          setStreamBuffer("");
-          setInput("");
-          return;
-        }
-        
-        const data = await res.json();
-        let reply = data.reply || "";
-        if (data.error) {
-          newMessages.push({ role: "assistant", content: `⚠️ ${data.error}` });
-        } else if (reply) {
-          newMessages.push({ role: "assistant", content: reply });
-        } else {
-          // Handle empty reply
-          newMessages.push({ role: "assistant", content: "⚠️ Received empty response from server." });
-        }
-        setMessages(newMessages);
-        setLoading(false);
-        setStreamBuffer("");
-        setInput("");
-        return;
-      }
-    } catch (error) {
-      console.error("Send message error:", error);
-      setMessages(prev => [...prev, { role: "assistant", content: `⚠️ Sorry, something went wrong: ${error.message || 'Unknown error'}` }]);
-      setLoading(false);
-      setStreamBuffer("");
-      setInput(""); // Make sure to clear input on error too
-    }
-  }
-
-  function handleClearHistory() {
-    setMessages([]);
-    if (typeof window !== "undefined") window.localStorage.removeItem("civoraHistory");
-  }
-
-  return (
-    <div className="ai-chat-main">
-      <div className="ai-chat-header"></div>
-      <div className="ai-chat-area">
-        {messages.length === 0 && (
-          <div className="ai-welcome">
-            <span>Welcome! Ask anything about scholarships, citizenship, global student life, or exams.</span>
-          </div>
-        )}
-        {messages.map((m, i) => (
-          <div key={i} className={`ai-chat-bubble ${m.role}`}>
-            <div className="ai-bubble-content">
-              {m.content.startsWith("<img") ? (
-                <span dangerouslySetInnerHTML={{ __html: m.content }} />
-              ) : (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  allowedElements={[
-                    "h2", "h3", "strong", "em", "ul", "ol", "li", "a", "code", "pre", "blockquote", "br", "p"
-                  ]}
-                  components={{
-                    h2: props => <div style={{margin:"22px 0 6px 0",borderBottom:"1px solid #333",fontWeight:"700",fontSize:"1.09rem",color:"#5e6ad2"}}>{props.children}</div>,
-                    h3: props => <div style={{marginTop:"16px",fontWeight:"600",fontSize:"1.02rem",color:"#7c83e4"}}>{props.children}</div>,
-                    li: props => <li style={{marginBottom:"8px"}}>{props.children}</li>,
-                    p: props => <p style={{margin:"7px 0"}}>{props.children}</p>
-                  }}
-                >{m.content}</ReactMarkdown>
-              )}
-            </div>
-          </div>
-        ))}
-        {/* Streaming buffer UI */}
-        {loading && streamBuffer && (
-          <div className="ai-chat-bubble assistant">
-            <div className="ai-bubble-content">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{streamBuffer}</ReactMarkdown>
-            </div>
-          </div>
-        )}
-        <div ref={chatEndRef}></div>
-      </div>
-      <form onSubmit={sendMessage} className="ai-chat-input-row">
-        <textarea
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          placeholder="Type your question…"
-          className="ai-chat-input"
-          disabled={loading}
-          aria-label="Type your question"
-          rows={1}
-          onKeyDown={handleInputKeyDown}
-        />
-        <input
-          type="file"
-          name="file"
-          accept="image/*,application/pdf"
-          ref={fileInputRef}
-          className="ai-file-input"
-          disabled={loading}
-          aria-label="Upload image or PDF"
-        />
-        <button
-          type="submit"
-          className="btn"
-          disabled={loading}
-          aria-label="Send message"
-        >
-          {loading ? "..." : "Send"}
-        </button>
-        <button type="button" className="btn" onClick={handleClearHistory}>
-          Clear
-        </button>
-      </form>
-      <style>{`
-        .ai-chat-main {
-          background: #0d0d0d;
-          color: #f5f5f5;
-          border-radius: 12px;
-          padding: 20px;
-          max-width: 800px;
-          margin: auto;
-          font-family: 'Inter', sans-serif;
-        }
-        .ai-chat-header {
-          border-bottom: 1px solid #222;
-          padding-bottom: 10px;
-          margin-bottom: 15px;
-        }
-        .ai-chat-bubble.user {
-          background: #1a1a1a;
-          border-radius: 12px;
-          padding: 10px 14px;
-          margin: 8px 0;
-          align-self: flex-end;
-        }
-        .ai-chat-bubble.assistant {
-          background: #111;
-          border-radius: 12px;
-          padding: 10px 14px;
-          margin: 8px 0;
-          align-self: flex-start;
-        }
-        .ai-chat-area {
-          min-height: 380px;
-          margin-bottom: 20px;
-        }
-        .ai-chat-input-row {
-          margin-top: 15px;
-          display: flex;
-          gap: 10px;
-        }
-        .ai-chat-input {
-          flex: 1;
-          border-radius: 8px;
-          border: 1px solid #333;
-          background: #1a1a1a;
-          color: #f5f5f5;
-          padding: 10px;
-        }
-        .ai-file-input {
-          background: #23232d;
-          color: #aaa;
-          border-radius: 8px;
-          border: none;
-          font-size: 0.9rem;
-          padding: 6px 0;
-          width: 110px;
-        }
-        .btn {
-          background: #333;
-          color: #f5f5f5;
-          border-radius: 8px;
-          padding: 8px 14px;
-          border: none;
-          cursor: pointer;
-        }
-        .btn:hover {
-          background: #444;
-        }
-        .ai-bubble-content {
-          word-break: break-word;
-        }
-        .ai-welcome {
-          font-size: 1.1rem;
-          color: #aaa;
-          text-align: center;
-          margin-bottom: 32px;
-        }
-        @media (max-width: 540px) {
-          .ai-chat-main {
-            max-width: 100vw;
-            border-radius: 0;
-            padding: 8px;
-          }
-        }
-      `}</style>
-    </div>
-  );
-}
-
-// Polyfill for EventSource with POST support (for SSE streaming, if needed)
-class EventSourcePolyfill {
-  constructor(url, { headers, payload }) {
-    this.events = {};
-    this.closed = false;
-    fetch(url, {
-      method: "POST",
-      headers,
-      body: payload,
-    }).then(async res => {
-      // Handle non-OK responses (including 308 redirects)
-      if (!res.ok) {
-        console.error(`API request failed with status ${res.status}`);
-        
-        // Try to parse error from JSON response body
-        try {
-          const data = await res.json();
-          if (data.error) {
-            if (this.events["error"]) {
-              this.events["error"](new Error(data.error));
-            }
-            this.close();
-            return;
-          }
-        } catch (e) {
-          // Not JSON, use generic HTTP error
-        }
-        
-        if (this.events["error"]) {
-          this.events["error"](new Error(`HTTP ${res.status}`));
-        }
-        this.close();
-        return;
-      }
-      
-      if (!res.body) {
-        console.error("Response has no body");
-        if (this.events["error"]) {
-          this.events["error"](new Error("No response body"));
-        }
-        this.close();
-        return;
-      }
-      
-      // Check content type to detect JSON error responses (HTTP 200 with error field)
-      const contentType = res.headers.get("content-type") || "";
-      if (contentType.includes("application/json")) {
-        // This is a JSON response, not SSE - likely an error or non-stream response
-        try {
-          const data = await res.json();
-          if (data.error) {
-            // API returned an error in JSON format
-            console.error("API error:", data.error);
-            if (this.events["error"]) {
-              this.events["error"](new Error(data.error));
-            }
-          } else if (data.reply) {
-            // Valid JSON response with reply - treat as a single message
-            if (this.events["message"]) {
-              this.events["message"]({ data: data.reply });
-            }
-            // Use setTimeout to ensure message handler completes before end event
-            setTimeout(() => {
-              if (this.events["end"]) {
-                this.events["end"]();
-              }
-            }, 0);
-          } else {
-            // Empty response
-            if (this.events["error"]) {
-              this.events["error"](new Error("Empty response from server"));
-            }
-          }
-        } catch (e) {
-          console.error("Failed to parse JSON response:", e);
-          if (this.events["error"]) {
-            this.events["error"](new Error("Invalid JSON response"));
-          }
-        }
-        this.close();
-        return;
-      }
-      
-      // Standard SSE streaming path
-      const reader = res.body.getReader();
-      let buffer = "";
-      const decoder = new TextDecoder();
-      const pump = async () => {
-        try {
-          while (!this.closed) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            buffer += decoder.decode(value);
-            const events = buffer.split("\n\n");
-            buffer = events.pop();
-            for (let event of events) {
-              if (event.startsWith("data:")) {
-                const data = event.slice(5).trim();
-                if (this.events["message"]) this.events["message"]({ data });
-              }
-              if (event.startsWith("event: end")) {
-                if (this.events["end"]) this.events["end"]();
-                this.close();
-              }
-            }
-          }
-        } catch (error) {
-          console.error("Stream reading error:", error);
-          if (this.events["error"]) {
-            this.events["error"](error);
-          }
-          this.close();
-        }
-      };
-      pump();
-    }).catch(error => {
-      console.error("Fetch error:", error);
-      if (this.events["error"]) {
-        this.events["error"](error);
-      }
-      this.close();
-    });
-  }
-  onmessage = fn => { this.events["message"] = fn; };
-  onerror = fn => { this.events["error"] = fn; };
-  addEventListener(type, fn) { this.events[type] = fn; }
-  close() { this.closed = true; }
-}
-
 export default function Home() {
-  return <CivoraAIChat />;
+  return (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `
+      <section class="section">
+        <div class="container">
+          <div class="card reveal" style="text-align: center; padding: 3rem 2rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">
+              <i class="fas fa-globe icon-left" aria-hidden="true"></i>Welcome to Civora
+            </h1>
+            <p class="subtext" style="font-size: 1.3rem; margin-bottom: 2rem;">
+              Opening doors for Nepali students to study, work, and belong anywhere in the world.
+            </p>
+            <p style="max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem; color: var(--text-secondary);">
+              Civora is a research-based platform that compiles verified scholarships, visa pathways, 
+              and citizenship options for students from Nepal and other underrepresented countries.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+              <a href="/scholarships/" class="linear-button" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                <i class="fas fa-search icon-left" aria-hidden="true"></i>Browse Scholarships
+              </a>
+              <a href="/citizenship/" class="linear-button secondary" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                <i class="fas fa-passport icon-left" aria-hidden="true"></i>Citizenship Pathways
+              </a>
+              <a href="/about/" class="linear-button secondary" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                <i class="fas fa-info-circle icon-left" aria-hidden="true"></i>About Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="card reveal">
+            <h2 style="text-align: center; margin-bottom: 2rem;">
+              <i class="fas fa-star icon-left" aria-hidden="true"></i>What We Offer
+            </h2>
+            <div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+              <div style="text-align: center; padding: 2rem;">
+                <i class="fas fa-graduation-cap" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+                <h3>Verified Scholarships</h3>
+                <p>Access a curated database of scholarships for Nepali students with verified information and direct application links.</p>
+                <a href="/scholarships/" class="linear-button" style="margin-top: 1rem; display: inline-block;">Explore Scholarships</a>
+              </div>
+              <div style="text-align: center; padding: 2rem;">
+                <i class="fas fa-passport" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+                <h3>Citizenship & Visas</h3>
+                <p>Discover pathways to citizenship and permanent residency in countries around the world.</p>
+                <a href="/citizenship/" class="linear-button" style="margin-top: 1rem; display: inline-block;">View Pathways</a>
+              </div>
+              <div style="text-align: center; padding: 2rem;">
+                <i class="fas fa-book-open" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+                <h3>Study Resources</h3>
+                <p>Get guides, tips, and resources to help you succeed in exams like IELTS and prepare for studying abroad.</p>
+                <a href="/ielts-prep/" class="linear-button" style="margin-top: 1rem; display: inline-block;">IELTS Preparation</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="card reveal">
+            <h2 style="text-align: center; margin-bottom: 2rem;">
+              <i class="fas fa-chart-line icon-left" aria-hidden="true"></i>Our Impact
+            </h2>
+            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
+              <div class="stat-card">
+                <i class="fas fa-users icon" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);" aria-hidden="true"></i>
+                <span class="stat-number" style="display: block; font-size: 2.5rem; font-weight: 700; color: var(--accent);">1000+</span>
+                <p>Students Reached</p>
+              </div>
+              <div class="stat-card">
+                <i class="fas fa-trophy icon" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);" aria-hidden="true"></i>
+                <span class="stat-number" style="display: block; font-size: 2.5rem; font-weight: 700; color: var(--accent);">24</span>
+                <p>Scholarships Verified</p>
+              </div>
+              <div class="stat-card">
+                <i class="fas fa-globe icon" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);" aria-hidden="true"></i>
+                <span class="stat-number" style="display: block; font-size: 2.5rem; font-weight: 700; color: var(--accent);">6+</span>
+                <p>Countries Covered</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="card reveal" style="text-align: center; padding: 3rem 2rem;">
+            <h2 style="margin-bottom: 1rem;">
+              <i class="fas fa-heart icon-left" aria-hidden="true"></i>Our Mission
+            </h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem;">
+              We believe that access to accurate, up-to-date information should not be a privilege. 
+              Every student deserves the opportunity to pursue their dreams, regardless of their background or financial situation.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+              <a href="/contact/" class="linear-button">
+                <i class="fas fa-envelope icon-left" aria-hidden="true"></i>Get in Touch
+              </a>
+              <a href="/student-stories/" class="linear-button secondary">
+                <i class="fas fa-users icon-left" aria-hidden="true"></i>Student Stories
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="card reveal" style="background: var(--bg-secondary); border-left: 4px solid var(--accent); padding: 2rem;">
+            <h3 style="margin-bottom: 1rem;">
+              <i class="fas fa-rocket icon-left" aria-hidden="true"></i>Built with Next.js 14
+            </h3>
+            <p style="margin-bottom: 1rem;">
+              Civora is powered by modern web technology to deliver fast, reliable, and accessible information to students worldwide.
+            </p>
+            <ul style="list-style: none; padding-left: 0;">
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--accent); margin-right: 0.5rem;" aria-hidden="true"></i>Statically generated for optimal performance</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--accent); margin-right: 0.5rem;" aria-hidden="true"></i>Open source and community-driven</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--accent); margin-right: 0.5rem;" aria-hidden="true"></i>Deployed via GitHub Pages for reliability</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      `,
+      }}
+    />
+  );
 }
