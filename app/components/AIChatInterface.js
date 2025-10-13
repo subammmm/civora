@@ -8,6 +8,13 @@
  * - On civora.me (with NEXT_PUBLIC_CIVORA_AI_ENABLED=false): This component is hidden
  * 
  * The AI chat code is preserved in the codebase but conditionally disabled for civora.me deployment.
+ * 
+ * BACKEND INTEGRATION:
+ * - Uses ONLY Gemini and LangSearch APIs (OpenAI removed as of v53)
+ * - API endpoint: POST /api/ai-assistant/
+ * - Expected payload: { input: string, history: array, file?: object }
+ * - Supports both streaming (text/event-stream) and JSON responses
+ * - Comprehensive error handling with user-friendly messages
  */
 
 "use client";
@@ -63,35 +70,97 @@ export default function AIChatInterface() {
     setLoading(true);
 
     try {
-      const formData = new FormData();
-      formData.append("message", input.trim());
-      formData.append("history", JSON.stringify(messages));
-      
+      // FIX: Changed from FormData to JSON to match API expectations
+      // API route expects: { input: string, history: array, file?: object }
+      // Previously sent: FormData with "message" field (causing 400 Bad Request)
+      const requestBody = {
+        input: input.trim(),
+        history: messages.map((msg) => ({
+          user: msg.role === "user" ? msg.content : undefined,
+          assistant: msg.role === "assistant" ? msg.content : undefined,
+        })),
+      };
+
+      // If file is present, read it and add to request
+      // Note: File parsing is not supported on Vercel serverless, but we send it anyway
       if (file) {
-        formData.append("file", file);
+        requestBody.file = {
+          name: file.name,
+          content: "File parsing not supported on Vercel serverless",
+        };
       }
 
       const response = await fetch("/api/ai-assistant/", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        // Enhanced error handling: Show specific error messages from API
+        const errorData = await response.json().catch(() => null);
+        const errorMessage = errorData?.error || `API error: ${response.status}`;
+        throw new Error(errorMessage);
       }
 
-      const data = await response.json();
+      // Check if response is streaming (text/event-stream) or JSON
+      const contentType = response.headers.get("content-type");
       
-      if (data.error) {
+      if (contentType?.includes("text/event-stream")) {
+        // Handle streaming response from API
+        let fullResponse = "";
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        
+        // Add an empty assistant message that we'll update as we stream
+        const assistantMessageIndex = messages.length + 1;
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: `Error: ${data.error}` },
+          { role: "assistant", content: "" },
         ]);
+        
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            
+            const chunk = decoder.decode(value);
+            fullResponse += chunk;
+            
+            // Update the assistant message in real-time
+            setMessages((prev) => {
+              const newMessages = [...prev];
+              newMessages[assistantMessageIndex] = {
+                role: "assistant",
+                content: fullResponse,
+              };
+              return newMessages;
+            });
+          }
+        } catch (streamError) {
+          console.error("Stream reading error:", streamError);
+          // If streaming fails, show error but keep partial response
+          if (!fullResponse) {
+            throw new Error("Failed to read response stream");
+          }
+        }
       } else {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.reply || "No response received." },
-        ]);
+        // Handle regular JSON response
+        const data = await response.json();
+        
+        if (data.error) {
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: `Error: ${data.error}` },
+          ]);
+        } else {
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: data.reply || "No response received." },
+          ]);
+        }
       }
     } catch (error) {
       console.error("Chat error:", error);
@@ -99,7 +168,7 @@ export default function AIChatInterface() {
         ...prev,
         {
           role: "assistant",
-          content: "Sorry, I encountered an error. Please try again.",
+          content: `Sorry, I encountered an error: ${error.message}. Please try again.`,
         },
       ]);
     } finally {
