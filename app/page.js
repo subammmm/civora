@@ -96,11 +96,13 @@ function CivoraAIChat() {
           console.error("EventSource error:", error);
           eventSource.close();
           setLoading(false);
-          // Only add message if we have content or if it's an actual error
+          // Display error message to user, prioritizing streamed content if available
           if (streamed) {
             setMessages(prev => [...prev, { role: "assistant", content: streamed }]);
           } else {
-            setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Sorry, streaming failed. Please check the console for details." }]);
+            // Extract error message from error object if available
+            const errorMsg = error?.message || "Sorry, streaming failed. Please check the console for details.";
+            setMessages(prev => [...prev, { role: "assistant", content: `⚠️ ${errorMsg}` }]);
           }
           setStreamBuffer("");
         };
@@ -337,16 +339,32 @@ class EventSourcePolyfill {
       method: "POST",
       headers,
       body: payload,
-    }).then(res => {
+    }).then(async res => {
       // Handle non-OK responses (including 308 redirects)
       if (!res.ok) {
         console.error(`API request failed with status ${res.status}`);
+        
+        // Try to parse error from JSON response body
+        try {
+          const data = await res.json();
+          if (data.error) {
+            if (this.events["error"]) {
+              this.events["error"](new Error(data.error));
+            }
+            this.close();
+            return;
+          }
+        } catch (e) {
+          // Not JSON, use generic HTTP error
+        }
+        
         if (this.events["error"]) {
           this.events["error"](new Error(`HTTP ${res.status}`));
         }
         this.close();
         return;
       }
+      
       if (!res.body) {
         console.error("Response has no body");
         if (this.events["error"]) {
@@ -355,6 +373,47 @@ class EventSourcePolyfill {
         this.close();
         return;
       }
+      
+      // Check content type to detect JSON error responses (HTTP 200 with error field)
+      const contentType = res.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        // This is a JSON response, not SSE - likely an error or non-stream response
+        try {
+          const data = await res.json();
+          if (data.error) {
+            // API returned an error in JSON format
+            console.error("API error:", data.error);
+            if (this.events["error"]) {
+              this.events["error"](new Error(data.error));
+            }
+          } else if (data.reply) {
+            // Valid JSON response with reply - treat as a single message
+            if (this.events["message"]) {
+              this.events["message"]({ data: data.reply });
+            }
+            // Use setTimeout to ensure message handler completes before end event
+            setTimeout(() => {
+              if (this.events["end"]) {
+                this.events["end"]();
+              }
+            }, 0);
+          } else {
+            // Empty response
+            if (this.events["error"]) {
+              this.events["error"](new Error("Empty response from server"));
+            }
+          }
+        } catch (e) {
+          console.error("Failed to parse JSON response:", e);
+          if (this.events["error"]) {
+            this.events["error"](new Error("Invalid JSON response"));
+          }
+        }
+        this.close();
+        return;
+      }
+      
+      // Standard SSE streaming path
       const reader = res.body.getReader();
       let buffer = "";
       const decoder = new TextDecoder();
