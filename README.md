@@ -1,4 +1,4 @@
-# 🌍 Civora
+      # 🌍 Civora
 
 > **Important**: This project is a **Next.js 14 App Router application** with static export for GitHub Pages deployment. The migration from static HTML to Next.js is **complete**. The Next.js app under `app/` is the single source of truth for all active pages.
 
