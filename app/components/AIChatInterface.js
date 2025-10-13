@@ -10,11 +10,23 @@
  * The AI chat code is preserved in the codebase but conditionally disabled for civora.me deployment.
  * 
  * BACKEND INTEGRATION:
- * - Uses ONLY Gemini and LangSearch APIs (OpenAI removed as of v53)
+ * - Uses ONLY Gemini and LangSearch APIs (OpenAI permanently removed as of v54)
  * - API endpoint: POST /api/ai-assistant/
  * - Expected payload: { input: string, history: array, file?: object }
  * - Supports both streaming (text/event-stream) and JSON responses
  * - Comprehensive error handling with user-friendly messages
+ * 
+ * ERROR HANDLING:
+ * - 400: Invalid request format or validation errors
+ * - 429: Rate limit exceeded (1 request per second)
+ * - 500: Configuration errors or unexpected server errors
+ * - 502: AI service temporarily unavailable
+ * - 504: Request timeout (network or service delays)
+ * 
+ * OPENAI STATUS: ❌ PERMANENTLY REMOVED
+ * - OpenAI API support has been completely removed from the backend
+ * - Do not attempt to integrate OpenAI - only Gemini and LangSearch are supported
+ * - All chat queries are processed through Gemini with LangSearch for web context
  */
 
 "use client";
@@ -73,6 +85,7 @@ export default function AIChatInterface() {
       // FIX: Changed from FormData to JSON to match API expectations
       // API route expects: { input: string, history: array, file?: object }
       // Previously sent: FormData with "message" field (causing 400 Bad Request)
+      // NOTE: OpenAI is NOT used - backend uses ONLY Gemini and LangSearch
       const requestBody = {
         input: input.trim(),
         history: messages.map((msg) => ({
@@ -100,9 +113,26 @@ export default function AIChatInterface() {
 
       if (!response.ok) {
         // Enhanced error handling: Show specific error messages from API
+        // Different status codes indicate different types of errors:
+        // - 400: Invalid request format or validation error
+        // - 429: Rate limit exceeded
+        // - 500: Configuration or unexpected server error
+        // - 502: AI service temporarily unavailable
+        // - 504: Request timeout
         const errorData = await response.json().catch(() => null);
-        const errorMessage = errorData?.error || `API error: ${response.status}`;
-        throw new Error(errorMessage);
+        const errorMessage = errorData?.error || `API error (${response.status})`;
+        
+        // Add context based on status code
+        let userFriendlyError = errorMessage;
+        if (response.status === 429) {
+          userFriendlyError = `${errorMessage} (Rate limit: 1 message per second)`;
+        } else if (response.status === 504) {
+          userFriendlyError = `${errorMessage} (Timeout)`;
+        } else if (response.status === 502) {
+          userFriendlyError = `${errorMessage} (Service issue)`;
+        }
+        
+        throw new Error(userFriendlyError);
       }
 
       // Check if response is streaming (text/event-stream) or JSON
@@ -164,11 +194,26 @@ export default function AIChatInterface() {
       }
     } catch (error) {
       console.error("Chat error:", error);
+      
+      // Display user-friendly error messages based on error type
+      let displayMessage = error.message;
+      
+      // Add helpful context for common errors
+      if (error.message.includes('Rate limit')) {
+        displayMessage += '\n\n💡 Tip: Please wait a moment before sending another message.';
+      } else if (error.message.includes('timeout') || error.message.includes('Timeout')) {
+        displayMessage += '\n\n💡 Tip: Try asking a simpler question or check your internet connection.';
+      } else if (error.message.includes('temporarily unavailable') || error.message.includes('Service issue')) {
+        displayMessage += '\n\n💡 Tip: The AI service may be experiencing high demand. Please try again in a few moments.';
+      } else if (error.message.includes('Invalid request format') || error.message.includes('validation')) {
+        displayMessage += '\n\n💡 Tip: Make sure your message is not empty and try again.';
+      }
+      
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: `Sorry, I encountered an error: ${error.message}. Please try again.`,
+          content: `❌ **Error:** ${displayMessage}`,
         },
       ]);
     } finally {

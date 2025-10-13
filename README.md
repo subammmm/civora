@@ -80,7 +80,7 @@ Create a `.env` file in the root directory (copy from `.env.example`):
 
 ```env
 # AI Assistant APIs - REQUIRED for AI chat functionality
-# OpenAI API has been REMOVED (as of v53) - do NOT use OPENAI_API_KEY
+# OpenAI API has been PERMANENTLY REMOVED (as of v54) - do NOT use OPENAI_API_KEY
 # Only Gemini and LangSearch are used now
 GEMINI_API_KEY=your_gemini_api_key_here
 LANGSEARCH_API_KEY=your_langsearch_api_key_here
@@ -99,19 +99,23 @@ PORT=3000
 ```
 
 **Important Notes:**
-- ❌ **OpenAI API removed**: Do NOT use `OPENAI_API_KEY` - it is no longer supported
+- ❌ **OpenAI API permanently removed (v54)**: Do NOT use `OPENAI_API_KEY` - it is no longer supported
 - ✅ **Only Gemini & LangSearch**: The AI assistant exclusively uses these two APIs
 - 🔑 **Get API keys**: 
   - Gemini: https://ai.google.dev/
   - LangSearch: https://langsearch.com/
 - 🌐 **Frontend control**: `NEXT_PUBLIC_CIVORA_AI_ENABLED` controls UI visibility
 - 🔒 **Backend validation**: API route validates keys at startup and returns 500 if missing
+- 📊 **Enhanced logging**: Comprehensive request/response/error logging for debugging
+- 💡 **User-friendly errors**: Specific validation messages and helpful tips for all error states
 
 **Why OpenAI was removed:**
 - Cost and rate limiting constraints
 - Simplified architecture with only 2 API providers
 - Better control over response quality with Gemini
 - LangSearch provides real-time web context
+
+**Latest Version: v54** - Enhanced error handling, detailed logging, and improved user feedback
 
 ### API Routes and Trailing Slashes
 
