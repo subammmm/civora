@@ -1,31 +1,43 @@
-// v52 - Production version for Vercel: streaming, context-first, transcript fix, typo dict, safe math, consistent error shape, strict CORS, health check
+// v53 - Production repairs: Enhanced error handling, env validation, comprehensive logging
+// Fixed 502 Bad Gateway errors by adding robust try-catch blocks and early env checks
 // Native modules removed for serverless compatibility
 // OpenAI fallback removed - using only LangSearch and Gemini
 
 import { z } from 'zod';
 import { create, all } from 'mathjs';
 
-// Env validation
+// FIX #1: Enhanced environment validation with early error detection
+// This prevents 502 errors from missing API keys during request processing
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production']).default('development'),
   GEMINI_API_KEY: z.string().min(1),
   LANGSEARCH_API_KEY: z.string().min(1),
 });
+
+// Store validation result to check before processing requests
+let envValidationError = null;
 try {
   envSchema.parse(process.env);
 } catch (error) {
   if (error instanceof z.ZodError) {
-    console.error('Invalid env/config:', error.issues.map(i => i.message).join('; '));
+    envValidationError = error.issues.map(i => i.message).join('; ');
+    console.error('[STARTUP ERROR] Invalid env/config:', envValidationError);
   }
 }
 
+// FIX #2: Early check for missing API keys to provide clear error messages
 if (!process.env.GEMINI_API_KEY || !process.env.LANGSEARCH_API_KEY) {
-  console.error('Missing API keys! Set GEMINI_API_KEY and LANGSEARCH_API_KEY in .env');
+  const missingKeys = [];
+  if (!process.env.GEMINI_API_KEY) missingKeys.push('GEMINI_API_KEY');
+  if (!process.env.LANGSEARCH_API_KEY) missingKeys.push('LANGSEARCH_API_KEY');
+  envValidationError = `Missing required environment variables: ${missingKeys.join(', ')}`;
+  console.error('[STARTUP ERROR]', envValidationError);
 }
 
 let requestCount = 0;
 const math = create(all, { number: 'BigNumber' });
 
+// FIX #3: Strict CORS headers for production security
 const CORS_HEADERS = {
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': process.env.NODE_ENV === 'production' ? 'https://civora.me' : '*',
@@ -37,11 +49,33 @@ export async function OPTIONS() {
   return new Response(null, { status: 204, headers: CORS_HEADERS });
 }
 
+// FIX #4: Health check endpoint with env status
 export async function GET() {
-  return new Response(JSON.stringify({ status: 'ok', version: 'v52' }), { status: 200, headers: CORS_HEADERS });
+  return new Response(
+    JSON.stringify({ 
+      status: 'ok', 
+      version: 'v53',
+      envConfigured: !envValidationError 
+    }), 
+    { status: 200, headers: CORS_HEADERS }
+  );
 }
 
 export async function POST(req) {
+  // FIX #5: Early return if environment is not properly configured
+  // Prevents 502 errors from attempting to use missing API keys
+  if (envValidationError) {
+    console.error('[REQUEST ERROR] Environment not configured:', envValidationError);
+    return new Response(
+      JSON.stringify({ 
+        reply: null, 
+        error: 'Service configuration error. Please contact support.' 
+      }), 
+      { status: 500, headers: CORS_HEADERS }
+    );
+  }
+
+  // Rate limiting
   if (!global.rateLimits) global.rateLimits = {};
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "local";
   const now = Date.now();
@@ -51,9 +85,22 @@ export async function POST(req) {
   global.rateLimits[ip] = now;
 
   requestCount++;
+  
+  // FIX #6: Comprehensive try-catch wrapper for all handler logic
+  // Catches any uncaught exceptions and returns proper error responses
   try {
-    // Input Validation
-    const body = await req.json();
+    // Input Validation with detailed error logging
+    let body;
+    try {
+      body = await req.json();
+    } catch (jsonError) {
+      console.error(`[REQUEST #${requestCount}] JSON parse error:`, jsonError.message);
+      return new Response(
+        JSON.stringify({ reply: null, error: 'Invalid JSON in request body' }), 
+        { status: 400, headers: CORS_HEADERS }
+      );
+    }
+
     const schema = z.object({
       input: z.string().min(1).max(2000).trim(),
       history: z.array(z.object({
@@ -62,9 +109,24 @@ export async function POST(req) {
       })).max(10).default([]),
       file: z.object({ name: z.string(), content: z.string().optional() }).optional(),
     });
-    const { input: rawInput, history, file } = schema.parse(body);
+    
+    let parsedData;
+    try {
+      parsedData = schema.parse(body);
+    } catch (validationError) {
+      console.error(`[REQUEST #${requestCount}] Validation error:`, validationError.message);
+      return new Response(
+        JSON.stringify({ 
+          reply: null, 
+          error: 'Invalid request format. Please check your input.' 
+        }), 
+        { status: 400, headers: CORS_HEADERS }
+      );
+    }
+    
+    const { input: rawInput, history, file } = parsedData;
 
-    console.log(`Request #${requestCount} from ${ip}: Input "${rawInput}"`);
+    console.log(`[REQUEST #${requestCount}] from ${ip}: Input "${rawInput}"`);
 
     // Typo correction
     const typoDict = {
@@ -137,6 +199,7 @@ export async function POST(req) {
     const searchNeeded = searchTriggers.some(trigger => trigger.test(correctedInput));
     let searchContext = 'No live web context found.';
     if (searchNeeded) {
+      // FIX #7: Enhanced error handling for LangSearch API calls
       try {
         const langController = new AbortController();
         const langTimeout = setTimeout(() => langController.abort(), 10000);
@@ -158,14 +221,19 @@ export async function POST(req) {
         if (langsearchResponse.ok) {
           const langsearchData = await langsearchResponse.json();
           searchContext = langsearchData.data?.webPages?.value?.map(page => page.snippet || page.summary || "").join('\n') || '';
+        } else {
+          console.error(`[REQUEST #${requestCount}] LangSearch API returned status ${langsearchResponse.status}`);
         }
         if (!searchContext) searchContext = 'No live web context found.';
       } catch (err) {
         if (err.name === 'AbortError') {
-          console.error('LangSearch timeout');
-          return new Response(JSON.stringify({ reply: null, error: 'LangSearch API request timed out' }), { status: 504, headers: CORS_HEADERS });
+          console.error(`[REQUEST #${requestCount}] LangSearch timeout after 10s`);
+          return new Response(
+            JSON.stringify({ reply: null, error: 'Search service timed out. Please try again.' }), 
+            { status: 504, headers: CORS_HEADERS }
+          );
         }
-        console.error('LangSearch error:', err.message);
+        console.error(`[REQUEST #${requestCount}] LangSearch error:`, err.message, err.stack);
         searchContext = 'No live web context found.';
       }
     }
@@ -237,6 +305,8 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
     let answer = '';
     let geminiFailed = false;
     const start = Date.now();
+    
+    // FIX #8: Enhanced error handling for Gemini API calls with detailed logging
     try {
       const gemController = new AbortController();
       const gemTimeout = setTimeout(() => gemController.abort(), 15000);
@@ -265,39 +335,46 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
           async start(controller) {
             const reader = geminiRes.body.getReader();
             let buffer = '';
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-              buffer += new TextDecoder().decode(value);
-              const events = buffer.split('\n\n');
-              buffer = events.pop();
-              events.forEach(event => {
-                if (event.startsWith('data:')) {
-                  const jsonStr = event.slice(5).trim();
-                  try {
-                    const chunk = JSON.parse(jsonStr);
-                    const text = chunk.candidates?.[0]?.content?.parts?.[0]?.text || '';
-                    if (text) controller.enqueue(text);
-                  } catch (e) { console.error('Parse error:', e); }
-                }
-              });
+            try {
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                buffer += new TextDecoder().decode(value);
+                const events = buffer.split('\n\n');
+                buffer = events.pop();
+                events.forEach(event => {
+                  if (event.startsWith('data:')) {
+                    const jsonStr = event.slice(5).trim();
+                    try {
+                      const chunk = JSON.parse(jsonStr);
+                      const text = chunk.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                      if (text) controller.enqueue(text);
+                    } catch (e) { 
+                      console.error(`[REQUEST #${requestCount}] Parse error:`, e.message); 
+                    }
+                  }
+                });
+              }
+            } catch (streamError) {
+              console.error(`[REQUEST #${requestCount}] Stream read error:`, streamError.message);
+            } finally {
+              controller.close();
             }
-            controller.close();
           }
         });
         const latency = Date.now() - start;
-        console.log(`Request #${requestCount} latency: ${latency}ms (streamed)`);
+        console.log(`[REQUEST #${requestCount}] latency: ${latency}ms (streamed)`);
         return new Response(stream, { headers: { ...CORS_HEADERS, 'Content-Type': 'text/event-stream' } });
       }
 
       // Fallback: non-stream (should not happen but for completeness)
       if (!geminiRes.ok) {
-        console.error("Gemini status:", geminiRes.status);
+        console.error(`[REQUEST #${requestCount}] Gemini API returned status ${geminiRes.status}`);
         geminiFailed = true;
       } else {
         const geminiData = await geminiRes.json();
         if (geminiData.error) {
-          console.error("Gemini error:", geminiData.error.message);
+          console.error(`[REQUEST #${requestCount}] Gemini error:`, geminiData.error.message);
           geminiFailed = true;
         } else {
           answer = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '_No answer_';
@@ -305,31 +382,44 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
       }
     } catch (err) {
       if (err.name === 'AbortError') {
-        console.error('Gemini timeout');
-        return new Response(JSON.stringify({ reply: null, error: 'Gemini API request timed out' }), { status: 504, headers: CORS_HEADERS });
+        console.error(`[REQUEST #${requestCount}] Gemini timeout after 15s`);
+        return new Response(
+          JSON.stringify({ reply: null, error: 'AI service timed out. Please try again.' }), 
+          { status: 504, headers: CORS_HEADERS }
+        );
       }
-      console.error('Gemini error:', err.message);
+      console.error(`[REQUEST #${requestCount}] Gemini error:`, err.message, err.stack);
       geminiFailed = true;
     }
 
     if (geminiFailed && !answer) {
       return new Response(
-        JSON.stringify({ reply: null, error: 'Gemini failed to generate a response' }),
+        JSON.stringify({ reply: null, error: 'AI service is temporarily unavailable. Please try again.' }),
         { status: 502, headers: CORS_HEADERS }
       );
     }
 
     answer = `---\n${answer}\n---`;
     const latency = Date.now() - start;
-    console.log(`Request #${requestCount} latency: ${latency}ms`);
+    console.log(`[REQUEST #${requestCount}] latency: ${latency}ms`);
 
     return new Response(
       JSON.stringify({ reply: answer, error: null }),
       { status: 200, headers: CORS_HEADERS }
     );
   } catch (error) {
-    const msg = error?.message || 'API failed';
-    console.error('Error:', msg);
-    return new Response(JSON.stringify({ reply: null, error: msg }), { status: 502, headers: CORS_HEADERS });
+    // FIX #9: Comprehensive fallback error handler for any uncaught exceptions
+    // Returns 500 status with sanitized error message and logs full details
+    const msg = error?.message || 'Unknown error occurred';
+    console.error(`[REQUEST #${requestCount}] UNCAUGHT ERROR:`, msg);
+    console.error(`[REQUEST #${requestCount}] Stack trace:`, error?.stack);
+    
+    return new Response(
+      JSON.stringify({ 
+        reply: null, 
+        error: 'An unexpected error occurred. Please try again or contact support.' 
+      }), 
+      { status: 500, headers: CORS_HEADERS }
+    );
   }
 }
