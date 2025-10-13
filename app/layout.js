@@ -183,6 +183,11 @@ export default function RootLayout({ children }) {
 }
 
 function Header() {
+  // Conditionally show AI chat link based on environment variable
+  // When NEXT_PUBLIC_CIVORA_AI_ENABLED=true (Vercel): Show AI chat link
+  // When NEXT_PUBLIC_CIVORA_AI_ENABLED=false (civora.me): Hide AI chat link
+  const aiEnabled = process.env.NEXT_PUBLIC_CIVORA_AI_ENABLED === 'true';
+
   return (
     <header className="site-header">
       <div className="header-inner">
@@ -204,6 +209,12 @@ function Header() {
           <a href="/ielts-prep/" className="nav-item">
             IELTS & Prep
           </a>
+          {/* Conditional AI Chat link - only shown when NEXT_PUBLIC_CIVORA_AI_ENABLED=true */}
+          {aiEnabled && (
+            <a href="/ai-chat/" className="nav-item">
+              AI Assistant
+            </a>
+          )}
           <a href="/about/" className="nav-item">
             About
           </a>
