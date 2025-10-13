@@ -11,7 +11,6 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
-    "export": "next export",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "link:check": "node scripts/link-check.mjs",
     "prebuild": "npm run sitemap"
