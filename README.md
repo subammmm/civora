@@ -33,6 +33,23 @@ npm run dev
 # Open http://localhost:3000/
 ```
 
+### API Routes and Trailing Slashes
+
+⚠️ **Important**: This project uses `trailingSlash: true` in Next.js config. All API routes MUST be accessed with a trailing slash to avoid 308 redirects.
+
+**Example:**
+```javascript
+// ✅ Correct
+fetch("/api/ai-assistant/", { method: "POST", ... })
+
+// ❌ Wrong - causes 308 redirect, breaks POST
+fetch("/api/ai-assistant", { method: "POST", ... })
+```
+
+**Why**: POST requests with 308 redirects lose their request body, causing API calls to fail silently.
+
+See [VERCEL-DEPLOYMENT-NOTES.md](./VERCEL-DEPLOYMENT-NOTES.md) for more details.
+
 ### Quality Checks
 
 ```bash
