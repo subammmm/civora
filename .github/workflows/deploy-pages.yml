@@ -37,7 +37,9 @@ jobs:
         run: npm ci
 
       - name: Build Next.js site
-        run: npm run build
+        run: npm run build:static
+        env:
+          EXPORT_MODE: 'true'
 
       - name: Verify critical files in build output
         run: |
