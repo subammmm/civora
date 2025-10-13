@@ -1,6 +1,6 @@
 linganguli # 🌍 Civora
 
-> **Important**: This project is a **Next.js 14 App Router application** with static export for GitHub Pages deployment. The migration from static HTML to Next.js is **complete**. The Next.js app under `app/` is the single source of truth for all active pages.
+> **Important**: This project is a **Next.js 14 App Router application** with dual deployment strategy. The Next.js app under `app/` is the single source of truth for all active pages.
 
 Civora is a research-based platform that compiles verified scholarships, visa pathways, and citizenship options for students from Nepal and other underrepresented countries.
 
@@ -11,9 +11,27 @@ Civora is a research-based platform that compiles verified scholarships, visa pa
 - **Framework**: Next.js 14 (App Router)
 - **Language**: JavaScript (with TypeScript support)
 - **Styling**: CSS (preserved from original site)
-- **Deployment**: GitHub Pages (static export via CI/CD)
+- **Deployment**: Dual strategy - Vercel (primary with API routes) + GitHub Pages (static backup)
 - **Domain**: civora.me
 - **Quality Tools**: ESLint, Prettier, TypeScript type-checking
+
+## Deployment
+
+Civora uses a **dual deployment strategy**:
+
+### Primary: Vercel (Recommended for civora.me)
+- ✅ Full Next.js with server-side rendering
+- ✅ API routes enabled (AI assistant/chat feature)
+- ✅ Automatic deployments from GitHub
+- ✅ Edge network for global performance
+
+**See [DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md) for setup instructions**
+
+### Backup: GitHub Pages
+- ✅ Static HTML export
+- ✅ Free hosting
+- ❌ No API routes (AI assistant disabled)
+- Available at: https://subammmm.github.io/civora/
 
 ## Local Development
 
@@ -69,26 +87,40 @@ npm run format:write
 ### Production Build
 
 ```bash
-# Build static site
+# Build for Vercel (with API routes)
 npm run build
+# Output: .next/ directory
 
-# Test production build locally
+# Build for GitHub Pages (static export)
+npm run build:static
+# Output: out/ directory
+
+# Test static build locally
 cd out
 python3 -m http.server 8080
 # Open http://localhost:8080/
 ```
+
+**Build Scripts**:
+- `npm run build` - Full Next.js build with API routes (for Vercel)
+- `npm run build:static` - Static export without API routes (for GitHub Pages)
+
+See [DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md) for complete deployment instructions.
 
 ## CI/CD
 
 The project uses GitHub Actions for continuous integration and deployment:
 
 - **CI Workflow** (`.github/workflows/ci.yml`): Runs lint and type-check on all pushes and PRs to main
-- **Deploy Workflow** (`.github/workflows/deploy-pages.yml`): Automatically builds and deploys to GitHub Pages on push to main
+- **Deploy Workflow** (`.github/workflows/deploy-pages.yml`): Automatically builds static export and deploys to GitHub Pages on push to main
 - **Dependabot**: Automatically opens PRs for dependency updates weekly
 
-## Live Site
+**Note**: GitHub Pages deployment creates a static backup. For full features (including AI assistant), use Vercel deployment.
 
-Visit: https://civora.me or https://subammmm.github.io/civora
+## Live Sites
+
+- **Primary (Recommended)**: https://civora.me (point to Vercel for full features)
+- **Backup**: https://subammmm.github.io/civora (static version, no API routes)
 
 ## Project Structure
 
