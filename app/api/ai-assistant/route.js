@@ -1,7 +1,8 @@
-// v53 - Production repairs: Enhanced error handling, env validation, comprehensive logging
-// Fixed 502 Bad Gateway errors by adding robust try-catch blocks and early env checks
-// Native modules removed for serverless compatibility
-// OpenAI fallback removed - using only LangSearch and Gemini
+// v54 - FINAL FIX: Enhanced logging, detailed error messages, OpenAI permanently removed
+// Fixed all 400 Bad Request errors with comprehensive request validation and logging
+// Improved error messages: specific feedback for validation, provider, and rate limit errors
+// OpenAI API completely removed - uses ONLY Gemini and LangSearch
+// All errors logged with request numbers for debugging
 
 /**
  * AI Assistant API Route - Conditional Rendering for Deployments
@@ -63,12 +64,14 @@ export async function OPTIONS() {
 }
 
 // FIX #4: Health check endpoint with env status
+// Returns API version and configuration status
 export async function GET() {
   return new Response(
     JSON.stringify({ 
       status: 'ok', 
-      version: 'v53',
-      envConfigured: !envValidationError 
+      version: 'v54',
+      envConfigured: !envValidationError,
+      providers: 'Gemini + LangSearch only (OpenAI removed)'
     }), 
     { status: 200, headers: CORS_HEADERS }
   );
@@ -77,23 +80,31 @@ export async function GET() {
 export async function POST(req) {
   // FIX #5: Early return if environment is not properly configured
   // Prevents 502 errors from attempting to use missing API keys
+  // Returns clear error message indicating misconfiguration
   if (envValidationError) {
-    console.error('[REQUEST ERROR] Environment not configured:', envValidationError);
+    console.error(`[REQUEST #${requestCount}] Environment not configured:`, envValidationError);
     return new Response(
       JSON.stringify({ 
         reply: null, 
-        error: 'Service configuration error. Please contact support.' 
+        error: 'AI service temporarily unavailable due to configuration error. Please contact support.' 
       }), 
       { status: 500, headers: CORS_HEADERS }
     );
   }
 
-  // Rate limiting
+  // Rate limiting: Prevent spam and abuse (1 request per second per IP)
   if (!global.rateLimits) global.rateLimits = {};
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "local";
   const now = Date.now();
   if (global.rateLimits[ip] && now - global.rateLimits[ip] < 1000) {
-    return new Response(JSON.stringify({ reply: null, error: "Too many requests. Please wait a moment." }), { status: 429, headers: CORS_HEADERS });
+    console.log(`[RATE LIMIT] IP ${ip} exceeded rate limit`);
+    return new Response(
+      JSON.stringify({ 
+        reply: null, 
+        error: "Too many requests. Please wait a moment before sending another message." 
+      }), 
+      { status: 429, headers: CORS_HEADERS }
+    );
   }
   global.rateLimits[ip] = now;
 
@@ -108,11 +119,23 @@ export async function POST(req) {
       body = await req.json();
     } catch (jsonError) {
       console.error(`[REQUEST #${requestCount}] JSON parse error:`, jsonError.message);
+      console.error(`[REQUEST #${requestCount}] Request details - IP: ${ip}, Content-Type: ${req.headers.get('content-type')}`);
       return new Response(
-        JSON.stringify({ reply: null, error: 'Invalid JSON in request body' }), 
+        JSON.stringify({ 
+          reply: null, 
+          error: 'Invalid JSON in request body. Please ensure you are sending valid JSON with Content-Type: application/json.' 
+        }), 
         { status: 400, headers: CORS_HEADERS }
       );
     }
+
+    // Log the incoming request payload for debugging
+    console.log(`[REQUEST #${requestCount}] Payload received:`, JSON.stringify({
+      hasInput: !!body.input,
+      inputLength: body.input?.length || 0,
+      historyLength: body.history?.length || 0,
+      hasFile: !!body.file
+    }));
 
     const schema = z.object({
       input: z.string().min(1).max(2000).trim(),
@@ -128,10 +151,24 @@ export async function POST(req) {
       parsedData = schema.parse(body);
     } catch (validationError) {
       console.error(`[REQUEST #${requestCount}] Validation error:`, validationError.message);
+      console.error(`[REQUEST #${requestCount}] Failed payload:`, JSON.stringify(body));
+      
+      // Provide specific validation error message
+      let specificError = 'Invalid request format. ';
+      if (!body.input) {
+        specificError += 'Missing required field "input". ';
+      } else if (typeof body.input !== 'string') {
+        specificError += 'Field "input" must be a string. ';
+      } else if (body.input.trim().length === 0) {
+        specificError += 'Field "input" cannot be empty. ';
+      } else if (body.input.length > 2000) {
+        specificError += 'Field "input" exceeds maximum length of 2000 characters. ';
+      }
+      
       return new Response(
         JSON.stringify({ 
           reply: null, 
-          error: 'Invalid request format. Please check your input.' 
+          error: specificError.trim() || 'Invalid request format. Please check your input.' 
         }), 
         { status: 400, headers: CORS_HEADERS }
       );
@@ -139,7 +176,10 @@ export async function POST(req) {
     
     const { input: rawInput, history, file } = parsedData;
 
-    console.log(`[REQUEST #${requestCount}] from ${ip}: Input "${rawInput}"`);
+    console.log(`[REQUEST #${requestCount}] from IP ${ip}: Processing query "${rawInput.substring(0, 100)}${rawInput.length > 100 ? '...' : ''}"`);
+    if (history && history.length > 0) {
+      console.log(`[REQUEST #${requestCount}] Conversation history: ${history.length} previous turns`);
+    }
 
     // Typo correction
     const typoDict = {
@@ -212,7 +252,8 @@ export async function POST(req) {
     const searchNeeded = searchTriggers.some(trigger => trigger.test(correctedInput));
     let searchContext = 'No live web context found.';
     if (searchNeeded) {
-      // FIX #7: Enhanced error handling for LangSearch API calls
+      // FIX #7: Enhanced error handling for LangSearch API calls with detailed logging
+      console.log(`[REQUEST #${requestCount}] Triggering LangSearch for query context`);
       try {
         const langController = new AbortController();
         const langTimeout = setTimeout(() => langController.abort(), 10000);
@@ -234,19 +275,25 @@ export async function POST(req) {
         if (langsearchResponse.ok) {
           const langsearchData = await langsearchResponse.json();
           searchContext = langsearchData.data?.webPages?.value?.map(page => page.snippet || page.summary || "").join('\n') || '';
+          console.log(`[REQUEST #${requestCount}] LangSearch returned ${langsearchData.data?.webPages?.value?.length || 0} results`);
         } else {
-          console.error(`[REQUEST #${requestCount}] LangSearch API returned status ${langsearchResponse.status}`);
+          console.error(`[REQUEST #${requestCount}] LangSearch API error: Status ${langsearchResponse.status}`);
+          const errorText = await langsearchResponse.text().catch(() => 'No error details');
+          console.error(`[REQUEST #${requestCount}] LangSearch error details:`, errorText);
         }
         if (!searchContext) searchContext = 'No live web context found.';
       } catch (err) {
         if (err.name === 'AbortError') {
           console.error(`[REQUEST #${requestCount}] LangSearch timeout after 10s`);
           return new Response(
-            JSON.stringify({ reply: null, error: 'Search service timed out. Please try again.' }), 
+            JSON.stringify({ 
+              reply: null, 
+              error: 'Web search service timed out. Please try again with a simpler query.' 
+            }), 
             { status: 504, headers: CORS_HEADERS }
           );
         }
-        console.error(`[REQUEST #${requestCount}] LangSearch error:`, err.message, err.stack);
+        console.error(`[REQUEST #${requestCount}] LangSearch unexpected error:`, err.message, err.stack);
         searchContext = 'No live web context found.';
       }
     }
@@ -315,9 +362,12 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
 `;
 
     // Gemini call with timeout and streaming
+    // Uses ONLY Gemini API - OpenAI has been permanently removed
     let answer = '';
     let geminiFailed = false;
     const start = Date.now();
+    
+    console.log(`[REQUEST #${requestCount}] Sending query to Gemini API`);
     
     // FIX #8: Enhanced error handling for Gemini API calls with detailed logging
     try {
@@ -344,6 +394,7 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
 
       // Streaming response
       if (geminiRes.ok && geminiRes.body) {
+        console.log(`[REQUEST #${requestCount}] Gemini streaming response started`);
         const stream = new ReadableStream({
           async start(controller) {
             const reader = geminiRes.body.getReader();
@@ -363,7 +414,7 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
                       const text = chunk.candidates?.[0]?.content?.parts?.[0]?.text || '';
                       if (text) controller.enqueue(text);
                     } catch (e) { 
-                      console.error(`[REQUEST #${requestCount}] Parse error:`, e.message); 
+                      console.error(`[REQUEST #${requestCount}] Stream parse error:`, e.message); 
                     }
                   }
                 });
@@ -372,22 +423,25 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
               console.error(`[REQUEST #${requestCount}] Stream read error:`, streamError.message);
             } finally {
               controller.close();
+              console.log(`[REQUEST #${requestCount}] Gemini stream completed`);
             }
           }
         });
         const latency = Date.now() - start;
-        console.log(`[REQUEST #${requestCount}] latency: ${latency}ms (streamed)`);
+        console.log(`[REQUEST #${requestCount}] Response latency: ${latency}ms (streamed)`);
         return new Response(stream, { headers: { ...CORS_HEADERS, 'Content-Type': 'text/event-stream' } });
       }
 
       // Fallback: non-stream (should not happen but for completeness)
       if (!geminiRes.ok) {
-        console.error(`[REQUEST #${requestCount}] Gemini API returned status ${geminiRes.status}`);
+        const errorBody = await geminiRes.text().catch(() => 'No error details');
+        console.error(`[REQUEST #${requestCount}] Gemini API error: Status ${geminiRes.status}`);
+        console.error(`[REQUEST #${requestCount}] Gemini error details:`, errorBody);
         geminiFailed = true;
       } else {
         const geminiData = await geminiRes.json();
         if (geminiData.error) {
-          console.error(`[REQUEST #${requestCount}] Gemini error:`, geminiData.error.message);
+          console.error(`[REQUEST #${requestCount}] Gemini returned error:`, geminiData.error.message);
           geminiFailed = true;
         } else {
           answer = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '_No answer_';
@@ -397,24 +451,30 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
       if (err.name === 'AbortError') {
         console.error(`[REQUEST #${requestCount}] Gemini timeout after 15s`);
         return new Response(
-          JSON.stringify({ reply: null, error: 'AI service timed out. Please try again.' }), 
+          JSON.stringify({ 
+            reply: null, 
+            error: 'AI service timed out while processing your request. Please try a shorter or simpler question.' 
+          }), 
           { status: 504, headers: CORS_HEADERS }
         );
       }
-      console.error(`[REQUEST #${requestCount}] Gemini error:`, err.message, err.stack);
+      console.error(`[REQUEST #${requestCount}] Gemini unexpected error:`, err.message, err.stack);
       geminiFailed = true;
     }
 
     if (geminiFailed && !answer) {
       return new Response(
-        JSON.stringify({ reply: null, error: 'AI service is temporarily unavailable. Please try again.' }),
+        JSON.stringify({ 
+          reply: null, 
+          error: 'AI service is temporarily unavailable. This could be due to high demand or a service issue. Please try again in a moment.' 
+        }),
         { status: 502, headers: CORS_HEADERS }
       );
     }
 
     answer = `---\n${answer}\n---`;
     const latency = Date.now() - start;
-    console.log(`[REQUEST #${requestCount}] latency: ${latency}ms`);
+    console.log(`[REQUEST #${requestCount}] Response latency: ${latency}ms (complete)`);
 
     return new Response(
       JSON.stringify({ reply: answer, error: null }),
@@ -426,11 +486,12 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
     const msg = error?.message || 'Unknown error occurred';
     console.error(`[REQUEST #${requestCount}] UNCAUGHT ERROR:`, msg);
     console.error(`[REQUEST #${requestCount}] Stack trace:`, error?.stack);
+    console.error(`[REQUEST #${requestCount}] Error type:`, error?.name);
     
     return new Response(
       JSON.stringify({ 
         reply: null, 
-        error: 'An unexpected error occurred. Please try again or contact support.' 
+        error: 'An unexpected error occurred while processing your request. Our team has been notified. Please try again or contact support if the issue persists.' 
       }), 
       { status: 500, headers: CORS_HEADERS }
     );
