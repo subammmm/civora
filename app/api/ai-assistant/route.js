@@ -1,17 +1,15 @@
-// v51 - Final production version for Vercel: streaming, context-first, transcript fix, typo dict, safe math, consistent error shape, OpenAI fallback, strict CORS, health check
+// v52 - Production version for Vercel: streaming, context-first, transcript fix, typo dict, safe math, consistent error shape, strict CORS, health check
 // Native modules removed for serverless compatibility
+// OpenAI fallback removed - using only LangSearch and Gemini
 
 import { z } from 'zod';
 import { create, all } from 'mathjs';
-const OpenAI = process.env.FALLBACK_PROVIDER === 'openai' ? require('openai') : null;
 
 // Env validation
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production']).default('development'),
   GEMINI_API_KEY: z.string().min(1),
   LANGSEARCH_API_KEY: z.string().min(1),
-  FALLBACK_PROVIDER: z.string().optional(),
-  OPENAI_API_KEY: z.string().optional(),
 });
 try {
   envSchema.parse(process.env);
@@ -40,7 +38,7 @@ export async function OPTIONS() {
 }
 
 export async function GET() {
-  return new Response(JSON.stringify({ status: 'ok', version: 'v51' }), { status: 200, headers: CORS_HEADERS });
+  return new Response(JSON.stringify({ status: 'ok', version: 'v52' }), { status: 200, headers: CORS_HEADERS });
 }
 
 export async function POST(req) {
@@ -312,23 +310,6 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
       }
       console.error('Gemini error:', err.message);
       geminiFailed = true;
-    }
-
-    // OpenAI fallback
-    if (geminiFailed && process.env.FALLBACK_PROVIDER === 'openai' && process.env.OPENAI_API_KEY && OpenAI) {
-      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-      const fallbackRes = await openai.chat.completions.create({
-        model: 'gpt-4o',
-        messages: [
-          { role: 'system', content: mentorPrompt },
-          { role: 'user', content: correctedInput },
-        ],
-        max_tokens: 1200,
-        temperature: 0.3,
-        stop: ['User:'],
-      });
-      answer = fallbackRes.choices[0].message.content.trim() || "_No answer_";
-      answer = `---\n${answer}\n--- (via fallback)`;
     }
 
     if (geminiFailed && !answer) {
