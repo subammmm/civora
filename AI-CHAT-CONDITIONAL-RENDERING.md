@@ -2,12 +2,17 @@
 
 ## Overview
 
-The Civora platform includes an AI-powered chat assistant that is **conditionally enabled** based on deployment environment. This allows:
+Civora's AI chat feature uses environment-based conditional rendering to control its visibility across different deployments. The same codebase serves both AI-enabled and AI-disabled versions without any code changes.
 
-- **Vercel deployment**: Full AI chat functionality enabled
-- **civora.me deployment**: AI chat hidden/disabled from users
+**Key Principle**: All AI chat code is preserved in the repository. Features are controlled solely through the `NEXT_PUBLIC_CIVORA_AI_ENABLED` environment variable.
 
-**Important**: The AI chat code is **never deleted** - it's always present in the codebase but conditionally rendered based on environment variables.
+## Deployment Strategy
+
+| Deployment | Environment Variable | AI Chat Visible? | Purpose |
+|------------|---------------------|------------------|---------|
+| **civora.me (Vercel Production)** | `NEXT_PUBLIC_CIVORA_AI_ENABLED=false` | ❌ No | Public-facing site |
+| **Vercel Preview** | `NEXT_PUBLIC_CIVORA_AI_ENABLED=true` | ✅ Yes | Testing & demos |
+| **GitHub Pages** | N/A (static export) | ❌ No | Static backup |
 
 ## How It Works
 
