@@ -11,7 +11,7 @@ Civora is a research-based platform that compiles verified scholarships, visa pa
 - **Framework**: Next.js 14 (App Router)
 - **Language**: JavaScript (with TypeScript support)
 - **Styling**: CSS (preserved from original site)
-- **Deployment**: Dual strategy - Vercel (primary with API routes) + GitHub Pages (static backup)
+- **Deployment**: Dual Vercel deployment strategy (civora.me with AI disabled, preview with AI enabled) + GitHub Pages (static backup)
 - **Domain**: civora.me
 - **Quality Tools**: ESLint, Prettier, TypeScript type-checking
 - **AI Features**: Conditional rendering based on environment variables
@@ -20,28 +20,35 @@ Civora is a research-based platform that compiles verified scholarships, visa pa
 
 Civora includes an **optional AI-powered chat assistant** that can be enabled or disabled per deployment:
 
-- **Vercel** (with `NEXT_PUBLIC_CIVORA_AI_ENABLED=true`): AI chat is accessible at `/ai-chat/`
-- **civora.me** (with `NEXT_PUBLIC_CIVORA_AI_ENABLED=false`): AI chat is hidden from users
+- **civora.me (Vercel Production)** - `NEXT_PUBLIC_CIVORA_AI_ENABLED=false`: AI chat is hidden from users
+- **Vercel Preview/Testing** - `NEXT_PUBLIC_CIVORA_AI_ENABLED=true`: AI chat is accessible at `/ai-chat/`
 
-The AI chat code is always preserved in the repository but conditionally rendered. See [AI-CHAT-CONDITIONAL-RENDERING.md](./AI-CHAT-CONDITIONAL-RENDERING.md) for full documentation.
+The AI chat code is always preserved in the repository but conditionally rendered based on environment variables. See [AI-CHAT-CONDITIONAL-RENDERING.md](./AI-CHAT-CONDITIONAL-RENDERING.md) for full documentation.
 
 ## Deployment
 
-Civora uses a **dual deployment strategy**:
+Civora uses a **dual Vercel deployment strategy** with different environment configurations:
 
-### Primary: Vercel (Recommended for civora.me)
+### Primary: civora.me (Vercel Production - AI Disabled)
 - ✅ Full Next.js with server-side rendering
-- ✅ API routes enabled (AI assistant/chat feature)
+- ✅ Custom domain: civora.me
+- ❌ AI chat hidden from users (`NEXT_PUBLIC_CIVORA_AI_ENABLED=false`)
 - ✅ Automatic deployments from GitHub
 - ✅ Edge network for global performance
 
-**See [DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md) for setup instructions**
+### Testing: Vercel Preview (AI Enabled)
+- ✅ Full Next.js with all features
+- ✅ AI chat accessible for testing (`NEXT_PUBLIC_CIVORA_AI_ENABLED=true`)
+- ✅ Preview deployments for pull requests
+- ✅ Same codebase, different configuration
+
+**See [DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md) for complete setup instructions**
 
 ### Backup: GitHub Pages
-- ✅ Static HTML export
-- ✅ Free hosting
-- ❌ No API routes (AI assistant disabled)
-- Available at: https://subammmm.github.io/civora/
+- ✅ Static HTML export at https://subammmm.github.io/civora/
+- ✅ Free hosting backup
+- ❌ No API routes (AI assistant not supported)
+- ⚠️ NOT used for civora.me domain
 
 ## Local Development
 

@@ -1,4 +1,4 @@
-name: Deploy Next.js static export to GitHub Pages
+name: Deploy Next.js static export to GitHub Pages (Backup Only)
 
 on:
   push:
@@ -10,6 +10,8 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 
+# IMPORTANT: This deploys a static backup to github.io/civora/
+# civora.me domain is served by Vercel, not GitHub Pages
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -47,10 +49,10 @@ jobs:
           ls -la out/
           test -f out/index.html && echo "✓ index.html present" || echo "✗ index.html missing"
           test -d out/assets && echo "✓ assets/ directory present" || echo "✗ assets/ directory missing"
-          test -f out/CNAME && echo "✓ CNAME present" || echo "✗ CNAME missing"
           test -f out/.nojekyll && echo "✓ .nojekyll present" || echo "✗ .nojekyll missing"
           test -f out/404.html && echo "✓ 404.html present" || echo "✗ 404.html missing"
-          test -f out/psychometric-quiz.html && echo "✓ psychometric-quiz.html present" || echo "✗ psychometric-quiz.html missing"
+          echo "Note: CNAME file intentionally excluded - civora.me served by Vercel, not GitHub Pages"
+          echo "GitHub Pages available at: https://subammmm.github.io/civora/"
 
       - name: Configure Pages
         uses: actions/configure-pages@v4
