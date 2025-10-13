@@ -391,9 +391,12 @@ class EventSourcePolyfill {
             if (this.events["message"]) {
               this.events["message"]({ data: data.reply });
             }
-            if (this.events["end"]) {
-              this.events["end"]();
-            }
+            // Use setTimeout to ensure message handler completes before end event
+            setTimeout(() => {
+              if (this.events["end"]) {
+                this.events["end"]();
+              }
+            }, 0);
           } else {
             // Empty response
             if (this.events["error"]) {
