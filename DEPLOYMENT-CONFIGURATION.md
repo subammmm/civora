@@ -2,19 +2,26 @@
 
 ## Overview
 
-Civora uses environment variables to control feature availability across different deployments. This allows the same codebase to serve different configurations without code changes.
+Civora uses environment variables to control feature availability across different Vercel deployments. This allows the same codebase to serve different configurations without code changes.
+
+**Deployment Strategy:**
+- **civora.me (Vercel Production)**: AI chat disabled for public users
+- **Vercel Preview/Testing**: AI chat enabled for testing and demonstration
+- **GitHub Pages**: Static backup only (no API routes)
 
 ## Environment Variable Configuration
 
-### Vercel Deployment (Full Features with AI Chat)
+### Vercel Production for civora.me (AI Chat Disabled)
+
+**Purpose**: Public-facing deployment at civora.me with clean UI, no AI chat
 
 **Environment Variables to Set in Vercel Dashboard:**
 
 ```bash
-# Enable AI Chat Feature
-NEXT_PUBLIC_CIVORA_AI_ENABLED=true
+# Disable AI Chat Feature for civora.me
+NEXT_PUBLIC_CIVORA_AI_ENABLED=false
 
-# Required API Keys
+# API Keys (backend needs these even if UI hidden)
 GEMINI_API_KEY=your_gemini_api_key_here
 LANGSEARCH_API_KEY=your_langsearch_api_key_here
 
@@ -30,21 +37,24 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=your_ga_id_here
 
 **Features Enabled:**
 - ✅ Full Next.js app with all pages
-- ✅ AI chat assistant accessible at `/ai-chat/`
-- ✅ "AI Assistant" link in navigation menu
-- ✅ API routes functional at `/api/ai-assistant/`
+- ❌ No AI chat UI (hidden from users)
+- ❌ No "AI Assistant" link in navigation
+- ✅ API route exists but not accessible via UI
 - ✅ Server-side rendering
 - ✅ Edge network deployment
+- ✅ Custom domain: civora.me
 
-### civora.me Deployment (Without AI Chat)
+### Vercel Preview/Testing (AI Chat Enabled)
 
-**Environment Variables to Set:**
+**Purpose**: Testing and demonstration deployment with full AI capabilities
+
+**Environment Variables to Set for Preview Environment:**
 
 ```bash
-# Disable AI Chat Feature
-NEXT_PUBLIC_CIVORA_AI_ENABLED=false
+# Enable AI Chat Feature for testing
+NEXT_PUBLIC_CIVORA_AI_ENABLED=true
 
-# API Keys (still needed for build, but AI UI hidden)
+# API Keys
 GEMINI_API_KEY=your_gemini_api_key_here
 LANGSEARCH_API_KEY=your_langsearch_api_key_here
 
@@ -54,23 +64,45 @@ NODE_ENV=production
 
 **Features Enabled:**
 - ✅ Full Next.js app with all pages
-- ❌ No AI chat UI (hidden from users)
-- ❌ No "AI Assistant" link in navigation
-- ✅ API route exists but not linked to
-- ✅ All other features functional
+- ✅ AI chat assistant accessible at `/ai-chat/`
+- ✅ "AI Assistant" link in navigation menu
+- ✅ API routes functional at `/api/ai-assistant/`
+- ✅ Server-side rendering
+- ✅ Preview URL for testing
+
+**How to Access:**
+1. Create a pull request in GitHub
+2. Vercel automatically creates preview deployment
+3. Access preview URL provided by Vercel bot in PR comments
+4. AI chat will be visible and functional
 
 ## Setting Environment Variables
 
 ### Vercel Dashboard
 
+**For Production (civora.me) - AI Disabled:**
+
 1. Go to your project in Vercel dashboard
 2. Navigate to **Settings** → **Environment Variables**
-3. Add each variable:
+3. Add variable:
    - Variable name: `NEXT_PUBLIC_CIVORA_AI_ENABLED`
-   - Value: `true` (for Vercel) or `false` (for civora.me)
-   - Environments: Select Production, Preview, and Development as needed
-4. Click **Save**
-5. Redeploy for changes to take effect
+   - Value: `false`
+   - Environments: Select **Production** only
+4. Add API keys (for all environments):
+   - Variable name: `GEMINI_API_KEY`
+   - Value: your key
+   - Environments: Select **Production**, **Preview**, **Development**
+5. Click **Save**
+6. Redeploy for changes to take effect
+
+**For Preview Deployments - AI Enabled:**
+
+1. Add the same variable again (or edit existing):
+   - Variable name: `NEXT_PUBLIC_CIVORA_AI_ENABLED`
+   - Value: `true`
+   - Environments: Select **Preview** only
+2. This enables AI chat in PR preview deployments
+3. Create a PR to test - Vercel will deploy with AI enabled
 
 ### Local Development (.env file)
 
@@ -254,24 +286,26 @@ npm run dev
 
 ## Multiple Deployment Strategies
 
-### Strategy 1: Separate Vercel Projects
+### Strategy 1: Production + Preview (Recommended)
 
-- **Project A** (civora-me): `NEXT_PUBLIC_CIVORA_AI_ENABLED=false`
-- **Project B** (civora-vercel): `NEXT_PUBLIC_CIVORA_AI_ENABLED=true`
-- Same codebase, different env vars
-- Deploy to both from same repository
+- **Production** (civora.me): `NEXT_PUBLIC_CIVORA_AI_ENABLED=false`
+- **Preview** (PR deployments): `NEXT_PUBLIC_CIVORA_AI_ENABLED=true`
+- Same codebase, different environment variables per deployment type
+- Set variables in Vercel dashboard for each environment
 
-### Strategy 2: Branch-Based Deployment
+### Strategy 2: Separate Vercel Projects
+
+- **Project A** (civora-production): `NEXT_PUBLIC_CIVORA_AI_ENABLED=false` → civora.me
+- **Project B** (civora-ai-demo): `NEXT_PUBLIC_CIVORA_AI_ENABLED=true` → separate URL
+- Same repository, different Vercel projects
+- Full control over each deployment
+
+### Strategy 3: Branch-Based (Not Recommended)
 
 - **main branch** → civora.me (AI disabled)
-- **vercel branch** → Vercel preview (AI enabled)
-- Set different env vars per branch in Vercel
-
-### Strategy 3: Environment-Based
-
-- **Production**: AI disabled
-- **Preview**: AI enabled
-- Different env vars per deployment environment
+- **ai-enabled branch** → Vercel preview (AI enabled)
+- Requires maintaining two branches
+- More complex to maintain
 
 ## Monitoring and Validation
 
