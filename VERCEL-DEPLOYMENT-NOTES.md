@@ -99,8 +99,6 @@ curl -X POST http://localhost:3000/api/ai-assistant/ \
 Ensure these are set in Vercel dashboard:
 - `GEMINI_API_KEY` - Required for AI assistant
 - `LANGSEARCH_API_KEY` - Required for web search
-- `FALLBACK_PROVIDER` - Optional (set to "openai" if using OpenAI fallback)
-- `OPENAI_API_KEY` - Optional (only if FALLBACK_PROVIDER is "openai")
 
 ### Testing Deployed API
 
