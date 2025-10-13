@@ -83,7 +83,7 @@ function CivoraAIChat() {
       // Use SSE streaming if no file, else fallback to JSON POST
       if (!fileUploadObject) {
         // Streaming for text-only
-        const eventSource = new EventSourcePolyfill("/api/ai-assistant", {
+        const eventSource = new EventSourcePolyfill("/api/ai-assistant/", {
           headers: { "Content-Type": "application/json" },
           payload: JSON.stringify({ input, history: historyPayload }),
         });
@@ -105,7 +105,7 @@ function CivoraAIChat() {
         });
       } else {
         // Fallback for file uploads (no SSE)
-        const res = await fetch("/api/ai-assistant", {
+        const res = await fetch("/api/ai-assistant/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ input, history: historyPayload, file: fileUploadObject }),
