@@ -14,6 +14,16 @@ Civora is a research-based platform that compiles verified scholarships, visa pa
 - **Deployment**: Dual strategy - Vercel (primary with API routes) + GitHub Pages (static backup)
 - **Domain**: civora.me
 - **Quality Tools**: ESLint, Prettier, TypeScript type-checking
+- **AI Features**: Conditional rendering based on environment variables
+
+## AI Chat Feature
+
+Civora includes an **optional AI-powered chat assistant** that can be enabled or disabled per deployment:
+
+- **Vercel** (with `NEXT_PUBLIC_CIVORA_AI_ENABLED=true`): AI chat is accessible at `/ai-chat/`
+- **civora.me** (with `NEXT_PUBLIC_CIVORA_AI_ENABLED=false`): AI chat is hidden from users
+
+The AI chat code is always preserved in the repository but conditionally rendered. See [AI-CHAT-CONDITIONAL-RENDERING.md](./AI-CHAT-CONDITIONAL-RENDERING.md) for full documentation.
 
 ## Deployment
 

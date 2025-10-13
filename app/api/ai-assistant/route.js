@@ -3,6 +3,19 @@
 // Native modules removed for serverless compatibility
 // OpenAI fallback removed - using only LangSearch and Gemini
 
+/**
+ * AI Assistant API Route - Conditional Rendering for Deployments
+ * 
+ * This API route is preserved in the codebase for both civora.me and Vercel deployments.
+ * The frontend conditionally accesses this API based on NEXT_PUBLIC_CIVORA_AI_ENABLED:
+ * 
+ * - Vercel deployment (NEXT_PUBLIC_CIVORA_AI_ENABLED=true): AI chat UI is shown, API is accessible
+ * - civora.me deployment (NEXT_PUBLIC_CIVORA_AI_ENABLED=false): AI chat UI is hidden, API exists but unused
+ * 
+ * The API itself is always functional, but the UI conditionally hides/shows access to it.
+ * This keeps all code intact while controlling where AI features are visible.
+ */
+
 import { z } from 'zod';
 import { create, all } from 'mathjs';
 
