@@ -116,10 +116,44 @@ curl https://civoraaa.vercel.app/api/ai-assistant/
 
 ### Trailing Slashes
 
-The config includes `trailingSlash: true`, which means:
-- All routes must be accessed with a trailing slash
+⚠️ **CRITICAL FOR API ROUTES**: The config includes `trailingSlash: true`, which means:
+- **All API routes MUST be accessed with a trailing slash**
 - API route is at `/api/ai-assistant/` (not `/api/ai-assistant`)
-- Next.js will redirect without trailing slash to with trailing slash
+- **Accessing without trailing slash will cause a 308 redirect**, breaking POST requests
+- Next.js will redirect without trailing slash to with trailing slash, but this breaks POST body
+
+### Why This Matters
+
+When you make a POST request to `/api/ai-assistant` (without trailing slash):
+1. Next.js returns a 308 Permanent Redirect to `/api/ai-assistant/`
+2. Browsers follow the redirect with a GET request (losing the POST body)
+3. Your API call fails silently or returns unexpected results
+
+**Solution**: Always use `/api/ai-assistant/` with the trailing slash in all fetch calls.
+
+### Frontend Code Requirements
+
+**Correct API calls:**
+```javascript
+// ✅ Correct - with trailing slash
+fetch("/api/ai-assistant/", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ input: "hello" })
+})
+
+// ❌ Wrong - without trailing slash (causes 308 redirect)
+fetch("/api/ai-assistant", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ input: "hello" })
+})
+```
+
+**Files checked and verified:**
+- ✅ `app/page.js` - Uses `/api/ai-assistant/` correctly
+- ✅ `public/assets/ai-global-ambassador.js` - No API calls (client-side only)
+- ✅ All other public assets - No API calls found
 
 ### Dual Deployment Consideration
 
@@ -157,6 +191,32 @@ And in package.json:
 ⚠️ **Warning**: This will make API routes return 404 on all deployments.
 
 ## Troubleshooting
+
+### Issue: POST requests return 308 redirects
+
+**Symptoms:**
+- POST requests to `/api/ai-assistant` fail
+- Browser console shows 308 Permanent Redirect
+- Chat UI doesn't display responses or shows errors
+- Network tab shows redirect from `/api/ai-assistant` to `/api/ai-assistant/`
+
+**Root Cause:**
+- The API endpoint is being called WITHOUT a trailing slash
+- Next.js config has `trailingSlash: true`
+- POST requests cannot be automatically redirected (body is lost)
+
+**Solution:**
+1. Check all `fetch()` calls to API routes
+2. Ensure they use `/api/ai-assistant/` with trailing slash
+3. Search codebase: `grep -r "api/ai-assistant[^/]" --include="*.js" --include="*.jsx"`
+4. Update any matches to include trailing slash
+
+**Verification:**
+```bash
+# Check browser Network tab for 308 redirects
+# Should see 200 OK for POST to /api/ai-assistant/
+# Should NOT see 308 redirects
+```
 
 ### Issue: API still returns 404 on Vercel
 

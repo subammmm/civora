@@ -92,17 +92,30 @@ function CivoraAIChat() {
           streamed += event.data;
           setStreamBuffer(streamed);
         };
-        eventSource.onerror = () => {
+        eventSource.onerror = (error) => {
+          console.error("EventSource error:", error);
           eventSource.close();
           setLoading(false);
-          setMessages(prev => [...prev, { role: "assistant", content: streamed || "⚠️ Sorry, streaming failed." }]);
+          // Only add message if we have content or if it's an actual error
+          if (streamed) {
+            setMessages(prev => [...prev, { role: "assistant", content: streamed }]);
+          } else {
+            setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Sorry, streaming failed. Please check the console for details." }]);
+          }
           setStreamBuffer("");
         };
         eventSource.addEventListener("end", () => {
-          setMessages(prev => [...prev, { role: "assistant", content: streamed }]);
+          // Always add the streamed content when stream ends successfully
+          if (streamed) {
+            setMessages(prev => [...prev, { role: "assistant", content: streamed }]);
+          } else {
+            // If no content was streamed, show a helpful message
+            setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Received empty response from server." }]);
+          }
           setLoading(false);
           setStreamBuffer("");
         });
+        setInput(""); // Clear input immediately after starting stream
       } else {
         // Fallback for file uploads (no SSE)
         const res = await fetch("/api/ai-assistant/", {
@@ -110,12 +123,30 @@ function CivoraAIChat() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ input, history: historyPayload, file: fileUploadObject }),
         });
+        
+        // Check for redirect or non-OK status
+        if (!res.ok) {
+          console.error(`API request failed with status ${res.status}`);
+          newMessages.push({ 
+            role: "assistant", 
+            content: `⚠️ API request failed (HTTP ${res.status}). Please ensure the API endpoint is accessible.` 
+          });
+          setMessages(newMessages);
+          setLoading(false);
+          setStreamBuffer("");
+          setInput("");
+          return;
+        }
+        
         const data = await res.json();
         let reply = data.reply || "";
         if (data.error) {
           newMessages.push({ role: "assistant", content: `⚠️ ${data.error}` });
-        } else {
+        } else if (reply) {
           newMessages.push({ role: "assistant", content: reply });
+        } else {
+          // Handle empty reply
+          newMessages.push({ role: "assistant", content: "⚠️ Received empty response from server." });
         }
         setMessages(newMessages);
         setLoading(false);
@@ -123,12 +154,13 @@ function CivoraAIChat() {
         setInput("");
         return;
       }
-    } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Sorry, something went wrong. Please try again." }]);
+    } catch (error) {
+      console.error("Send message error:", error);
+      setMessages(prev => [...prev, { role: "assistant", content: `⚠️ Sorry, something went wrong: ${error.message || 'Unknown error'}` }]);
       setLoading(false);
       setStreamBuffer("");
+      setInput(""); // Make sure to clear input on error too
     }
-    setInput("");
   }
 
   function handleClearHistory() {
@@ -306,33 +338,64 @@ class EventSourcePolyfill {
       headers,
       body: payload,
     }).then(res => {
-      if (!res.body) return;
+      // Handle non-OK responses (including 308 redirects)
+      if (!res.ok) {
+        console.error(`API request failed with status ${res.status}`);
+        if (this.events["error"]) {
+          this.events["error"](new Error(`HTTP ${res.status}`));
+        }
+        this.close();
+        return;
+      }
+      if (!res.body) {
+        console.error("Response has no body");
+        if (this.events["error"]) {
+          this.events["error"](new Error("No response body"));
+        }
+        this.close();
+        return;
+      }
       const reader = res.body.getReader();
       let buffer = "";
       const decoder = new TextDecoder();
       const pump = async () => {
-        while (!this.closed) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value);
-          const events = buffer.split("\n\n");
-          buffer = events.pop();
-          for (let event of events) {
-            if (event.startsWith("data:")) {
-              const data = event.slice(5).trim();
-              if (this.events["message"]) this.events["message"]({ data });
-            }
-            if (event.startsWith("event: end")) {
-              if (this.events["end"]) this.events["end"]();
-              this.close();
+        try {
+          while (!this.closed) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value);
+            const events = buffer.split("\n\n");
+            buffer = events.pop();
+            for (let event of events) {
+              if (event.startsWith("data:")) {
+                const data = event.slice(5).trim();
+                if (this.events["message"]) this.events["message"]({ data });
+              }
+              if (event.startsWith("event: end")) {
+                if (this.events["end"]) this.events["end"]();
+                this.close();
+              }
             }
           }
+        } catch (error) {
+          console.error("Stream reading error:", error);
+          if (this.events["error"]) {
+            this.events["error"](error);
+          }
+          this.close();
         }
       };
       pump();
+    }).catch(error => {
+      console.error("Fetch error:", error);
+      if (this.events["error"]) {
+        this.events["error"](error);
+      }
+      this.close();
     });
   }
   onmessage = fn => { this.events["message"] = fn; };
+  onerror = fn => { this.events["error"] = fn; };
   addEventListener(type, fn) { this.events[type] = fn; }
   close() { this.closed = true; }
 }
