@@ -1,3 +1,8 @@
+// v55 - TRAILING SLASH FIX: API routes now work without trailing slashes
+// Fixed 308 redirect issue by making trailingSlash conditional in next.config.js
+// Frontend updated to call /api/ai-assistant (no trailing slash)
+// This prevents POST body loss in 308 redirects and eliminates 502 Bad Gateway errors
+//
 // v54 - FINAL FIX: Enhanced logging, detailed error messages, OpenAI permanently removed
 // Fixed all 400 Bad Request errors with comprehensive request validation and logging
 // Improved error messages: specific feedback for validation, provider, and rate limit errors
@@ -69,9 +74,10 @@ export async function GET() {
   return new Response(
     JSON.stringify({ 
       status: 'ok', 
-      version: 'v54',
+      version: 'v55',
       envConfigured: !envValidationError,
-      providers: 'Gemini + LangSearch only (OpenAI removed)'
+      providers: 'Gemini + LangSearch only (OpenAI removed)',
+      trailingSlash: 'Not required (v55 fix)'
     }), 
     { status: 200, headers: CORS_HEADERS }
   );
