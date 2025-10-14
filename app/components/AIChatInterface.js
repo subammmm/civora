@@ -103,7 +103,7 @@ export default function AIChatInterface() {
         };
       }
 
-      const response = await fetch("/api/ai-assistant/", {
+      const response = await fetch("/api/ai-assistant", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
