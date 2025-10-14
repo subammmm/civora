@@ -93,7 +93,7 @@ export default function AboutPage() {
               </div>
               <div className="stat-card">
                 <i className="fas fa-trophy icon" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);" aria-hidden="true"></i>
-                <span className="stat-number">24</span>
+                <span className="stat-number">35+</span>
                 <p>Scholarships Verified</p>
               </div>
               <div className="stat-card">
@@ -110,22 +110,20 @@ export default function AboutPage() {
       
       <section className="section">
         <div className="container">
-          <div className="flex align-center gap-2" style="flex-direction: row-reverse;">
-            <div style="flex: 1;">
-              <h2>Founder's Story</h2>
+          <div className="card reveal" style="text-align: center; padding: 2rem;">
+            <h2 style="margin-bottom: 1.5rem;"><i className="fas fa-user icon-left" aria-hidden="true"></i>Founder's Story</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: left;">
               <p>Hi, I'm <strong>Shubham Dhakal</strong>, a Nepali student passionate about making global education accessible to underrepresented communities. As someone who has navigated the complex world of international scholarships and visa applications, I understand firsthand the challenges that Nepali students face when seeking opportunities abroad.</p>
               
               <p>My journey began with countless hours researching scholarships, deciphering visa requirements, and trying to understand the pathways to study and work internationally. Through this process, I realized that most information was scattered, outdated, or simply inaccessible to students from developing countries like Nepal.</p>
 
               <p><strong>Civora</strong> is my solution to this problem. What started as personal research notes has evolved into a comprehensive platform designed to democratize access to global opportunities.</p>
-
-              <div className="margin-top-2">
-                <a href="https://www.linkedin.com/in/shubhamdhakal" target="_blank" rel="noopener" className="linear-button">Connect on LinkedIn</a>
-              </div>
             </div>
-            <div style="flex: 1; background: var(--light-accent); height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--muted);">
-              
-              <span aria-hidden="true">📸</span>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+              <a href="https://www.linkedin.com/in/shubhamdhakal" target="_blank" rel="noopener" className="linear-button">
+                <i className="fab fa-linkedin icon-left" aria-hidden="true"></i>Connect on LinkedIn
+              </a>
             </div>
           </div>
         </div>
@@ -134,26 +132,31 @@ export default function AboutPage() {
       
       <section className="section">
         <div className="container">
-          <div className="text-center margin-bottom-2">
-            <h2>Join Our Mission</h2>
-            <p className="subtext">Help us expand our impact and reach more students</p>
-          </div>
+          <div className="card reveal">
+            <div class="text-center margin-bottom-2">
+              <h2><i className="fas fa-hands-helping icon-left" aria-hidden="true"></i>Join Our Mission</h2>
+              <p className="subtext">Help us expand our impact and reach more students</p>
+            </div>
           
-          <div className="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-            <div className="linear-card">
-              <h3>Share Information</h3>
-              <p>Know about a scholarship or opportunity we haven't covered? Help us expand our database by sharing verified information.</p>
-              <a href="contact.html?subject=Contribution" className="linear-button margin-top-1">Contribute</a>
-            </div>
-            <div className="linear-card">
-              <h3>Translate Content</h3>
-              <p>Help us reach more students by translating our content into additional languages spoken by underrepresented communities.</p>
-              <a href="contact.html?subject=Translation" className="linear-button margin-top-1">Help Translate</a>
-            </div>
-            <div className="linear-card">
-              <h3>Share Your Story</h3>
-              <p>Inspire others by sharing your success story and the resources that helped you achieve your goals.</p>
-              <a href="contact.html?subject=Story" className="linear-button margin-top-1">Share Story</a>
+            <div className="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+              <div className="linear-card" style="text-align: center;">
+                <i className="fas fa-share icon" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+                <h3>Share Information</h3>
+                <p>Know about a scholarship or opportunity we haven't covered? Help us expand our database by sharing verified information.</p>
+                <a href="/contact/?subject=Contribution" className="linear-button margin-top-1">Contribute</a>
+              </div>
+              <div className="linear-card" style="text-align: center;">
+                <i className="fas fa-language icon" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+                <h3>Translate Content</h3>
+                <p>Help us reach more students by translating our content into additional languages spoken by underrepresented communities.</p>
+                <a href="/contact/?subject=Translation" className="linear-button margin-top-1">Help Translate</a>
+              </div>
+              <div className="linear-card" style="text-align: center;">
+                <i className="fas fa-pen icon" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;" aria-hidden="true"></i>
+                <h3>Share Your Story</h3>
+                <p>Inspire others by sharing your success story and the resources that helped you achieve your goals.</p>
+                <a href="/contact/?subject=Story" className="linear-button margin-top-1">Share Story</a>
+              </div>
             </div>
           </div>
         </div>

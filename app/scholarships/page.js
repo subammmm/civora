@@ -211,7 +211,7 @@ export default function ScholarshipsPage() {
                     <strong>East-West Center Graduate Degree Fellowship</strong><br>
                     <span class="subtext">Full support at UH</span>
                   </td>
-                  <td>USA (Hawaii)</td>
+                  <td>USA</td>
                   <td>Graduate</td>
                   <td>Relevant to EWC goals</td>
                   <td>

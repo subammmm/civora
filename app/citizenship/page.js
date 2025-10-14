@@ -74,11 +74,11 @@ export default function CitizenshipPage() {
 
       <section class="section">
         <div class="container">
-          <div class="card reveal callout" style="background: #fee2e2; color: #7f1d1d; border-left: 4px solid #dc2626;">
-      <h3>⚠️ Nepal Dual Citizenship Warning</h3>
-      <p><strong>Important:</strong> Nepal does not allow dual citizenship. Acquiring foreign citizenship means automatic loss of Nepali citizenship unless you renounce the foreign citizenship within 2 years. Consider this carefully before naturalizing.</p>
-      <p><strong>Resources:</strong> <a href="https://mofa.gov.np/" target="_blank" style="color: #7f1d1d;">Nepal Ministry of Foreign Affairs</a> | <a href="https://www.nepalembassyusa.org/" target="_blank" style="color: #7f1d1d;">Nepal Embassy USA</a></p>
-    </div>
+          <div class="card reveal" style="border-left: 4px solid var(--error); background: var(--surface);">
+            <h3><i class="fas fa-exclamation-triangle icon-left" style="color: var(--error);" aria-hidden="true"></i>Nepal Dual Citizenship Warning</h3>
+            <p><strong>Important:</strong> Nepal does not allow dual citizenship. Acquiring foreign citizenship means automatic loss of Nepali citizenship unless you renounce the foreign citizenship within 2 years. Consider this carefully before naturalizing.</p>
+            <p><strong>Resources:</strong> <a href="https://mofa.gov.np/" target="_blank" style="color: var(--accent);">Nepal Ministry of Foreign Affairs</a> | <a href="https://www.nepalembassyusa.org/" target="_blank" style="color: var(--accent);">Nepal Embassy USA</a></p>
+          </div>
         </div>
       </section>
 
