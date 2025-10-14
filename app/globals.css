@@ -131,23 +131,16 @@ body {
   font-weight: var(--body-weight);
 }
 
-/* Page Wrapper - 75% Scaling */
+/* Page Wrapper - No scaling for consistent sizing */
 #wrapper {
-  transform-origin: top left;
-  transform: scale(0.75) translateZ(0);
-  width: calc(100% / 0.75);
-  min-height: calc(100vh / 0.75);
-  position: absolute;
-  top: 0;
-  left: 0;
-  will-change: transform;
-  overflow: visible;
-  backface-visibility: hidden;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
 }
 
-/* Prevent bottom scroll gap */
+/* Allow normal body content */
 body > *:not(#wrapper) {
-  display: none;
+  /* Removed display: none to allow normal content flow */
 }
 
 .site-fixed,
@@ -687,6 +680,7 @@ i {
   cursor: pointer;
   font-family: inherit;
   font-size: var(--body-size);
+  opacity: 1;
 }
 
 .linear-button:hover {
@@ -694,6 +688,17 @@ i {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(94, 106, 210, 0.4);
   text-decoration: none;
+}
+
+.linear-button.secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.linear-button.secondary:hover {
+  background: var(--surface);
+  border-color: #404043;
 }
 
 .margin-top-1 {
@@ -1103,15 +1108,14 @@ a:hover {
   transition:
     background 200ms ease,
     transform 200ms ease,
-    box-shadow 200ms ease,
-    opacity 0.3s ease;
+    box-shadow 200ms ease;
   font-size: var(--body-size);
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
   line-height: 1;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 /* Hover: darken background by 10% and full brightness text */
@@ -1119,14 +1123,15 @@ a:hover {
 .btn-primary:hover {
   background: var(--button-hover);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(94, 106, 210, 0.4);
   text-decoration: none;
-  opacity: 1;
 }
 
 /* Focus: match hover for keyboard navigation */
 .btn:focus,
 .btn-primary:focus {
-  opacity: 1;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Active: inset shadow */
@@ -1134,7 +1139,6 @@ a:hover {
 .btn-primary:active {
   transform: translateY(0);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-  opacity: 1;
 }
 
 /* Secondary: border #2A2A2D, transparent background */
@@ -1150,48 +1154,47 @@ a:hover {
   transition:
     background 200ms ease,
     border-color 200ms ease,
-    transform 200ms ease,
-    opacity 0.3s ease;
+    transform 200ms ease;
   font-size: var(--body-size);
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
   line-height: 1;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .btn-secondary:hover {
   background: var(--surface);
   border-color: #404043;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   text-decoration: none;
-  opacity: 1;
 }
 
 .btn-secondary:focus {
-  opacity: 1;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .btn-secondary:active {
   transform: translateY(0);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-  opacity: 1;
 }
 
-/* Apply translucent text to all button elements */
+/* Remove default button opacity rule */
 button {
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
+  /* Removed global opacity: 0.5 rule */
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 button:hover,
 button:focus {
-  opacity: 1;
+  /* No forced opacity changes */
 }
 
 button:active {
-  opacity: 1;
+  /* No forced opacity changes */
 }
 
 /* Inputs */
