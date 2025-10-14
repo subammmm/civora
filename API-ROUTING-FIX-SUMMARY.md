@@ -3,6 +3,8 @@
 ## Overview
 This document summarizes the comprehensive fix for AI chat API routing and frontend display issues, addressing 308 redirect problems and ensuring valid API responses are always displayed to users.
 
+**LATEST UPDATE (v55)**: The `trailingSlash` configuration has been updated to only apply in static export mode. API routes now work without trailing slashes to prevent 308 redirects on POST requests.
+
 ## Changes Made
 
 ### 1. Enhanced EventSourcePolyfill (app/page.js)
@@ -59,6 +61,8 @@ This document summarizes the comprehensive fix for AI chat API routing and front
 1. `app/page.js` - Enhanced error handling and EventSourcePolyfill
 2. `README.md` - Added API routing warnings and examples
 3. `VERCEL-DEPLOYMENT-NOTES.md` - Comprehensive trailing slash documentation
+4. **`next.config.js` (v55)** - Made trailingSlash conditional (only in static export mode)
+5. **`app/components/AIChatInterface.js` (v55)** - Removed trailing slash from API calls
 
 ## Testing Checklist
 
@@ -81,22 +85,25 @@ This document summarizes the comprehensive fix for AI chat API routing and front
 
 ## Verification Commands
 
-### Check for API calls without trailing slash:
-```bash
-grep -rn "api/ai-assistant[^/]" --include="*.js" --include="*.jsx" /home/runner/work/civora/civora/app/
-```
-Expected: No matches (all calls should have trailing slash)
-
-### Verify trailing slash in all API calls:
+### Check API calls (v55 - NO trailing slash required):
 ```bash
 grep -rn "fetch.*api/ai-assistant" /home/runner/work/civora/civora/app/
 ```
-Expected: All matches should show `/api/ai-assistant/` with trailing slash
+Expected: All matches should show `/api/ai-assistant` WITHOUT trailing slash (v55+)
+
+### Verify no 308 redirects:
+```bash
+curl -X POST http://localhost:3001/api/ai-assistant \
+  -H "Content-Type: application/json" \
+  -d '{"input":"hello"}' \
+  -v
+```
+Expected: Should return 200 OK directly, NOT 308 redirect
 
 ### Test API endpoint (after deployment):
 ```bash
-# Should return 200 OK, not 308 redirect
-curl -X POST https://civoraaa.vercel.app/api/ai-assistant/ \
+# Should return 200 OK, not 308 redirect (v55 - NO trailing slash)
+curl -X POST https://civoraaa.vercel.app/api/ai-assistant \
   -H "Content-Type: application/json" \
   -d '{"input":"hello"}' \
   -v
@@ -117,8 +124,8 @@ curl -X POST https://civoraaa.vercel.app/api/ai-assistant/ \
 - **Fix**: Check for empty content and show appropriate message
 
 ✅ **Issue**: POST requests return 308 redirects
-- **Root Cause**: API called without trailing slash
-- **Fix**: Verified all calls use `/api/ai-assistant/` with trailing slash
+- **Root Cause**: API called without trailing slash when `trailingSlash: true` was set globally
+- **Fix (v55)**: Made `trailingSlash: true` conditional (only in static export mode). API calls now use `/api/ai-assistant` without trailing slash
 
 ✅ **Issue**: Input field not cleared after errors
 - **Root Cause**: `setInput("")` only in some code paths
