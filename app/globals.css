@@ -787,6 +787,9 @@ i {
     border-color 160ms ease,
     transform 160ms ease;
   margin-bottom: var(--space-4); /* Reduced from space-8 to space-4 (16px) */
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .card:hover,
@@ -797,6 +800,28 @@ i {
   border-color: #333336;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Ensure text in cards wraps properly */
+.card h2,
+.card h3,
+.card h4,
+.card p,
+.box h2,
+.box h3,
+.box h4,
+.box p,
+.linear-card h2,
+.linear-card h3,
+.linear-card h4,
+.linear-card p,
+.tile h2,
+.tile h3,
+.tile h4,
+.tile p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 /* Image hover animations inside boxes */
@@ -822,6 +847,61 @@ i {
 
 .icon-left {
   margin-right: 8px;
+}
+
+/* Scholarship Table Styling */
+.linear-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1rem;
+}
+
+.linear-table thead th {
+  background: var(--surface);
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.linear-table tbody tr.scholarship-item {
+  border-bottom: 1px solid var(--border);
+  transition: background 160ms ease;
+}
+
+.linear-table tbody tr.scholarship-item:hover {
+  background: var(--surface);
+}
+
+.linear-table tbody td {
+  padding: 1.5rem 1rem;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.linear-table tbody td strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.linear-table tbody td .subtext {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .linear-table {
+    font-size: 0.875rem;
+  }
+  
+  .linear-table tbody td {
+    padding: 1rem 0.5rem;
+  }
 }
 
 .icon-right {
@@ -1103,15 +1183,14 @@ a:hover {
   transition:
     background 200ms ease,
     transform 200ms ease,
-    box-shadow 200ms ease,
-    opacity 0.3s ease;
+    box-shadow 200ms ease;
   font-size: var(--body-size);
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
   line-height: 1;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 /* Hover: darken background by 10% and full brightness text */
@@ -1150,15 +1229,14 @@ a:hover {
   transition:
     background 200ms ease,
     border-color 200ms ease,
-    transform 200ms ease,
-    opacity 0.3s ease;
+    transform 200ms ease;
   font-size: var(--body-size);
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
   line-height: 1;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .btn-secondary:hover {
@@ -1179,10 +1257,9 @@ a:hover {
   opacity: 1;
 }
 
-/* Apply translucent text to all button elements */
+/* Ensure button text is always visible */
 button {
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
+  opacity: 1;
 }
 
 button:hover,
