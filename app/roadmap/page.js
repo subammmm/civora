@@ -5,15 +5,14 @@ export const metadata = {
 
 export default function RoadmapPage() {
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: `      <h1>Roadmap & Future Plans</h1>
+    <main style={{ padding: '4rem 2rem', maxWidth: '1200px', margin: '0 auto' }}>
+      <h1>Roadmap & Future Plans</h1>
       <p className="page-intro">Our vision for expanding Civora into a comprehensive global mobility platform, with transparent timelines and community-driven development priorities.</p>
       
       <section className="roadmap-vision">
         <div className="vision-card">
           <h2>Our 5-Year Vision</h2>
-          <p>Transform Civora from a Nepal-focused resource into the world's most trusted platform for global education and mobility. By 2029, we aim to serve students from 50+ countries with AI-powered personalization, community support, and verified pathways to education, work, and citizenship opportunities worldwide.</p>
+          <p>Transform Civora from a Nepal-focused resource into the world&apos;s most trusted platform for global education and mobility. By 2029, we aim to serve students from 50+ countries with AI-powered personalization, community support, and verified pathways to education, work, and citizenship opportunities worldwide.</p>
           
           <div className="vision-metrics">
             <div className="metric-target">
@@ -115,7 +114,7 @@ export default function RoadmapPage() {
 
       <section className="feature-priorities">
         <h2>Community-Requested Features</h2>
-        <p>Features prioritized based on user feedback and voting. <a href="contact.html">Suggest new features</a> or vote on existing requests.</p>
+        <p>Features prioritized based on user feedback and voting. <a href="/contact/">Suggest new features</a> or vote on existing requests.</p>
         
         <div className="feature-list">
           <div className="feature-card high-priority">
@@ -217,16 +216,16 @@ export default function RoadmapPage() {
       <section className="community-input">
         <div className="input-card">
           <h2>Shape Our Future</h2>
-          <p>Civora's development is driven by community needs. Your input helps us prioritize features and improvements that matter most to students worldwide.</p>
+          <p>Civora&apos;s development is driven by community needs. Your input helps us prioritize features and improvements that matter most to students worldwide.</p>
           
           <div className="input-options">
-            <a href="contact.html?subject=Feature Request" className="input-btn">
+            <a href="/contact/?subject=Feature Request" className="input-btn">
               💡 Suggest a Feature
             </a>
-            <a href="contact.html?subject=Partnership" className="input-btn">
+            <a href="/contact/?subject=Partnership" className="input-btn">
               🤝 Propose a Partnership
             </a>
-            <a href="contact.html?subject=Feedback" className="input-btn">
+            <a href="/contact/?subject=Feedback" className="input-btn">
               📝 Share Feedback
             </a>
           </div>
@@ -236,10 +235,6 @@ export default function RoadmapPage() {
           </div>
         </div>
       </section>
-
     </main>
-`,
-      }}
-    />
   );
 }

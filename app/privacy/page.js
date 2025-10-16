@@ -5,10 +5,9 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: `      <h1>Privacy Policy</h1>
-      <p className="page-intro">Last updated: <span id="last-updated"></span></p>
+    <main style={{ padding: '4rem 2rem', maxWidth: '900px', margin: '0 auto' }}>
+      <h1>Privacy Policy</h1>
+      <p className="page-intro">Last updated: <span id="last-updated">October 12, 2025</span></p>
       
       <section>
         <h2>Data Collection and Use</h2>
@@ -27,7 +26,7 @@ export default function PrivacyPage() {
       
       <section>
         <h2>Payments and Donations</h2>
-        <p>If you choose to support Civora through donations, payment processing is handled by third-party providers (such as Stripe or Ko-fi). We do not store your payment information. Please refer to the payment processor's privacy policy for details on how they handle your data.</p>
+        <p>If you choose to support Civora through donations, payment processing is handled by third-party providers (such as Stripe or Ko-fi). We do not store your payment information. Please refer to the payment processor&apos;s privacy policy for details on how they handle your data.</p>
       </section>
       
       <section>
@@ -58,11 +57,8 @@ export default function PrivacyPage() {
       
       <section>
         <h2>Changes to This Policy</h2>
-        <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated "Last updated" date.</p>
+        <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated &quot;Last updated&quot; date.</p>
       </section>
     </main>
-`,
-      }}
-    />
   );
 }
