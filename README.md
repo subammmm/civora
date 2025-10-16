@@ -560,63 +560,55 @@ The Next.js app under `app/` is the single source of truth for all active pages.
 
 ## Contributing
 
-### For New Contributors
+We welcome contributions from the community! Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 
-This project uses **Next.js 14** with the App Router. Here's what you need to know:
+- How to set up the development environment
+- Code style and best practices
+- Pull request process
+- Testing guidelines
+- Commit message conventions
 
-#### Setup
+### Quick Start for Contributors
 
-1. Clone the repository
+1. Fork and clone the repository
 2. Install Node.js 20 (see `.nvmrc`)
 3. Run `npm install`
 4. Start development server: `npm run dev`
-5. Visit http://localhost:3000/
+5. Make your changes and test thoroughly
+6. Submit a pull request
 
-#### Making Changes
-
-- **Pages**: Edit React components in `app/` directory (e.g., `app/page.js`, `app/scholarships/page.js`)
-- **Shared layout**: Edit `app/layout.js` for header/footer changes
-- **Styles**: Edit CSS files in `app/` directory
-- **Assets**: Place images, fonts, etc. in `public/assets/`
-
-#### Testing Your Changes
-
-```bash
-# Lint your code
-npm run lint
-
-# Type check
-npm run type-check
-
-# Format code
-npm run format:write
-
-# Build for production
-npm run build
-
-# Test the production build locally
-cd out && python3 -m http.server 8080
-```
-
-#### Submitting Changes
-
-1. Create a new branch
-2. Make your changes
-3. Test locally with `npm run dev` and `npm run build`
-4. Run `npm run lint` and `npm run type-check`
-5. Commit and push to your branch
-6. Open a Pull Request
-
-The CI/CD pipeline will automatically:
-- Run linting and type checks
-- Build the Next.js site
-- Deploy to GitHub Pages on merge to `main`
+For detailed instructions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ### Quick Reference
 
 - **Development**: `npm run dev` → http://localhost:3000/
-- **Production build**: `npm run build` → outputs to `out/`
-- **Test production**: `cd out && python3 -m http.server 8080`
+- **Production build**: `npm run build` → outputs to `.next/`
+- **Static export**: `npm run build:static` → outputs to `out/`
+- **Validation**: `npm run validate` → test static assets
 - **Deployed site**: https://civora.me
 - **Deploy time**: 1-2 minutes after push to `main`
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+## Acknowledgments
+
+- Built with [Next.js 14](https://nextjs.org/)
+- Styled with inspiration from [Linear](https://linear.app/)
+- Deployed on [Vercel](https://vercel.com/) and [GitHub Pages](https://pages.github.com/)
+- Icons from [Font Awesome](https://fontawesome.com/)
+- Fonts from [Google Fonts](https://fonts.google.com/)
+
+## Support
+
+- **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/subammmm/civora/issues)
+- **Questions**: Check [CONTRIBUTING.md](./CONTRIBUTING.md) or open a discussion
+- **Contact**: Visit [civora.me/contact](https://civora.me/contact/) for direct contact
+
+---
+
+**Version**: 1.0.0 (Next.js)  
+**Last Updated**: October 2024  
+**Maintained by**: [subammmm](https://github.com/subammmm)
 
