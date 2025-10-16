@@ -189,14 +189,14 @@ function Header() {
   const aiEnabled = process.env.NEXT_PUBLIC_CIVORA_AI_ENABLED === 'true';
 
   return (
-    <header className="site-header">
+    <header className="site-header" role="banner">
       <div className="header-inner">
-        <a className="brand" href="/">
+        <a className="brand" href="/" aria-label="Civora Home">
           <img src="/assets/logo.svg" alt="Civora Logo" className="brand-logo" />
           Civora
         </a>
 
-        <nav id="site-nav" className="site-nav">
+        <nav id="site-nav" className="site-nav" role="navigation" aria-label="Main navigation">
           <a href="/scholarships/" className="nav-item">
             Scholarships
           </a>
@@ -224,10 +224,15 @@ function Header() {
         </nav>
 
         <div className="header-controls">
-          <button className="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
+          <button 
+            className="nav-toggle" 
+            aria-label="Toggle navigation menu" 
+            aria-expanded="false"
+            aria-controls="site-nav"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
           </button>
         </div>
       </div>
@@ -237,13 +242,13 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" role="contentinfo">
       <div className="footer-inner">
         <div className="footer-left">
           <i className="fas fa-copyright icon-left" aria-hidden="true"></i>
           <span id="year"></span> Civora
         </div>
-        <div className="footer-right">
+        <nav className="footer-right" aria-label="Footer navigation">
           <a href="/about/">About</a>
           <a href="/scholarships/">Scholarships</a>
           <a href="/citizenship/">Citizenship</a>
@@ -256,15 +261,15 @@ function Footer() {
             href="https://linkedin.com/in/shubhamdhakal"
             className="social-icon"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             aria-label="Connect with Shubham Dhakal on LinkedIn"
             title="Connect with Shubham Dhakal on LinkedIn"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
             </svg>
           </a>
-        </div>
+        </nav>
       </div>
     </footer>
   );

@@ -14,6 +14,8 @@
     "format:write": "prettier --write .",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "link:check": "node scripts/link-check.mjs",
+    "validate": "bash tests/validate.sh",
+    "test": "npm run validate",
     "prebuild": "npm run sitemap"
   },
   "engines": {
