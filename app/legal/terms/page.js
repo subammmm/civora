@@ -1,3 +1,5 @@
+import LegalPageLayout from '../../components/LegalPageLayout';
+
 export const metadata = {
   title: 'Terms of Service',
   description: 'Civora terms of service - Rules and regulations for using our platform.',
@@ -5,11 +7,8 @@ export const metadata = {
 
 export default function TermsOfService() {
   return (
-    <main style={{ padding: '4rem 2rem', maxWidth: '900px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Terms of Service</h1>
-      <p style={{ color: '#666', marginBottom: '2rem' }}>Last updated: October 12, 2025</p>
-
-      <section style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
+    <LegalPageLayout title="Terms of Service" lastUpdated="October 12, 2025">
+      <section style={{ marginBottom: '2rem' }}>
         <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>1. Agreement to Terms</h2>
         <p>
           By accessing and using Civora ("the Service," "we," "our," or "us") at civora.me, you
@@ -188,6 +187,6 @@ export default function TermsOfService() {
           Service.
         </p>
       </div>
-    </main>
+    </LegalPageLayout>
   );
 }
