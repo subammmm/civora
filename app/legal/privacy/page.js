@@ -1,3 +1,5 @@
+import LegalPageLayout from '../../components/LegalPageLayout';
+
 export const metadata = {
   title: 'Privacy Policy',
   description: 'Civora privacy policy - How we collect, use, and protect your personal information.',
@@ -5,11 +7,8 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <main style={{ padding: '4rem 2rem', maxWidth: '900px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Privacy Policy</h1>
-      <p style={{ color: '#666', marginBottom: '2rem' }}>Last updated: October 12, 2025</p>
-
-      <section style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
+    <LegalPageLayout title="Privacy Policy" lastUpdated="October 12, 2025">
+      <section style={{ marginBottom: '2rem' }}>
         <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>1. Introduction</h2>
         <p>
           Welcome to Civora ("we," "our," or "us"). We are committed to protecting your personal
@@ -153,6 +152,6 @@ export default function PrivacyPolicy() {
           civora.me. By using our website, you consent to the terms of this Privacy Policy.
         </p>
       </div>
-    </main>
+    </LegalPageLayout>
   );
 }

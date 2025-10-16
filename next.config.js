@@ -9,10 +9,44 @@ const nextConfig = {
   // For Vercel deployment with API routes, trailing slashes cause 308 redirects
   // which lose POST request bodies. API routes should be accessed without trailing slashes.
   ...(process.env.EXPORT_MODE === 'true' && { trailingSlash: true }),
+  
+  // Image optimization
   images: {
-    unoptimized: true,
+    unoptimized: process.env.EXPORT_MODE === 'true',
+    formats: ['image/avif', 'image/webp'],
   },
+  
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
   reactStrictMode: true,
+  
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin'
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
