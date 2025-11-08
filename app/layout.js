@@ -152,9 +152,8 @@ export default function RootLayout({ children }) {
         {/* Google Analytics */}
         <Script id="google-analytics" strategy="afterInteractive">
           {`
-            const GA_MEASUREMENT_ID = null;
-            
-            if (GA_MEASUREMENT_ID) {
+            const GA_MEASUREMENT_ID = 'G-3FRBDLWLW0';
+              if (GA_MEASUREMENT_ID) {
               const script = document.createElement('script');
               script.async = true;
               script.src = \`https://www.googletagmanager.com/gtag/js?id=\${GA_MEASUREMENT_ID}\`;
