@@ -1,0 +1,67 @@
+# FastAPI and ASGI server
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+asyncpg==0.29.0
+
+# Authentication
+pyjwt==2.8.0
+bcrypt==4.1.2
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Security and encryption
+cryptography==42.0.0
+
+# Machine Learning
+scikit-learn==1.4.0
+numpy==1.26.3
+scipy==1.12.0
+spacy==3.7.2
+pandas==2.2.0
+
+# RPA and Automation
+playwright==1.41.1
+selenium==4.17.2
+
+# API and HTTP
+httpx==0.26.0
+requests==2.31.0
+
+# Validation
+pydantic==2.5.3
+pydantic-settings==2.1.0
+email-validator==2.1.0
+
+# Rate limiting
+slowapi==0.1.9
+
+# CORS
+python-cors==1.0.0
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Logging
+python-json-logger==2.0.7
+
+# Testing
+pytest==7.4.4
+pytest-asyncio==0.23.3
+pytest-cov==4.1.0
+httpx==0.26.0
+
+# PDF generation
+reportlab==4.0.9
+pypdf2==3.0.1
+
+# Cache
+cachetools==5.3.2
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2024.1

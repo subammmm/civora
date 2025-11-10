@@ -1,0 +1,227 @@
+"""
+GlobalForge.ai Backend API
+FastAPI application for visa, scholarship, tax, citizenship, and wealth optimization
+"""
+import os
+from fastapi import FastAPI, Request, status
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from contextlib import asynccontextmanager
+from dotenv import load_dotenv
+
+from database import init_db, engine, Base
+from routers import users_router, matching_router, automation_router, sims_router
+from utils import logger, error_response
+
+# Load environment variables
+load_dotenv()
+
+# ============================================================================
+# Application Lifespan
+# ============================================================================
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    Application lifespan events
+    Runs on startup and shutdown
+    """
+    # Startup
+    logger.info("Starting GlobalForge.ai API...")
+    
+    # Initialize database tables
+    try:
+        Base.metadata.create_all(bind=engine)
+        logger.info("Database tables initialized")
+    except Exception as e:
+        logger.error(f"Database initialization failed: {str(e)}")
+    
+    # Verify environment variables
+    required_vars = ["DATABASE_URL", "JWT_SECRET_KEY"]
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    if missing_vars:
+        logger.warning(f"Missing environment variables: {', '.join(missing_vars)}")
+    
+    logger.info("API startup complete")
+    
+    yield
+    
+    # Shutdown
+    logger.info("Shutting down GlobalForge.ai API...")
+
+# ============================================================================
+# Initialize FastAPI App
+# ============================================================================
+
+app = FastAPI(
+    title="GlobalForge.ai API",
+    description="AI-native platform for visa, scholarship, tax, citizenship, and wealth optimization",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# ============================================================================
+# CORS Configuration
+# ============================================================================
+
+# Get allowed origins from environment or use defaults
+ALLOWED_ORIGINS = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:3000,http://localhost:3001,https://subammmm.github.io,https://*.vercel.app"
+).split(",")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"]
+)
+
+# ============================================================================
+# Rate Limiting
+# ============================================================================
+
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# ============================================================================
+# Exception Handlers
+# ============================================================================
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    """
+    Global exception handler for unhandled errors
+    """
+    logger.error(f"Unhandled exception: {str(exc)}", exc_info=True)
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content=error_response(
+            error="Internal server error",
+            detail="An unexpected error occurred",
+            code="INTERNAL_ERROR"
+        )
+    )
+
+@app.exception_handler(RateLimitExceeded)
+async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    """
+    Rate limit exceeded handler
+    """
+    return JSONResponse(
+        status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+        content=error_response(
+            error="Rate limit exceeded",
+            detail="Too many requests. Please try again later.",
+            code="RATE_LIMIT_EXCEEDED"
+        )
+    )
+
+# ============================================================================
+# Include Routers
+# ============================================================================
+
+# Apply rate limits to all routes
+app.include_router(
+    users_router,
+    prefix="/api",
+    responses={
+        429: {"description": "Rate limit exceeded"}
+    }
+)
+
+app.include_router(
+    matching_router,
+    prefix="/api",
+    responses={
+        429: {"description": "Rate limit exceeded"}
+    }
+)
+
+app.include_router(
+    automation_router,
+    prefix="/api",
+    responses={
+        429: {"description": "Rate limit exceeded"}
+    }
+)
+
+app.include_router(
+    sims_router,
+    prefix="/api",
+    responses={
+        429: {"description": "Rate limit exceeded"}
+    }
+)
+
+# ============================================================================
+# Health Check Endpoints
+# ============================================================================
+
+@app.get("/")
+@limiter.limit("100/minute")
+async def root(request: Request):
+    """
+    Root endpoint - API info
+    """
+    return {
+        "name": "GlobalForge.ai API",
+        "version": "1.0.0",
+        "status": "operational",
+        "docs": "/docs",
+        "endpoints": {
+            "users": "/api/users",
+            "matching": "/api/matching",
+            "automation": "/api/automation",
+            "simulations": "/api/sims"
+        }
+    }
+
+@app.get("/health")
+@limiter.limit("100/minute")
+async def health_check(request: Request):
+    """
+    Health check endpoint for monitoring
+    """
+    try:
+        # Test database connection
+        from database import SessionLocal
+        db = SessionLocal()
+        db.execute("SELECT 1")
+        db.close()
+        db_status = "healthy"
+    except Exception as e:
+        logger.error(f"Database health check failed: {str(e)}")
+        db_status = "unhealthy"
+    
+    return {
+        "status": "healthy" if db_status == "healthy" else "degraded",
+        "database": db_status,
+        "api": "healthy"
+    }
+
+# ============================================================================
+# Application Entry Point
+# ============================================================================
+
+if __name__ == "__main__":
+    import uvicorn
+    
+    port = int(os.getenv("PORT", 8000))
+    host = os.getenv("HOST", "0.0.0.0")
+    
+    uvicorn.run(
+        "main:app",
+        host=host,
+        port=port,
+        reload=os.getenv("ENV", "production") == "development",
+        log_level="info"
+    )
