@@ -957,34 +957,12 @@ a:hover {
 }
 
 /* Ensure buttons inside cards always have visible text (not hidden by card link styles) */
-.card .linear-button,
-.box .linear-button,
-.linear-card .linear-button,
-.tile .linear-button,
-.card .btn,
-.box .btn,
-.linear-card .btn,
-.tile .btn,
-.card .btn-primary,
-.box .btn-primary,
-.linear-card .btn-primary,
-.tile .btn-primary {
+:is(.card, .box, .linear-card, .tile) :is(.linear-button, .btn, .btn-primary) {
   color: var(--text-primary);
   text-decoration: none;
 }
 
-.card .linear-button:hover,
-.box .linear-button:hover,
-.linear-card .linear-button:hover,
-.tile .linear-button:hover,
-.card .btn:hover,
-.box .btn:hover,
-.linear-card .btn:hover,
-.tile .btn:hover,
-.card .btn-primary:hover,
-.box .btn-primary:hover,
-.linear-card .btn-primary:hover,
-.tile .btn-primary:hover {
+:is(.card, .box, .linear-card, .tile) :is(.linear-button, .btn, .btn-primary):hover {
   color: var(--text-primary);
   text-decoration: none;
 }
