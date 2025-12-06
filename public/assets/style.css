@@ -956,6 +956,17 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Ensure buttons inside cards always have visible text (not hidden by card link styles) */
+:is(.card, .box, .linear-card, .tile) :is(.linear-button, .btn, .btn-primary) {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+:is(.card, .box, .linear-card, .tile) :is(.linear-button, .btn, .btn-primary):hover {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
 /* Phase 4 - Components */
 /* Buttons */
 /* Primary: filled #5E6AD2, white text, 8px radius */
