@@ -2,10 +2,7 @@
 
 import { scholarships } from './scholarships-data';
 
-export const metadata = {
-  title: 'Scholarships Database',
-  description: 'Discover and compare scholarships tailored for Nepali students worldwide.',
-};
+
 
 // Issue #18 FIX: Converted from dangerouslySetInnerHTML to safe JSX
 export default function ScholarshipsPage() {
