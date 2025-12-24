@@ -1,0 +1,151 @@
+/* ============================================================================
+   LOADING STATES & ERROR MESSAGES - Issues #7-8 FIXED
+   ============================================================================ */
+
+.loading-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    min-height: 200px;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error-message,
+.error-banner {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 4px solid var(--error);
+    color: var(--error);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-card);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+[data-theme="light"] .error-message,
+[data-theme="light"] .error-banner {
+    background: rgba(220, 38, 38, 0.1);
+    color: #991b1b;
+}
+
+.success-message {
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 4px solid var(--success);
+    color: var(--success);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-card);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+/* ============================================================================
+   TOAST NOTIFICATIONS - Issue #14 FIXED
+   ============================================================================ */
+
+.toast {
+    position: fixed;
+    bottom: var(--space-6);
+    right: var(--space-6);
+    background: var(--surface);
+    color: var(--text-primary);
+    padding: var(--space-4);
+    border-radius: var(--radius-card);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    min-width: 300px;
+    max-width: 500px;
+    z-index: var(--z-tooltip);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-success {
+    border-left: 4px solid var(--success);
+}
+
+.toast-error {
+    border-left: 4px solid var(--error);
+}
+
+.toast-info {
+    border-left: 4px solid var(--accent);
+}
+
+.toast-warning {
+    border-left: 4px solid var(--warning);
+}
+
+/* ============================================================================
+   MODAL IMPROVEMENTS - Issues #16-17 FIXED
+   ============================================================================ */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: var(--z-modal-backdrop);
+    backdrop-filter: blur(4px);
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--surface);
+    border-radius: var(--radius-modal);
+    padding: var(--space-6);
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: var(--z-modal);
+}
+
+/* Prevent body scroll when modal open - JS will add this class */
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+/* ============================================================================
+   RESPONSIVE IMPROVEMENTS - Issue #11 Enhanced
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .toast {
+        bottom: var(--space-4);
+        right: var(--space-4);
+        left: var(--space-4);
+        min-width: unset;
+    }
+
+    .modal {
+        max-width: 95vw;
+        padding: var(--space-4);
+    }
+}

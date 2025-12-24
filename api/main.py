@@ -1,18 +1,21 @@
+```
 """
 GlobalForge.ai Backend API
 FastAPI application for visa, scholarship, tax, citizenship, and wealth optimization
 """
 import os
-from fastapi import FastAPI, Request, status
+from fastapi import FastAPI, Request, status, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from sqlalchemy.orm import Session
+from sqlalchemy import text
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 
-from database import init_db, engine, Base
+from database import init_db, engine, Base, get_db
 from routers import users_router, matching_router, automation_router, sims_router
 from utils import logger, error_response
 
@@ -40,10 +43,22 @@ async def lifespan(app: FastAPI):
         logger.error(f"Database initialization failed: {str(e)}")
     
     # Verify environment variables
+    # Issue #22 FIXED: Strict JWT validation
     required_vars = ["DATABASE_URL", "JWT_SECRET_KEY"]
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     if missing_vars:
-        logger.warning(f"Missing environment variables: {', '.join(missing_vars)}")
+        raise RuntimeError(
+            f"Missing required environment variables: {missing_vars}. "
+            f"Please set these in your .env file before starting the server."
+        )
+    
+    # Validate JWT_SECRET_KEY strength
+    jwt_secret = os.getenv("JWT_SECRET_KEY", "")
+    if len(jwt_secret) < 32:
+        raise RuntimeError(
+            "JWT_SECRET_KEY must be at least 32 characters long. "
+            "Generate one with: python -c 'import secrets; print(secrets.token_urlsafe(32))'"
+        )
     
     logger.info("API startup complete")
     
@@ -129,38 +144,23 @@ async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
 # Include Routers
 # ============================================================================
 
-# Apply rate limits to all routes
-app.include_router(
-    users_router,
-    prefix="/api",
-    responses={
-        429: {"description": "Rate limit exceeded"}
-    }
-)
+# Issue #45 FIXED: API Versioning
+API_V1_PREFIX = "/api/v1"
 
-app.include_router(
-    matching_router,
-    prefix="/api",
-    responses={
-        429: {"description": "Rate limit exceeded"}
-    }
-)
-
-app.include_router(
-    automation_router,
-    prefix="/api",
-    responses={
-        429: {"description": "Rate limit exceeded"}
-    }
-)
-
-app.include_router(
-    sims_router,
-    prefix="/api",
-    responses={
-        429: {"description": "Rate limit exceeded"}
-    }
-)
+# Include routers with versioning
+try:
+    from routers import users_router, matching_router, automation_router, sims_router
+    
+    app.include_router(users_router, prefix=API_V1_PREFIX, tags=["users"])
+    app.include_router(matching_router, prefix=API_V1_PREFIX, tags=["matching"])
+    app.include_router(automation_router, prefix=API_V1_PREFIX, tags=["automation"])
+    app.include_router(sims_router, prefix=API_V1_PREFIX, tags=["sims"])
+    
+    logger.info(f"API routers loaded with prefix: {API_V1_PREFIX}")
+except ImportError as e:
+    logger.warning(f"Some routers not available: {str(e)}")
+except Exception as e:
+    logger.error(f"Error loading routers: {str(e)}")
 
 # ============================================================================
 # Health Check Endpoints
@@ -186,24 +186,22 @@ async def root(request: Request):
     }
 
 @app.get("/health")
-@limiter.limit("100/minute")
-async def health_check(request: Request):
+async def health_check(db: Session = Depends(get_db)):
     """
-    Health check endpoint for monitoring
+    Health check endpoint
+    Returns API status and database connectivity
     """
     try:
-        # Test database connection
-        from database import SessionLocal
-        db = SessionLocal()
-        db.execute("SELECT 1")
-        db.close()
-        db_status = "healthy"
+        # Check database connection
+        db.execute(text("SELECT 1"))
+        db_status = "connected"
     except Exception as e:
         logger.error(f"Database health check failed: {str(e)}")
-        db_status = "unhealthy"
+        db_status = "disconnected"
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="Database unavailable")
     
     return {
-        "status": "healthy" if db_status == "healthy" else "degraded",
+        "status": "healthy",
         "database": db_status,
         "api": "healthy"
     }

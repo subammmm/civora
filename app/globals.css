@@ -12,15 +12,18 @@
 :root {
   /* Design Tokens - Phase 1 Foundations */
   /* Colors - Dark-first Design */
-  --bg-primary: #0e0e10; /* Background */
-  --surface: #1c1c1f; /* Surface panels */
-  --border: #2a2a2d; /* Borders/dividers */
-  --text-primary: #ffffff; /* Primary text */
-  --text-secondary: #9ca3af; /* Secondary text */
-  --accent: #5e6ad2; /* Accent (brand purple) */
-  --success: #10b981; /* Success */
-  --error: #ef4444; /* Error */
-  --warning: #f59e0b; /* Warning */
+  /* Dark theme (default) */
+  --bg-primary: #0e0e10;
+  --surface: #1c1c1f;
+  --border: #2a2a2d;
+  --text-primary: #ffffff;
+  --text-secondary: #b8bfc8;
+  /* Issue #4 FIXED: Better contrast */
+  --accent: #5e6ad2;
+  --success: #10b981;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --bg-secondary: #18181b;
 
   /* Typography Scale */
   --h1-size: 48px;
@@ -96,6 +99,80 @@
   --focus: rgba(94, 106, 210, 0.3);
 }
 
+/* Issue #2 FIXED: Light theme support */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --surface: #f9fafb;
+  --border: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --accent: #5e6ad2;
+  --success: #059669;
+  --warning: #d97706;
+  --error: #dc2626;
+  --bg-secondary: #f3f4f6;
+}
+
+/* Issue #15 FIXED: Z-Index Management Scale */
+:root {
+  --z-base: 1;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* Issue #12-13 FIXED: Layout Improvements */
+.content-container {
+  max-width: 65ch;
+  margin: 0 auto;
+}
+
+.prose {
+  max-width: 65ch;
+  line-height: 1.75;
+}
+
+/* Issue #9-10 FIXED: Consistent Spacing Utilities */
+.gap-sm {
+  gap: var(--space-2);
+}
+
+.gap-md {
+  gap: var(--space-4);
+}
+
+.gap-lg {
+  gap: var(--space-6);
+}
+
+.mb-sm {
+  margin-bottom: var(--space-2);
+}
+
+.mb-md {
+  margin-bottom: var(--space-4);
+}
+
+.mb-lg {
+  margin-bottom: var(--space-6);
+}
+
+.p-sm {
+  padding: var(--space-2);
+}
+
+.p-md {
+  padding: var(--space-4);
+}
+
+.p-lg {
+  padding: var(--space-6);
+}
+
 /* Global CSS Reset and System Setup */
 html,
 body {
@@ -131,13 +208,11 @@ body {
   font-weight: var(--body-weight);
 }
 
-/* Page Wrapper - 75% Scaling */
+/* Page Wrapper for consistent layout - Issue #1 FIXED: Removed 75% scaling */
 #wrapper {
-  transform-origin: top left;
-  transform: scale(0.75) translateZ(0);
-  width: calc(100% / 0.75);
-  min-height: calc(100vh / 0.75);
-  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
   top: 0;
   left: 0;
   will-change: transform;
@@ -146,7 +221,7 @@ body {
 }
 
 /* Prevent bottom scroll gap */
-body > *:not(#wrapper) {
+body>*:not(#wrapper) {
   display: none;
 }
 
@@ -231,7 +306,8 @@ body {
 }
 
 .micro-text {
-  font-size: clamp(12px, 1.2vw, 14px); /* Micro text: 12–14px */
+  font-size: clamp(12px, 1.2vw, 14px);
+  /* Micro text: 12–14px */
   font-weight: 400;
   color: var(--text-muted);
   line-height: 1.5;
@@ -242,15 +318,19 @@ body {
 .font-light {
   font-weight: 300;
 }
+
 .font-regular {
   font-weight: 400;
 }
+
 .font-medium {
   font-weight: 500;
 }
+
 .font-semibold {
   font-weight: 600;
 }
+
 .font-bold {
   font-weight: 700;
 }
@@ -259,24 +339,31 @@ body {
 .text-xs {
   font-size: 12px;
 }
+
 .text-sm {
   font-size: 14px;
 }
+
 .text-base {
   font-size: 18px;
 }
+
 .text-lg {
   font-size: 20px;
 }
+
 .text-xl {
   font-size: 24px;
 }
+
 .text-2xl {
   font-size: 32px;
 }
+
 .text-3xl {
   font-size: 48px;
 }
+
 .text-4xl {
   font-size: 96px;
 }
@@ -285,12 +372,15 @@ body {
 .leading-tight {
   line-height: 1.08;
 }
+
 .leading-snug {
   line-height: 1.15;
 }
+
 .leading-normal {
   line-height: 1.7;
 }
+
 .leading-relaxed {
   line-height: 1.8;
 }
@@ -299,9 +389,11 @@ body {
 .text-hi {
   color: var(--text-hi);
 }
+
 .text-normal {
   color: var(--text);
 }
+
 .text-muted {
   color: var(--text-muted);
 }
@@ -310,9 +402,11 @@ body {
 .uppercase {
   text-transform: uppercase;
 }
+
 .lowercase {
   text-transform: lowercase;
 }
+
 .capitalize {
   text-transform: capitalize;
 }
@@ -394,8 +488,18 @@ i {
   margin: 0 auto;
 }
 
+/* Issue #11 FIXED: Tablet breakpoint */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .grid-3-cols,
+  .grid-4-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
-  .grid-2x2,
+
+  .grid-2-cols,
   .grid-3-cols,
   .grid-4-cols {
     grid-template-columns: 1fr;
@@ -532,6 +636,7 @@ i {
 
 /* Mobile responsiveness for box grids */
 @media (max-width: 768px) {
+
   .stats-grid,
   .info-box-grid,
   .feature-grid {
@@ -548,36 +653,47 @@ i {
 .col-1 {
   grid-column: span 1;
 }
+
 .col-2 {
   grid-column: span 2;
 }
+
 .col-3 {
   grid-column: span 3;
 }
+
 .col-4 {
   grid-column: span 4;
 }
+
 .col-5 {
   grid-column: span 5;
 }
+
 .col-6 {
   grid-column: span 6;
 }
+
 .col-7 {
   grid-column: span 7;
 }
+
 .col-8 {
   grid-column: span 8;
 }
+
 .col-9 {
   grid-column: span 9;
 }
+
 .col-10 {
   grid-column: span 10;
 }
+
 .col-11 {
   grid-column: span 11;
 }
+
 .col-12 {
   grid-column: span 12;
 }
@@ -591,19 +707,22 @@ i {
 /* Reduce excessive spacing at bottom of pages */
 .page {
   padding: 1rem 0;
-  padding-bottom: 0.5rem; /* Minimal bottom padding */
+  padding-bottom: 0.5rem;
+  /* Minimal bottom padding */
 }
 
 /* Reduce gaps between sections on about page */
 .about-section {
-  padding: 1.5rem 0; /* Further reduced from default section spacing */
+  padding: 1.5rem 0;
+  /* Further reduced from default section spacing */
 }
 
 /* Timeline Components */
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Reduced from 2rem for tighter spacing */
+  gap: 1.5rem;
+  /* Reduced from 2rem for tighter spacing */
 }
 
 .timeline-step {
@@ -671,11 +790,16 @@ i {
   font-weight: 600;
 }
 
-/* Linear Button */
-.linear-button {
+/* Linear-style Buttons - Issue #6 FIXED: 44px touch targets */
+.linear-button,
+.button,
+button:not(.unstyled) {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  min-height: 44px;
+  /* WCAG touch target minimum */
+  min-width: 44px;
   padding: 0.75rem 1.25rem;
   background: var(--accent);
   color: var(--text-primary);
@@ -702,8 +826,10 @@ i {
 
 /* Footer - ensure proper spacing */
 .site-footer {
-  margin-top: 1rem; /* Reduced from 2rem to 1rem */
-  padding: 1.5rem 0; /* Reduced from 2rem to 1.5rem */
+  margin-top: 1rem;
+  /* Reduced from 2rem to 1rem */
+  padding: 1.5rem 0;
+  /* Reduced from 2rem to 1.5rem */
   border-top: 1px solid var(--border);
 }
 
@@ -786,7 +912,8 @@ i {
     background 160ms ease,
     border-color 160ms ease,
     transform 160ms ease;
-  margin-bottom: var(--space-4); /* Reduced from space-8 to space-4 (16px) */
+  margin-bottom: var(--space-4);
+  /* Reduced from space-8 to space-4 (16px) */
   overflow: hidden;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -898,7 +1025,7 @@ i {
   .linear-table {
     font-size: 0.875rem;
   }
-  
+
   .linear-table tbody td {
     padding: 1rem 0.5rem;
   }
@@ -908,21 +1035,26 @@ i {
   margin-left: 8px;
 }
 
-/* Skip to Content - Accessibility */
+/* Skip to content link - Issue #3 FIXED */
 .skip-to-content {
   position: absolute;
   top: -40px;
-  left: 6px;
-  background: var(--brand);
-  color: var(--button-text);
+  left: 0;
+  background: var(--accent);
+  color: white;
   padding: 8px;
   text-decoration: none;
   border-radius: 4px;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .skip-to-content:focus {
-  top: 6px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 10000;
+  outline: 2px solid white;
+  border-radius: 4px;
 }
 
 /* Phase 3 - Navigation System */
@@ -1128,7 +1260,8 @@ i {
 /* Main Content Layout */
 .main-content {
   flex: 1;
-  margin-top: clamp(64px, 8vh, 72px); /* Header height */
+  margin-top: clamp(64px, 8vh, 72px);
+  /* Header height */
 }
 
 /* Page content wrapper - Add top padding to avoid header overlap */
@@ -1398,7 +1531,7 @@ textarea::placeholder {
   color: var(--text-primary);
 }
 
-.submission-card > p {
+.submission-card>p {
   margin-bottom: 2rem;
   color: var(--text-secondary);
 }
@@ -1515,7 +1648,7 @@ textarea::placeholder {
   margin: 3rem 0;
 }
 
-.success-stories > h2 {
+.success-stories>h2 {
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -1650,6 +1783,7 @@ textarea::placeholder {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -1691,6 +1825,7 @@ dropdown.active {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
@@ -1726,6 +1861,7 @@ dropdown.active {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1741,6 +1877,7 @@ dropdown.active {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1814,9 +1951,11 @@ select:focus-visible {
 .text-success {
   color: var(--success);
 }
+
 .text-error {
   color: var(--error);
 }
+
 .text-warning {
   color: var(--warning);
 }
@@ -1827,21 +1966,27 @@ select:focus-visible {
 .m-0 {
   margin: 0;
 }
+
 .m-1 {
   margin: var(--space-1);
 }
+
 .m-2 {
   margin: var(--space-2);
 }
+
 .m-3 {
   margin: var(--space-3);
 }
+
 .m-4 {
   margin: var(--space-4);
 }
+
 .m-6 {
   margin: var(--space-6);
 }
+
 .m-8 {
   margin: var(--space-8);
 }
@@ -1849,21 +1994,27 @@ select:focus-visible {
 .p-0 {
   padding: 0;
 }
+
 .p-1 {
   padding: var(--space-1);
 }
+
 .p-2 {
   padding: var(--space-2);
 }
+
 .p-3 {
   padding: var(--space-3);
 }
+
 .p-4 {
   padding: var(--space-4);
 }
+
 .p-6 {
   padding: var(--space-6);
 }
+
 .p-8 {
   padding: var(--space-8);
 }
@@ -1872,15 +2023,19 @@ select:focus-visible {
 .flex {
   display: flex;
 }
+
 .flex-col {
   flex-direction: column;
 }
+
 .items-center {
   align-items: center;
 }
+
 .justify-center {
   justify-content: center;
 }
+
 .justify-between {
   justify-content: space-between;
 }
@@ -1889,12 +2044,15 @@ select:focus-visible {
 .relative {
   position: relative;
 }
+
 .absolute {
   position: absolute;
 }
+
 .fixed {
   position: fixed;
 }
+
 .sticky {
   position: sticky;
 }
@@ -1903,12 +2061,15 @@ select:focus-visible {
 .block {
   display: block;
 }
+
 .inline {
   display: inline;
 }
+
 .inline-block {
   display: inline-block;
 }
+
 .hidden {
   display: none;
 }
@@ -1917,6 +2078,7 @@ select:focus-visible {
 .overflow-hidden {
   overflow: hidden;
 }
+
 .overflow-visible {
   overflow: visible;
 }
@@ -1925,6 +2087,7 @@ select:focus-visible {
 .visible {
   visibility: visible;
 }
+
 .invisible {
   visibility: hidden;
 }
@@ -1933,15 +2096,19 @@ select:focus-visible {
 .z-10 {
   z-index: 10;
 }
+
 .z-20 {
   z-index: 20;
 }
+
 .z-30 {
   z-index: 30;
 }
+
 .z-40 {
   z-index: 40;
 }
+
 .z-50 {
   z-index: 50;
 }
@@ -1951,6 +2118,7 @@ select:focus-visible {
   .mobile-hidden {
     display: none;
   }
+
   .desktop-hidden {
     display: block;
   }
@@ -1960,6 +2128,7 @@ select:focus-visible {
   .mobile-hidden {
     display: block;
   }
+
   .desktop-hidden {
     display: none;
   }
