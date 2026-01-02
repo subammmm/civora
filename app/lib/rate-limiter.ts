@@ -1,7 +1,7 @@
-"""
-Issue #51 FIXED: Client - Side Rate Limiting
-Token bucket implementation to prevent API abuse
-"""
+/**
+ * Issue #51 FIXED: Client - Side Rate Limiting
+ * Token bucket implementation to prevent API abuse
+ */
 
 class RateLimiter {
     private tokens: number;

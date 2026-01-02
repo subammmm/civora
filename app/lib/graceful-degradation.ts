@@ -1,7 +1,7 @@
-"""
-Issue #52 FIXED: Graceful Degradation Utilities
-Fallbacks for missing browser features
-"""
+/**
+ * Issue #52 FIXED: Graceful Degradation Utilities
+ * Fallbacks for missing browser features
+ */
 
 // Check for feature support
 export const features = {
