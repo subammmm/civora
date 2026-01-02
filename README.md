@@ -1,4 +1,4 @@
-linganguli # 🌍 Civora
+# 🌍 Civora
 
 > **Important**: This project is a **Next.js 14 App Router application** with dual deployment strategy. The Next.js app under `app/` is the single source of truth for all active pages.
 
