@@ -113,8 +113,6 @@
 
 /* Global CSS Reset and System Setup */
 html, body {
-html,
-body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -168,9 +166,6 @@ body > *:not(#wrapper) {
 }
 
 .site-fixed, header.site-fixed, footer.site-fixed {
-.site-fixed,
-header.site-fixed,
-footer.site-fixed {
   position: relative;
 }
 
@@ -233,8 +228,6 @@ h6 {
 }
 
 p, body {
-p,
-body {
   font-size: var(--body-size);
   line-height: calc(var(--body-line) / var(--body-size));
   font-weight: var(--body-weight);
@@ -242,8 +235,6 @@ body {
 }
 
 .subtext, .small-text {
-.subtext,
-.small-text {
   font-size: var(--small-size);
   line-height: calc(var(--small-line) / var(--small-size));
   font-weight: var(--small-weight);
@@ -293,6 +284,13 @@ body {
 
 /* Code and Monospace */
 code, .code {
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
 .font-light {
   font-weight: 300;
 }
@@ -392,15 +390,11 @@ pre {
 
 /* Emphasis Elements */
 strong, b {
-strong,
-b {
   font-weight: 600;
   color: var(--text-hi);
 }
 
 em, i {
-em,
-i {
   font-style: italic;
 }
 
@@ -461,8 +455,6 @@ i {
 
 /* Uniform Box Layout System - For Metrics, Stats, and Info Cards */
 .stats-grid, .info-box-grid {
-.stats-grid,
-.info-box-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--grid-gutter);
@@ -471,8 +463,6 @@ i {
 }
 
 .stat-card, .info-box {
-.stat-card,
-.info-box {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
@@ -500,6 +490,15 @@ i {
 
 /* Info box icon styling */
 .info-box-icon, .stat-card .icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
 .stat-card:hover,
 .info-box:hover {
   background: #1f1f22;
@@ -526,8 +525,6 @@ i {
 
 /* Stat number styling */
 .stat-number, .info-box-number {
-.stat-number,
-.info-box-number {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -538,9 +535,6 @@ i {
 
 /* Info box description */
 .info-box-desc, .stat-card p, .info-box p {
-.info-box-desc,
-.stat-card p,
-.info-box p {
   font-size: var(--body-size);
   color: var(--text-secondary);
   margin: 0;
@@ -613,15 +607,6 @@ i {
   }
   
   .stat-card, .info-box {
-  .stats-grid,
-  .info-box-grid,
-  .feature-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .stat-card,
-  .info-box {
     min-height: 150px;
   }
 }
@@ -885,10 +870,6 @@ i {
 
 /* Card/Tile System - Updated with new specifications */
 .card, .box, .linear-card, .tile {
-.card,
-.box,
-.linear-card,
-.tile {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
@@ -1218,6 +1199,9 @@ a:hover {
 }
 
 .card a:hover, .box a:hover, .linear-card a:hover, .tile a:hover {
+  text-decoration: underline;
+}
+
 .card a,
 .box a,
 .linear-card a,
@@ -1248,11 +1232,6 @@ a:hover {
 /* Buttons */
 /* Primary: filled #5E6AD2, white text, 8px radius */
 .btn, .btn-primary {
-/* Phase 4 - Components */
-/* Buttons */
-/* Primary: filled #5E6AD2, white text, 8px radius */
-.btn,
-.btn-primary {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -1292,15 +1271,11 @@ a:hover {
 
 /* Focus: match hover for keyboard navigation */
 .btn:focus, .btn-primary:focus {
-.btn:focus,
-.btn-primary:focus {
   opacity: 1;
 }
 
 /* Active: inset shadow */
 .btn:active, .btn-primary:active {
-.btn:active,
-.btn-primary:active {
   transform: translateY(0);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
   opacity: 1;
@@ -1350,8 +1325,6 @@ a:hover {
 }
 
 /* Apply opacity transition to all button elements */
-button {
-/* Apply translucent text to all button elements */
 button {
   opacity: 0.5;
   transition: opacity 0.3s ease;
