@@ -1,3 +1,7 @@
+// v56 - GEMINI MODEL FIX: Updated to use correct Gemini model name
+// Fixed invalid model reference from gemini-2.5-flash to gemini-1.5-flash
+// This resolves API errors caused by requesting non-existent model
+//
 // v55 - TRAILING SLASH FIX: API routes now work without trailing slashes
 // Fixed 308 redirect issue by making trailingSlash conditional in next.config.js
 // Frontend updated to call /api/ai-assistant (no trailing slash)
@@ -74,10 +78,11 @@ export async function GET() {
   return new Response(
     JSON.stringify({ 
       status: 'ok', 
-      version: 'v55',
+      version: 'v56',
       envConfigured: !envValidationError,
       providers: 'Gemini + LangSearch only (OpenAI removed)',
-      trailingSlash: 'Not required (v55 fix)'
+      trailingSlash: 'Not required (v55 fix)',
+      model: 'gemini-1.5-flash (v56 fix)'
     }), 
     { status: 200, headers: CORS_HEADERS }
   );
@@ -380,7 +385,7 @@ If you cannot generate a complete roadmap, reply with: "Sorry, couldn't generate
       const gemController = new AbortController();
       const gemTimeout = setTimeout(() => gemController.abort(), 15000);
       const geminiRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?key=${process.env.GEMINI_API_KEY}&alt=sse`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?key=${process.env.GEMINI_API_KEY}&alt=sse`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

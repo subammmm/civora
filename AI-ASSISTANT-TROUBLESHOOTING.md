@@ -193,7 +193,7 @@ async function sendMessage(text) {
 2. **Verify API key:**
 ```bash
 # Test Gemini API directly
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=YOUR_KEY" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"contents":[{"parts":[{"text":"test"}]}]}'
 ```
@@ -436,7 +436,7 @@ Look for these patterns:
 
 **Test Gemini API directly:**
 ```bash
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=YOUR_GEMINI_KEY" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_GEMINI_KEY" \
   -H "Content-Type: application/json" \
   -d '{"contents":[{"parts":[{"text":"Say hello"}]}]}'
 ```
