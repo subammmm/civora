@@ -1,614 +1,110 @@
-linganguli # 🌍 Civora
+# 🌍 Civora
 
-> **Important**: This project is a **Next.js 14 App Router application** with dual deployment strategy. The Next.js app under `app/` is the single source of truth for all active pages.
+**Civora** is an AI-powered civic engagement platform designed to bridge the gap between citizens and their governments. It transforms how people interact with democracy by making civic participation accessible, informed, and impactful.
 
-Civora is a research-based platform that compiles verified scholarships, visa pathways, and citizenship options for students from Nepal and other underrepresented countries.
+## 🎯 Vision
 
-**Built with Next.js 14** 🚀
+To create a world where every citizen has equal access to civic information and the tools to make their voice heard effectively in their democracy.
 
-## Technology Stack
+## ✨ Key Features
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: JavaScript (with TypeScript support)
-- **Styling**: CSS (preserved from original site)
-- **Deployment**: Dual Vercel deployment strategy (civora.me with AI disabled, preview with AI enabled) + GitHub Pages (static backup)
-- **Domain**: civora.me
-- **Quality Tools**: ESLint, Prettier, TypeScript type-checking
-- **AI Features**: Conditional rendering based on environment variables
+### 📋 Smart Legislation Tracking
+- Real-time monitoring of bills and legislation at federal, state, and local levels
+- AI-powered plain-language summaries of complex legal documents
+- Personalized alerts based on your interests and location
 
-## AI Chat Feature
+### 🗣️ Civic Voice Tools
+- Find and contact your elected representatives
+- Generate personalized, effective messages to officials
+- Track your civic engagement history and impact
 
-Civora includes an **optional AI-powered chat assistant** that can be enabled or disabled per deployment:
+### 📊 Transparency Dashboard
+- Government spending visualization
+- Voting records of elected officials
+- Campaign finance tracking
 
-- **civora.me (Vercel Production)** - `NEXT_PUBLIC_CIVORA_AI_ENABLED=false`: AI chat is hidden from users
-- **Vercel Preview/Testing** - `NEXT_PUBLIC_CIVORA_AI_ENABLED=true`: AI chat is accessible at `/ai-chat/`
+### 🤖 AI Civic Assistant
+- Ask questions about laws, rights, and civic processes
+- Get guidance on how to engage with local government
+- Receive personalized civic action recommendations
 
-The AI chat code is always preserved in the repository but conditionally rendered based on environment variables. See [AI-CHAT-CONDITIONAL-RENDERING.md](./AI-CHAT-CONDITIONAL-RENDERING.md) for full documentation.
+## 🛠️ Tech Stack
 
-## Deployment
+- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express
+- **Database**: PostgreSQL with Prisma ORM
+- **AI/ML**: OpenAI GPT-4, Custom NLP models
+- **APIs**: Congress.gov, OpenStates, Google Civic Information
+- **Infrastructure**: Vercel, AWS
 
-Civora uses a **dual Vercel deployment strategy** with different environment configurations:
-
-### Primary: civora.me (Vercel Production - AI Disabled)
-- ✅ Full Next.js with server-side rendering
-- ✅ Custom domain: civora.me
-- ❌ AI chat hidden from users (`NEXT_PUBLIC_CIVORA_AI_ENABLED=false`)
-- ✅ Automatic deployments from GitHub
-- ✅ Edge network for global performance
-
-### Testing: Vercel Preview (AI Enabled)
-- ✅ Full Next.js with all features
-- ✅ AI chat accessible for testing (`NEXT_PUBLIC_CIVORA_AI_ENABLED=true`)
-- ✅ Preview deployments for pull requests
-- ✅ Same codebase, different configuration
-
-**See [DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md) for complete setup instructions**
-
-### Backup: GitHub Pages
-- ✅ Static HTML export at https://subammmm.github.io/civora/
-- ✅ Free hosting backup
-- ❌ No API routes (AI assistant not supported)
-- ⚠️ NOT used for civora.me domain
-
-## Local Development
+## 🚀 Getting Started
 
 ### Prerequisites
+- Node.js 18+
+- PostgreSQL 14+
+- npm or yarn
 
-- Node.js 18.17.0 or higher (Node 20 recommended - see `.nvmrc`)
-- npm
-
-### Development Server
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/subammmm/civora.git
+cd civora
+
 # Install dependencies
 npm install
 
-# Copy environment variables (see Environment Variables section below)
-cp .env.example .env
-# Edit .env and add your API keys
+# Set up environment variables
+cp .env.example .env.local
 
-# Run development server
+# Run database migrations
+npx prisma migrate dev
+
+# Start the development server
 npm run dev
-# Open http://localhost:3000/
 ```
 
-### Environment Variables
+Visit `http://localhost:3000` to see the app.
 
-**Required for AI Chat Feature:**
-
-Create a `.env` file in the root directory (copy from `.env.example`):
-
-```env
-# AI Assistant APIs - REQUIRED for AI chat functionality
-# OpenAI API has been PERMANENTLY REMOVED (as of v54) - do NOT use OPENAI_API_KEY
-# Only Gemini and LangSearch are used now
-GEMINI_API_KEY=your_gemini_api_key_here
-LANGSEARCH_API_KEY=your_langsearch_api_key_here
-
-# AI Chat Feature Control
-# Set to 'true' to enable AI chat (for Vercel preview/testing)
-# Set to 'false' to disable AI chat (for civora.me production)
-NEXT_PUBLIC_CIVORA_AI_ENABLED=true
-
-# Environment
-NODE_ENV=development
-
-# Optional
-CORS_ORIGIN=*
-PORT=3000
-```
-
-**Important Notes:**
-- ❌ **OpenAI API permanently removed (v54)**: Do NOT use `OPENAI_API_KEY` - it is no longer supported
-- ✅ **Only Gemini & LangSearch**: The AI assistant exclusively uses these two APIs
-- 🔑 **Get API keys**: 
-  - Gemini: https://ai.google.dev/
-  - LangSearch: https://langsearch.com/
-- 🌐 **Frontend control**: `NEXT_PUBLIC_CIVORA_AI_ENABLED` controls UI visibility
-- 🔒 **Backend validation**: API route validates keys at startup and returns 500 if missing
-- 📊 **Enhanced logging**: Comprehensive request/response/error logging for debugging
-- 💡 **User-friendly errors**: Specific validation messages and helpful tips for all error states
-
-**Why OpenAI was removed:**
-- Cost and rate limiting constraints
-- Simplified architecture with only 2 API providers
-- Better control over response quality with Gemini
-- LangSearch provides real-time web context
-
-**Latest Version: v54** - Enhanced error handling, detailed logging, and improved user feedback
-
-### API Routes and Trailing Slashes
-
-⚠️ **Important**: This project uses `trailingSlash: true` in Next.js config. All API routes MUST be accessed with a trailing slash to avoid 308 redirects.
-
-**Example:**
-```javascript
-// ✅ Correct
-fetch("/api/ai-assistant/", { method: "POST", ... })
-
-// ❌ Wrong - causes 308 redirect, breaks POST
-fetch("/api/ai-assistant", { method: "POST", ... })
-```
-
-**Why**: POST requests with 308 redirects lose their request body, causing API calls to fail silently.
-
-See [VERCEL-DEPLOYMENT-NOTES.md](./VERCEL-DEPLOYMENT-NOTES.md) for more details.
-
-### Quality Checks
-
-```bash
-# Run ESLint
-npm run lint
-
-# Type check
-npm run type-check
-
-# Format check
-npm run format
-
-# Auto-format code
-npm run format:write
-```
-
-### Production Build
-
-```bash
-# Build for Vercel (with API routes)
-npm run build
-# Output: .next/ directory
-
-# Build for GitHub Pages (static export)
-npm run build:static
-# Output: out/ directory
-
-# Test static build locally
-cd out
-python3 -m http.server 8080
-# Open http://localhost:8080/
-```
-
-**Build Scripts**:
-- `npm run build` - Full Next.js build with API routes (for Vercel)
-- `npm run build:static` - Static export without API routes (for GitHub Pages)
-
-See [DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md) for complete deployment instructions.
-
-## CI/CD
-
-The project uses GitHub Actions for continuous integration and deployment:
-
-- **CI Workflow** (`.github/workflows/ci.yml`): Runs lint and type-check on all pushes and PRs to main
-- **Deploy Workflow** (`.github/workflows/deploy-pages.yml`): Automatically builds static export and deploys to GitHub Pages on push to main
-- **Dependabot**: Automatically opens PRs for dependency updates weekly
-
-**Note**: GitHub Pages deployment creates a static backup. For full features (including AI assistant), use Vercel deployment.
-
-## Live Sites
-
-- **Primary (Recommended)**: https://civora.me (point to Vercel for full features)
-- **Backup**: https://subammmm.github.io/civora (static version, no API routes)
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 civora/
-├── app/                    # Next.js App Router pages
-│   ├── layout.js          # Root layout (Header/Footer)
-│   ├── page.js            # Homepage
-│   ├── globals.css        # Global styles
-│   ├── scholarships/      # Scholarships page
-│   ├── citizenship/       # Citizenship page
-│   ├── about/             # About page
-│   └── ...                # Other pages
-├── public/                # Static assets
-│   ├── assets/           # Images, CSS, JS
-│   ├── CNAME             # Custom domain config
-│   ├── .nojekyll         # GitHub Pages config
-│   ├── manifest.webmanifest
-│   ├── robots.txt
-│   ├── sitemap.xml       # SEO sitemap (deployed to root)
-│   └── psychometric-quiz.html  # Standalone quiz page
-├── next.config.js        # Next.js configuration
-├── tsconfig.json         # TypeScript configuration
-├── .eslintrc.json        # ESLint configuration
-├── .prettierrc           # Prettier configuration
-├── .nvmrc                # Node version (20)
-├── package.json          # Dependencies
-└── .github/
-    ├── workflows/        # GitHub Actions
-    │   ├── ci.yml        # CI checks (lint, type-check)
-    │   └── deploy-pages.yml  # Deployment
-    └── dependabot.yml    # Automated dependency updates
+├── app/                    # Next.js app router pages
+├── components/             # Reusable UI components
+├── lib/                    # Utility functions and API clients
+├── prisma/                 # Database schema and migrations
+├── public/                 # Static assets
+├── services/               # Business logic and external APIs
+└── types/                  # TypeScript type definitions
 ```
 
-## Next.js Configuration
+## 🤝 Contributing
 
-The site uses static export for GitHub Pages compatibility:
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-```javascript
-// next.config.js
-{
-  output: 'export',           // Static site generation
-  trailingSlash: true,        // Directory-style URLs
-  images: { unoptimized: true } // GitHub Pages compatibility
-}
-```
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Deployment
+## 📄 License
 
-Deployment is automated via GitHub Actions:
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-1. Push to `main` branch
-2. GitHub Actions builds the Next.js site
-3. Deploys to GitHub Pages
-4. Available at civora.me within 1-2 minutes
+## 🙏 Acknowledgments
 
-Manual deployment:
+- [Congress.gov API](https://api.congress.gov/) for federal legislation data
+- [OpenStates](https://openstates.org/) for state-level legislative data
+- [Google Civic Information API](https://developers.google.com/civic-information) for representative data
 
-```bash
-npm run build
-# The `out/` directory contains the static site
-# Deploy contents of `out/` to any static hosting
-```
+## 📬 Contact
 
-## Performance & SEO Features
-
-### Implemented Optimizations
-
-1. **SEO & Meta Tags** ✅
-   - Complete Open Graph and Twitter Card meta tags
-   - Structured data (JSON-LD) for search engines
-   - Canonical URLs and meta descriptions
-   - Keywords and author meta tags
-
-2. **Accessibility** ✅
-   - All images have descriptive alt text
-   - Lazy loading on non-hero images
-   - Width/height attributes to prevent layout shift
-   - Skip-to-content link for keyboard navigation
-   - Proper ARIA labels
-
-3. **Performance** ✅
-   - Critical CSS inlined in `<head>` for fast initial render
-   - Deferred JavaScript loading
-   - Smooth scroll behavior
-   - Image optimization (WebP format for og-image)
-   - Proper 1200x630 social sharing image
-
-4. **Internationalization** ✅
-   - hreflang tags for English and Nepali
-   - Multi-language support via script.js
-   - Proper lang attribute on HTML tag
-
-5. **Sitemap & Robots** ✅
-   - sitemap.xml with all pages
-   - robots.txt allowing all crawlers
-   - Updated lastmod dates
-
-6. **Contact Form** ✅
-   - Full contact form with validation
-   - Honeypot field for spam prevention
-   - Mailto fallback
-   - Consistent styling with site theme
-
-7. **UI Polish** ✅
-   - Smooth hover transitions (0.3s) on buttons and links
-   - Consistent spacing using CSS variables
-   - Card hover effects with lift animation
-   - Mobile-responsive navigation
-
-### Performance Testing
-
-To test site performance, run these checks:
-
-1. **Google PageSpeed Insights**
-
-   ```
-   https://pagespeed.web.dev/
-   Test URL: https://civora.me/
-   Target: Performance ≥90, Accessibility ≥90
-   ```
-
-2. **Lighthouse (Chrome DevTools)**
-
-   ```bash
-   # Open Chrome DevTools (F12)
-   # Navigate to Lighthouse tab
-   # Run audit for Desktop and Mobile
-   # Check: Performance, Accessibility, Best Practices, SEO
-   ```
-
-3. **Manual Testing Checklist**
-   - [ ] All pages load within 2 seconds
-   - [ ] Images lazy-load properly
-   - [ ] Smooth scrolling works on anchor links
-   - [ ] Navigation menu works on mobile
-   - [ ] Contact form submits correctly
-   - [ ] All links are functional
-   - [ ] Hover effects are smooth
-   - [ ] No layout shift on page load
-
-### Page Scaling Testing (75% Scale)
-
-The site uses a 75% scale transform for better content density on desktop devices. To test:
-
-1. **Browser DevTools Testing**
-
-   ```bash
-   # Open Chrome DevTools (F12)
-   # Console tab - check for viewport logging:
-   #   "Viewport Before Scaling"
-   #   "Viewport After Scaling"
-   #   "Scaling Applied: Yes"
-   ```
-
-2. **Visual Testing Checklist**
-   - [ ] Desktop: Page appears 75% of original size
-   - [ ] Desktop: No extra black space at bottom
-   - [ ] Desktop: No horizontal scrollbar
-   - [ ] Desktop: All content visible and accessible
-   - [ ] Mobile (≤768px): Scaling disabled (full size)
-   - [ ] Mobile: No zoom issues
-   - [ ] Mobile: No overflow or clipping
-   - [ ] Tablet: Test at 768px breakpoint
-
-3. **Performance Validation**
-
-   ```bash
-   # Check for transform performance
-   # DevTools → Performance tab → Record page load
-   # Look for smooth rendering without lag
-   ```
-
-4. **Cross-browser Testing**
-   - [ ] Chrome/Edge (Chromium)
-   - [ ] Firefox
-   - [ ] Safari (if available)
-   - [ ] Mobile browsers (Chrome Mobile, Safari iOS)
-
-**Note:** The wrapper scaling uses `will-change: transform` for optimized performance and is disabled on mobile devices (max-width: 768px) to prevent zoom issues.
-
-### Scholarship Filtering System
-
-The scholarships page includes a dynamic filtering system that allows users to filter scholarships by country, level, field, and deadline.
-
-**Testing the Filter System:**
-
-1. **Basic Filtering**
-
-   ```bash
-   # Start local server
-   python3 -m http.server 8080
-   # Navigate to http://localhost:8080/scholarships.html
-   ```
-
-2. **Test Individual Filters**
-   - Open browser console (F12) to see filter debug logs
-   - Select "United States" from country filter → should show 9 USA scholarships
-   - Select "United Kingdom" from country filter → should show 5 UK scholarships
-   - Select "Undergraduate" from level filter → filters by bachelor's programs
-   - Select "Graduate" from level filter → filters by master's/professional programs
-   - Select "PhD" from level filter → filters by doctoral programs
-
-3. **Test Combined Filters (AND Logic)**
-   - Select "United States" + "Undergraduate" → should show 3 results
-   - Select "Canada" + "PhD" → should show 1 result
-   - Select "Nepal" + "PhD" → should show "No scholarships match your criteria" message
-
-4. **Test Reset Functionality**
-   - Apply any combination of filters
-   - Click "Reset All Filters" button
-   - All filters should clear and all 24 scholarships should be visible
-
-5. **Console Debugging**
-
-   ```javascript
-   // Open browser console to see:
-   // - "Filters populated: X countries, Y levels..." on page load
-   // - "Applying filters: {selectedCountry: usa, ...}" when filters change
-   // - "X scholarships visible" after each filter application
-   ```
-
-6. **Edge Cases to Test**
-   - Select filters with no matching scholarships (e.g., Nepal + PhD)
-   - Verify "no results" message displays correctly
-   - Verify reset button appears in no-results message
-   - Apply multiple filters in different orders
-   - Verify dynamic country options are populated from actual scholarship data
-
-**Expected Behavior:**
-
-- ✅ All 24 scholarships visible on page load
-- ✅ Filters use AND logic (must match ALL selected criteria)
-- ✅ No results message appears when no scholarships match
-- ✅ Reset button clears all filters and shows all scholarships
-- ✅ Country dropdown dynamically populated with 11 unique countries
-- ✅ Console logs show filter state for debugging
-
-### Regenerating Sitemap
-
-To update the sitemap with new pages:
-
-1. Edit `public/sitemap.xml` (deployed to root via Next.js build)
-2. Add new URL entries following the Next.js route format with trailing slashes:
-   ```xml
-   <url>
-     <loc>https://civora.me/new-page/</loc>
-     <lastmod>YYYY-MM-DD</lastmod>
-     <priority>0.8</priority>
-   </url>
-   ```
-3. Update lastmod dates for changed pages
-4. Rebuild the site with `npm run build` to deploy the updated sitemap
-
-### Image Guidelines
-
-- **Social sharing image**: 1200x630px, optimized to <100KB
-- **Feature images**: Use WebP format when possible
-- **Alt text**: Always descriptive, never empty
-- **Lazy loading**: Add `loading="lazy"` to images below the fold
-- **Dimensions**: Always include width/height attributes
-
-## Firebase Analytics Setup (Optional)
-
-The site includes optional Firebase integration for anonymous page view tracking. To enable:
-
-### 1. Create a Firebase Project
-
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project or use an existing one
-3. Enable Realtime Database in the Firebase Console
-4. Set database rules to allow writes but restrict reads (for security)
-
-### 2. Get Firebase Configuration
-
-1. In Firebase Console, go to Project Settings
-2. Scroll down to "Your apps" and select "Web app"
-3. Copy the Firebase configuration object
-
-### 3. Update Configuration Files
-
-**For index.html:**
-Replace the placeholder config in the Firebase script section (around line 230):
-
-```javascript
-const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  databaseURL: 'https://YOUR_PROJECT_ID.firebaseio.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.appspot.com',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
-};
-```
-
-**For private.html:**
-Update the same configuration in private.html (around line 157)
-
-### 4. Set Database Rules
-
-In Firebase Console, go to Realtime Database → Rules:
-
-```json
-{
-  "rules": {
-    "pageViews": {
-      ".read": false,
-      ".write": true
-    }
-  }
-}
-```
-
-**Note:** This allows anonymous writes for page tracking but prevents public reads for privacy.
-
-### 5. Access Analytics Dashboard
-
-1. Visit `https://yourdomain.com/private.html` (keep this URL private)
-2. Login credentials (default):
-   - Username: `admin`
-   - Password: `civora2025`
-3. **IMPORTANT:** Change the password in `private.html` before deployment!
-
-### Security Considerations
-
-⚠️ **The authentication in private.html is for demonstration only!**
-
-For production use:
-
-- Implement proper server-side authentication
-- Use Firebase Authentication or OAuth
-- Never hardcode credentials in client-side code
-- Consider using Firebase Security Rules for row-level access control
-- Use environment variables for sensitive configuration
-
-### Disabling Firebase
-
-If you don't want to use Firebase analytics:
-
-- The site will work normally without configuration
-- Page views simply won't be tracked
+- **Website**: [civora.io](https://civora.io)
+- **Email**: hello@civora.io
+- **Twitter**: [@CivoraApp](https://twitter.com/CivoraApp)
 
 ---
 
-## Migration from Static HTML to Next.js - COMPLETED ✅
-
-This site was successfully migrated from static HTML/CSS/JS to Next.js 14 in October 2024. **The migration is complete and the site is fully operational.**
-
-✅ **Preserved**:
-
-- All original content and design
-- URL structure (with trailing slashes)
-- Custom domain (civora.me)
-- All assets and functionality
-- SEO metadata and structured data
-
-✅ **Improved**:
-
-- Modern React-based architecture
-- Better build tooling and development experience
-- Optimized performance with Next.js
-- Automated deployment via GitHub Actions
-- Type-safe routing with App Router
-- CI/CD with automated quality checks
-- TypeScript support and type checking
-- Code formatting with Prettier
-- Linting with ESLint
-
-The Next.js app under `app/` is the single source of truth for all active pages.
-
-## Contributing
-
-We welcome contributions from the community! Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
-
-- How to set up the development environment
-- Code style and best practices
-- Pull request process
-- Testing guidelines
-- Commit message conventions
-
-### Quick Start for Contributors
-
-1. Fork and clone the repository
-2. Install Node.js 20 (see `.nvmrc`)
-3. Run `npm install`
-4. Start development server: `npm run dev`
-5. Make your changes and test thoroughly
-6. Submit a pull request
-
-For detailed instructions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-### Quick Reference
-
-- **Development**: `npm run dev` → http://localhost:3000/
-- **Production build**: `npm run build` → outputs to `.next/`
-- **Static export**: `npm run build:static` → outputs to `out/`
-- **Validation**: `npm run validate` → test static assets
-- **Deployed site**: https://civora.me
-- **Deploy time**: 1-2 minutes after push to `main`
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with [Next.js 14](https://nextjs.org/)
-- Styled with inspiration from [Linear](https://linear.app/)
-- Deployed on [Vercel](https://vercel.com/) and [GitHub Pages](https://pages.github.com/)
-- Icons from [Font Awesome](https://fontawesome.com/)
-- Fonts from [Google Fonts](https://fonts.google.com/)
-
-## Support
-
-- **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/subammmm/civora/issues)
-- **Questions**: Check [CONTRIBUTING.md](./CONTRIBUTING.md) or open a discussion
-- **Contact**: Visit [civora.me/contact](https://civora.me/contact/) for direct contact
-
----
-
-**Version**: 1.0.0 (Next.js)  
-**Last Updated**: October 2024  
-**Maintained by**: [subammmm](https://github.com/subammmm)
-
+<p align="center">Made with ❤️ for democracy</p>
