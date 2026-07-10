@@ -1,8 +1,20 @@
 /* ============================================================
    Civora — Global Stylesheet
    A scholarship resource platform for Nepali students.
-   Design: Black & white only · Inter · Minimal · Editorial
+   Design: Dark Theme
    ============================================================ */
+
+:root {
+  --bg-primary: #0E0E10;
+  --surface: #1C1C1F;
+  --border: #2A2A2D;
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --accent: #5E6AD2;
+  --success: #10B981;
+  --error: #EF4444;
+  --warning: #F59E0B;
+}
 
 /* ------------------------------------------------------------
    1. Reset & Base
@@ -22,14 +34,14 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #fff;
-  color: #222;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  color: #000;
+  color: var(--text-primary);
   text-decoration: none;
 }
 
@@ -59,8 +71,8 @@ button {
   height: 1px;
   overflow: hidden;
   z-index: 1000;
-  background: #000;
-  color: #fff;
+  background: var(--surface);
+  color: var(--text-primary);
   padding: 0.75rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -108,8 +120,9 @@ button {
 .site-header {
   position: sticky;
   top: 0;
-  background: #000;
-  color: #fff;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
   z-index: 200;
 }
 
@@ -124,7 +137,7 @@ button {
 }
 
 .brand {
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 700;
   text-decoration: none;
   display: flex;
@@ -147,17 +160,16 @@ button {
 }
 
 .nav-item {
-  color: #fff;
-  opacity: 0.7;
+  color: var(--text-secondary);
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: opacity 0.2s;
+  transition: color 0.2s;
   text-decoration: none;
 }
 
 .nav-item:hover {
-  opacity: 1;
+  color: var(--text-primary);
   text-decoration: none;
 }
 
@@ -179,7 +191,7 @@ button {
   display: block;
   width: 20px;
   height: 2px;
-  background: #fff;
+  background: var(--text-primary);
   transition: 0.2s;
 }
 
@@ -188,9 +200,9 @@ button {
    ------------------------------------------------------------ */
 
 .site-footer {
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border);
   padding: 2rem 0;
-  background: #fff;
+  background: var(--surface);
 }
 
 .footer-inner {
@@ -203,7 +215,7 @@ button {
 }
 
 .footer-left {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.875rem;
 }
 
@@ -215,24 +227,24 @@ button {
 }
 
 .footer-right a {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.8125rem;
   text-decoration: none;
 }
 
 .footer-right a:hover {
-  color: #000;
+  color: var(--text-primary);
   text-decoration: none;
 }
 
 .social-icon {
   display: inline-flex;
-  color: #666;
+  color: var(--text-secondary);
   transition: color 0.2s;
 }
 
 .social-icon:hover {
-  color: #000;
+  color: var(--text-primary);
 }
 
 /* ------------------------------------------------------------
@@ -242,7 +254,7 @@ button {
 h1 {
   font-size: 2.25rem;
   font-weight: 800;
-  color: #000;
+  color: var(--text-primary);
   letter-spacing: -0.025em;
   line-height: 1.2;
   margin-bottom: 0.75rem;
@@ -251,7 +263,7 @@ h1 {
 h2 {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #000;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
 }
@@ -259,19 +271,19 @@ h2 {
 h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #111;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
 p {
-  color: #444;
+  color: var(--text-secondary);
   line-height: 1.7;
   font-size: 1rem;
   margin-bottom: 1rem;
 }
 
 .subtext {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9375rem;
 }
 
@@ -291,13 +303,13 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #000;
-  color: #fff;
+  background: var(--accent);
+  color: #FFFFFF;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   font-weight: 600;
   font-size: 0.875rem;
-  border: 2px solid #000;
+  border: 2px solid var(--accent);
   cursor: pointer;
   transition: all 0.2s;
   text-decoration: none;
@@ -306,21 +318,21 @@ p {
 }
 
 .linear-button:hover {
-  background: #fff;
-  color: #000;
+  background: transparent;
+  color: var(--accent);
   text-decoration: none;
 }
 
 .linear-button.secondary {
-  background: #fff;
-  color: #000;
-  border: 2px solid #222;
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border);
 }
 
 .linear-button.secondary:hover {
-  background: #000;
-  color: #fff;
-  border-color: #000;
+  background: var(--border);
+  color: var(--text-primary);
+  border-color: var(--border);
 }
 
 /* ------------------------------------------------------------
@@ -328,16 +340,16 @@ p {
    ------------------------------------------------------------ */
 
 .card {
-  background: #fff;
-  border: 1px solid #eee;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 2rem;
   margin-bottom: 1.5rem;
 }
 
 .linear-card {
-  background: #fafafa;
-  border: 1px solid #eee;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1.5rem;
 }
@@ -362,7 +374,7 @@ p {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #000;
+  color: var(--text-primary);
   display: block;
 }
 
@@ -379,10 +391,10 @@ p {
 .linear-table th {
   text-align: left;
   padding: 0.75rem 1rem;
-  background: #f5f5f5;
+  background: var(--surface);
   font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #ddd;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border);
   font-size: 0.8125rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -390,13 +402,13 @@ p {
 
 .linear-table td {
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #eee;
-  color: #444;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
   vertical-align: top;
 }
 
 .linear-table tr:hover td {
-  background: #fafafa;
+  background: var(--border);
 }
 
 /* ------------------------------------------------------------
@@ -411,19 +423,19 @@ p {
 
 .filter-select {
   appearance: none;
-  background: #fff url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 0.75rem center/16px;
-  border: 1px solid #ddd;
+  background: var(--surface) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 0.75rem center/16px;
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 0.625rem 2.5rem 0.625rem 1rem;
   font-size: 0.875rem;
-  color: #333;
+  color: var(--text-primary);
   cursor: pointer;
   min-width: 160px;
   font-family: inherit;
 }
 
 .filter-select:focus {
-  border-color: #000;
+  border-color: var(--accent);
   outline: none;
 }
 
@@ -440,7 +452,7 @@ p {
   margin-bottom: 0.5rem;
   font-weight: 600;
   font-size: 0.875rem;
-  color: #222;
+  color: var(--text-primary);
 }
 
 .form-group input,
@@ -448,21 +460,21 @@ p {
 .form-group select {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
-  background: #fff;
-  color: #222;
+  background: var(--surface);
+  color: var(--text-primary);
   box-sizing: border-box;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  border-color: #000;
+  border-color: var(--accent);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.2);
 }
 
 .form-group textarea {
@@ -529,9 +541,10 @@ p {
     top: 100%;
     left: 0;
     right: 0;
-    background: #000;
+    background: var(--surface);
     padding: 1rem;
     z-index: 100;
+    border-bottom: 1px solid var(--border);
   }
 
   .header-controls {
