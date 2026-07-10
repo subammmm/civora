@@ -4,20 +4,21 @@ import Script from 'next/script';
 export const metadata = {
   metadataBase: new URL('https://civora.me'),
   title: {
-    default: 'Civora – Scholarships & Resources for Students',
+    default: 'Civora – Scholarships for Nepali Students',
     template: '%s | Civora',
   },
   description:
-    'Civora is a purpose-built tool for Nepali students. Streamline scholarships, study-abroad guides, and practical resources.',
+    'Civora helps Nepali students find verified international scholarships. Browse 35+ scholarships with direct links to official application portals.',
   keywords: [
     'nepal scholarships',
-    'nepali students abroad',
+    'nepali students',
     'international scholarships',
-    'study abroad nepal',
+    'study abroad scholarships',
     'university scholarships',
     'graduate scholarships',
     'undergraduate scholarships',
     'scholarship database',
+    'fully funded scholarships',
   ],
   authors: [{ name: 'Civora' }],
   creator: 'Civora',
@@ -35,60 +36,46 @@ export const metadata = {
     locale: 'en_US',
     url: 'https://civora.me/',
     siteName: 'Civora',
-    title: 'Civora — Opening doors for Nepali students',
+    title: 'Civora — Scholarships for Nepali Students',
     description:
-      'Civora is a research-driven hub for Nepali students: verified scholarships, study-abroad guides, and practical templates.',
+      'Browse 35+ verified international scholarships for Nepali students. All links go to official application portals.',
     images: [
       {
         url: 'https://civora.me/assets/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Civora',
+        alt: 'Civora — Scholarships for Nepali Students',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@civora',
-    title: 'Civora — Opening doors for Nepali students',
+    title: 'Civora — Scholarships for Nepali Students',
     description:
-      'Civora is a research-driven hub for Nepali students: verified scholarships, study-abroad guides, and practical templates.',
+      'Browse 35+ verified international scholarships for Nepali students. All links go to official application portals.',
     images: ['https://civora.me/assets/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://civora.me/',
-    languages: {
-      en: 'https://civora.me/',
-      ne: 'https://civora.me/?lang=ne',
-    },
   },
 };
 
 export const viewport = {
-  themeColor: '#0C0D0F',
+  themeColor: '#000000',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Performance: Preconnect to external resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-        
-        {/* Fonts with font-display: swap for better performance */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
 
-        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -97,7 +84,7 @@ export default function RootLayout({ children }) {
               '@type': 'WebSite',
               name: 'Civora',
               description:
-                'Opening doors for Nepali students to study, work, and belong anywhere in the world',
+                'A scholarship resource platform for Nepali students',
               url: 'https://civora.me',
               potentialAction: {
                 '@type': 'SearchAction',
@@ -108,10 +95,6 @@ export default function RootLayout({ children }) {
                 '@type': 'Organization',
                 name: 'Civora',
                 url: 'https://civora.me',
-                logo: {
-                  '@type': 'ImageObject',
-                  url: 'https://civora.me/assets/logo.svg',
-                },
               },
             }),
           }}
@@ -129,29 +112,11 @@ export default function RootLayout({ children }) {
           <Footer />
         </div>
 
-        {/* Client-side scripts */}
-        <Script src="/assets/script.js" strategy="lazyOnload" />
-        <Script src="/assets/reveal.js" strategy="lazyOnload" />
-        <Script src="/assets/command-palette.js" strategy="lazyOnload" />
-        <Script src="/assets/scale-fix.js" strategy="lazyOnload" />
-
-        {/* Monitoring - Sentry initialization */}
-        <Script id="sentry-init" strategy="afterInteractive">
-          {`
-            // Initialize Sentry if DSN is configured
-            if (typeof window !== 'undefined') {
-              import('/lib/monitoring/sentry.js')
-                .then(module => module.initSentry())
-                .catch(err => console.warn('Failed to load Sentry:', err));
-            }
-          `}
-        </Script>
-
         {/* Google Analytics */}
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             const GA_MEASUREMENT_ID = 'G-3FRBDLWLW0';
-              if (GA_MEASUREMENT_ID) {
+            if (GA_MEASUREMENT_ID) {
               const script = document.createElement('script');
               script.async = true;
               script.src = \`https://www.googletagmanager.com/gtag/js?id=\${GA_MEASUREMENT_ID}\`;
@@ -166,11 +131,6 @@ export default function RootLayout({ children }) {
                 'allow_google_signals': false,
                 'allow_ad_personalization_signals': false
               });
-              
-              gtag('event', 'page_view', {
-                'page_title': document.title,
-                'page_location': window.location.href
-              });
             }
           `}
         </Script>
@@ -180,16 +140,10 @@ export default function RootLayout({ children }) {
 }
 
 function Header() {
-  // Conditionally show AI chat link based on environment variable
-  // When NEXT_PUBLIC_CIVORA_AI_ENABLED=true (Vercel): Show AI chat link
-  // When NEXT_PUBLIC_CIVORA_AI_ENABLED=false (civora.me): Hide AI chat link
-  const aiEnabled = process.env.NEXT_PUBLIC_CIVORA_AI_ENABLED === 'true';
-
   return (
     <header className="site-header" role="banner">
       <div className="header-inner">
         <a className="brand" href="/" aria-label="Civora Home">
-          <img src="/assets/logo.svg" alt="Civora Logo" className="brand-logo" />
           Civora
         </a>
 
@@ -197,18 +151,6 @@ function Header() {
           <a href="/scholarships/" className="nav-item">
             Scholarships
           </a>
-          <a href="/student-stories/" className="nav-item">
-            Students & Stories
-          </a>
-          <a href="/ielts-prep/" className="nav-item">
-            IELTS & Prep
-          </a>
-          {/* Conditional AI Chat link - only shown when NEXT_PUBLIC_CIVORA_AI_ENABLED=true */}
-          {aiEnabled && (
-            <a href="/ai-chat/" className="nav-item">
-              AI Assistant
-            </a>
-          )}
           <a href="/about/" className="nav-item">
             About
           </a>
@@ -218,9 +160,9 @@ function Header() {
         </nav>
 
         <div className="header-controls">
-          <button 
-            className="nav-toggle" 
-            aria-label="Toggle navigation menu" 
+          <button
+            className="nav-toggle"
+            aria-label="Toggle navigation menu"
             aria-expanded="false"
             aria-controls="site-nav"
           >
@@ -239,29 +181,14 @@ function Footer() {
     <footer className="site-footer" role="contentinfo">
       <div className="footer-inner">
         <div className="footer-left">
-          <i className="fas fa-copyright icon-left" aria-hidden="true"></i>
-          <span id="year"></span> Civora
+          © {new Date().getFullYear()} Civora
         </div>
         <nav className="footer-right" aria-label="Footer navigation">
-          <a href="/about/">About</a>
           <a href="/scholarships/">Scholarships</a>
-          <a href="/student-stories/">Students & Stories</a>
-          <a href="/ielts-prep/">IELTS & Prep</a>
+          <a href="/about/">About</a>
           <a href="/contact/">Contact</a>
-          <a href="/legal/privacy/">Privacy Policy</a>
-          <a href="/legal/terms/">Terms of Service</a>
-          <a
-            href="https://linkedin.com/in/shubhamdhakal"
-            className="social-icon"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Connect with Shubham Dhakal on LinkedIn"
-            title="Connect with Shubham Dhakal on LinkedIn"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-            </svg>
-          </a>
+          <a href="/legal/privacy/">Privacy</a>
+          <a href="/legal/terms/">Terms</a>
         </nav>
       </div>
     </footer>

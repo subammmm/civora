@@ -57,13 +57,13 @@ export default function TermsOfService() {
       <section style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
         <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>4. Information Accuracy</h2>
         <p>
-          While we strive to provide accurate and up-to-date information about scholarships, visa
-          pathways, and citizenship options, we cannot guarantee the completeness, accuracy, or
+          While we strive to provide accurate and up-to-date information about scholarships and
+          educational opportunities, we cannot guarantee the completeness, accuracy, or
           timeliness of this information. Users are responsible for verifying all information with
           official sources before making decisions based on content provided on our platform.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          Scholarship eligibility, visa requirements, and citizenship laws are subject to change
+          Scholarship eligibility and application requirements are subject to change
           without notice. Civora is not responsible for any decisions made based on outdated or
           inaccurate information.
         </p>

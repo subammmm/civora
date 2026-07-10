@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Civora – Scholarships and Pathways for Students',
+  title: 'Civora – Scholarships for Nepali Students',
   description:
-    'Civora is a purpose-built tool for Nepali students. Streamline scholarships, guides, and citizenship pathways.',
+    'Civora is a scholarship resource platform for Nepali students. Browse verified scholarships and application guides.',
 };

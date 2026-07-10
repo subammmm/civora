@@ -1,19 +1,17 @@
-export default function LegalPageLayout({ children, title, lastUpdated }) {
+export default function LegalPageLayout({ title, lastUpdated, children }) {
   return (
-    <main style={{ padding: '4rem 2rem', maxWidth: '900px', margin: '0 auto' }}>
-      {title && (
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
-          {title}
-        </h1>
-      )}
-      {lastUpdated && (
-        <p style={{ color: '#666', marginBottom: '2rem' }}>
-          Last updated: {lastUpdated}
-        </p>
-      )}
-      <div style={{ lineHeight: '1.8' }}>
-        {children}
-      </div>
+    <main>
+      <section className="section">
+        <div className="container" style={{ maxWidth: '720px' }}>
+          <div className="card">
+            <h1>{title}</h1>
+            <p className="subtext" style={{ marginBottom: '2rem' }}>
+              Last updated: {lastUpdated}
+            </p>
+            {children}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
