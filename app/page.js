@@ -19,10 +19,6 @@ export default function Home() {
                   <i className="fas fa-graduation-cap icon-left" aria-hidden="true"></i>
                   Browse Scholarships
                 </a>
-                <a href="/citizenship/" className="linear-button secondary">
-                  <i className="fas fa-passport icon-left" aria-hidden="true"></i>
-                  Citizenship Pathways
-                </a>
                 <a href="/about/" className="linear-button secondary">
                   <i className="fas fa-info-circle icon-left" aria-hidden="true"></i>
                   Learn More
@@ -53,16 +49,6 @@ export default function Home() {
               </div>
               
               <div className="linear-card">
-                <i className="fas fa-map-marked-alt" style={{ fontSize: '2rem', color: 'var(--accent)', marginBottom: '1rem' }} aria-hidden="true"></i>
-                <h3>Citizenship & Visa Guides</h3>
-                <p>Clear pathways to citizenship and residency in multiple countries, with step-by-step guidance.</p>
-                <a href="/citizenship/" className="linear-button margin-top-1">
-                  <i className="fas fa-arrow-right icon-left" aria-hidden="true"></i>
-                  View Pathways
-                </a>
-              </div>
-              
-              <div className="linear-card">
                 <i className="fas fa-file-alt" style={{ fontSize: '2rem', color: 'var(--accent)', marginBottom: '1rem' }} aria-hidden="true"></i>
                 <h3>Application Templates</h3>
                 <p>Downloadable templates for essays, financial documents, and letters to streamline your applications.</p>
@@ -88,7 +74,7 @@ export default function Home() {
                   should not be a privilege.
                 </p>
                 <p>
-                  By compiling verified scholarships, visa pathways, and citizenship options, Civora serves 
+                  By compiling verified scholarships, study-abroad guides, and practical resources, Civora serves 
                   as a research hub to support students in building international futures.
                 </p>
                 <div style={{ marginTop: '1.5rem' }}>

@@ -4,18 +4,16 @@ import Script from 'next/script';
 export const metadata = {
   metadataBase: new URL('https://civora.me'),
   title: {
-    default: 'Civora – Scholarships and Pathways for Students',
+    default: 'Civora – Scholarships & Resources for Students',
     template: '%s | Civora',
   },
   description:
-    'Civora is a purpose-built tool for Nepali students. Streamline scholarships, guides, and citizenship pathways.',
+    'Civora is a purpose-built tool for Nepali students. Streamline scholarships, study-abroad guides, and practical resources.',
   keywords: [
     'nepal scholarships',
     'nepali students abroad',
     'international scholarships',
     'study abroad nepal',
-    'student visa nepal',
-    'citizenship pathways',
     'university scholarships',
     'graduate scholarships',
     'undergraduate scholarships',
@@ -39,7 +37,7 @@ export const metadata = {
     siteName: 'Civora',
     title: 'Civora — Opening doors for Nepali students',
     description:
-      'Civora is a research-driven hub for Nepali students: verified scholarships, clear visa and residency pathways, and practical templates.',
+      'Civora is a research-driven hub for Nepali students: verified scholarships, study-abroad guides, and practical templates.',
     images: [
       {
         url: 'https://civora.me/assets/og-image.jpg',
@@ -54,7 +52,7 @@ export const metadata = {
     site: '@civora',
     title: 'Civora — Opening doors for Nepali students',
     description:
-      'Civora is a research-driven hub for Nepali students: verified scholarships, clear visa and residency pathways, and practical templates.',
+      'Civora is a research-driven hub for Nepali students: verified scholarships, study-abroad guides, and practical templates.',
     images: ['https://civora.me/assets/og-image.jpg'],
   },
   alternates: {
@@ -199,9 +197,6 @@ function Header() {
           <a href="/scholarships/" className="nav-item">
             Scholarships
           </a>
-          <a href="/citizenship/" className="nav-item">
-            Citizenship
-          </a>
           <a href="/student-stories/" className="nav-item">
             Students & Stories
           </a>
@@ -250,7 +245,6 @@ function Footer() {
         <nav className="footer-right" aria-label="Footer navigation">
           <a href="/about/">About</a>
           <a href="/scholarships/">Scholarships</a>
-          <a href="/citizenship/">Citizenship</a>
           <a href="/student-stories/">Students & Stories</a>
           <a href="/ielts-prep/">IELTS & Prep</a>
           <a href="/contact/">Contact</a>

@@ -234,7 +234,7 @@ export default function AIChatInterface() {
           <i className="fas fa-robot icon-left" aria-hidden="true"></i>
           Civora AI Assistant
         </h1>
-        <p className="subtext">Ask me anything about scholarships, visas, and study abroad opportunities</p>
+        <p className="subtext">Ask me anything about scholarships and study abroad opportunities</p>
       </div>
 
       <div className="chat-messages">
@@ -245,7 +245,7 @@ export default function AIChatInterface() {
             <p>I can help you with:</p>
             <ul>
               <li>Finding scholarships for your profile</li>
-              <li>Visa and citizenship pathways</li>
+              <li>University application timelines</li>
               <li>Study abroad guidance</li>
               <li>Application tips and resources</li>
             </ul>

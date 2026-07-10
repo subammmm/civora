@@ -12,7 +12,7 @@ export default function RoadmapPage() {
       <section className="roadmap-vision">
         <div className="vision-card">
           <h2>Our 5-Year Vision</h2>
-          <p>Transform Civora from a Nepal-focused resource into the world&apos;s most trusted platform for global education and mobility. By 2029, we aim to serve students from 50+ countries with AI-powered personalization, community support, and verified pathways to education, work, and citizenship opportunities worldwide.</p>
+          <p>Transform Civora from a Nepal-focused resource into the world&apos;s most trusted platform for global education and mobility. By 2029, we aim to serve students from 50+ countries with AI-powered personalization, community support, and verified pathways to education and work opportunities worldwide.</p>
           
           <div className="vision-metrics">
             <div className="metric-target">
@@ -104,7 +104,7 @@ export default function RoadmapPage() {
                 <li>🔮 Support for 15 additional countries</li>
                 <li>🔮 Regional scholarship databases</li>
                 <li>🔮 Local language content creation</li>
-                <li>🔮 Country-specific visa guides</li>
+                <li>🔮 Country-specific study guides</li>
                 <li>🔮 Partnership with government agencies</li>
               </ul>
             </div>

@@ -97,7 +97,7 @@ export default function Student_StoriesPage() {
                   <blockquote>
                     &quot;Civora&apos;s detailed visa pathway guide made the difference. The
                     step-by-step process for France helped me navigate both the scholarship
-                    application and student visa requirements without any confusion.&quot;
+                    application and student requirements without any confusion.&quot;
                   </blockquote>
                   <div className="story-highlights">
                     <h4>Key Success Factors:</h4>
@@ -126,8 +126,8 @@ export default function Student_StoriesPage() {
                 </div>
                 <div className="story-content">
                   <blockquote>
-                    &quot;The Canadian immigration pathway section on Civora was incredibly helpful.
-                    Understanding the study → work → PR route gave me confidence that this was a
+                    &quot;The Canadian student resource section on Civora was incredibly helpful.
+                    Understanding the study opportunities gave me confidence that this was a
                     viable long-term plan, not just a temporary opportunity.&quot;
                   </blockquote>
                   <div className="story-outcomes">
@@ -162,7 +162,7 @@ export default function Student_StoriesPage() {
                 </div>
                 <div className="story-content">
                   <blockquote>
-                    &quot;Civora&apos;s European citizenship pathway information helped me understand
+                    &quot;Civora&apos;s European study pathway information helped me understand
                     the long-term benefits of studying in Europe. The Erasmus+ program allowed me to
                     study in three different countries!&quot;
                   </blockquote>

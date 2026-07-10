@@ -21,7 +21,7 @@ export default function AboutPage() {
             <div className="flex align-center gap-2" style={{ flexDirection: 'row' }}>
               <div style={{ flex: 1 }}>
                 <h2><i className="fas fa-bullseye icon-left" aria-hidden="true"></i>Our Mission</h2>
-                <p>Civora was founded to bridge the information gap for Nepali and underprivileged students seeking global opportunities. By compiling verified scholarships, visa pathways, and citizenship options, Civora serves as a research hub to support students in building international futures.</p>
+                <p>Civora was founded to bridge the information gap for Nepali and underprivileged students seeking global opportunities. By compiling verified scholarships, study-abroad guides, and practical resources, Civora serves as a research hub to support students in building international futures.</p>
                 
                 <p>We believe that access to accurate, up-to-date information should not be a privilege. Every student deserves the opportunity to pursue their dreams, regardless of their background or financial situation.</p>
 

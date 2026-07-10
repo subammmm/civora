@@ -296,7 +296,7 @@ class GlobalAmbassadorAI {
   classifyIntent(message) {
     const intents = {
       scholarship_search: /scholarship|funding|grant|financial aid/i,
-      visa_query: /visa|immigration|residency|citizenship/i,
+      university_query: /university|college|campus/i,
       application_help: /application|apply|deadline|requirements/i,
       career_guidance: /career|job|work|employment/i,
       study_abroad: /study abroad|university|college|program/i,

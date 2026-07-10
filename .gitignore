@@ -102,4 +102,4 @@ api/data/*.pkl
 frontend/node_modules/
 frontend/build/
 frontend/.env
-frontend/.env.local
+frontend/.env.local.env

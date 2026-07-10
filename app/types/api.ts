@@ -11,7 +11,7 @@ export interface User {
 
 export interface Opportunity {
     id: number;
-    type: 'visa' | 'scholarship' | 'citizenship';
+    type: 'scholarship';
     name: string;
     country: string;
     level?: string;
@@ -23,7 +23,7 @@ export interface Opportunity {
 }
 
 export interface OpportunityFilter {
-    type?: 'visa' | 'scholarship' | 'all';
+    type?: 'scholarship' | 'all';
     country?: string;
     level?: string;
     page?: number;

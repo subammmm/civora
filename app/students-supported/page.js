@@ -9,9 +9,9 @@ const countries = [
   { flag: '🇫🇷', name: 'France', description: 'Eiffel Excellence Scholarships, French government programs, and pathways through public universities and grandes écoles.' },
   { flag: '🇬🇧', name: 'United Kingdom', description: 'Chevening Scholarships, Commonwealth Scholarships, and prestigious university admissions including Russell Group institutions.' },
   { flag: '🇺🇸', name: 'United States', description: 'Fulbright Program, need-based aid at liberal arts colleges, and graduate assistantships at research universities.' },
-  { flag: '🇦🇺', name: 'Australia', description: 'Australia Awards Scholarships, Research Training Program (RTP), and pathways to permanent residency through study.' },
+  { flag: '🇦🇺', name: 'Australia', description: 'Australia Awards Scholarships, Research Training Program (RTP), and other study opportunities.' },
   { flag: '🇧🇪', name: 'Belgium', description: 'Erasmus Mundus programs, VLIR-UOS scholarships, and opportunities in both French and Dutch-speaking regions.' },
-  { flag: '🇨🇦', name: 'Canada', description: 'Multiple scholarship programs, Post-Graduation Work Permits (PGWP), and clear pathways to permanent residency.' },
+  { flag: '🇨🇦', name: 'Canada', description: 'Multiple scholarship programs, Post-Graduation Work Permits (PGWP), and diverse study opportunities.' },
   { flag: '🇩🇪', name: 'Germany', description: 'DAAD scholarships, research opportunities, and EU Blue Card pathways for skilled professionals.' }
 ];
 

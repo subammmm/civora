@@ -196,15 +196,12 @@ export async function POST(req) {
     const typoDict = {
       'shcolarship': 'scholarship', 'scholorship': 'scholarship', 'scolarship': 'scholarship',
       'scholership': 'scholarship', 'scholaship': 'scholarship',
-      'citizenshipp': 'citizenship', 'citiznship': 'citizenship', 'citizneshipo': 'citizenship',
-      'citizinship': 'citizenship', 'citizenhip': 'citizenship', 'univerity': 'university',
-      'ielts': 'IELTS', 'toefl': 'TOEFL', 'imigration': 'immigration', 'immigartion': 'immigration',
-      'immgration': 'immigration', 'immigrationn': 'immigration', 'immigratoin': 'immigration',
+      'univerity': 'university',
+      'ielts': 'IELTS', 'toefl': 'TOEFL',
       'universites': 'universities', 'univercities': 'universities', 'unveristy': 'university', 'unversity': 'university',
       'frensh': 'french', 'franch': 'french',
       'studing': 'studying', 'studdying': 'studying', 'studdy': 'studying',
       'abrod': 'abroad', 'abroaded': 'abroad',
-      'visaa': 'visa', 'viza': 'visa',
       'accomodation': 'accommodation', 'accomadation': 'accommodation',
       'career': 'career'
     };
@@ -258,7 +255,7 @@ export async function POST(req) {
     // Conditional Search triggers
     const searchTriggers = [
       /current|latest|news|202[0-9]|president|nobel|who won|what happened/i,
-      /study|scholarship|citizenship|university|abroad|ielts|toefl|visa|career|path|job|internship/i
+      /study|scholarship|university|abroad|ielts|toefl|career|path|job|internship/i
     ];
     const searchNeeded = searchTriggers.some(trigger => trigger.test(correctedInput));
     let searchContext = 'No live web context found.';
@@ -330,7 +327,7 @@ Always prioritize live info from search context if it exists. Do not ignore it. 
 User question:
 ${correctedInput}
 
-If the question is about studying abroad, scholarships, citizenship, or career paths:
+If the question is about studying abroad, scholarships, or career paths:
 - Output a roadmap with sections:
   ### Pathways
   ### Requirements
@@ -343,16 +340,16 @@ If the question is about studying abroad, scholarships, citizenship, or career p
 Example roadmap:
 
 ### Pathways
-- Naturalization (residency years)
-- Marriage to citizen (duration + language)
-- Descent (proof of parentage)
+- University application timelines
+- Scholarship requirements
+- Program durations
 
 ### Requirements
-- Language: B1–B2 (CEFR)
-- Clean record, integration proof
+- Language: IELTS 6.5+ or TOEFL 90+
+- Academic transcripts
 
 ### Documents
-- Passport, residence permits, birth/marriage certificates
+- Academic records, recommendation letters, statement of purpose
 
 ### ECAs
 - Community engagement, leadership, volunteering
