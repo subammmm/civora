@@ -1,24 +1,24 @@
 export const metadata = {
   title: 'About Civora',
-  description: 'Civora helps Nepali students find verified international scholarships. Learn about our mission and values.',
+  description: 'Civora helps Nepali students find verified international scholarships. Learn about our mission, values, and the team behind the platform.',
 };
 
 export default function AboutPage() {
   return (
     <main>
-      {/* Header */}
-      <section className="section">
-        <div className="container" style={{ textAlign: 'center', maxWidth: '640px' }}>
+      {/* Hero */}
+      <section className="section section-navy" style={{ textAlign: 'center' }}>
+        <div className="container" style={{ maxWidth: '640px' }}>
           <h1>About Civora</h1>
-          <p className="subtext" style={{ fontSize: '1.125rem' }}>
-            A scholarship resource platform built for Nepali students.
+          <p style={{ fontSize: '1.125rem' }}>
+            A scholarship discovery platform built for Nepali students.
           </p>
         </div>
       </section>
 
       {/* Mission */}
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="container" style={{ maxWidth: '640px' }}>
+      <section className="section">
+        <div className="container" style={{ maxWidth: '720px' }}>
           <div className="card">
             <h2>Our Mission</h2>
             <p>
@@ -27,16 +27,16 @@ export default function AboutPage() {
             <p>
               We believe that access to accurate, up-to-date scholarship information should not be a privilege. Every student deserves the opportunity to pursue higher education, regardless of their background or financial situation.
             </p>
-            <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <a href="/scholarships/" className="linear-button">Browse Scholarships →</a>
-              <a href="/contact/" className="linear-button secondary">Get in Touch</a>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+              <a href="/scholarships/" className="btn-primary">Browse Scholarships →</a>
+              <a href="/contact/" className="btn-outline">Get in Touch</a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="section" style={{ background: '#fafafa' }}>
+      <section className="section section-light">
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <h2>Our Values</h2>
@@ -44,17 +44,20 @@ export default function AboutPage() {
           </div>
 
           <div className="feature-grid">
-            <div className="linear-card">
+            <div className="resource-card">
+              <div className="resource-icon">✅</div>
               <h3>Accuracy</h3>
               <p>Every scholarship is verified through official sources and updated regularly to ensure students receive accurate information.</p>
             </div>
-            <div className="linear-card">
+            <div className="resource-card">
+              <div className="resource-icon">🌐</div>
               <h3>Accessibility</h3>
               <p>We make scholarship information available in a clear, easy-to-navigate format, ensuring it reaches students who need it most.</p>
             </div>
-            <div className="linear-card">
+            <div className="resource-card">
+              <div className="resource-icon">🔍</div>
               <h3>Transparency</h3>
-              <p>All our resources are open and free. We cite sources and provide direct links to official application portals.</p>
+              <p>All our resources are open and free. We cite sources and provide direct links to official application portals — no middlemen.</p>
             </div>
           </div>
         </div>
@@ -62,7 +65,7 @@ export default function AboutPage() {
 
       {/* Founder */}
       <section className="section">
-        <div className="container" style={{ maxWidth: '640px' }}>
+        <div className="container" style={{ maxWidth: '720px' }}>
           <div className="card" style={{ textAlign: 'center' }}>
             <h2>Founder</h2>
             <div style={{ textAlign: 'left', marginTop: '1.5rem' }}>
@@ -77,7 +80,7 @@ export default function AboutPage() {
               href="https://www.linkedin.com/in/shubhamdhakal"
               target="_blank"
               rel="noopener noreferrer"
-              className="linear-button secondary"
+              className="btn-outline"
               style={{ marginTop: '1rem' }}
             >
               Connect on LinkedIn →
@@ -87,15 +90,13 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section" style={{ background: '#000', color: '#fff', textAlign: 'center' }}>
+      <section className="section section-gold" style={{ textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '640px' }}>
-          <h2 style={{ color: '#fff' }}>Help Us Grow</h2>
-          <p style={{ color: '#999' }}>
+          <h2>Help Us Grow</h2>
+          <p>
             Know about a scholarship we haven&apos;t listed? Have feedback or want to contribute? We&apos;d love to hear from you.
           </p>
-          <a href="/contact/" className="linear-button" style={{ background: '#fff', color: '#000', borderColor: '#fff', marginTop: '0.5rem' }}>
-            Contact Us →
-          </a>
+          <a href="/contact/" className="btn-secondary" style={{ marginTop: '0.5rem' }}>Contact Us →</a>
         </div>
       </section>
     </main>

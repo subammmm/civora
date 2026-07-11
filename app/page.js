@@ -2,80 +2,166 @@ import "./globals.css";
 import { scholarships } from "./scholarships/scholarships-data";
 
 export default function Home() {
-  // Pick 4 featured scholarships (fully funded ones with good recognition)
-  const featured = scholarships.filter(s => 
-    ['fulbright-nepal', 'chevening', 'erasmus-mundus', 'daad', 'gates-cambridge', 'kgsp'].includes(s.id)
-  ).slice(0, 4);
+  const now = new Date();
 
-  // Count unique countries
-  const countries = new Set(scholarships.map(s => s.countryCode)).size;
+  // Upcoming deadlines: future deadlines sorted ascending, first 5
+  const upcomingDeadlines = scholarships
+    .filter((s) => new Date(s.deadlineDate) > now)
+    .sort((a, b) => new Date(a.deadlineDate) - new Date(b.deadlineDate))
+    .slice(0, 5);
+
+  // Featured scholarships: fully funded, first 6
+  const featured = scholarships
+    .filter((s) => s.fundingType === "fully-funded")
+    .slice(0, 6);
 
   return (
-    <main>
-      {/* Hero */}
-      <section className="section" style={{ paddingTop: '5rem', paddingBottom: '5rem' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: '3rem', marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>
-            Scholarships for<br />Nepali Students
-          </h1>
-          <p className="subtext" style={{ fontSize: '1.125rem', maxWidth: '560px', margin: '0 auto 2rem' }}>
-            A curated database of verified international scholarships with direct links to official application portals.
+    <>
+      {/* ===== 1. Hero Section ===== */}
+      <section className="section section-navy">
+        <div className="container" style={{ textAlign: "center" }}>
+          <h1 style={{ fontSize: "3rem" }}>Find Your Path to Studying Abroad</h1>
+          <p
+            style={{
+              fontSize: "1.2rem",
+              maxWidth: "600px",
+              margin: "0 auto 2.5rem",
+            }}
+          >
+            Discover verified scholarships from 15+ countries — curated for
+            Nepali students
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="/scholarships/" className="linear-button">
-              Browse All Scholarships →
+
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search scholarships by name, country, or field..."
+              readOnly
+            />
+            <a
+              href="/scholarships/"
+              className="btn-primary"
+              style={{ borderRadius: 0 }}
+            >
+              Search
             </a>
-            <a href="/about/" className="linear-button secondary">
-              About Civora
-            </a>
+          </div>
+
+          <div
+            style={{
+              marginTop: "2.5rem",
+              color: "rgba(255,255,255,0.6)",
+              fontSize: "0.9375rem",
+            }}
+          >
+            {scholarships.length}+ Verified Scholarships · 15+ Countries ·
+            Updated July 2026
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section style={{ borderTop: '1px solid #eee', borderBottom: '1px solid #eee', padding: '2.5rem 0' }}>
-        <div className="container">
-          <div className="stats-grid">
-            <div className="stat-card">
-              <span className="stat-number">{scholarships.length}+</span>
-              <p style={{ color: '#666', marginBottom: 0 }}>Verified Scholarships</p>
-            </div>
-            <div className="stat-card">
-              <span className="stat-number">{countries}+</span>
-              <p style={{ color: '#666', marginBottom: 0 }}>Countries</p>
-            </div>
-            <div className="stat-card">
-              <span className="stat-number">100%</span>
-              <p style={{ color: '#666', marginBottom: 0 }}>Free to Use</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Scholarships */}
+      {/* ===== 2. Upcoming Deadlines Section ===== */}
       <section className="section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <h2>Featured Scholarships</h2>
-            <p className="subtext">Highlighted opportunities for Nepali students</p>
+          <h2 style={{ textAlign: "center" }}>⏰ Upcoming Deadlines</h2>
+          <p className="subtext" style={{ textAlign: "center" }}>
+            Don&apos;t miss these approaching scholarship deadlines
+          </p>
+
+          <div className="deadline-strip">
+            {upcomingDeadlines.map((s) => {
+              const daysLeft = Math.ceil(
+                (new Date(s.deadlineDate) - new Date()) / (1000 * 60 * 60 * 24)
+              );
+              return (
+                <div className="deadline-item" key={s.id}>
+                  <div className="deadline-countdown">
+                    <span
+                      className={`days ${daysLeft < 30 ? "urgent" : ""}`}
+                    >
+                      {daysLeft}
+                    </span>
+                    <span className="label">days left</span>
+                  </div>
+                  <div className="deadline-info">
+                    <h4>
+                      {s.countryFlag} {s.name}
+                    </h4>
+                    <p>{s.deadline}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
+          <div style={{ textAlign: "center" }}>
+            <a
+              href="/scholarships/"
+              className="btn-outline btn-sm"
+              style={{ marginTop: "1.5rem" }}
+            >
+              View All Deadlines →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 3. Featured Scholarships ===== */}
+      <section className="section section-light">
+        <div className="container">
+          <h2 style={{ textAlign: "center" }}>Featured Scholarships</h2>
+          <p className="subtext" style={{ textAlign: "center" }}>
+            Hand-picked opportunities for Nepali students
+          </p>
+
           <div className="feature-grid">
-            {featured.map(s => (
-              <div className="linear-card" key={s.id}>
-                <p style={{ fontSize: '0.8125rem', color: '#999', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  {s.country}
+            {featured.map((s) => (
+              <div className="card scholarship-card" key={s.id}>
+                <div className="card-header">
+                  <span className="card-country">
+                    <span className="flag">{s.countryFlag}</span> {s.country}
+                  </span>
+                  <span
+                    className={`badge ${
+                      s.fundingType === "fully-funded"
+                        ? "badge-funding fully-funded"
+                        : "badge-funding"
+                    }`}
+                  >
+                    {s.fundingType === "fully-funded"
+                      ? "Fully Funded"
+                      : s.fundingType === "partial"
+                      ? "Partial"
+                      : "Stipend"}
+                  </span>
+                </div>
+                <h3>{s.name}</h3>
+                <p className="card-organizer">{s.organizer}</p>
+                <div className="card-badges">
+                  {s.level.map((l) => (
+                    <span key={l} className="badge badge-level">
+                      {l}
+                    </span>
+                  ))}
+                </div>
+                <p style={{ fontSize: "0.9375rem", marginBottom: "1rem" }}>
+                  {s.description}
                 </p>
-                <h3 style={{ marginBottom: '0.5rem' }}>{s.name}</h3>
-                <p style={{ fontSize: '0.9375rem', marginBottom: '0.75rem' }}>{s.description}</p>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.8125rem', color: '#666' }}>{s.deadline}</span>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <span className="card-deadline">{s.deadline}</span>
                   <a
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="linear-button"
-                    style={{ padding: '0.5rem 1rem', fontSize: '0.8125rem' }}
+                    className="btn-primary btn-sm"
                   >
                     Apply →
                   </a>
@@ -84,54 +170,147 @@ export default function Home() {
             ))}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <a href="/scholarships/" className="linear-button secondary">
-              View All {scholarships.length} Scholarships →
+          <div style={{ textAlign: "center" }}>
+            <a
+              href="/scholarships/"
+              className="btn-secondary"
+              style={{ marginTop: "2rem" }}
+            >
+              Browse All {scholarships.length} Scholarships →
             </a>
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="section" style={{ background: '#fafafa' }}>
+      {/* ===== 4. How It Works ===== */}
+      <section className="section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <h2>How It Works</h2>
-            <p className="subtext">Three simple steps to find your scholarship</p>
-          </div>
+          <h2 style={{ textAlign: "center" }}>How It Works</h2>
+          <p className="subtext" style={{ textAlign: "center" }}>
+            Three simple steps to find your scholarship
+          </p>
 
-          <div className="stats-grid">
-            <div style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '2rem', fontWeight: 800, color: '#000', marginBottom: '0.75rem' }}>01</span>
-              <h3>Browse</h3>
-              <p style={{ fontSize: '0.9375rem' }}>Explore our database of verified scholarships from {countries}+ countries.</p>
+          <div
+            className="stats-grid"
+            style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
+          >
+            <div style={{ textAlign: "center" }}>
+              <div className="step-number">1</div>
+              <h3>Search</h3>
+              <p>
+                Browse our database of verified scholarships from 15+ countries.
+                Filter by country, field, or degree level.
+              </p>
             </div>
-            <div style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '2rem', fontWeight: 800, color: '#000', marginBottom: '0.75rem' }}>02</span>
-              <h3>Filter</h3>
-              <p style={{ fontSize: '0.9375rem' }}>Narrow results by country, degree level, field, or deadline.</p>
+            <div style={{ textAlign: "center" }}>
+              <div className="step-number">2</div>
+              <h3>Check Eligibility</h3>
+              <p>
+                Review requirements, deadlines, and what each scholarship
+                covers. Save your favorites for later.
+              </p>
             </div>
-            <div style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '2rem', fontWeight: 800, color: '#000', marginBottom: '0.75rem' }}>03</span>
+            <div style={{ textAlign: "center" }}>
+              <div className="step-number">3</div>
               <h3>Apply</h3>
-              <p style={{ fontSize: '0.9375rem' }}>Click through to the official application portal and submit your application.</p>
+              <p>
+                Click through to the official application portal and submit your
+                application before the deadline.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mission Teaser */}
-      <section className="section">
-        <div className="container" style={{ textAlign: 'center', maxWidth: '640px' }}>
-          <h2>Built for Nepali Students</h2>
-          <p>
-            Civora was created to bridge the information gap for Nepali students seeking international scholarships. Every scholarship in our database is verified and linked to its official source.
-          </p>
-          <a href="/about/" className="linear-button secondary" style={{ marginTop: '0.5rem' }}>
-            Learn More About Civora →
+      {/* ===== 5. Resources Teaser ===== */}
+      <section className="section section-navy">
+        <div className="container" style={{ textAlign: "center" }}>
+          <h2>Prepare Your Application</h2>
+          <p>Helpful guides to strengthen your scholarship applications</p>
+
+          <div className="feature-grid">
+            {[
+              {
+                emoji: "📝",
+                title: "Personal Statements",
+                desc: "Learn how to write a compelling statement",
+              },
+              {
+                emoji: "📬",
+                title: "Recommendation Letters",
+                desc: "Get strong letters from the right people",
+              },
+              {
+                emoji: "📖",
+                title: "English Tests",
+                desc: "IELTS, TOEFL, and Duolingo guide",
+              },
+              {
+                emoji: "🇳🇵",
+                title: "Nepal-Specific Tips",
+                desc: "Documents, attestation, and more",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                style={{
+                  background: "rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: "12px",
+                  padding: "1.5rem",
+                  textAlign: "center",
+                }}
+              >
+                <div style={{ fontSize: "2rem", marginBottom: "0.75rem" }}>
+                  {item.emoji}
+                </div>
+                <h3 style={{ color: "#fff" }}>{item.title}</h3>
+                <p style={{ color: "rgba(255,255,255,0.7)" }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href="/resources/"
+            className="btn-primary"
+            style={{ marginTop: "2rem" }}
+          >
+            View All Resources →
           </a>
         </div>
       </section>
-    </main>
+
+      {/* ===== 6. Stats Bar ===== */}
+      <section className="section-gold" style={{ padding: "2.5rem 0" }}>
+        <div className="container">
+          <div className="stats-grid">
+            <div style={{ textAlign: "center" }}>
+              <div className="stat-number" style={{ color: "var(--navy)" }}>
+                {scholarships.length}+
+              </div>
+              <p style={{ color: "var(--navy)" }}>Verified Scholarships</p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <div className="stat-number" style={{ color: "var(--navy)" }}>
+                15+
+              </div>
+              <p style={{ color: "var(--navy)" }}>Countries</p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <div className="stat-number" style={{ color: "var(--navy)" }}>
+                100%
+              </div>
+              <p style={{ color: "var(--navy)" }}>Free to Use</p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <div className="stat-number" style={{ color: "var(--navy)" }}>
+                Monthly
+              </div>
+              <p style={{ color: "var(--navy)" }}>Updates</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

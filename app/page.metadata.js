@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Civora – Scholarships for Nepali Students',
+  title: 'Civora – Find Your Path to Studying Abroad',
   description:
-    'Civora is a scholarship resource platform for Nepali students. Browse verified scholarships and application guides.',
+    'Discover verified international scholarships curated for Nepali students. Browse 22+ scholarships from 15+ countries.',
 };
