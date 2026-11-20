@@ -9,22 +9,22 @@ import { NextResponse } from 'next/server';
 import {
     getScholarships,
     createScholarship,
-    seedScholarships
+    seedScholarships,
+    supabaseReadsEnabled
 } from '../../../lib/database/scholarships';
 import { DEADLINE_FILTERS } from '../../../lib/deadlines';
+import { readFilters } from '../../../lib/scholarship-filters';
 import { rejectUnlessAdmin } from '../../../lib/admin-auth';
-
-const CODE_PATTERN = /^[a-z0-9-]{1,40}$/;
 
 /**
  * GET /api/scholarships
  * 
  * Query parameters:
  * - country: Filter by country code
- * - level: Filter by education level
+ * - level: undergraduate | graduate | phd, or a degree level: bachelors | masters | phd
  * - field: Filter by field of study
  * - deadline: open | passed | 30d (closing within 30 days)
- * - seed: If 'true', seed the database with static data
+ * - seed: If 'true', seed the database with static data (development only, needs USE_SUPABASE_READS=true)
  */
 export async function GET(request) {
     try {
@@ -33,7 +33,7 @@ export async function GET(request) {
         // Check if this is a seed request
         if (searchParams.get('seed') === 'true') {
             // Seeding writes with the service-role key and this route has no auth: local/dev only.
-            if (process.env.NODE_ENV === 'production') {
+            if (process.env.NODE_ENV === 'production' || !supabaseReadsEnabled()) {
                 return NextResponse.json({ success: false, error: 'Not found' }, { status: 404 });
             }
             const count = await seedScholarships();
@@ -44,22 +44,7 @@ export async function GET(request) {
             });
         }
 
-        // Extract filters from query parameters
-        const filters = {
-            country: searchParams.get('country') || undefined,
-            level: searchParams.get('level') || undefined,
-            field: searchParams.get('field') || undefined,
-            deadline: searchParams.get('deadline') || undefined,
-        };
-
-        // Remove undefined values
-        Object.keys(filters).forEach(key => {
-            if (filters[key] === undefined) delete filters[key];
-        });
-
-        const invalid = Object.keys(filters).filter(key =>
-            key === 'deadline' ? !DEADLINE_FILTERS.includes(filters[key]) : !CODE_PATTERN.test(filters[key])
-        );
+        const { filters, invalid } = readFilters(searchParams);
         if (invalid.length > 0) {
             return NextResponse.json(
                 {

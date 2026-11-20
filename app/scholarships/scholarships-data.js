@@ -1,5 +1,6 @@
 // Civora — Scholarship Database
 // lastVerified: the date the deadline, coverage and URL of an entry were last checked against the official site.
+// source (optional): the official page the facts were confirmed on, when it is not the same page as `url`.
 // deadlineDate is the last day to apply (END of the range when there is one; the EARLIEST date when different
 // applicants have different deadlines); null when there is no single date
 // (it varies by institution or programme). A ~ in `deadline` marks a date the organiser has not confirmed yet.
@@ -83,22 +84,24 @@ export const scholarships = [
     country: 'Japan',
     countryCode: 'japan',
     countryFlag: '🇯🇵',
-    organizer: 'Japanese Government (MEXT)',
+    organizer: 'Japanese Government (MEXT) / Embassy of Japan in Nepal',
     level: ['Bachelors', 'Masters', 'PhD'],
     levelCode: 'undergraduate',
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Monthly stipend (¥117,000–¥145,000)', 'Round-trip airfare', 'Japanese language training'],
-    deadline: 'April–June 2027 (Embassy track)',
-    deadlineDate: '2027-04-01',
+    covers: ['Tuition', 'Monthly stipend (¥117,000 undergraduate; ¥143,000–145,000 graduate)', 'Round-trip airfare', 'Japanese language training'],
+    deadline: 'Closed (2027 intake: research students May 31, 2026; undergraduates June 14, 2026); 2028 round not yet announced',
+    deadlineDate: '2026-05-31',
     eligibility: [
-      'Nepali citizen under 35 years old',
-      'Good academic standing',
-      'Willing to learn Japanese language'
+      'Nepali citizen; research students under 35, undergraduates under 25',
+      'Minimum grades set by the Embassy (research: 70% science / 60% humanities; undergraduate: 75% / 65%)',
+      'Willing to learn Japanese (undergraduate classes are taught in Japanese)'
     ],
-    url: 'https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/',
-    description: 'One of the most comprehensive scholarships available — includes free Japanese language training before your degree program begins.'
+    lastVerified: '2026-11-19',
+    source: 'https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/',
+    url: 'https://www.np.emb-japan.go.jp/itpr_ja/11_000001_00723.html',
+    description: 'One of the most comprehensive scholarships available — includes free Japanese language training before your degree program begins. Nepalis apply through the Embassy of Japan in Kathmandu; the last round was announced in late April.'
   },
   {
     id: 'kgsp',
@@ -136,16 +139,18 @@ export const scholarships = [
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Accommodation', 'Monthly stipend', 'Medical insurance'],
-    deadline: 'January–April 2027',
-    deadlineDate: '2027-01-15',
+    covers: ['Tuition', 'Free dormitory or accommodation subsidy', 'Monthly stipend (CNY 2,500 bachelor\'s / 3,000 master\'s / 3,500 PhD)', 'Medical insurance'],
+    deadline: 'Varies by track and university; the 2027-28 call for Nepal is not yet published',
+    deadlineDate: null,
     eligibility: [
       'Non-Chinese citizen in good health',
       'Bachelor\'s for Master\'s, Master\'s for PhD',
-      'Age limits vary by program level'
+      'Under 25 for a bachelor\'s, under 35 for a master\'s, under 40 for a PhD'
     ],
+    lastVerified: '2026-11-19',
+    source: 'https://www.campuschina.org/content/details3_74776.html',
     url: 'https://www.campuschina.org/',
-    description: 'China\'s national scholarship covering study at over 280 Chinese universities. Multiple application channels available through embassy or direct university application.'
+    description: 'China\'s national scholarship covering study at over 280 Chinese universities. Two routes: the bilateral programme (apply through your home country\'s dispatching authority) or the university programme (apply directly to a designated Chinese university).'
   },
   {
     id: 'turkiye',
@@ -184,14 +189,16 @@ export const scholarships = [
     fieldCode: 'all',
     fundingType: 'fully-funded',
     covers: ['Tuition', 'Return airfare', 'Living allowance', 'Health insurance', 'Pre-course English support'],
-    deadline: '~April 30, 2027',
+    deadline: '~April 30, 2027 (applications open February 1 and close April 30 each year; the 2027 round is not yet announced)',
     deadlineDate: '2027-04-30',
+    // Not fully verified in the Nov 2026 review: the yearly window and Nepal's eligibility are confirmed, but the level,
+    // work-experience and English requirements for the next intake are not published yet.
     eligibility: [
       'Nepali citizen (eligible developing country)',
       'Minimum 2 years work experience',
       'IELTS 6.5 overall (no band below 6.0)'
     ],
-    url: 'https://australiaawardsnepal.org/',
+    url: 'https://australiaawardsnepal.org/opportunities/',
     description: 'Australian Government scholarships focusing on development outcomes. Scholars are expected to contribute to Nepal\'s development upon return.'
   },
   {
@@ -280,39 +287,17 @@ export const scholarships = [
     fieldCode: 'all',
     fundingType: 'fully-funded',
     covers: ['Tuition', 'Living allowance', 'Return airfare', 'Health insurance', 'Establishment allowance'],
-    deadline: '~March 2027',
+    deadline: 'March 31, 2027 (portal opens March 1; it may close early for countries with many applications)',
     deadlineDate: '2027-03-31',
     eligibility: [
       'Citizen of eligible developing country (Nepal eligible)',
       'Meet English language requirements',
       'Not a permanent resident of New Zealand'
     ],
-    url: 'https://www.nzscholarships.govt.nz/',
-    description: 'New Zealand Government scholarships supporting individuals from developing countries to gain skills that contribute to their home country\'s development.'
-  },
-  {
-    id: 'stipendium-hungaricum',
-    name: 'Stipendium Hungaricum',
-    country: 'Hungary',
-    countryCode: 'hungary',
-    countryFlag: '🇭🇺',
-    organizer: 'Hungarian Government',
-    level: ['Bachelors', 'Masters', 'PhD'],
-    levelCode: 'undergraduate',
-    field: 'All Fields',
-    fieldCode: 'all',
-    fundingType: 'fully-funded',
-    covers: ['Tuition', 'Monthly stipend', 'Accommodation', 'Medical insurance'],
-    deadline: '~January 15, 2027',
-    deadlineDate: '2027-01-15',
-    // Not verified in the Nov 2026 review: Nepal's place on the partner list could not be confirmed either way.
-    eligibility: [
-      'Citizen of a partner country: check the current partner list for Nepal before applying',
-      'No Hungarian citizenship',
-      'Meet academic requirements of chosen program'
-    ],
-    url: 'https://stipendiumhungaricum.hu/',
-    description: 'Hungary\'s government scholarship program with over 600 study programs available. Growing number of English-taught programs across all fields.'
+    lastVerified: '2026-11-19',
+    source: 'https://www.nzscholarships.govt.nz/international-tertiary-students/',
+    url: 'https://www.nzscholarships.govt.nz/check-eligible-countries/',
+    description: 'New Zealand Government scholarships supporting individuals from developing countries to gain skills that contribute to their home country\'s development. For Nepal: postgraduate certificate, postgraduate diploma, master\'s and PhD.'
   },
   {
     id: 'gates-cambridge',
@@ -481,10 +466,435 @@ export const scholarships = [
     lastVerified: '2026-11-19',
     url: 'https://www.studyinnl.org/finances/nl-scholarship',
     description: 'A €5,000 grant for non-EEA students starting their first year of study at a participating Dutch university. Combine with other funding for full coverage.'
+  },
+  {
+    id: 'global-ugrad-nepal',
+    name: 'Global Undergraduate Exchange Program (Global UGRAD)',
+    country: 'USA',
+    countryCode: 'usa',
+    countryFlag: '🇺🇸',
+    organizer: 'U.S. Department of State / USEF-Nepal',
+    level: ['Bachelors'],
+    levelCode: 'undergraduate',
+    field: 'All Fields',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Tuition and mandatory fees', 'Housing and meals', 'Round-trip economy airfare', 'Monthly maintenance allowance', 'Health benefits'],
+    deadline: 'January 11, 2027 (opens December 1, 2026)',
+    deadlineDate: '2027-01-11',
+    eligibility: [
+      'Citizen of Nepal, aged 18 to 25',
+      'Enrolled in first- or second-year full-time undergraduate study at a Nepali institution',
+      'Must have one full year left at the home institution after the programme'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://usefnepal.org/fulbright/global-undergrad-exchange-fellowship-ugrad/program-timeline',
+    url: 'https://usefnepal.org/fulbright/global-undergrad-exchange-fellowship-ugrad/?action=main',
+    description: 'One-semester, non-degree exchange at a U.S. university (fall 2027 or spring 2028) for Nepali undergraduates. TOEFL is not needed to apply; shortlisted candidates take it free of charge.'
+  },
+  {
+    id: 'jj-wbgsp',
+    name: 'Joint Japan/World Bank Graduate Scholarship Program (JJ/WBGSP)',
+    country: 'Various',
+    countryCode: 'other',
+    countryFlag: '🌍',
+    organizer: 'World Bank / Government of Japan',
+    level: ['Masters'],
+    levelCode: 'graduate',
+    field: 'Development-related fields',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Tuition', 'Monthly living stipend', 'Round-trip economy airfare', 'US$600 travel allowance per trip', 'Basic medical insurance'],
+    deadline: 'May 21, 2027 (window 2: March 29 – May 21, 2027; window 1: January 18 – February 26, 2027)',
+    deadlineDate: '2027-05-21',
+    eligibility: [
+      'Nepal is on the official list of eligible World Bank member developing countries',
+      'Bachelor\'s degree earned at least 3 years ago plus at least 3 years of paid development-related work',
+      'Get admitted to a participating master\'s programme first: only candidates shortlisted by the university receive the scholarship application link'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://www.worldbank.org/en/programs/scholarships/jj-wbgsp',
+    url: 'https://www.worldbank.org/en/programs/scholarships/jj-wbgsp',
+    description: 'Funds a master\'s degree in a development-related field at participating universities. You apply to the university first; only shortlisted candidates are invited to apply for the scholarship.'
+  },
+  {
+    id: 'adb-jsp-ait',
+    name: 'ADB-Japan Scholarship Program at the Asian Institute of Technology',
+    country: 'Thailand',
+    countryCode: 'thailand',
+    countryFlag: '🇹🇭',
+    organizer: 'Asian Development Bank / Government of Japan / AIT',
+    level: ['Masters'],
+    levelCode: 'graduate',
+    field: 'Development-related fields',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Tuition fees', 'Subsistence and housing allowance', 'Books allowance', 'Medical and accident insurance', 'Economy air travel'],
+    deadline: 'March 31, 2027 (August 2027 intake)',
+    deadlineDate: '2027-03-31',
+    eligibility: [
+      'National of an ADB borrowing member country (ADB lists Nepal)',
+      'Bachelor\'s degree with a superior record and at least 2 years of full-time work experience after it',
+      'Not more than 35 years old; not living or working outside your home country'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://ait.ac.th/financial/asian-development-bank-japan-scholarship-program-adb-jsp/',
+    url: 'https://ait.ac.th/financial/asian-development-bank-japan-scholarship-program-adb-jsp/',
+    description: 'Full master\'s scholarship at AIT near Bangkok, funded by Japan through ADB. There is no separate form: apply through the AIT admission portal and state that you want to be considered.'
+  },
+  {
+    id: 'ait-scholarships',
+    name: 'AIT Scholarships',
+    country: 'Thailand',
+    countryCode: 'thailand',
+    countryFlag: '🇹🇭',
+    organizer: 'Asian Institute of Technology',
+    level: ['Masters', 'PhD'],
+    levelCode: 'graduate',
+    field: 'All Fields',
+    fieldCode: 'all',
+    fundingType: 'partial',
+    covers: ['Full or partial tuition fees only', 'Registration fees NOT covered (20,000 Baht per semester)', 'Living expenses NOT covered'],
+    deadline: 'December 10, 2026 (January 2027 intake); July 15, 2027 (August 2027 intake)',
+    deadlineDate: '2026-12-10',
+    eligibility: [
+      'Open to all nationalities, so Nepali citizens can apply',
+      'Four-year bachelor\'s degree; IELTS Academic or AIT English test 5.0 for master\'s, 5.5 for doctoral',
+      'PhD applicants need a master\'s degree with a CGPA of 3.50'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://ait.ac.th/financial/ait-scholarships/',
+    url: 'https://ait.ac.th/financial/ait-scholarships/',
+    description: 'Tuition-only awards (full or partial) decided by each AIT faculty at admission. Students pay registration fees and living costs themselves.'
+  },
+  {
+    id: 'ait-japanese-government-phd',
+    name: 'Japanese Government Scholarships at AIT (Doctoral)',
+    country: 'Thailand',
+    countryCode: 'thailand',
+    countryFlag: '🇹🇭',
+    organizer: 'Government of Japan / Asian Institute of Technology',
+    level: ['PhD'],
+    levelCode: 'phd',
+    field: 'Remote Sensing and GIS; Mechatronics and Machine Intelligence',
+    fieldCode: 'engineering',
+    fundingType: 'fully-funded',
+    covers: ['Tuition and registration fees (up to 6 semesters)', 'Bursary and accommodation', 'Medical insurance', 'Research support', 'One round-trip economy airfare'],
+    deadline: 'Closed April 30, 2026 (August 2026 intake); next round not yet announced',
+    deadlineDate: '2026-04-30',
+    eligibility: [
+      'Nepal is named in the South Asia priority country list',
+      'Master\'s degree with a GPA of at least 3.50 or equivalent',
+      'IELTS Academic 6 (writing and overall) or equivalent, plus a dissertation research outline'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://ait.ac.th/financial/japanese-government-scholarships/',
+    url: 'https://ait.ac.th/financial/japanese-government-scholarships/',
+    description: 'Doctoral scholarship at AIT in two named programmes for students from listed Southeast and South Asian countries. The official page still shows the 2026 round; no 2027 date is posted.'
+  },
+  {
+    id: 'kaist-undergraduate-scholarship',
+    name: 'KAIST Undergraduate Scholarship (International Admission)',
+    country: 'South Korea',
+    countryCode: 'south-korea',
+    countryFlag: '🇰🇷',
+    organizer: 'Korea Advanced Institute of Science and Technology (KAIST)',
+    level: ['Bachelors'],
+    levelCode: 'undergraduate',
+    field: 'Science and Engineering',
+    fieldCode: 'engineering',
+    fundingType: 'fully-funded',
+    covers: ['Tuition exemption for 8 semesters', 'Living stipend of 350,000 KRW per month', 'Medical health insurance'],
+    deadline: 'January 14, 2027 (regular admission, opened November 10, 2026)',
+    deadlineDate: '2027-01-14',
+    eligibility: [
+      'Given to students admitted through KAIST international undergraduate admission, which is for non-Korean citizens (Nepalis included)',
+      'Tick the KAIST scholarship box in the admission application; there is no separate application',
+      'Keep a GPA above 2.7 out of 4.3 after the first year'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://admission.kaist.ac.kr/intl-undergraduate/support/scholarships/kaist',
+    url: 'https://admission.kaist.ac.kr/intl-undergraduate/application/ApplicationGuide/ApplicationTimeline',
+    description: 'International students admitted to a KAIST bachelor\'s programme receive a tuition waiver, a small monthly stipend and health insurance. The competition is the admission itself.'
+  },
+  {
+    id: 'kaist-graduate-scholarship',
+    name: 'KAIST Scholarship for International Graduate Students',
+    country: 'South Korea',
+    countryCode: 'south-korea',
+    countryFlag: '🇰🇷',
+    organizer: 'Korea Advanced Institute of Science and Technology (KAIST)',
+    level: ['Masters', 'PhD'],
+    levelCode: 'graduate',
+    field: 'Science and Engineering',
+    fieldCode: 'engineering',
+    fundingType: 'fully-funded',
+    covers: ['Full tuition', 'National health insurance', 'Monthly stipend (amount depends on research involvement and college)'],
+    deadline: 'February 5, 2027 (fall 2027 entry; opens January 7, 2027)',
+    deadlineDate: '2027-02-05',
+    eligibility: [
+      'Open to international applicants for KAIST graduate programmes, so Nepali citizens can apply',
+      'Chosen inside the graduate admission application; admission and scholarship are decided separately',
+      'The GDI-GTIP track is excluded'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://admission.kaist.ac.kr/intl-graduate/FinancialSupport/Scholarship/KAISTScholarship',
+    url: 'https://admission.kaist.ac.kr/intl-graduate/Admission/YearlyTimelines',
+    description: 'Tuition, health insurance and a research-linked stipend for international master\'s and PhD students at KAIST. The official page does not fix the stipend amount.'
+  },
+  {
+    id: 'kaust-fellowship',
+    name: 'KAUST Fellowship',
+    country: 'Saudi Arabia',
+    countryCode: 'saudi-arabia',
+    countryFlag: '🇸🇦',
+    organizer: 'King Abdullah University of Science and Technology (KAUST)',
+    level: ['Masters', 'PhD'],
+    levelCode: 'graduate',
+    field: 'Science and Engineering',
+    fieldCode: 'engineering',
+    fundingType: 'fully-funded',
+    covers: ['Full tuition', 'Living allowance of $20,000–30,000 per year', 'Housing', 'Medical and dental coverage', 'Relocation support'],
+    deadline: '~January 3, 2027 (fall 2027 entry, round 2; KAUST marks its dates as tentative)',
+    deadlineDate: '2027-01-03',
+    eligibility: [
+      'KAUST states no nationality restriction and says it takes applications from all over the world; Nepal is not named explicitly',
+      'Bachelor\'s degree with a minimum GPA of 3.0',
+      'TOEFL iBT or IELTS 6.5'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://www.kaust.edu.sa/en/study/applying-to-kaust',
+    url: 'https://admissions.kaust.edu.sa/how-to-apply/admission-timelines',
+    description: 'Admitted MS and PhD students at KAUST receive the fellowship: tuition, a living allowance, housing and medical cover.'
+  },
+  {
+    id: 'india-golden-jubilee-gjss',
+    name: 'Golden Jubilee Scholarship Scheme (GJSS)',
+    country: 'Nepal',
+    countryCode: 'nepal',
+    countryFlag: '🇳🇵',
+    organizer: 'Embassy of India, Kathmandu (Government of India)',
+    level: ['Bachelors'],
+    levelCode: 'undergraduate',
+    field: 'All Fields',
+    fieldCode: 'all',
+    fundingType: 'stipend',
+    covers: ['NRs 48,000 per year for MBBS/BDS (5 years)', 'NRs 48,000 per year for BE/B.Tech (4 years)', 'NRs 36,000 per year for other 3-year bachelor\'s courses'],
+    deadline: 'November 29, 2026 (extended; 2026-27 round)',
+    deadlineDate: '2026-11-29',
+    eligibility: [
+      'Nepali student in the first year of a regular undergraduate course at a recognised institute in Nepal',
+      'Aged 17 to 22 on July 1, with at least 70% aggregate in Class 12',
+      'Family income below NRs 200,000 per year and no other scholarship'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://www.indembkathmandu.gov.in/gjss',
+    url: 'https://indembkathmandu.gov.in/education/news/scholarship',
+    description: 'Annual stipend from the Government of India for Nepali undergraduates studying in Nepal, not abroad. Applications are made online when the scheme opens, usually in October or November.'
+  },
+  {
+    id: 'reach-oxford-scholarship',
+    name: 'Reach Oxford Scholarship',
+    country: 'UK',
+    countryCode: 'uk',
+    countryFlag: '🇬🇧',
+    organizer: 'University of Oxford',
+    level: ['Bachelors'],
+    levelCode: 'undergraduate',
+    field: 'All Fields (except Medicine)',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Course fees', 'Grant for living costs', 'One return air fare per year'],
+    deadline: 'January 26, 2027 (2027 entry; an Oxford offer is required first)',
+    deadlineDate: '2027-01-26',
+    eligibility: [
+      'Nepal is named in the official list of eligible low-income (OECD DAC) countries',
+      'Must already hold an offer of an undergraduate place at Oxford',
+      'Selected on academic ability, financial need and social commitment; around 2–3 awards per year'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://www.ox.ac.uk/admissions/undergraduate/fees-and-funding/oxford-bursaries-and-scholarships/reach-oxford',
+    url: 'https://www.ox.ac.uk/admissions/undergraduate/fees-and-funding/oxford-bursaries-and-scholarships/reach-oxford',
+    description: 'Undergraduate scholarship at Oxford for students from low-income countries who cannot study for a degree at home. Very competitive: around 2–3 awards a year, only for applicants who already hold an Oxford offer.'
+  },
+  {
+    id: 'clarendon-fund-oxford',
+    name: 'Clarendon Fund Scholarships',
+    country: 'UK',
+    countryCode: 'uk',
+    countryFlag: '🇬🇧',
+    organizer: 'University of Oxford (Clarendon Fund)',
+    level: ['Masters', 'PhD'],
+    levelCode: 'graduate',
+    field: 'All Fields',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Course fees in full', 'Annual grant for living costs (at least £20,780 in 2025-26)'],
+    deadline: 'The December 2026 or January 2027 deadline of your Oxford course (no separate application)',
+    deadlineDate: null,
+    eligibility: [
+      'No restriction by nationality or country of residence, so Nepali citizens are eligible',
+      'Apply for a new master\'s or DPhil course at Oxford by that course\'s December or January deadline',
+      'Considered automatically; selected on academic merit and potential'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://www.ox.ac.uk/admissions/graduate/fees-and-funding/funding/clarendon/applicants',
+    url: 'https://www.ox.ac.uk/admissions/graduate/fees-and-funding/funding/clarendon',
+    description: 'Over 200 fully funded graduate scholarships a year at Oxford, awarded on academic merit. You are considered automatically when you apply for your course by its December or January deadline.'
+  },
+  {
+    id: 'weidenfeld-hoffmann-oxford',
+    name: 'Weidenfeld-Hoffmann Scholarships and Leadership Programme',
+    country: 'UK',
+    countryCode: 'uk',
+    countryFlag: '🇬🇧',
+    organizer: 'University of Oxford / Weidenfeld-Hoffmann Trust',
+    level: ['Masters'],
+    levelCode: 'graduate',
+    field: 'Selected Oxford graduate courses',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['100% of course fees', 'Grant for living costs (at least £21,805)', 'Leadership development programme'],
+    deadline: 'The December 2026 or January 2027 deadline of your Oxford course (2027-28 entry)',
+    deadlineDate: null,
+    eligibility: [
+      'Nepal is on the official list of eligible countries (you must be ordinarily resident in one)',
+      'Apply for one of the eligible full-time Oxford courses and upload the scholarship statement with the course application',
+      'Intend to return to your country of residence after the course'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://www.ox.ac.uk/admissions/graduate/fees-and-funding/fees-funding-and-scholarship-search/weidenfeld-hoffmann-scholarships-and-leadership-programme',
+    url: 'https://www.ox.ac.uk/admissions/graduate/fees-and-funding/fees-funding-and-scholarship-search/weidenfeld-hoffmann-scholarships-and-leadership-programme',
+    description: 'Fully funded Oxford graduate scholarship with a year-long leadership programme, aimed mainly at applicants from developing and emerging economies. Limited to a set list of courses.'
+  },
+  {
+    id: 'swiss-government-excellence',
+    name: 'Swiss Government Excellence Scholarships',
+    country: 'Switzerland',
+    countryCode: 'switzerland',
+    countryFlag: '🇨🇭',
+    organizer: 'Swiss Confederation (FCS / SERI)',
+    level: ['PhD'],
+    levelCode: 'phd',
+    field: 'All Fields',
+    fieldCode: 'all',
+    fundingType: 'stipend',
+    covers: ['CHF 2,450 per month', 'Compulsory health insurance premiums', 'Return flight allowance', 'One-time CHF 600 rental deposit grant', 'Tuition and semester fees NOT covered'],
+    deadline: 'November 27, 2026 (2027-28 round for Nepal)',
+    deadlineDate: '2026-11-27',
+    eligibility: [
+      'Nepal is on the official 2027-28 country list (research fellowship and PhD scholarship)',
+      'Master\'s degree, maximum age 35, and a Swiss academic supervisor backing the application',
+      'Apply through the online portal; the contact is the Embassy of Switzerland in Nepal'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://www.sbfi.admin.ch/dam/en/sd-web/ETBRLVHEDk7K/2026-08-04_Asia_List_of_countries_and_territories_complete.pdf',
+    url: 'https://www.sbfi.admin.ch/en/swiss-government-excellence-scholarships-at-a-glance',
+    description: 'Swiss federal scholarships for PhD study and research fellowships at Swiss universities. A monthly stipend rather than a full package: tuition and semester fees are not covered.'
+  },
+  {
+    id: 'lester-b-pearson-toronto',
+    name: 'Lester B. Pearson International Scholarship',
+    country: 'Canada',
+    countryCode: 'canada',
+    countryFlag: '🇨🇦',
+    organizer: 'University of Toronto',
+    level: ['Bachelors'],
+    levelCode: 'undergraduate',
+    field: 'All Fields',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Tuition', 'Books', 'Incidental fees', 'Full residence support for four years'],
+    deadline: 'Closed November 6, 2026 (2027 entry; school nominations were due October 9); next round ~autumn 2027',
+    deadlineDate: '2026-11-06',
+    eligibility: [
+      'Open to any international student who needs a study permit, which includes Nepali citizens',
+      'You must be nominated by your high school',
+      'In the final year of secondary school, or graduated no earlier than June of the previous year'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://future.utoronto.ca/pearson/about/',
+    url: 'https://future.utoronto.ca/pearson/about/',
+    description: 'Four-year undergraduate scholarship at the University of Toronto for international students nominated by their school. The 2027 entry round has closed.'
+  },
+  {
+    id: 'mccall-macbain-scholarships',
+    name: 'McCall MacBain Scholarships at McGill',
+    country: 'Canada',
+    countryCode: 'canada',
+    countryFlag: '🇨🇦',
+    organizer: 'McCall MacBain Foundation / McGill University',
+    level: ['Masters'],
+    levelCode: 'graduate',
+    field: 'Eligible McGill master\'s and professional programmes',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Tuition and fees', 'Living stipend of CAD 2,300 per month during academic terms', 'One-time relocation grant', 'Mentorship and leadership programme'],
+    deadline: 'Closed August 19, 2026 (international applicants, 2027 entry); next round opens ~June 2027',
+    deadlineDate: '2026-08-19',
+    eligibility: [
+      'International applicants (anyone who is not a Canadian citizen, permanent resident or refugee) are eligible; 10 of up to 30 scholarships go to them',
+      'Recent or upcoming first bachelor\'s degree, or aged 30 or younger: check the exact cut-off dates for your round',
+      'Meet McGill\'s admission and language requirements for the chosen programme'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://mccallmacbainscholars.org/apply/',
+    url: 'https://mccallmacbainscholars.org/apply/',
+    description: 'Full scholarship for a master\'s or professional degree at McGill, selected on character, community engagement and leadership as well as academics. The international round for 2027 entry closed in August 2026.'
+  },
+  {
+    id: 'romanian-government-scholarship',
+    name: 'Romanian Government Scholarships (Ministry of Foreign Affairs)',
+    country: 'Romania',
+    countryCode: 'romania',
+    countryFlag: '🇷🇴',
+    organizer: 'Government of Romania (Ministry of Foreign Affairs)',
+    level: ['Bachelors', 'Masters', 'PhD'],
+    levelCode: 'undergraduate',
+    field: 'All Fields (except Medicine, Dental Medicine, Pharmacy)',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Tuition, including the Romanian language preparatory year', 'Monthly scholarship', 'Dormitory accommodation (subject to available places)', 'International travel NOT covered'],
+    deadline: 'Closed March 31, 2026 (window was February 16 – March 31); next call ~February–March 2027, not yet announced',
+    deadlineDate: '2026-03-31',
+    eligibility: [
+      'Open to citizens of all non-EU countries, which includes Nepal',
+      'Good grades in your last completed school or degree (at least 7 on the Romanian scale or equivalent)',
+      'Bachelor\'s and master\'s are taught in Romanian (a preparatory language year is provided); a PhD may be in English'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://scholarships.studyinromania.gov.ro/scholarship-about',
+    url: 'https://scholarships.studyinromania.gov.ro/',
+    description: 'Annual Romanian state scholarships for non-EU citizens at bachelor\'s, master\'s and PhD level. Bachelor\'s and master\'s study is in Romanian; applications are accepted only through the official online platform.'
+  },
+  {
+    id: 'kazakhstan-government-scholarship',
+    name: 'Scholarship Program of the Republic of Kazakhstan',
+    country: 'Kazakhstan',
+    countryCode: 'kazakhstan',
+    countryFlag: '🇰🇿',
+    organizer: 'Government of Kazakhstan (Ministry of Science and Higher Education)',
+    level: ['Bachelors', 'Masters', 'PhD'],
+    levelCode: 'undergraduate',
+    field: 'All Fields',
+    fieldCode: 'all',
+    fundingType: 'partial',
+    covers: ['Full tuition fees', 'Monthly allowance (depends on academic progress)', 'Travel, accommodation, visa and medical insurance NOT covered'],
+    deadline: 'Not yet announced for 2027-28',
+    deadlineDate: null,
+    eligibility: [
+      'Open to foreign citizens with no country restriction stated, so Nepali citizens can apply',
+      'Good grades for a bachelor\'s; a GPA of at least 2.33/4 in the previous degree for a master\'s or PhD',
+      'Selection by documents, an online test and an online interview'
+    ],
+    lastVerified: '2026-11-19',
+    source: 'https://oq.gov.kz/en/b-ship',
+    url: 'https://oq.gov.kz/en/b-ship',
+    description: 'Kazakh government scholarship for foreign citizens at bachelor\'s, master\'s and PhD level. It pays tuition and a monthly allowance but not travel, accommodation, visa or insurance.'
   }
 ];
 
-// Distinct destination countries (the multi-country entries are not counted).
+// Distinct destination countries abroad (the multi-country entries and Nepal itself are not counted).
 export const countryCount = new Set(
-  scholarships.map((s) => s.countryCode).filter((c) => c !== 'other' && c !== 'europe')
+  scholarships.map((s) => s.countryCode).filter((c) => !['other', 'europe', 'nepal'].includes(c))
 ).size;

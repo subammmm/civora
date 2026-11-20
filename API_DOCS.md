@@ -12,7 +12,7 @@ GET /scholarships?country=uk&level=graduate&field=all&deadline=open
 | Parameter  | Values | Meaning |
 |------------|--------|---------|
 | `country`  | lowercase code, e.g. `uk`, `japan`, `south-korea` | matches `countryCode` |
-| `level`    | `undergraduate`, `graduate`, `phd` | matches `levelCode` |
+| `level`    | `undergraduate`, `graduate`, `phd`, or `bachelors`, `masters` | `levelCode`, or any degree level the scholarship offers |
 | `field`    | lowercase code, e.g. `all`, `engineering` | matches `fieldCode` |
 | `deadline` | `open` | deadline not passed yet, or no single deadline date |
 |            | `passed` | deadline date is in the past |

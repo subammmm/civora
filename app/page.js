@@ -1,6 +1,7 @@
 import "./globals.css";
 import { scholarships, countryCount } from "./scholarships/scholarships-data";
 import { daysLeft, matchesDeadline } from "../lib/deadlines";
+import Link from "next/link";
 
 // Static page with "days left" counters: re-render daily so they don't freeze at build time.
 export const revalidate = 86400;
@@ -15,9 +16,15 @@ export default function Home() {
     .sort((a, b) => new Date(a.deadlineDate) - new Date(b.deadlineDate))
     .slice(0, 5);
 
+  const openNow = scholarships.filter((s) => matchesDeadline(s, "open", now));
+  // Newest lastVerified in the data, e.g. "Nov 2026".
+  const lastChecked = new Date(
+    scholarships.map((s) => s.lastVerified).filter(Boolean).sort().at(-1)
+  ).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
+
   // Featured scholarships: fully funded and still open, first 6
-  const featured = scholarships
-    .filter((s) => s.fundingType === "fully-funded" && matchesDeadline(s, "open", now))
+  const featured = openNow
+    .filter((s) => s.fundingType === "fully-funded")
     .slice(0, 6);
 
   return (
@@ -47,6 +54,15 @@ export default function Home() {
             <button type="submit">Search</button>
           </form>
 
+          <p className="open-now-links">
+            For students in Nepal, open right now:{" "}
+            {["Bachelors", "Masters", "PhD"].map((level) => (
+              <Link key={level} href={`/scholarships?deadline=open&level=${level.toLowerCase()}`}>
+                {level} ({openNow.filter((s) => s.level.includes(level)).length})
+              </Link>
+            ))}
+          </p>
+
           <div
             style={{
               marginTop: "2.5rem",
@@ -54,7 +70,7 @@ export default function Home() {
               fontSize: "0.9375rem",
             }}
           >
-            {scholarships.length} Verified Scholarships · {countryCount}+ Countries
+            {scholarships.length} Scholarships · {countryCount}+ Countries
           </div>
         </div>
       </section>
@@ -92,13 +108,13 @@ export default function Home() {
           </div>
 
           <div style={{ textAlign: "center" }}>
-            <a
+            <Link
               href="/scholarships"
               className="btn-outline btn-sm"
               style={{ marginTop: "1.5rem" }}
             >
               View All Deadlines →
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -168,13 +184,13 @@ export default function Home() {
           </div>
 
           <div style={{ textAlign: "center" }}>
-            <a
+            <Link
               href="/scholarships"
               className="btn-secondary"
               style={{ marginTop: "2rem" }}
             >
               Browse All {scholarships.length} Scholarships →
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -285,7 +301,7 @@ export default function Home() {
               <div className="stat-number" style={{ color: "var(--navy)" }}>
                 {scholarships.length}
               </div>
-              <p style={{ color: "var(--navy)" }}>Verified Scholarships</p>
+              <p style={{ color: "var(--navy)" }}>Scholarships</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <div className="stat-number" style={{ color: "var(--navy)" }}>
@@ -301,9 +317,9 @@ export default function Home() {
             </div>
             <div style={{ textAlign: "center" }}>
               <div className="stat-number" style={{ color: "var(--navy)" }}>
-                Monthly
+                {lastChecked}
               </div>
-              <p style={{ color: "var(--navy)" }}>Updates</p>
+              <p style={{ color: "var(--navy)" }}>Data Last Checked</p>
             </div>
           </div>
         </div>

@@ -1,110 +1,60 @@
-# 🌍 Civora
+# Civora
 
-**Civora** is an AI-powered civic engagement platform designed to bridge the gap between citizens and their governments. It transforms how people interact with democracy by making civic participation accessible, informed, and impactful.
+A scholarship-discovery site for Nepali students: a curated list of scholarships a Nepali citizen can actually apply to, with deadlines, eligibility, coverage and links to the official application pages. Entries checked against their official source carry the date they were verified.
 
-## 🎯 Vision
+## What it does
 
-To create a world where every citizen has equal access to civic information and the tools to make their voice heard effectively in their democracy.
+- **Scholarship list** (`/scholarships`) with search and filters for level, country, funding type and deadline. Filters live in the URL, so a view can be shared (`?level=masters&deadline=open`).
+- **A page per scholarship** (`/scholarships/[id]`) with eligibility, coverage, the official link and when it was last verified.
+- **Deadlines in your calendar:** an `.ics` download per scholarship, and a feed of every open deadline at `/api/scholarships/calendar.ics`.
+- **Atom feed** of verified entries at `/feed.xml`.
+- **Saved scholarships**, kept in the browser, exportable to a calendar file.
+- **Read API** at `/api/scholarships` (see [API_DOCS.md](API_DOCS.md)).
 
-## ✨ Key Features
+## Running it
 
-### 📋 Smart Legislation Tracking
-- Real-time monitoring of bills and legislation at federal, state, and local levels
-- AI-powered plain-language summaries of complex legal documents
-- Personalized alerts based on your interests and location
-
-### 🗣️ Civic Voice Tools
-- Find and contact your elected representatives
-- Generate personalized, effective messages to officials
-- Track your civic engagement history and impact
-
-### 📊 Transparency Dashboard
-- Government spending visualization
-- Voting records of elected officials
-- Campaign finance tracking
-
-### 🤖 AI Civic Assistant
-- Ask questions about laws, rights, and civic processes
-- Get guidance on how to engage with local government
-- Receive personalized civic action recommendations
-
-## 🛠️ Tech Stack
-
-- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
-- **Backend**: Node.js, Express
-- **Database**: PostgreSQL with Prisma ORM
-- **AI/ML**: OpenAI GPT-4, Custom NLP models
-- **APIs**: Congress.gov, OpenStates, Google Civic Information
-- **Infrastructure**: Vercel, AWS
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+
-- PostgreSQL 14+
-- npm or yarn
-
-### Installation
+Needs Node 20.9 or later.
 
 ```bash
-# Clone the repository
-git clone https://github.com/subammmm/civora.git
-cd civora
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.example .env.local
-
-# Run database migrations
-npx prisma migrate dev
-
-# Start the development server
+npm ci
+cp .env.example .env   # every value is optional for local use
 npm run dev
 ```
 
-Visit `http://localhost:3000` to see the app.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm run type-check` | TypeScript check |
+| `npm test` | Unit tests (Node's built-in test runner) |
 
-## 📁 Project Structure
+## Data
 
-```
-civora/
-├── app/                    # Next.js app router pages
-├── components/             # Reusable UI components
-├── lib/                    # Utility functions and API clients
-├── prisma/                 # Database schema and migrations
-├── public/                 # Static assets
-├── services/               # Business logic and external APIs
-└── types/                  # TypeScript type definitions
-```
+The scholarships live in [`app/scholarships/scholarships-data.js`](app/scholarships/scholarships-data.js). That file is the single source of truth for reads. To add or correct an entry, edit it there, set `lastVerified` to the date you checked the official page, and put that page in `source`.
 
-## 🤝 Contributing
+Supabase is optional and off by default. Reads only use it when `USE_SUPABASE_READS=true`; see [docs/SUPABASE-SETUP.md](docs/SUPABASE-SETUP.md).
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+## Configuration
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+All variables are documented in [`.env.example`](.env.example). The ones that matter in production:
 
-## 📄 License
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Origin used for canonical tags, the sitemap, robots.txt and feeds. Defaults to the Vercel production host, then `https://civora.me`. |
+| `ADMIN_API_TOKEN` | Enables the write API (`x-admin-token` header). Unset means the write routes return 404. |
+| `NEXT_PUBLIC_FORMSPREE_ID` | Form ID for the contact and footer forms. |
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Deployment
 
-## 🙏 Acknowledgments
+Deployed on Vercel from `main`. CI (`.github/workflows/ci.yml`) runs lint, type check and tests on every push and pull request.
 
-- [Congress.gov API](https://api.congress.gov/) for federal legislation data
-- [OpenStates](https://openstates.org/) for state-level legislative data
-- [Google Civic Information API](https://developers.google.com/civic-information) for representative data
+## Repository notes
 
-## 📬 Contact
+- `docs/archive/` holds old status and implementation notes from earlier versions of the project.
+- `frontend/`, `python_backend/` and most of `public/assets/` belong to earlier versions and are not used by the current app.
 
-- **Website**: [civora.io](https://civora.io)
-- **Email**: hello@civora.io
-- **Twitter**: [@CivoraApp](https://twitter.com/CivoraApp)
+## License
 
----
-
-<p align="center">Made with ❤️ for democracy</p>
+See [LICENSE](LICENSE).
