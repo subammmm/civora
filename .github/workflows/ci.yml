@@ -28,6 +28,26 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          # The tests import the app's ESM .js files directly; Node >= 22.12 loads them without flags.
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
   type-check:
     runs-on: ubuntu-latest
 

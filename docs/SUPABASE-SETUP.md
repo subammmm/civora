@@ -11,7 +11,12 @@ Civora uses Supabase for:
 - **Newsletter Subscribers** - Email list management
 - **Analytics** - Page view tracking (optional)
 
-> **Note:** The app gracefully falls back to static data if Supabase is not configured.
+> **Note (November 2026):** scholarships are read from the static dataset in
+> `app/scholarships/scholarships-data.js`, which is the single source of truth for the pages, the API,
+> the calendar and the feed. The `scholarships` table has fewer columns and is not kept in sync, so the API
+> reads it only when `USE_SUPABASE_READS=true` is set (and Supabase is configured). The seed request below
+> needs that flag too and never runs in production. Without the flag, the admin write routes still write to
+> the table, but nothing reads those rows.
 
 ---
 
@@ -62,7 +67,7 @@ After the tables are created, seed the scholarships data:
 # Start the dev server
 npm run dev
 
-# In another terminal, seed the database
+# In another terminal, seed the database (requires USE_SUPABASE_READS=true in .env)
 curl "http://localhost:3000/api/scholarships?seed=true"
 ```
 
