@@ -11,7 +11,7 @@ export default function ThankYouPage() {
         <p style={{ fontSize: '1.2rem', marginBottom: '2rem' }}>
           Your message has been sent successfully. We'll get back to you soon.
         </p>
-        <a href="/" className="button">Return to Home</a>
+        <a href="/" className="btn-primary">Return to Home</a>
       </div>
     </main>
   );
