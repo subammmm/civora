@@ -1,4 +1,58 @@
-# GlobalForge.ai API Documentation
+# Civora API Documentation
+
+## Scholarship API (Next.js route handlers, served with the site)
+
+Base URL: `https://civora.me/api` (local: `http://localhost:3000/api`)
+
+### List scholarships
+```http
+GET /scholarships?country=uk&level=graduate&field=all&deadline=open
+```
+
+| Parameter  | Values | Meaning |
+|------------|--------|---------|
+| `country`  | lowercase code, e.g. `uk`, `japan`, `south-korea` | matches `countryCode` |
+| `level`    | `undergraduate`, `graduate`, `phd` | matches `levelCode` |
+| `field`    | lowercase code, e.g. `all`, `engineering` | matches `fieldCode` |
+| `deadline` | `open` | deadline not passed yet, or no single deadline date |
+|            | `passed` | deadline date is in the past |
+|            | `30d` | deadline within the next 30 days |
+
+The deadline filter works on `deadlineDate` (`YYYY-MM-DD`, the last day to apply; `null` when the
+deadline varies by institution). A deadline counts as open until the end of that day (UTC).
+Anything else in these parameters returns `400` with the list of invalid parameter names.
+
+### Get one scholarship
+```http
+GET /scholarships/{id}
+```
+
+### Calendar (.ics)
+```http
+GET /scholarships/calendar.ics            # feed of every open, dated deadline: subscribe to this URL
+GET /scholarships/calendar.ics?ids=a,b,c  # download with only those scholarships (max 50 ids)
+```
+Each deadline is an all-day event with reminders 14 and 3 days before. Events whose date is not
+officially confirmed are prefixed `(approx.)`. With `ids`, the response is `404` when none of them has
+an upcoming dated deadline and `400` when `ids` is malformed.
+Check the output with `node scripts/check-ics.mjs <file-or-url> [expected-event-count]`.
+
+### Write routes (admin only)
+```http
+POST   /scholarships
+PUT    /scholarships/{id}
+DELETE /scholarships/{id}
+x-admin-token: <ADMIN_API_TOKEN>
+```
+These require the `x-admin-token` header to equal the server-only `ADMIN_API_TOKEN` environment
+variable. A missing or wrong token returns `401`. When `ADMIN_API_TOKEN` is not set, the write routes
+are disabled and return `404`.
+
+---
+
+# Legacy Python backend (python_backend/, not deployed with the site)
+
+## GlobalForge.ai API
 
 ## Base URL
 ```
