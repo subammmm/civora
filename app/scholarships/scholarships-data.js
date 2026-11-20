@@ -115,7 +115,7 @@ export const scholarships = [
       'Under 25 (Bachelor\'s) or under 40 (Graduate)',
       'No Korean ancestry required'
     ],
-    url: 'https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do',
+    url: 'https://www.studyinkorea.go.kr/en/plan/scholarship.do',
     description: 'South Korea\'s flagship scholarship includes 1 year of Korean language training before your degree program. One of the most generous packages available.'
   },
   {
@@ -230,7 +230,7 @@ export const scholarships = [
       'Bachelor\'s degree + 2 years work experience',
       'Admitted to a participating academic institution'
     ],
-    url: 'https://www.adb.org/what-we-do/adb-japan-scholarship-program',
+    url: 'https://www.adb.org/work-with-us/careers/japan-scholarship-program',
     description: 'For development professionals from ADB member countries to study at top institutions across Asia-Pacific. Strong focus on development impact.'
   },
   {
