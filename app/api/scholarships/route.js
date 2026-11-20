@@ -28,6 +28,10 @@ export async function GET(request) {
 
         // Check if this is a seed request
         if (searchParams.get('seed') === 'true') {
+            // Seeding writes with the service-role key and this route has no auth: local/dev only.
+            if (process.env.NODE_ENV === 'production') {
+                return NextResponse.json({ success: false, error: 'Not found' }, { status: 404 });
+            }
             const count = await seedScholarships();
             return NextResponse.json({
                 success: true,

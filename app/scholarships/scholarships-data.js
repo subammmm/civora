@@ -1,6 +1,6 @@
 // Civora — Scholarship Database
 // Updated: July 2026 | 2026-2027 application cycle
-// All deadlines are for the upcoming cycle. Dates marked as approximate (~) when official dates haven't been announced yet.
+// All deadlines are for the upcoming cycle. For entries with a date range, deadlineDate is the END of the range. Dates marked as approximate (~) when official dates haven't been announced yet.
 
 export const scholarships = [
   {
@@ -63,7 +63,7 @@ export const scholarships = [
     fundingType: 'fully-funded',
     covers: ['Monthly stipend (€934-1,300)', 'Health insurance', 'Travel allowance', 'Study allowance'],
     deadline: 'Varies by program, Oct–Dec 2026',
-    deadlineDate: '2026-10-15',
+    deadlineDate: '2026-12-31',
     eligibility: [
       'Bachelor\'s degree completed within last 6 years',
       'Strong academic record',
@@ -115,7 +115,7 @@ export const scholarships = [
       'Under 25 (Bachelor\'s) or under 40 (Graduate)',
       'No Korean ancestry required'
     ],
-    url: 'https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do',
+    url: 'https://www.studyinkorea.go.kr/en/plan/scholarship.do',
     description: 'South Korea\'s flagship scholarship includes 1 year of Korean language training before your degree program. One of the most generous packages available.'
   },
   {
@@ -201,7 +201,7 @@ export const scholarships = [
     fundingType: 'fully-funded',
     covers: ['Tuition', 'Monthly allowance (€1,400)', 'Travel costs', 'Installation costs', 'Insurance'],
     deadline: 'Varies by program, Oct 2026–Feb 2027',
-    deadlineDate: '2026-10-01',
+    deadlineDate: '2027-02-28',
     eligibility: [
       'Bachelor\'s degree in relevant field',
       'Strong academic record',
@@ -230,7 +230,7 @@ export const scholarships = [
       'Bachelor\'s degree + 2 years work experience',
       'Admitted to a participating academic institution'
     ],
-    url: 'https://www.adb.org/what-we-do/adb-japan-scholarship-program',
+    url: 'https://www.adb.org/work-with-us/careers/japan-scholarship-program',
     description: 'For development professionals from ADB member countries to study at top institutions across Asia-Pacific. Strong focus on development impact.'
   },
   {
@@ -339,7 +339,7 @@ export const scholarships = [
     fundingType: 'fully-funded',
     covers: ['Tuition', 'Maintenance allowance', 'Return airfare', 'Academic development funding'],
     deadline: '~October 2026 / December 2026',
-    deadlineDate: '2026-10-08',
+    deadlineDate: '2026-12-01',
     eligibility: [
       'Outstanding academic record',
       'Non-UK citizen applying to University of Cambridge',

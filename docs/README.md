@@ -11,23 +11,23 @@ Welcome to the Civora documentation directory. This folder contains comprehensiv
 
 ### Development Guides
 - [README.md](../README.md) - Main project README with setup instructions
-- [DEPLOYMENT-GUIDE.md](../DEPLOYMENT-GUIDE.md) - Deployment instructions for Vercel and GitHub Pages
-- [DEVELOPMENT-GUIDE.md](../DEVELOPMENT-GUIDE.md) - Detailed development setup and workflows
+- [DEPLOYMENT-GUIDE.md](archive/DEPLOYMENT-GUIDE.md) - Deployment instructions for Vercel and GitHub Pages
+- [DEVELOPMENT-GUIDE.md](archive/DEVELOPMENT-GUIDE.md) - Detailed development setup and workflows
 
 ### Migration Documentation
-- [NEXTJS_MIGRATION.md](../NEXTJS_MIGRATION.md) - Details about the migration from static HTML to Next.js
+- [NEXTJS_MIGRATION.md](archive/NEXTJS_MIGRATION.md) - Details about the migration from static HTML to Next.js
 
 ### Deployment Documentation
-- [DEPLOYMENT-CONFIGURATION.md](../DEPLOYMENT-CONFIGURATION.md) - Deployment configuration details
-- [DEPLOYMENT-CHECKLIST.md](../DEPLOYMENT-CHECKLIST.md) - Pre-deployment checklist
-- [VERCEL-DEPLOYMENT-NOTES.md](../VERCEL-DEPLOYMENT-NOTES.md) - Vercel-specific deployment notes
-- [GITHUB-PAGES-DEPLOYMENT.md](../GITHUB-PAGES-DEPLOYMENT.md) - GitHub Pages deployment guide
+- [DEPLOYMENT-CONFIGURATION.md](archive/DEPLOYMENT-CONFIGURATION.md) - Deployment configuration details
+- [DEPLOYMENT-CHECKLIST.md](archive/DEPLOYMENT-CHECKLIST.md) - Pre-deployment checklist
+- [VERCEL-DEPLOYMENT-NOTES.md](archive/VERCEL-DEPLOYMENT-NOTES.md) - Vercel-specific deployment notes
+- [GITHUB-PAGES-DEPLOYMENT.md](archive/GITHUB-PAGES-DEPLOYMENT.md) - GitHub Pages deployment guide
 
 ### Feature Documentation
-- [AI-CHAT-CONDITIONAL-RENDERING.md](../AI-CHAT-CONDITIONAL-RENDERING.md) - AI chat feature documentation
+- [AI-CHAT-CONDITIONAL-RENDERING.md](archive/AI-CHAT-CONDITIONAL-RENDERING.md) - AI chat feature documentation
 
 ### Testing & Validation
-- [TESTING-VALIDATION-SUMMARY.md](../TESTING-VALIDATION-SUMMARY.md) - Testing guidelines
+- [TESTING-VALIDATION-SUMMARY.md](archive/TESTING-VALIDATION-SUMMARY.md) - Testing guidelines
 - [tests/validate.sh](../tests/validate.sh) - Automated validation script
 
 ## Quick Links
@@ -40,14 +40,14 @@ Start with [CONTRIBUTING.md](../CONTRIBUTING.md) to understand:
 - Testing requirements
 
 ### For Deployment
-See [DEPLOYMENT-GUIDE.md](../DEPLOYMENT-GUIDE.md) for:
+See [DEPLOYMENT-GUIDE.md](archive/DEPLOYMENT-GUIDE.md) for:
 - Environment variables setup
 - Vercel deployment
 - GitHub Pages static export
 - Domain configuration
 
 ### For Development
-See [DEVELOPMENT-GUIDE.md](../DEVELOPMENT-GUIDE.md) for:
+See [DEVELOPMENT-GUIDE.md](archive/DEVELOPMENT-GUIDE.md) for:
 - Project structure
 - Available scripts
 - Local development workflow

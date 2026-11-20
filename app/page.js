@@ -1,6 +1,9 @@
 import "./globals.css";
 import { scholarships } from "./scholarships/scholarships-data";
 
+// Static page with "days left" counters: re-render daily so they don't freeze at build time.
+export const revalidate = 86400;
+
 export default function Home() {
   const now = new Date();
 
@@ -10,13 +13,13 @@ export default function Home() {
     .sort((a, b) => new Date(a.deadlineDate) - new Date(b.deadlineDate))
     .slice(0, 5);
 
-  // Featured scholarships: fully funded, first 6
+  // Featured scholarships: fully funded and still open, first 6
   const featured = scholarships
-    .filter((s) => s.fundingType === "fully-funded")
+    .filter((s) => s.fundingType === "fully-funded" && new Date(s.deadlineDate) > now)
     .slice(0, 6);
 
   return (
-    <>
+    <main>
       {/* ===== 1. Hero Section ===== */}
       <section className="section section-navy">
         <div className="container" style={{ textAlign: "center" }}>
@@ -32,20 +35,15 @@ export default function Home() {
             Nepali students
           </p>
 
-          <div className="search-bar">
+          <form className="search-bar" action="/scholarships" method="get" role="search">
             <input
               type="text"
+              name="q"
+              aria-label="Search scholarships"
               placeholder="Search scholarships by name, country, or field..."
-              readOnly
             />
-            <a
-              href="/scholarships/"
-              className="btn-primary"
-              style={{ borderRadius: 0 }}
-            >
-              Search
-            </a>
-          </div>
+            <button type="submit">Search</button>
+          </form>
 
           <div
             style={{
@@ -311,6 +309,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

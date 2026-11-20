@@ -1,3 +1,5 @@
+import FormspreeForm from '../components/FormspreeForm';
+
 export const metadata = {
   title: 'Contact',
   description: 'Get in touch with Civora for questions, feedback, or scholarship contributions.',
@@ -24,7 +26,7 @@ export default function ContactPage() {
           <div className="card">
             <h2 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>Send Us a Message</h2>
 
-            <form id="contact-form" action={`https://formspree.io/f/${formspreeId}`} method="POST">
+            <FormspreeForm id="contact-form" formId={formspreeId} successMessage="Thank you! Your message has been sent. We'll get back to you soon.">
               <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
 
               <div className="form-group">
@@ -60,7 +62,7 @@ export default function ContactPage() {
               <p className="subtext" style={{ textAlign: 'center', marginTop: '1rem', marginBottom: 0 }}>
                 We typically respond within 48 hours.
               </p>
-            </form>
+            </FormspreeForm>
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '1rem' }}>

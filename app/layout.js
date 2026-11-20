@@ -1,5 +1,9 @@
 import './globals.css';
 import Script from 'next/script';
+import { Inter } from 'next/font/google';
+import FormspreeForm from './components/FormspreeForm';
+
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
 
 export const metadata = {
   metadataBase: new URL('https://civora.me'),
@@ -56,14 +60,8 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -76,7 +74,7 @@ export default function RootLayout({ children }) {
               potentialAction: {
                 '@type': 'SearchAction',
                 target: 'https://civora.me/scholarships/?q={search_term_string}',
-                '@query-input': 'required name=search_term_string',
+                'query-input': 'required name=search_term_string',
               },
               publisher: {
                 '@type': 'Organization',
@@ -89,17 +87,18 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <div id="wrapper">
-          <Header />
           <a href="#main-content" className="skip-to-content">Skip to content</a>
+          <Header />
           <div className="main-content">
-            <main id="main-content">{children}</main>
+            {/* pages render their own <main>; a second one here nested landmarks */}
+            <div id="main-content">{children}</div>
           </div>
           <Footer />
         </div>
 
-        <Script id="mobile-nav" strategy="lazyOnload">
+        <Script id="mobile-nav" strategy="afterInteractive">
           {`
-            document.addEventListener('DOMContentLoaded', function() {
+            {
               const toggle = document.querySelector('.nav-toggle');
               const nav = document.getElementById('site-nav');
               if (toggle && nav) {
@@ -109,7 +108,7 @@ export default function RootLayout({ children }) {
                   toggle.setAttribute('aria-expanded', isOpen);
                 });
               }
-            });
+            }
           `}
         </Script>
 
@@ -211,10 +210,10 @@ function Footer() {
             <p className="footer-desc" style={{ marginBottom: '0.75rem' }}>
               Get notified when scholarship deadlines are approaching.
             </p>
-            <form className="footer-newsletter-input" action={`https://formspree.io/f/${formspreeId}`} method="POST">
+            <FormspreeForm className="footer-newsletter-input" formId={formspreeId} successMessage="Subscribed. Thank you!">
               <input type="email" name="email" placeholder="Your email" required aria-label="Email for newsletter" />
               <button type="submit">Subscribe</button>
-            </form>
+            </FormspreeForm>
           </div>
         </div>
 
