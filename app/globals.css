@@ -716,6 +716,38 @@ p {
   font-size: 0.875rem;
 }
 
+/* Home hero: "open right now" links by level */
+.open-now-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 1.25rem;
+  margin: 1.5rem 0 0;
+}
+
+.section-navy .open-now-links a {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Single scholarship page */
+.scholarship-detail {
+  max-width: 760px;
+}
+
+.scholarship-detail h2 {
+  font-size: 1.25rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.scholarship-detail .card-deadline {
+  display: inline-block;
+}
+
+.scholarship-card h3 a {
+  color: inherit;
+}
+
 
 /* ================================================================
    10. FEATURE / STATS
@@ -1260,6 +1292,33 @@ p {
 
   .nav-toggle {
     display: flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Four tabs do not fit a phone: keep them on one line and let the row scroll */
+  .tabs {
+    overflow-x: auto;
+  }
+
+  .tab {
+    flex: none;
+    white-space: nowrap;
+    padding: 0.75rem 0.875rem;
+  }
+
+  /* Touch targets: at least 44px tall */
+  .footer-links a,
+  .open-now-links a,
+  .calendar-links a {
+    padding: 0.875rem 0;
+  }
+
+  .scholarship-card .card-bookmark {
+    min-width: 44px;
+    min-height: 44px;
   }
 
   /* Typography */
