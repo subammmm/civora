@@ -1,4 +1,5 @@
 import './globals.css';
+import Link from 'next/link';
 import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import FormspreeForm from './components/FormspreeForm';
@@ -107,6 +108,11 @@ export default function RootLayout({ children }) {
                   const isOpen = nav.classList.contains('active');
                   toggle.setAttribute('aria-expanded', isOpen);
                 });
+                // Home is a client-side Link: close the menu when a nav item is followed.
+                nav.addEventListener('click', function() {
+                  nav.classList.remove('active');
+                  toggle.setAttribute('aria-expanded', false);
+                });
               }
             }
           `}
@@ -140,12 +146,12 @@ function Header() {
   return (
     <header className="site-header" role="banner">
       <div className="header-inner">
-        <a className="brand" href="/" aria-label="Civora Home">
+        <Link className="brand" href="/" aria-label="Civora Home">
           🎓 Civora
-        </a>
+        </Link>
 
         <nav id="site-nav" className="site-nav" role="navigation" aria-label="Main navigation">
-          <a href="/" className="nav-item">Home</a>
+          <Link href="/" className="nav-item">Home</Link>
           <a href="/scholarships/" className="nav-item">Scholarships</a>
           <a href="/resources/" className="nav-item">Resources</a>
           <a href="/about/" className="nav-item">About</a>

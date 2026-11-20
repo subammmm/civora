@@ -22,6 +22,8 @@ export default function ScholarshipsPage() {
   const [now, setNow] = useState(null);
 
   useEffect(() => {
+    // Deliberate post-mount read of the clock/URL/localStorage (not available while prerendering).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setNow(Date.now());
     const q = new URLSearchParams(window.location.search).get('q');
     if (q) setSearch(q);
