@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export const metadata = {
   title: '404 - Page Not Found',
   description: 'The page you are looking for does not exist.',
@@ -25,7 +27,7 @@ export default function NotFound() {
         navigate back to our homepage.
       </p>
       <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-        <a
+        <Link
           href="/"
           style={{
             display: 'inline-block',
@@ -39,7 +41,7 @@ export default function NotFound() {
           }}
         >
           Go to Homepage
-        </a>
+        </Link>
         <a
           href="/scholarships/"
           style={{

@@ -18,7 +18,7 @@ import {
  */
 export async function GET(request, { params }) {
     try {
-        const { id } = params;
+        const { id } = await params;
         const scholarship = await getScholarshipById(id);
 
         if (!scholarship) {
@@ -36,7 +36,7 @@ export async function GET(request, { params }) {
             data: scholarship,
         });
     } catch (error) {
-        console.error(`GET /api/scholarships/${params.id} error:`, error);
+        console.error(`GET /api/scholarships/[id] error:`, error);
         return NextResponse.json(
             {
                 success: false,
@@ -53,7 +53,7 @@ export async function GET(request, { params }) {
  */
 export async function PUT(request, { params }) {
     try {
-        const { id } = params;
+        const { id } = await params;
         const body = await request.json();
 
         // Check if scholarship exists
@@ -76,7 +76,7 @@ export async function PUT(request, { params }) {
             message: 'Scholarship updated successfully',
         });
     } catch (error) {
-        console.error(`PUT /api/scholarships/${params.id} error:`, error);
+        console.error(`PUT /api/scholarships/[id] error:`, error);
         return NextResponse.json(
             {
                 success: false,
@@ -93,7 +93,7 @@ export async function PUT(request, { params }) {
  */
 export async function DELETE(request, { params }) {
     try {
-        const { id } = params;
+        const { id } = await params;
 
         // Check if scholarship exists
         const existing = await getScholarshipById(id);
@@ -114,7 +114,7 @@ export async function DELETE(request, { params }) {
             message: 'Scholarship deleted successfully',
         });
     } catch (error) {
-        console.error(`DELETE /api/scholarships/${params.id} error:`, error);
+        console.error(`DELETE /api/scholarships/[id] error:`, error);
         return NextResponse.json(
             {
                 success: false,

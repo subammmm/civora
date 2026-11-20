@@ -3,7 +3,10 @@
 const nextConfig = {
   // Image Optimization
   images: {
-    domains: ['images.unsplash.com', 'placehold.co'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'placehold.co' },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
 

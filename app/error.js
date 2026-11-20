@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 export default function Error({ error, reset }) {
   return (
     <main
@@ -39,7 +41,7 @@ export default function Error({ error, reset }) {
         >
           Try Again
         </button>
-        <a
+        <Link
           href="/"
           style={{
             display: 'inline-block',
@@ -54,7 +56,7 @@ export default function Error({ error, reset }) {
           }}
         >
           Go to Homepage
-        </a>
+        </Link>
       </div>
       {process.env.NODE_ENV === 'development' && error && (
         <details style={{ marginTop: '2rem', maxWidth: '600px', textAlign: 'left' }}>
