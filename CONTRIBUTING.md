@@ -98,7 +98,6 @@ npm run format           # Check code formatting
 npm run format:write     # Auto-format code with Prettier
 
 # Utilities
-npm run sitemap          # Generate sitemap
 npm run link:check       # Check for broken links
 ```
 

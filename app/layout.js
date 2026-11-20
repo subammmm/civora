@@ -4,11 +4,12 @@ import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import FormspreeForm from './components/FormspreeForm';
 import { scholarships, countryCount } from './scholarships/scholarships-data';
+import { SITE_URL } from '../lib/site';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
 
 export const metadata = {
-  metadataBase: new URL('https://civora.me'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Civora – Find Your Path to Studying Abroad',
     template: '%s | Civora',
@@ -36,12 +37,12 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://civora.me/',
+    url: './',
     siteName: 'Civora',
     title: 'Civora — Find Your Path to Studying Abroad',
     description: `Discover verified international scholarships curated for Nepali students. ${scholarships.length} scholarships from ${countryCount}+ countries.`,
     images: [{
-      url: 'https://civora.me/assets/og-image.jpg',
+      url: '/assets/og-image.jpg',
       width: 1200, height: 630,
       alt: 'Civora — Scholarships for Nepali Students',
     }],
@@ -51,9 +52,10 @@ export const metadata = {
     site: '@civora',
     title: 'Civora — Find Your Path to Studying Abroad',
     description: 'Discover verified international scholarships curated for Nepali students.',
-    images: ['https://civora.me/assets/og-image.jpg'],
+    images: ['/assets/og-image.jpg'],
   },
-  alternates: { canonical: 'https://civora.me/' },
+  // './' resolves against each page's own path, so every page is its own canonical.
+  alternates: { canonical: './', types: { 'application/atom+xml': '/feed.xml' } },
 };
 
 export const viewport = {
@@ -72,16 +74,16 @@ export default function RootLayout({ children }) {
               '@type': 'WebSite',
               name: 'Civora',
               description: 'A scholarship discovery platform for Nepali students',
-              url: 'https://civora.me',
+              url: SITE_URL,
               potentialAction: {
                 '@type': 'SearchAction',
-                target: 'https://civora.me/scholarships?q={search_term_string}',
+                target: `${SITE_URL}/scholarships?q={search_term_string}`,
                 'query-input': 'required name=search_term_string',
               },
               publisher: {
                 '@type': 'Organization',
                 name: 'Civora',
-                url: 'https://civora.me',
+                url: SITE_URL,
               },
             }),
           }}
@@ -154,7 +156,7 @@ function Header() {
 
         <nav id="site-nav" className="site-nav" role="navigation" aria-label="Main navigation">
           <Link href="/" className="nav-item">Home</Link>
-          <a href="/scholarships" className="nav-item">Scholarships</a>
+          <Link href="/scholarships" className="nav-item">Scholarships</Link>
           <a href="/resources" className="nav-item">Resources</a>
           <a href="/about" className="nav-item">About</a>
           <a href="/contact" className="nav-item">Contact</a>
@@ -191,7 +193,7 @@ function Footer() {
           <div>
             <span className="footer-brand">🎓 Civora</span>
             <p className="footer-desc">
-              Helping Nepali students discover international scholarship opportunities. All scholarships are verified and linked to official sources.
+              Helping Nepali students discover international scholarship opportunities. Entries are checked against, and link to, official sources.
             </p>
           </div>
 
@@ -199,7 +201,7 @@ function Footer() {
           <div>
             <p className="footer-heading">Quick Links</p>
             <ul className="footer-links">
-              <li><a href="/scholarships">Scholarships</a></li>
+              <li><Link href="/scholarships">Scholarships</Link></li>
               <li><a href="/resources">Resources</a></li>
               <li><a href="/about">About</a></li>
               <li><a href="/contact">Contact</a></li>

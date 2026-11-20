@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export const metadata = {
   title: 'Resources — Guides for Nepali Students',
   description: 'Helpful guides for Nepali students: personal statements, recommendation letters, English tests (IELTS, TOEFL), and Nepal-specific application tips.',
@@ -141,8 +143,8 @@ export default function ResourcesPage() {
 
             <h3>Free Preparation Resources</h3>
             <ul style={{ paddingLeft: '1.5rem', marginBottom: '1rem', lineHeight: '1.8' }}>
-              <li><a href="https://www.ielts.org/for-test-takers/sample-test-questions" target="_blank" rel="noopener noreferrer"><strong>IELTS Sample Tests</strong></a> — Free official practice materials</li>
-              <li><a href="https://www.ets.org/toefl/test-takers/ibt/prepare/practice-tests.html" target="_blank" rel="noopener noreferrer"><strong>TOEFL Free Practice</strong></a> — Official ETS practice tests</li>
+              <li><a href="https://www.ielts.org/take-a-test/preparation-resources/sample-test-questions" target="_blank" rel="noopener noreferrer"><strong>IELTS Sample Tests</strong></a> — Free official practice materials</li>
+              <li><a href="https://www.ets.org/toefl/test-takers/ibt/prepare.html" target="_blank" rel="noopener noreferrer"><strong>TOEFL Free Practice</strong></a> — Official ETS practice tests</li>
               <li><a href="https://englishtest.duolingo.com/applicants" target="_blank" rel="noopener noreferrer"><strong>Duolingo Practice</strong></a> — Free practice test available</li>
             </ul>
 
@@ -197,7 +199,7 @@ export default function ResourcesPage() {
         <div className="container" style={{ maxWidth: '640px' }}>
           <h2>Ready to Find Your Scholarship?</h2>
           <p style={{ marginBottom: '1.5rem' }}>Browse our database of verified international scholarships curated for Nepali students.</p>
-          <a href="/scholarships" className="btn-primary">Browse Scholarships →</a>
+          <Link href="/scholarships" className="btn-primary">Browse Scholarships →</Link>
         </div>
       </section>
     </main>

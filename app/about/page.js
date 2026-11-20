@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export const metadata = {
   title: 'About Civora',
   description: 'Civora helps Nepali students find verified international scholarships. Learn about our mission, values, and the team behind the platform.',
@@ -28,7 +30,7 @@ export default function AboutPage() {
               We believe that access to accurate, up-to-date scholarship information should not be a privilege. Every student deserves the opportunity to pursue higher education, regardless of their background or financial situation.
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
-              <a href="/scholarships" className="btn-primary">Browse Scholarships →</a>
+              <Link href="/scholarships" className="btn-primary">Browse Scholarships →</Link>
               <a href="/contact" className="btn-outline">Get in Touch</a>
             </div>
           </div>

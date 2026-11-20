@@ -42,7 +42,7 @@ export default function NotFound() {
         >
           Go to Homepage
         </Link>
-        <a
+        <Link
           href="/scholarships"
           style={{
             display: 'inline-block',
@@ -57,7 +57,7 @@ export default function NotFound() {
           }}
         >
           Browse Scholarships
-        </a>
+        </Link>
       </div>
     </main>
   );
