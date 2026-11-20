@@ -7,85 +7,43 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://civora.me/about/</loc>
+    <loc>https://civora.me/about</loc>
     <lastmod>2025-12-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://civora.me/scholarships/</loc>
+    <loc>https://civora.me/scholarships</loc>
     <lastmod>2025-12-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://civora.me/citizenship/</loc>
-    <lastmod>2025-12-06</lastmod>
+    <loc>https://civora.me/resources</loc>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://civora.me/student-stories/</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://civora.me/ielts-prep/</loc>
+    <loc>https://civora.me/contact</loc>
     <lastmod>2025-12-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://civora.me/pathway-builder/</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://civora.me/blog/</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://civora.me/roadmap/</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://civora.me/contact/</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://civora.me/privacy/</loc>
+    <loc>https://civora.me/privacy</loc>
     <lastmod>2025-12-06</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://civora.me/students-supported/</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://civora.me/thank-you/</loc>
+    <loc>https://civora.me/legal/privacy</loc>
     <lastmod>2025-12-06</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://civora.me/legal/privacy/</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://civora.me/legal/terms/</loc>
+    <loc>https://civora.me/legal/terms</loc>
     <lastmod>2025-12-06</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
