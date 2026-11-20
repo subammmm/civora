@@ -1,8 +1,8 @@
 name: Deploy Next.js static export to GitHub Pages (Backup Only)
 
+# Manual only: the app now has API routes, so a static export cannot build
+# (there is no build:static script). Vercel is the real host.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 # Allow one concurrent deployment
