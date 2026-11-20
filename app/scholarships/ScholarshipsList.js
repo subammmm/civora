@@ -38,8 +38,9 @@ export default function ScholarshipsList({ initialNow }) {
     if (params.get('deadline') === '30d') setView('soon');
     if (params.get('deadline') === 'open') setView('open');
     try {
+      // Drop ids of entries that have since been removed from the list.
       const saved = JSON.parse(localStorage.getItem('civora-saved') || '[]');
-      setSavedIds(saved);
+      setSavedIds(saved.filter((id) => scholarships.some((s) => s.id === id)));
     } catch {}
   }, []);
 
