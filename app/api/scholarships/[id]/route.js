@@ -2,8 +2,8 @@
  * Single Scholarship API Route
  * 
  * GET /api/scholarships/[id] - Get a specific scholarship
- * PUT /api/scholarships/[id] - Update a scholarship
- * DELETE /api/scholarships/[id] - Delete a scholarship
+ * PUT /api/scholarships/[id] - Update a scholarship (x-admin-token required)
+ * DELETE /api/scholarships/[id] - Delete a scholarship (x-admin-token required)
  */
 
 import { NextResponse } from 'next/server';
@@ -12,6 +12,7 @@ import {
     updateScholarship,
     deleteScholarship
 } from '../../../../lib/database/scholarships';
+import { rejectUnlessAdmin } from '../../../../lib/admin-auth';
 
 /**
  * GET /api/scholarships/[id]
@@ -41,7 +42,6 @@ export async function GET(request, { params }) {
             {
                 success: false,
                 error: 'Failed to fetch scholarship',
-                message: error.message,
             },
             { status: 500 }
         );
@@ -52,9 +52,15 @@ export async function GET(request, { params }) {
  * PUT /api/scholarships/[id]
  */
 export async function PUT(request, { params }) {
+    const rejection = rejectUnlessAdmin(request);
+    if (rejection) return rejection;
+
     try {
         const { id } = await params;
-        const body = await request.json();
+        const body = await request.json().catch(() => null);
+        if (!body || typeof body !== 'object' || Array.isArray(body)) {
+            return NextResponse.json({ success: false, error: 'Body must be a JSON object' }, { status: 400 });
+        }
 
         // Check if scholarship exists
         const existing = await getScholarshipById(id);
@@ -81,7 +87,6 @@ export async function PUT(request, { params }) {
             {
                 success: false,
                 error: 'Failed to update scholarship',
-                message: error.message,
             },
             { status: 500 }
         );
@@ -92,6 +97,9 @@ export async function PUT(request, { params }) {
  * DELETE /api/scholarships/[id]
  */
 export async function DELETE(request, { params }) {
+    const rejection = rejectUnlessAdmin(request);
+    if (rejection) return rejection;
+
     try {
         const { id } = await params;
 
@@ -119,7 +127,6 @@ export async function DELETE(request, { params }) {
             {
                 success: false,
                 error: 'Failed to delete scholarship',
-                message: error.message,
             },
             { status: 500 }
         );

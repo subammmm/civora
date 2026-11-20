@@ -1,6 +1,8 @@
 // Civora — Scholarship Database
-// Updated: July 2026 | 2026-2027 application cycle
-// All deadlines are for the upcoming cycle. For entries with a date range, deadlineDate is the END of the range. Dates marked as approximate (~) when official dates haven't been announced yet.
+// lastVerified: the date the deadline, coverage and URL of an entry were last checked against the official site.
+// deadlineDate is the last day to apply (END of the range when there is one; the EARLIEST date when different
+// applicants have different deadlines); null when there is no single date
+// (it varies by institution or programme). A ~ in `deadline` marks a date the organiser has not confirmed yet.
 
 export const scholarships = [
   {
@@ -9,21 +11,22 @@ export const scholarships = [
     country: 'USA',
     countryCode: 'usa',
     countryFlag: '🇺🇸',
-    organizer: 'U.S. Department of State',
+    organizer: 'U.S. Department of State / USEF-Nepal',
     level: ['Masters', 'PhD'],
     levelCode: 'graduate',
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Living costs', 'Airfare', 'Health insurance', 'Book allowance'],
-    deadline: 'April 2027 (Nepal cycle)',
-    deadlineDate: '2027-04-15',
+    covers: ['Tuition', 'Living stipend', 'Round-trip travel', 'Health insurance', 'Academic allowances'],
+    deadline: 'Closed May 31, 2026 (2027-28 cohort); next cycle not yet announced',
+    deadlineDate: '2026-05-31',
     eligibility: [
       'Nepali citizen with bachelor\'s degree',
       'Minimum 3 years work experience preferred',
       'Strong English proficiency (TOEFL/IELTS)'
     ],
-    url: 'https://np.usembassy.gov/education-culture/educational-exchanges/fulbright-program/',
+    lastVerified: '2026-11-19',
+    url: 'https://usefnepal.org/fulbright/ffsp/program-information/',
     description: 'The Fulbright Program provides full funding for Nepali students to pursue graduate studies at U.S. universities. One of the most prestigious scholarships available.'
   },
   {
@@ -38,15 +41,16 @@ export const scholarships = [
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Living allowance', 'Return airfare', 'Thesis grant'],
-    deadline: '~November 5, 2026',
-    deadlineDate: '2026-11-05',
+    covers: ['Tuition fees', 'Monthly stipend', 'Return economy airfare', 'Arrival and departure allowances', 'Visa cost'],
+    deadline: 'Closed October 2026 (2027-28 round); applications usually open in August',
+    deadlineDate: '2026-10-31',
     eligibility: [
       'At least 2 years work experience',
       'Return to home country for 2 years after',
       'Apply to 3 eligible UK university courses'
     ],
-    url: 'https://www.chevening.org/scholarships/',
+    lastVerified: '2026-11-19',
+    url: 'https://www.chevening.org/scholarship/nepal/',
     description: 'UK Government\'s global scholarship programme for future leaders. Covers a one-year Master\'s degree at any UK university.'
   },
   {
@@ -61,15 +65,16 @@ export const scholarships = [
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Monthly stipend (€934-1,300)', 'Health insurance', 'Travel allowance', 'Study allowance'],
-    deadline: 'Varies by program, Oct–Dec 2026',
-    deadlineDate: '2026-12-31',
+    covers: ['Monthly stipend (€992 Master\'s / €1,300 PhD)', 'Health insurance (most programmes)', 'Travel allowance', 'One-off research allowance'],
+    deadline: 'Varies by programme — check the DAAD scholarship database',
+    deadlineDate: null,
     eligibility: [
       'Bachelor\'s degree completed within last 6 years',
       'Strong academic record',
       'English or German proficiency depending on program'
     ],
-    url: 'https://www.daad.de/en/',
+    lastVerified: '2026-11-19',
+    url: 'https://www.daad.de/en/studying-in-germany/scholarships/daad-scholarships/',
     description: 'Germany\'s largest scholarship organization offering hundreds of programs across all disciplines at German universities.'
   },
   {
@@ -84,7 +89,7 @@ export const scholarships = [
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Monthly stipend (¥117,000-¥148,000)', 'Round-trip airfare', 'Japanese language training'],
+    covers: ['Tuition', 'Monthly stipend (¥117,000–¥145,000)', 'Round-trip airfare', 'Japanese language training'],
     deadline: 'April–June 2027 (Embassy track)',
     deadlineDate: '2027-04-01',
     eligibility: [
@@ -92,7 +97,7 @@ export const scholarships = [
       'Good academic standing',
       'Willing to learn Japanese language'
     ],
-    url: 'https://www.studyinjapan.go.jp/en/planning/scholarship/',
+    url: 'https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/',
     description: 'One of the most comprehensive scholarships available — includes free Japanese language training before your degree program begins.'
   },
   {
@@ -108,13 +113,14 @@ export const scholarships = [
     fieldCode: 'all',
     fundingType: 'fully-funded',
     covers: ['Tuition', 'Monthly stipend', 'Round-trip airfare', 'Korean language training', 'Settlement allowance'],
-    deadline: '~February–March 2027',
+    deadline: '~February–March 2027 (graduate); undergraduate track runs September–November',
     deadlineDate: '2027-02-28',
     eligibility: [
       'Nepali citizen with GPA 80% or above',
       'Under 25 (Bachelor\'s) or under 40 (Graduate)',
       'No Korean ancestry required'
     ],
+    lastVerified: '2026-11-19',
     url: 'https://www.studyinkorea.go.kr/en/plan/scholarship.do',
     description: 'South Korea\'s flagship scholarship includes 1 year of Korean language training before your degree program. One of the most generous packages available.'
   },
@@ -161,6 +167,7 @@ export const scholarships = [
       'Minimum 70% GPA (Bachelor\'s) or 75% (Graduate)',
       'No Turkish citizenship'
     ],
+    lastVerified: '2026-11-19',
     url: 'https://www.turkiyeburslari.gov.tr/',
     description: 'One of the most comprehensive scholarship programs in the world — covers everything including 1 year of Turkish language training.'
   },
@@ -184,7 +191,7 @@ export const scholarships = [
       'Minimum 2 years work experience',
       'IELTS 6.5 overall (no band below 6.0)'
     ],
-    url: 'https://www.australiaawards.gov.au/',
+    url: 'https://australiaawardsnepal.org/',
     description: 'Australian Government scholarships focusing on development outcomes. Scholars are expected to contribute to Nepal\'s development upon return.'
   },
   {
@@ -199,14 +206,15 @@ export const scholarships = [
     field: 'Various specialized programs',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Monthly allowance (€1,400)', 'Travel costs', 'Installation costs', 'Insurance'],
-    deadline: 'Varies by program, Oct 2026–Feb 2027',
-    deadlineDate: '2027-02-28',
+    covers: ['Participation costs (tuition)', 'Monthly allowance (€1,400, up to 24 months)', 'Contribution to travel and visa costs'],
+    deadline: 'Varies by programme, mostly October 2026–January 2027',
+    deadlineDate: '2027-01-31',
     eligibility: [
       'Bachelor\'s degree in relevant field',
       'Strong academic record',
       'English proficiency (varies by program)'
     ],
+    lastVerified: '2026-11-19',
     url: 'https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en',
     description: 'Study in 2-3 European countries during your Master\'s degree. Over 100 joint programs available across all disciplines.'
   },
@@ -223,13 +231,15 @@ export const scholarships = [
     fieldCode: 'all',
     fundingType: 'fully-funded',
     covers: ['Tuition', 'Monthly subsistence', 'Housing allowance', 'Book allowance', 'Medical insurance', 'Travel'],
-    deadline: '~December 2026 (varies by institution)',
-    deadlineDate: '2026-12-01',
+    deadline: 'Varies by institution — apply at least 6 months before your intended start',
+    deadlineDate: null,
     eligibility: [
       'Citizen of ADB borrowing member country (Nepal eligible)',
       'Bachelor\'s degree + 2 years work experience',
-      'Admitted to a participating academic institution'
+      'Admitted to a participating academic institution',
+      'Not more than 35 years old at the time of application'
     ],
+    lastVerified: '2026-11-19',
     url: 'https://www.adb.org/work-with-us/careers/japan-scholarship-program',
     description: 'For development professionals from ADB member countries to study at top institutions across Asia-Pacific. Strong focus on development impact.'
   },
@@ -245,43 +255,21 @@ export const scholarships = [
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'partial',
-    covers: ['$20,000–$50,000 fellowship grant'],
-    deadline: '~November 15, 2026',
-    deadlineDate: '2026-11-15',
+    covers: ['$20,000 stipend (Master\'s) or $25,000 (Doctorate)'],
+    deadline: 'Closed September 17, 2026 (2027-28 awards); next cycle not yet announced',
+    deadlineDate: '2026-09-17',
     eligibility: [
       'Women only — non-U.S. citizens',
       'Must hold equivalent of U.S. bachelor\'s degree',
       'Plan to return to home country after studies'
     ],
+    lastVerified: '2026-11-19',
     url: 'https://www.aauw.org/resources/programs/fellowships-grants/international-fellowships/',
     description: 'For women pursuing full-time graduate or postdoctoral study in the U.S. who plan to return to their home countries to advance careers.'
   },
   {
-    id: 'commonwealth',
-    name: 'Commonwealth Scholarships',
-    country: 'UK',
-    countryCode: 'uk',
-    countryFlag: '🇬🇧',
-    organizer: 'Commonwealth Scholarship Commission',
-    level: ['Masters', 'PhD'],
-    levelCode: 'graduate',
-    field: 'All Fields',
-    fieldCode: 'all',
-    fundingType: 'fully-funded',
-    covers: ['Tuition', 'Living allowance', 'Return airfare', 'Thesis grant', 'Warm clothing allowance'],
-    deadline: '~December 2026',
-    deadlineDate: '2026-12-17',
-    eligibility: [
-      'Citizen of Commonwealth country (Nepal is eligible)',
-      'Hold first degree of upper second class (2:1)',
-      'Unable to afford study in UK without scholarship'
-    ],
-    url: 'https://cscuk.fcdo.gov.uk/scholarships/',
-    description: 'UK government-funded scholarships for talented individuals from Commonwealth countries who could not otherwise study in the UK.'
-  },
-  {
     id: 'nz-scholarships',
-    name: 'New Zealand Scholarships',
+    name: 'Manaaki New Zealand Scholarships',
     country: 'New Zealand',
     countryCode: 'new-zealand',
     countryFlag: '🇳🇿',
@@ -314,11 +302,12 @@ export const scholarships = [
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Monthly stipend (HUF 43,700–140,000)', 'Accommodation', 'Medical insurance'],
+    covers: ['Tuition', 'Monthly stipend', 'Accommodation', 'Medical insurance'],
     deadline: '~January 15, 2027',
     deadlineDate: '2027-01-15',
+    // Not verified in the Nov 2026 review: Nepal's place on the partner list could not be confirmed either way.
     eligibility: [
-      'Citizen of partner country (Nepal has bilateral agreement)',
+      'Citizen of a partner country: check the current partner list for Nepal before applying',
       'No Hungarian citizenship',
       'Meet academic requirements of chosen program'
     ],
@@ -337,15 +326,16 @@ export const scholarships = [
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Maintenance allowance', 'Return airfare', 'Academic development funding'],
-    deadline: '~October 2026 / December 2026',
-    deadlineDate: '2026-12-01',
+    covers: ['University fees', 'Maintenance allowance (£23,152/year at the 2026-27 rate)', 'Airfare at the start and end of the course', 'Visa costs and health surcharge'],
+    deadline: 'December 8, 2026 or January 6, 2027, depending on your course',
+    deadlineDate: '2026-12-08',
     eligibility: [
       'Outstanding academic record',
       'Non-UK citizen applying to University of Cambridge',
       'Commitment to improving the lives of others'
     ],
-    url: 'https://www.gatescambridge.org/apply',
+    lastVerified: '2026-11-19',
+    url: 'https://www.gatescambridge.org/apply/timeline/',
     description: 'One of the most prestigious international scholarships — for outstanding applicants from outside the UK to pursue graduate study at Cambridge.'
   },
   {
@@ -360,43 +350,21 @@ export const scholarships = [
     field: 'All Fields',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Stipend', 'Housing allowance', 'Travel', 'Leadership programming'],
-    deadline: '~October 2026',
-    deadlineDate: '2026-10-09',
+    covers: ['Tuition and fees', 'Living stipend', 'Annual round-trip travel stipend', 'One-time relocation stipend'],
+    deadline: 'Closed October 6, 2026 (2027 cohort); 2028 cohort application opens June 2027',
+    deadlineDate: '2026-10-06',
     eligibility: [
       'Bachelor\'s degree from any country',
       'Apply simultaneously to Stanford graduate program',
       'Demonstrated leadership and civic commitment'
     ],
+    lastVerified: '2026-11-19',
     url: 'https://knight-hennessy.stanford.edu/admission',
     description: 'Stanford\'s premier fellowship for graduate students demonstrating independence of thought, purposeful leadership, and civic mindset.'
   },
   {
-    id: 'swedish-institute',
-    name: 'Swedish Institute Scholarships (SISGP)',
-    country: 'Sweden',
-    countryCode: 'sweden',
-    countryFlag: '🇸🇪',
-    organizer: 'Swedish Institute',
-    level: ['Masters'],
-    levelCode: 'graduate',
-    field: 'All Fields',
-    fieldCode: 'all',
-    fundingType: 'fully-funded',
-    covers: ['Tuition', 'Living allowance (SEK 10,000/month)', 'Travel grant', 'Insurance'],
-    deadline: '~February 2027',
-    deadlineDate: '2027-02-18',
-    eligibility: [
-      'Citizen of eligible developing country (Nepal eligible)',
-      'Minimum 3,000 hours work/volunteer experience',
-      'Demonstrated leadership experience'
-    ],
-    url: 'https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/',
-    description: 'For future global leaders from developing countries. Strong emphasis on professional experience and leadership potential.'
-  },
-  {
     id: 'eiffel-excellence',
-    name: 'Eiffel Excellence Scholarship',
+    name: 'France Excellence Eiffel Scholarship',
     country: 'France',
     countryCode: 'france',
     countryFlag: '🇫🇷',
@@ -406,15 +374,16 @@ export const scholarships = [
     field: 'Engineering, Sciences, Economics, Law, Political Science',
     fieldCode: 'engineering',
     fundingType: 'fully-funded',
-    covers: ['Monthly allowance (€1,181)', 'Return airfare', 'Health insurance', 'Housing assistance', 'Cultural activities'],
-    deadline: '~January 2027',
-    deadlineDate: '2027-01-07',
+    covers: ['Monthly allowance (€1,200 Master\'s / €2,000 PhD)', 'Return airfare', 'Health insurance', 'Housing assistance', 'Cultural activities'],
+    deadline: 'January 6, 2027 (French institutions submit for you — their internal deadlines are earlier)',
+    deadlineDate: '2027-01-06',
     eligibility: [
-      'Non-French citizen, max age 25 (Masters) or 30 (PhD)',
+      'Non-French citizen, up to 29 years old (Masters) or 35 (PhD)',
       'Not already residing in France',
       'Applied through a French higher education institution'
     ],
-    url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence',
+    lastVerified: '2026-11-19',
+    url: 'https://www.campusfrance.org/en/france-excellence-eiffel-scholarship-program',
     description: 'France\'s prestigious scholarship targeting excellence in science, engineering, economics, and law. Candidates are nominated by French institutions.'
   },
   {
@@ -429,15 +398,16 @@ export const scholarships = [
     field: 'Public Policy, Economics, Business, International Studies',
     fieldCode: 'business',
     fundingType: 'fully-funded',
-    covers: ['Tuition', 'Room and board', 'Travel', 'Health insurance', 'Study trips'],
-    deadline: '~September 2026',
-    deadlineDate: '2026-09-15',
+    covers: ['Tuition and fees', 'Room and board', 'Travel to and from Beijing', 'Health insurance', 'In-country study tours', 'Personal stipend'],
+    deadline: 'Closed September 9, 2026 (class of 2027-28); next window April–September 2027',
+    deadlineDate: '2026-09-09',
     eligibility: [
       'Bachelor\'s degree (completed before enrollment)',
       'Age 18-28 at time of enrollment',
       'English proficiency required'
     ],
-    url: 'https://www.schwarzmanscholars.org/',
+    lastVerified: '2026-11-19',
+    url: 'https://www.schwarzmanscholars.org/admissions/',
     description: 'A one-year Master\'s program at Tsinghua University in Beijing — designed to prepare future leaders to the geopolitical landscape of the 21st century.'
   },
   {
@@ -460,35 +430,37 @@ export const scholarships = [
       'Minimum 3 years relevant work experience',
       'Proficiency in English + second language preferred'
     ],
+    lastVerified: '2026-11-19',
     url: 'https://www.rotary.org/en/our-programs/peace-fellowships',
     description: 'Study at one of Rotary\'s Peace Centers at leading universities worldwide. For professionals dedicated to peace, conflict resolution, and development.'
   },
   {
-    id: 'vanier-canada',
-    name: 'Vanier Canada Graduate Scholarships',
+    id: 'cgrs-d-canada',
+    name: 'Canada Graduate Research Scholarship – Doctoral (CGRS D)',
     country: 'Canada',
     countryCode: 'canada',
     countryFlag: '🇨🇦',
-    organizer: 'Government of Canada',
+    organizer: 'Government of Canada (CIHR, NSERC, SSHRC)',
     level: ['PhD'],
     levelCode: 'phd',
     field: 'Health, Sciences, Engineering, Social Sciences, Humanities',
     fieldCode: 'all',
     fundingType: 'fully-funded',
-    covers: ['$50,000 CAD per year for 3 years'],
-    deadline: '~November 2026',
-    deadlineDate: '2026-11-01',
+    covers: ['$40,000 CAD per year for 36 months'],
+    deadline: 'October 17 each year (2026 round closed); universities set earlier internal deadlines',
+    deadlineDate: '2026-10-17',
     eligibility: [
-      'Nominated by a Canadian university',
-      'Pursuing first doctoral degree',
-      'Demonstrated leadership skills and research potential'
+      'Already enrolled in a doctoral programme at an eligible Canadian institution',
+      'International students are eligible, but only up to 15% of awards go to them',
+      'Apply through your Canadian university'
     ],
-    url: 'https://vanier.gc.ca/',
-    description: 'Canada\'s most prestigious doctoral scholarship — $50,000/year for 3 years. Open to both Canadian and international students.'
+    lastVerified: '2026-11-19',
+    url: 'https://nserc-crsng.canada.ca/en/funding-opportunity/canada-graduate-research-scholarship-doctoral-program',
+    description: 'Replaced the Vanier Canada Graduate Scholarships, which no longer accept applications. For students already doing a PhD in Canada — not an entry scholarship for applicants still in Nepal.'
   },
   {
     id: 'holland-scholarship',
-    name: 'Holland Scholarship',
+    name: 'NL Scholarship (formerly Holland Scholarship)',
     country: 'Netherlands',
     countryCode: 'netherlands',
     countryFlag: '🇳🇱',
@@ -499,14 +471,20 @@ export const scholarships = [
     fieldCode: 'all',
     fundingType: 'partial',
     covers: ['€5,000 one-time grant'],
-    deadline: '~May 1, 2027',
-    deadlineDate: '2027-05-01',
+    deadline: 'Varies by institution — check your university for 2027-28 deadlines',
+    deadlineDate: null,
     eligibility: [
       'Non-EEA nationality (Nepal eligible)',
       'First time studying in the Netherlands',
       'Admitted to a participating Dutch university'
     ],
-    url: 'https://www.studyinholland.nl/finances/holland-scholarship',
+    lastVerified: '2026-11-19',
+    url: 'https://www.studyinnl.org/finances/nl-scholarship',
     description: 'A €5,000 grant for non-EEA students starting their first year of study at a participating Dutch university. Combine with other funding for full coverage.'
   }
 ];
+
+// Distinct destination countries (the multi-country entries are not counted).
+export const countryCount = new Set(
+  scholarships.map((s) => s.countryCode).filter((c) => c !== 'other' && c !== 'europe')
+).size;

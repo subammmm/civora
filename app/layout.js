@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import FormspreeForm from './components/FormspreeForm';
+import { scholarships, countryCount } from './scholarships/scholarships-data';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
 
@@ -13,7 +14,7 @@ export const metadata = {
     template: '%s | Civora',
   },
   description:
-    'Discover verified international scholarships curated for Nepali students. Browse 22+ scholarships from 15+ countries with direct links to official application portals. Updated July 2026.',
+    `Discover verified international scholarships curated for Nepali students. Browse ${scholarships.length} scholarships from ${countryCount}+ countries with direct links to official application portals.`,
   keywords: [
     'nepal scholarships',
     'nepali students abroad',
@@ -38,7 +39,7 @@ export const metadata = {
     url: 'https://civora.me/',
     siteName: 'Civora',
     title: 'Civora — Find Your Path to Studying Abroad',
-    description: 'Discover verified international scholarships curated for Nepali students. 22+ scholarships from 15+ countries.',
+    description: `Discover verified international scholarships curated for Nepali students. ${scholarships.length} scholarships from ${countryCount}+ countries.`,
     images: [{
       url: 'https://civora.me/assets/og-image.jpg',
       width: 1200, height: 630,
@@ -74,7 +75,7 @@ export default function RootLayout({ children }) {
               url: 'https://civora.me',
               potentialAction: {
                 '@type': 'SearchAction',
-                target: 'https://civora.me/scholarships/?q={search_term_string}',
+                target: 'https://civora.me/scholarships?q={search_term_string}',
                 'query-input': 'required name=search_term_string',
               },
               publisher: {
@@ -118,10 +119,11 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        <Script id="google-analytics" strategy="afterInteractive">
+        {/* Production site only: no analytics from localhost or preview deployments. */}
+        {process.env.NODE_ENV === 'production' && <Script id="google-analytics" strategy="afterInteractive">
           {`
             const GA_MEASUREMENT_ID = 'G-3FRBDLWLW0';
-            if (GA_MEASUREMENT_ID) {
+            if (/^(www\\.)?civora\\.me$/.test(location.hostname)) {
               const script = document.createElement('script');
               script.async = true;
               script.src = \`https://www.googletagmanager.com/gtag/js?id=\${GA_MEASUREMENT_ID}\`;
@@ -136,7 +138,7 @@ export default function RootLayout({ children }) {
               });
             }
           `}
-        </Script>
+        </Script>}
       </body>
     </html>
   );
@@ -152,10 +154,10 @@ function Header() {
 
         <nav id="site-nav" className="site-nav" role="navigation" aria-label="Main navigation">
           <Link href="/" className="nav-item">Home</Link>
-          <a href="/scholarships/" className="nav-item">Scholarships</a>
-          <a href="/resources/" className="nav-item">Resources</a>
-          <a href="/about/" className="nav-item">About</a>
-          <a href="/contact/" className="nav-item">Contact</a>
+          <a href="/scholarships" className="nav-item">Scholarships</a>
+          <a href="/resources" className="nav-item">Resources</a>
+          <a href="/about" className="nav-item">About</a>
+          <a href="/contact" className="nav-item">Contact</a>
         </nav>
 
         <div className="header-controls">
@@ -176,6 +178,9 @@ function Header() {
 }
 
 function Footer() {
+  // Newest lastVerified in the data, e.g. "November 2026".
+  const newest = scholarships.map((s) => s.lastVerified).filter(Boolean).sort().at(-1);
+  const lastChecked = new Date(newest).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
   const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'xldpregr';
 
   return (
@@ -194,10 +199,10 @@ function Footer() {
           <div>
             <p className="footer-heading">Quick Links</p>
             <ul className="footer-links">
-              <li><a href="/scholarships/">Scholarships</a></li>
-              <li><a href="/resources/">Resources</a></li>
-              <li><a href="/about/">About</a></li>
-              <li><a href="/contact/">Contact</a></li>
+              <li><a href="/scholarships">Scholarships</a></li>
+              <li><a href="/resources">Resources</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
             </ul>
           </div>
 
@@ -205,8 +210,8 @@ function Footer() {
           <div>
             <p className="footer-heading">Legal</p>
             <ul className="footer-links">
-              <li><a href="/legal/privacy/">Privacy Policy</a></li>
-              <li><a href="/legal/terms/">Terms of Service</a></li>
+              <li><a href="/legal/privacy">Privacy Policy</a></li>
+              <li><a href="/legal/terms">Terms of Service</a></li>
             </ul>
           </div>
 
@@ -225,7 +230,7 @@ function Footer() {
 
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Civora. All rights reserved.</span>
-          <span>Last updated: July 2026</span>
+          <span>Scholarship data last checked: {lastChecked}</span>
         </div>
       </div>
     </footer>

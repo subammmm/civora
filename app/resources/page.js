@@ -197,7 +197,7 @@ export default function ResourcesPage() {
         <div className="container" style={{ maxWidth: '640px' }}>
           <h2>Ready to Find Your Scholarship?</h2>
           <p style={{ marginBottom: '1.5rem' }}>Browse our database of verified international scholarships curated for Nepali students.</p>
-          <a href="/scholarships/" className="btn-primary">Browse Scholarships →</a>
+          <a href="/scholarships" className="btn-primary">Browse Scholarships →</a>
         </div>
       </section>
     </main>

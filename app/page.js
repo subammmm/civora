@@ -1,21 +1,23 @@
 import "./globals.css";
-import { scholarships } from "./scholarships/scholarships-data";
+import { scholarships, countryCount } from "./scholarships/scholarships-data";
+import { daysLeft, matchesDeadline } from "../lib/deadlines";
 
 // Static page with "days left" counters: re-render daily so they don't freeze at build time.
 export const revalidate = 86400;
 
 export default function Home() {
-  const now = new Date();
+  // Server-rendered and revalidated daily, so reading the clock here is intended.
+  const now = new Date().getTime();
 
   // Upcoming deadlines: future deadlines sorted ascending, first 5
   const upcomingDeadlines = scholarships
-    .filter((s) => new Date(s.deadlineDate) > now)
+    .filter((s) => s.deadlineDate && daysLeft(s, now) >= 0)
     .sort((a, b) => new Date(a.deadlineDate) - new Date(b.deadlineDate))
     .slice(0, 5);
 
   // Featured scholarships: fully funded and still open, first 6
   const featured = scholarships
-    .filter((s) => s.fundingType === "fully-funded" && new Date(s.deadlineDate) > now)
+    .filter((s) => s.fundingType === "fully-funded" && matchesDeadline(s, "open", now))
     .slice(0, 6);
 
   return (
@@ -31,7 +33,7 @@ export default function Home() {
               margin: "0 auto 2.5rem",
             }}
           >
-            Discover verified scholarships from 15+ countries — curated for
+            Discover scholarships from {countryCount}+ countries — curated for
             Nepali students
           </p>
 
@@ -52,8 +54,7 @@ export default function Home() {
               fontSize: "0.9375rem",
             }}
           >
-            {scholarships.length}+ Verified Scholarships · 15+ Countries ·
-            Updated July 2026
+            {scholarships.length} Verified Scholarships · {countryCount}+ Countries
           </div>
         </div>
       </section>
@@ -68,16 +69,14 @@ export default function Home() {
 
           <div className="deadline-strip">
             {upcomingDeadlines.map((s) => {
-              const daysLeft = Math.ceil(
-                (new Date(s.deadlineDate) - new Date()) / (1000 * 60 * 60 * 24)
-              );
+              const days = daysLeft(s, now);
               return (
                 <div className="deadline-item" key={s.id}>
                   <div className="deadline-countdown">
                     <span
-                      className={`days ${daysLeft < 30 ? "urgent" : ""}`}
+                      className={`days ${days <= 30 ? "urgent" : ""}`}
                     >
-                      {daysLeft}
+                      {days}
                     </span>
                     <span className="label">days left</span>
                   </div>
@@ -94,7 +93,7 @@ export default function Home() {
 
           <div style={{ textAlign: "center" }}>
             <a
-              href="/scholarships/"
+              href="/scholarships"
               className="btn-outline btn-sm"
               style={{ marginTop: "1.5rem" }}
             >
@@ -170,7 +169,7 @@ export default function Home() {
 
           <div style={{ textAlign: "center" }}>
             <a
-              href="/scholarships/"
+              href="/scholarships"
               className="btn-secondary"
               style={{ marginTop: "2rem" }}
             >
@@ -196,7 +195,7 @@ export default function Home() {
               <div className="step-number">1</div>
               <h3>Search</h3>
               <p>
-                Browse our database of verified scholarships from 15+ countries.
+                Browse our database of scholarships from {countryCount}+ countries.
                 Filter by country, field, or degree level.
               </p>
             </div>
@@ -269,7 +268,7 @@ export default function Home() {
           </div>
 
           <a
-            href="/resources/"
+            href="/resources"
             className="btn-primary"
             style={{ marginTop: "2rem" }}
           >
@@ -284,13 +283,13 @@ export default function Home() {
           <div className="stats-grid">
             <div style={{ textAlign: "center" }}>
               <div className="stat-number" style={{ color: "var(--navy)" }}>
-                {scholarships.length}+
+                {scholarships.length}
               </div>
               <p style={{ color: "var(--navy)" }}>Verified Scholarships</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <div className="stat-number" style={{ color: "var(--navy)" }}>
-                15+
+                {countryCount}+
               </div>
               <p style={{ color: "var(--navy)" }}>Countries</p>
             </div>

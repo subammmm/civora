@@ -11,6 +11,10 @@ import {
     createScholarship,
     seedScholarships
 } from '../../../lib/database/scholarships';
+import { DEADLINE_FILTERS } from '../../../lib/deadlines';
+import { rejectUnlessAdmin } from '../../../lib/admin-auth';
+
+const CODE_PATTERN = /^[a-z0-9-]{1,40}$/;
 
 /**
  * GET /api/scholarships
@@ -19,7 +23,7 @@ import {
  * - country: Filter by country code
  * - level: Filter by education level
  * - field: Filter by field of study
- * - deadline: Filter by deadline status
+ * - deadline: open | passed | 30d (closing within 30 days)
  * - seed: If 'true', seed the database with static data
  */
 export async function GET(request) {
@@ -53,6 +57,21 @@ export async function GET(request) {
             if (filters[key] === undefined) delete filters[key];
         });
 
+        const invalid = Object.keys(filters).filter(key =>
+            key === 'deadline' ? !DEADLINE_FILTERS.includes(filters[key]) : !CODE_PATTERN.test(filters[key])
+        );
+        if (invalid.length > 0) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error: 'Invalid query parameters',
+                    invalid,
+                    hint: `deadline must be one of: ${DEADLINE_FILTERS.join(', ')}; other filters are lowercase codes`,
+                },
+                { status: 400 }
+            );
+        }
+
         const scholarships = await getScholarships(filters);
 
         return NextResponse.json({
@@ -67,7 +86,6 @@ export async function GET(request) {
             {
                 success: false,
                 error: 'Failed to fetch scholarships',
-                message: error.message,
             },
             { status: 500 }
         );
@@ -80,8 +98,14 @@ export async function GET(request) {
  * Body: Scholarship object
  */
 export async function POST(request) {
+    const rejection = rejectUnlessAdmin(request);
+    if (rejection) return rejection;
+
     try {
-        const body = await request.json();
+        const body = await request.json().catch(() => null);
+        if (!body || typeof body !== 'object' || Array.isArray(body)) {
+            return NextResponse.json({ success: false, error: 'Body must be a JSON object' }, { status: 400 });
+        }
 
         // Basic validation
         const requiredFields = ['id', 'name', 'country', 'level', 'deadline', 'url'];
@@ -111,7 +135,6 @@ export async function POST(request) {
             {
                 success: false,
                 error: 'Failed to create scholarship',
-                message: error.message,
             },
             { status: 500 }
         );

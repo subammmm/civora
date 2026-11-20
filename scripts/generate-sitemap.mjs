@@ -19,9 +19,7 @@ const routes = [
   { path: '/blog/', priority: '0.7', changefreq: 'weekly' },
   { path: '/roadmap/', priority: '0.6', changefreq: 'monthly' },
   { path: '/contact/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/privacy/', priority: '0.5', changefreq: 'yearly' },
   { path: '/students-supported/', priority: '0.7', changefreq: 'monthly' },
-  { path: '/thank-you/', priority: '0.5', changefreq: 'yearly' },
   { path: '/legal/privacy/', priority: '0.5', changefreq: 'yearly' },
   { path: '/legal/terms/', priority: '0.5', changefreq: 'yearly' },
 ];
