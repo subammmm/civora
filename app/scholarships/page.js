@@ -2,12 +2,17 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { scholarships } from './scholarships-data';
+import { daysLeft, matchesDeadline } from '../../lib/deadlines';
+
+const CALENDAR_URL = '/api/scholarships/calendar.ics';
+const formatDate = (isoDate) =>
+  new Date(isoDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
 const countryLabels = {
   usa: 'United States', uk: 'United Kingdom', germany: 'Germany', japan: 'Japan',
   'south-korea': 'South Korea', china: 'China', turkey: 'Turkey', australia: 'Australia',
-  europe: 'Europe', canada: 'Canada', france: 'France', sweden: 'Sweden',
-  'new-zealand': 'New Zealand', hungary: 'Hungary', netherlands: 'Netherlands', other: 'Various'
+  europe: 'Europe', canada: 'Canada', france: 'France',
+  'new-zealand': 'New Zealand', netherlands: 'Netherlands', other: 'Various'
 };
 
 const getCountryLabel = (code) => countryLabels[code] || code;
@@ -17,7 +22,7 @@ export default function ScholarshipsPage() {
   const [filters, setFilters] = useState({ country: '', level: '', field: '', funding: '' });
   const [sort, setSort] = useState('deadline');
   const [savedIds, setSavedIds] = useState([]);
-  const [showSaved, setShowSaved] = useState(false);
+  const [view, setView] = useState('all'); // all | soon | saved
   // Set after mount: reading the clock during render makes the prerendered HTML disagree with the client.
   const [now, setNow] = useState(null);
 
@@ -25,8 +30,10 @@ export default function ScholarshipsPage() {
     // Deliberate post-mount read of the clock/URL/localStorage (not available while prerendering).
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setNow(Date.now());
-    const q = new URLSearchParams(window.location.search).get('q');
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
     if (q) setSearch(q);
+    if (params.get('deadline') === '30d') setView('soon');
     try {
       const saved = JSON.parse(localStorage.getItem('civora-saved') || '[]');
       setSavedIds(saved);
@@ -59,8 +66,10 @@ export default function ScholarshipsPage() {
   const filtered = useMemo(() => {
     let result = scholarships;
 
-    if (showSaved) {
+    if (view === 'saved') {
       result = result.filter(s => savedIds.includes(s.id));
+    } else if (view === 'soon') {
+      result = result.filter(s => now !== null && matchesDeadline(s, '30d', now));
     }
 
     if (search) {
@@ -78,16 +87,23 @@ export default function ScholarshipsPage() {
     if (filters.funding) result = result.filter(s => s.fundingType === filters.funding);
 
     if (sort === 'deadline') {
-      // Soonest upcoming first; deadlines that already passed go to the end.
-      const passed = (s) => now !== null && new Date(s.deadlineDate) < now;
+      // Soonest upcoming first, then the ones without a single date, then the passed ones.
+      const rank = (s) => !s.deadlineDate ? 1 : now !== null && daysLeft(s, now) < 0 ? 2 : 0;
       result = [...result].sort((a, b) =>
-        passed(a) - passed(b) || new Date(a.deadlineDate) - new Date(b.deadlineDate));
+        rank(a) - rank(b) || new Date(a.deadlineDate) - new Date(b.deadlineDate));
     } else {
       result = [...result].sort((a, b) => a.name.localeCompare(b.name));
     }
 
     return result;
-  }, [search, filters, sort, showSaved, savedIds, now]);
+  }, [search, filters, sort, view, savedIds, now]);
+
+  const closingSoon = now === null ? [] : scholarships.filter(s => matchesDeadline(s, '30d', now));
+  // Saved scholarships that still have a dated, upcoming deadline: the ones a calendar export can hold.
+  const exportableIds = now === null ? [] : savedIds.filter(id => {
+    const s = scholarships.find(x => x.id === id);
+    return s && s.deadlineDate && daysLeft(s, now) >= 0;
+  });
 
   return (
     <main>
@@ -109,13 +125,25 @@ export default function ScholarshipsPage() {
           />
 
           <div className="tabs" style={{ marginTop: '1rem' }}>
-            <button className={`tab ${!showSaved ? 'active' : ''}`} onClick={() => setShowSaved(false)}>
+            <button className={`tab ${view === 'all' ? 'active' : ''}`} aria-pressed={view === 'all'} onClick={() => setView('all')}>
               All Scholarships ({scholarships.length})
             </button>
-            <button className={`tab ${showSaved ? 'active' : ''}`} onClick={() => setShowSaved(true)}>
+            <button className={`tab ${view === 'soon' ? 'active' : ''}`} aria-pressed={view === 'soon'} onClick={() => setView('soon')}>
+              ⏰ Closing soon ({closingSoon.length})
+            </button>
+            <button className={`tab ${view === 'saved' ? 'active' : ''}`} aria-pressed={view === 'saved'} onClick={() => setView('saved')}>
               ♥ Saved ({savedIds.length})
             </button>
           </div>
+
+          <p className="calendar-links">
+            {view === 'saved' && exportableIds.length > 0 && (
+              <a href={`${CALENDAR_URL}?ids=${exportableIds.join(',')}`} download>
+                Export saved deadlines to calendar (.ics)
+              </a>
+            )}
+            <a href={CALENDAR_URL}>Calendar feed of all open deadlines (.ics)</a>
+          </p>
 
           <div className="filter-section" style={{ marginTop: '1.25rem' }}>
             <select
@@ -223,11 +251,10 @@ export default function ScholarshipsPage() {
                     {s.covers.map(c => <li key={c}>{c}</li>)}
                   </ul>
                   {(() => {
-                    const daysLeft = now === null ? null : Math.ceil((new Date(s.deadlineDate) - now) / (1000*60*60*24));
-                    const isUrgent = daysLeft > 0 && daysLeft < 30;
+                    const days = now === null ? null : daysLeft(s, now);
                     return (
-                      <span className={`card-deadline ${isUrgent ? 'urgent' : ''}`}>
-                        📅 {s.deadline} {daysLeft === null ? '' : daysLeft > 0 ? `(${daysLeft} days left)` : '(deadline passed — check the official site for the next cycle)'}
+                      <span className={`card-deadline ${days !== null && days >= 0 && days <= 30 ? 'urgent' : ''}`}>
+                        📅 {s.deadline} {days === null ? '' : days > 0 ? `(${days} ${days === 1 ? 'day' : 'days'} left)` : days === 0 ? '(closes today)' : '(deadline passed — check the official site for the next cycle)'}
                       </span>
                     );
                   })()}
@@ -238,22 +265,29 @@ export default function ScholarshipsPage() {
                     <a href={s.url} target="_blank" rel="noopener noreferrer" className="btn-primary btn-sm">
                       Apply Now →
                     </a>
-                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="btn-outline btn-sm">
-                      Learn More
-                    </a>
+                    {now !== null && s.deadlineDate && daysLeft(s, now) >= 0 && (
+                      <a href={`${CALENDAR_URL}?ids=${s.id}`} download className="btn-outline btn-sm" aria-label={`Add ${s.name} deadline to calendar`}>
+                        📅 Add to calendar
+                      </a>
+                    )}
                   </div>
+                  {s.lastVerified && (
+                    <p className="card-verified">Verified {formatDate(s.lastVerified)}</p>
+                  )}
                 </div>
               ))}
             </div>
           ) : (
             <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-              <p style={{ fontSize: '1.125rem', color: 'var(--gray-500)' }}>No scholarships match your search</p>
+              <p style={{ fontSize: '1.125rem', color: 'var(--gray-500)' }}>
+                {view === 'soon' ? 'No deadlines in the next 30 days match your search' : view === 'saved' && savedIds.length === 0 ? 'No saved scholarships yet — tap ♡ on a card to save it' : 'No scholarships match your search'}
+              </p>
               <button
                 className="btn-primary btn-sm"
                 onClick={() => {
                   setSearch('');
                   clearAllFilters();
-                  setShowSaved(false);
+                  setView('all');
                 }}
                 style={{ marginTop: '1rem' }}
               >
@@ -264,7 +298,7 @@ export default function ScholarshipsPage() {
 
           <div style={{ marginTop: '2rem', padding: '1.25rem', background: 'var(--gray-100)', borderRadius: '8px', borderLeft: '4px solid var(--gold)' }}>
             <p style={{ color: 'var(--gray-500)', fontSize: '0.8125rem', marginBottom: 0 }}>
-              <strong>Disclaimer:</strong> Deadlines shown are for the 2026-2027 application cycle and may be approximate. Dates marked with ~ haven&apos;t been officially confirmed yet. Always verify with the official scholarship website before applying.
+              <strong>Disclaimer:</strong> Entries marked &quot;Verified&quot; were checked against the official site on that date; the others are still waiting for the organiser to publish the next cycle. Dates marked with ~ haven&apos;t been officially confirmed yet. Always verify with the official scholarship website before applying.
             </p>
           </div>
         </div>
