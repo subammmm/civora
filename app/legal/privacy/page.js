@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <LegalPageLayout title="Privacy Policy" lastUpdated="October 12, 2025">
+    <LegalPageLayout title="Privacy Policy" lastUpdated="November 19, 2026">
       <section style={{ marginBottom: '2rem' }}>
         <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>1. Introduction</h2>
         <p>
@@ -33,6 +33,14 @@ export default function PrivacyPolicy() {
           <li>
             <strong>Cookies and Tracking:</strong> We use cookies and similar tracking technologies
             to track activity on our website and store certain information.
+          </li>
+          <li>
+            <strong>Analytics and forms:</strong> On civora.me we use Google Analytics with IP
+            anonymization. Messages and newsletter sign-ups are delivered to us by Formspree.
+          </li>
+          <li>
+            <strong>Saved scholarships:</strong> The scholarships you save are stored only in your
+            own browser (local storage) and are never sent to us.
           </li>
         </ul>
       </section>
@@ -142,7 +150,7 @@ export default function PrivacyPolicy() {
         <p style={{ marginTop: '1rem' }}>
           <strong>Email:</strong> privacy@civora.me
           <br />
-          <strong>Website:</strong> https://civora.me/contact/
+          <strong>Website:</strong> https://civora.me/contact
         </p>
       </section>
 

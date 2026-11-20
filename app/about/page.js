@@ -28,8 +28,8 @@ export default function AboutPage() {
               We believe that access to accurate, up-to-date scholarship information should not be a privilege. Every student deserves the opportunity to pursue higher education, regardless of their background or financial situation.
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
-              <a href="/scholarships/" className="btn-primary">Browse Scholarships →</a>
-              <a href="/contact/" className="btn-outline">Get in Touch</a>
+              <a href="/scholarships" className="btn-primary">Browse Scholarships →</a>
+              <a href="/contact" className="btn-outline">Get in Touch</a>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function AboutPage() {
           <p>
             Know about a scholarship we haven&apos;t listed? Have feedback or want to contribute? We&apos;d love to hear from you.
           </p>
-          <a href="/contact/" className="btn-secondary" style={{ marginTop: '0.5rem' }}>Contact Us →</a>
+          <a href="/contact" className="btn-secondary" style={{ marginTop: '0.5rem' }}>Contact Us →</a>
         </div>
       </section>
     </main>

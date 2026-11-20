@@ -6,10 +6,10 @@ This directory contains utility functions and helper modules used throughout the
 
 ```
 lib/
-├── utils/
-│   ├── README.md          # This file
-│   ├── formatting.js      # Date, number, and text formatting utilities (to be added)
-│   ├── validation.js      # Form validation helpers (to be added)
+└── utils/
+    ├── README.md          # This file
+    ├── formatting.js      # Date, number, and text formatting utilities (to be added)
+    ├── validation.js      # Form validation helpers (to be added)
     └── constants.js       # Application constants (to be added)
 ```
 

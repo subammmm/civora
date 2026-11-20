@@ -18,7 +18,7 @@ export default function NotFound() {
         textAlign: 'center',
       }}
     >
-      <h1 style={{ fontSize: '6rem', fontWeight: '800', margin: '0', color: '#0C0D0F' }}>404</h1>
+      <h1 style={{ fontSize: '6rem', fontWeight: '800', margin: '0', color: '#1B2A4A' }}>404</h1>
       <h2 style={{ fontSize: '2rem', fontWeight: '600', margin: '1rem 0', color: '#333' }}>
         Page Not Found
       </h2>
@@ -32,7 +32,7 @@ export default function NotFound() {
           style={{
             display: 'inline-block',
             padding: '0.75rem 2rem',
-            backgroundColor: '#0C0D0F',
+            backgroundColor: '#1B2A4A',
             color: '#fff',
             textDecoration: 'none',
             borderRadius: '8px',
@@ -43,16 +43,16 @@ export default function NotFound() {
           Go to Homepage
         </Link>
         <a
-          href="/scholarships/"
+          href="/scholarships"
           style={{
             display: 'inline-block',
             padding: '0.75rem 2rem',
             backgroundColor: '#fff',
-            color: '#0C0D0F',
+            color: '#1B2A4A',
             textDecoration: 'none',
             borderRadius: '8px',
             fontWeight: '600',
-            border: '2px solid #0C0D0F',
+            border: '2px solid #1B2A4A',
             transition: 'all 0.3s',
           }}
         >

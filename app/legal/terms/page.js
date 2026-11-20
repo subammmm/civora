@@ -176,7 +176,7 @@ export default function TermsOfService() {
         <p style={{ marginTop: '1rem' }}>
           <strong>Email:</strong> legal@civora.me
           <br />
-          <strong>Website:</strong> https://civora.me/contact/
+          <strong>Website:</strong> https://civora.me/contact
         </p>
       </section>
 
