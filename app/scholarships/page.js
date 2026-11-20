@@ -111,7 +111,7 @@ export default function ScholarshipsPage() {
         <div className="container">
           <h1>Scholarships</h1>
           <p className="subtext">
-            Browse {scholarships.length} verified scholarships for Nepali students. All links go directly to official application portals.
+            Browse {scholarships.length} scholarships for Nepali students; {scholarships.filter((s) => s.lastVerified).length} were checked against official sources and say so on the card. All links go directly to official application portals.
           </p>
 
           <input

@@ -33,7 +33,7 @@ export default function Home() {
               margin: "0 auto 2.5rem",
             }}
           >
-            Discover verified scholarships from {countryCount}+ countries — curated for
+            Discover scholarships from {countryCount}+ countries — curated for
             Nepali students
           </p>
 
@@ -195,7 +195,7 @@ export default function Home() {
               <div className="step-number">1</div>
               <h3>Search</h3>
               <p>
-                Browse our database of verified scholarships from {countryCount}+ countries.
+                Browse our database of scholarships from {countryCount}+ countries.
                 Filter by country, field, or degree level.
               </p>
             </div>

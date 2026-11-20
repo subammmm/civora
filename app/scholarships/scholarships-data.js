@@ -291,6 +291,30 @@ export const scholarships = [
     description: 'New Zealand Government scholarships supporting individuals from developing countries to gain skills that contribute to their home country\'s development.'
   },
   {
+    id: 'stipendium-hungaricum',
+    name: 'Stipendium Hungaricum',
+    country: 'Hungary',
+    countryCode: 'hungary',
+    countryFlag: '🇭🇺',
+    organizer: 'Hungarian Government',
+    level: ['Bachelors', 'Masters', 'PhD'],
+    levelCode: 'undergraduate',
+    field: 'All Fields',
+    fieldCode: 'all',
+    fundingType: 'fully-funded',
+    covers: ['Tuition', 'Monthly stipend', 'Accommodation', 'Medical insurance'],
+    deadline: '~January 15, 2027',
+    deadlineDate: '2027-01-15',
+    // Not verified in the Nov 2026 review: Nepal's place on the partner list could not be confirmed either way.
+    eligibility: [
+      'Citizen of a partner country: check the current partner list for Nepal before applying',
+      'No Hungarian citizenship',
+      'Meet academic requirements of chosen program'
+    ],
+    url: 'https://stipendiumhungaricum.hu/',
+    description: 'Hungary\'s government scholarship program with over 600 study programs available. Growing number of English-taught programs across all fields.'
+  },
+  {
     id: 'gates-cambridge',
     name: 'Gates Cambridge Scholarships',
     country: 'UK',
