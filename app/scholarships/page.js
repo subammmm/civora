@@ -18,8 +18,13 @@ export default function ScholarshipsPage() {
   const [sort, setSort] = useState('deadline');
   const [savedIds, setSavedIds] = useState([]);
   const [showSaved, setShowSaved] = useState(false);
+  // Set after mount: reading the clock during render makes the prerendered HTML disagree with the client.
+  const [now, setNow] = useState(null);
 
   useEffect(() => {
+    setNow(Date.now());
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) setSearch(q);
     try {
       const saved = JSON.parse(localStorage.getItem('civora-saved') || '[]');
       setSavedIds(saved);
@@ -29,7 +34,7 @@ export default function ScholarshipsPage() {
   const toggleSave = (id) => {
     setSavedIds(prev => {
       const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
-      localStorage.setItem('civora-saved', JSON.stringify(next));
+      try { localStorage.setItem('civora-saved', JSON.stringify(next)); } catch {}
       return next;
     });
   };
@@ -71,13 +76,16 @@ export default function ScholarshipsPage() {
     if (filters.funding) result = result.filter(s => s.fundingType === filters.funding);
 
     if (sort === 'deadline') {
-      result = [...result].sort((a, b) => new Date(a.deadlineDate) - new Date(b.deadlineDate));
+      // Soonest upcoming first; deadlines that already passed go to the end.
+      const passed = (s) => now !== null && new Date(s.deadlineDate) < now;
+      result = [...result].sort((a, b) =>
+        passed(a) - passed(b) || new Date(a.deadlineDate) - new Date(b.deadlineDate));
     } else {
       result = [...result].sort((a, b) => a.name.localeCompare(b.name));
     }
 
     return result;
-  }, [search, filters, sort, showSaved, savedIds]);
+  }, [search, filters, sort, showSaved, savedIds, now]);
 
   return (
     <main>
@@ -91,6 +99,7 @@ export default function ScholarshipsPage() {
           <input
             className="search-input"
             type="text"
+            aria-label="Search scholarships"
             placeholder="Search by name, country, or field..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -109,6 +118,7 @@ export default function ScholarshipsPage() {
           <div className="filter-section" style={{ marginTop: '1.25rem' }}>
             <select
               className="filter-select"
+              aria-label="Filter by country"
               value={filters.country}
               onChange={(e) => updateFilter('country', e.target.value)}
             >
@@ -120,6 +130,7 @@ export default function ScholarshipsPage() {
 
             <select
               className="filter-select"
+              aria-label="Filter by level"
               value={filters.level}
               onChange={(e) => updateFilter('level', e.target.value)}
             >
@@ -131,6 +142,7 @@ export default function ScholarshipsPage() {
 
             <select
               className="filter-select"
+              aria-label="Filter by funding type"
               value={filters.funding}
               onChange={(e) => updateFilter('funding', e.target.value)}
             >
@@ -142,6 +154,7 @@ export default function ScholarshipsPage() {
 
             <select
               className="filter-select"
+              aria-label="Sort by"
               value={sort}
               onChange={(e) => setSort(e.target.value)}
             >
@@ -160,17 +173,17 @@ export default function ScholarshipsPage() {
             <div className="filter-pills">
               {filters.country && (
                 <span className="filter-pill">
-                  Country: {getCountryLabel(filters.country)} <button onClick={() => updateFilter('country', '')}>×</button>
+                  Country: {getCountryLabel(filters.country)} <button aria-label="Remove country filter" onClick={() => updateFilter('country', '')}>×</button>
                 </span>
               )}
               {filters.level && (
                 <span className="filter-pill">
-                  Level: {filters.level.charAt(0).toUpperCase() + filters.level.slice(1)} <button onClick={() => updateFilter('level', '')}>×</button>
+                  Level: {filters.level.charAt(0).toUpperCase() + filters.level.slice(1)} <button aria-label="Remove level filter" onClick={() => updateFilter('level', '')}>×</button>
                 </span>
               )}
               {filters.funding && (
                 <span className="filter-pill">
-                  Funding: {filters.funding === 'fully-funded' ? 'Fully Funded' : filters.funding.charAt(0).toUpperCase() + filters.funding.slice(1)} <button onClick={() => updateFilter('funding', '')}>×</button>
+                  Funding: {filters.funding === 'fully-funded' ? 'Fully Funded' : filters.funding.charAt(0).toUpperCase() + filters.funding.slice(1)} <button aria-label="Remove funding filter" onClick={() => updateFilter('funding', '')}>×</button>
                 </span>
               )}
             </div>
@@ -191,7 +204,7 @@ export default function ScholarshipsPage() {
                     <button
                       className={`card-bookmark ${savedIds.includes(s.id) ? 'saved' : ''}`}
                       onClick={() => toggleSave(s.id)}
-                      aria-label={savedIds.includes(s.id) ? 'Unsave' : 'Save'}
+                      aria-label={`${savedIds.includes(s.id) ? 'Unsave' : 'Save'} ${s.name}`}
                     >
                       {savedIds.includes(s.id) ? '♥' : '♡'}
                     </button>
@@ -208,11 +221,11 @@ export default function ScholarshipsPage() {
                     {s.covers.map(c => <li key={c}>{c}</li>)}
                   </ul>
                   {(() => {
-                    const daysLeft = Math.ceil((new Date(s.deadlineDate) - new Date()) / (1000*60*60*24));
+                    const daysLeft = now === null ? null : Math.ceil((new Date(s.deadlineDate) - now) / (1000*60*60*24));
                     const isUrgent = daysLeft > 0 && daysLeft < 30;
                     return (
                       <span className={`card-deadline ${isUrgent ? 'urgent' : ''}`}>
-                        📅 {s.deadline} {daysLeft > 0 ? `(${daysLeft} days left)` : ''}
+                        📅 {s.deadline} {daysLeft === null ? '' : daysLeft > 0 ? `(${daysLeft} days left)` : '(deadline passed — check the official site for the next cycle)'}
                       </span>
                     );
                   })()}
