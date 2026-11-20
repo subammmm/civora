@@ -74,7 +74,7 @@ export default function Home() {
                 <div className="deadline-item" key={s.id}>
                   <div className="deadline-countdown">
                     <span
-                      className={`days ${days < 30 ? "urgent" : ""}`}
+                      className={`days ${days <= 30 ? "urgent" : ""}`}
                     >
                       {days}
                     </span>

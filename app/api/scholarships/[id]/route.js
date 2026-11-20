@@ -58,7 +58,7 @@ export async function PUT(request, { params }) {
     try {
         const { id } = await params;
         const body = await request.json().catch(() => null);
-        if (!body || typeof body !== 'object') {
+        if (!body || typeof body !== 'object' || Array.isArray(body)) {
             return NextResponse.json({ success: false, error: 'Body must be a JSON object' }, { status: 400 });
         }
 

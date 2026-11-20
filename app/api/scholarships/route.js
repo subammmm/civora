@@ -103,7 +103,7 @@ export async function POST(request) {
 
     try {
         const body = await request.json().catch(() => null);
-        if (!body || typeof body !== 'object') {
+        if (!body || typeof body !== 'object' || Array.isArray(body)) {
             return NextResponse.json({ success: false, error: 'Body must be a JSON object' }, { status: 400 });
         }
 
